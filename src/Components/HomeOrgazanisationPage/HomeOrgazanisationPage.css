@@ -1,0 +1,229 @@
+.orgai_home_pg_wrapper {
+  width: 100%;
+  background-color: #3b003d;
+  font-family: 'Manrope', 'Roboto', sans-serif;
+}
+
+.orgai_home_pg_container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 90px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* LEFT SIDE */
+.orgai_home_pg_left {
+  flex: 1;
+  max-width: 540px;
+}
+
+.orgai_home_pg_tagline {
+  color: #e0a83d;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px;
+}
+
+.orgai_home_pg_heading {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 34px;
+  line-height: 1.35;
+  color: #ffffff;
+  font-weight: 500;
+  margin: 0 0 24px;
+}
+
+.orgai_home_pg_heading_italic {
+  color: #e0a83d;
+  font-style: italic;
+}
+
+.orgai_home_pg_desc {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #e6dbe3;
+  margin: 0 0 20px;
+}
+
+.orgai_home_pg_desc:last-child {
+  margin-bottom: 0;
+}
+
+/* RIGHT FORM */
+.orgai_home_pg_right {
+  flex: 1;
+  max-width: 500px;
+  width: 100%;
+}
+
+.orgai_home_pg_form {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.orgai_home_pg_input,
+.orgai_home_pg_select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  font-size: 14.5px;
+  color: #2b2b2b;
+  font-family: inherit;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background-color: #ffffff;
+}
+
+.orgai_home_pg_input:focus,
+.orgai_home_pg_select:focus {
+  border-color: #3b003d;
+}
+
+.orgai_home_pg_input::placeholder {
+  color: #a3a3a3;
+}
+
+.orgai_home_pg_select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%232b2b2b' stroke-width='1.5' fill='none' fill-rule='evenodd'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+/* Checkbox Row */
+.orgai_home_pg_checkbox_row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: -2px;
+}
+
+.orgai_home_pg_checkbox_label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #3a3a3a;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.orgai_home_pg_checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #3b003d;
+}
+
+/* Email Label */
+.orgai_home_pg_field_label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2b2b2b;
+  margin-top: 4px;
+  margin-bottom: -8px;
+}
+
+/* Submit Button */
+.orgai_home_pg_submit_btn {
+  background-color: #d9911f;
+  color: #ffffff;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  width: 100%;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.orgai_home_pg_submit_btn:hover {
+  background-color: #c17f16;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .orgai_home_pg_container {
+    gap: 40px;
+  }
+
+  .orgai_home_pg_heading {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .orgai_home_pg_container {
+    flex-direction: column;
+    padding: 60px 24px;
+  }
+
+  .orgai_home_pg_left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .orgai_home_pg_desc {
+    text-align: left;
+  }
+
+  .orgai_home_pg_right {
+    max-width: 100%;
+  }
+
+  .orgai_home_pg_form {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 560px) {
+  .orgai_home_pg_heading {
+    font-size: 24px;
+  }
+
+  .orgai_home_pg_desc {
+    font-size: 14.5px;
+  }
+
+  .orgai_home_pg_form {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .orgai_home_pg_checkbox_row {
+    gap: 12px;
+  }
+
+  .orgai_home_pg_checkbox_label {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .orgai_home_pg_checkbox_row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

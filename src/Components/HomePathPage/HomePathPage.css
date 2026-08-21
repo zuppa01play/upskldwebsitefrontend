@@ -1,0 +1,135 @@
+.upskld_path_home_pg_wrapper {
+  width: 100%;
+  background-color: #faf6ec;
+  font-family: 'Manrope', 'Roboto', sans-serif;
+}
+
+.upskld_path_home_pg_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.upskld_path_home_pg_tagline {
+  color: #b5842a;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px;
+}
+
+.upskld_path_home_pg_heading {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 34px;
+  line-height: 1.35;
+  color: #1a1a1a;
+  font-weight: 500;
+  max-width: 780px;
+  margin: 0 0 60px;
+}
+
+.upskld_path_home_pg_heading_italic {
+  color: #b5842a;
+  font-style: italic;
+}
+
+/* Steps Row */
+.upskld_path_home_pg_steps_row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.upskld_path_home_pg_step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 260px;
+}
+
+.upskld_path_home_pg_number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #3b003d;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.upskld_path_home_pg_step_title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 18px;
+  color: #1a1a1a;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+
+.upskld_path_home_pg_step_desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #5a5a5a;
+  margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .upskld_path_home_pg_heading {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 820px) {
+  .upskld_path_home_pg_steps_row {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+
+  .upskld_path_home_pg_step {
+    flex: 1 1 calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 560px) {
+  .upskld_path_home_pg_container {
+    padding: 60px 20px 60px;
+  }
+
+  .upskld_path_home_pg_heading {
+    font-size: 24px;
+    margin-bottom: 44px;
+  }
+
+  .upskld_path_home_pg_steps_row {
+    flex-direction: column;
+    row-gap: 32px;
+  }
+
+  .upskld_path_home_pg_step {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .upskld_path_home_pg_number {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .upskld_path_home_pg_step_title {
+    font-size: 17px;
+  }
+}

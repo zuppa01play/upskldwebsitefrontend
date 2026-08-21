@@ -1,0 +1,260 @@
+.upskld_philos_pg_wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(to top, rgba(80, 0, 67, 0.87), rgb(255, 255, 255));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Manrope', 'Roboto', sans-serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.upskld_philos_pg_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.upskld_philos_pg_tagline {
+  color: #530148;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px;
+  opacity: 0;
+  animation: upskld_philos_pg_fade_up 0.6s ease forwards;
+}
+
+.upskld_philos_pg_heading {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 38px;
+  line-height: 1.35;
+  color: #000000;
+  font-weight: 500;
+  max-width: 820px;
+  margin: 0 0 24px;
+  opacity: 0;
+  animation: upskld_philos_pg_fade_up 0.6s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.upskld_philos_pg_heading_italic {
+  color: #530148;
+  font-style: italic;
+}
+
+.upskld_philos_pg_subtext {
+  font-size: 20px;
+  line-height: 1.7;
+  color: #000000;
+  max-width: 720px;
+  margin: 0 0 56px;
+  opacity: 0;
+  animation: upskld_philos_pg_fade_up 0.6s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* Compare Row */
+.upskld_philos_pg_compare_row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: upskld_philos_pg_fade_up 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.upskld_philos_pg_card {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 32px 30px;
+  flex: 1;
+  max-width: 460px;
+  text-align: left;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.upskld_philos_pg_card:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+.upskld_philos_pg_card_title {
+  color: #530148;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  margin: 0 0 20px;
+}
+
+.upskld_philos_pg_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.upskld_philos_pg_list_item {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.upskld_philos_pg_list_item:last-child {
+  border-bottom: none;
+}
+
+.upskld_philos_pg_plus {
+  color: #00b451;
+  font-size: 26px;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+/* Quote */
+.upskld_philos_pg_quote {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #000000;
+  max-width: 640px;
+  margin: 0 0 36px;
+  opacity: 0;
+  animation: upskld_philos_pg_fade_up 0.6s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Button */
+.upskld_philos_pg_btn_wrap {
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  animation: upskld_philos_pg_fade_up 0.6s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.upskld_philos_pg_btn {
+  background-color: #1b6e02;
+  color: #000000;
+  border: none;
+  padding: 16px 30px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.upskld_philos_pg_btn:hover {
+  background-color: #c17f16;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(217, 145, 31, 0.35);
+}
+
+/* Animation */
+@keyframes upskld_philos_pg_fade_up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.upskld_philos_pg_tagline,
+.upskld_philos_pg_heading,
+.upskld_philos_pg_subtext,
+.upskld_philos_pg_compare_row,
+.upskld_philos_pg_quote,
+.upskld_philos_pg_btn_wrap {
+  transform: translateY(16px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .upskld_philos_pg_heading {
+    font-size: 32px;
+  }
+
+  .upskld_philos_pg_compare_row {
+    gap: 18px;
+  }
+
+  .upskld_philos_pg_card {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 780px) {
+  .upskld_philos_pg_container {
+    padding: 60px 24px 60px;
+  }
+
+  .upskld_philos_pg_heading {
+    font-size: 26px;
+  }
+
+  .upskld_philos_pg_subtext {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .upskld_philos_pg_compare_row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .upskld_philos_pg_card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .upskld_philos_pg_plus {
+    transform: rotate(0deg);
+    font-size: 22px;
+  }
+
+  .upskld_philos_pg_quote {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .upskld_philos_pg_heading {
+    font-size: 22px;
+  }
+
+  .upskld_philos_pg_card {
+    padding: 24px 20px;
+  }
+
+  .upskld_philos_pg_list_item {
+    font-size: 14px;
+  }
+
+  .upskld_philos_pg_btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Parallax doesn't work reliably on iOS Safari / most mobile browsers — fallback to normal scroll */
+@media (max-width: 900px) {
+  .upskld_philos_pg_wrapper {
+    background-attachment: scroll;
+  }
+}

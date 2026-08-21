@@ -1,0 +1,274 @@
+.hometrack_pg_wrapper {
+  width: 100%;
+  background-color: #faf6ec;
+  font-family: 'Manrope', 'Roboto', sans-serif;
+}
+
+.hometrack_pg_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hometrack_pg_tagline {
+  color: #440052;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px;
+}
+
+.hometrack_pg_heading {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 36px;
+  line-height: 1.35;
+  color: #1a1a1a;
+  font-weight: 500;
+  max-width: 800px;
+  margin: 0 0 24px;
+}
+
+.hometrack_pg_heading_italic {
+  color: #b5842a;
+  font-style: italic;
+}
+
+.hometrack_pg_subtext {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #5a5a5a;
+  max-width: 700px;
+  margin: 0 0 40px;
+}
+
+/* Tabs */
+.hometrack_pg_tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.hometrack_pg_tab_btn {
+  background-color: #ffffff;
+  color: #2b2b2b;
+  border: 1px solid #e3dcc9;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.hometrack_pg_tab_btn:hover {
+  border-color: #2f4a2b;
+  color: #2f4a2b;
+}
+
+.hometrack_pg_tab_btn_active {
+  background-color: #4d006b;
+  color: #ffffff;
+  border-color: #2f4a2b;
+}
+
+.hometrack_pg_tab_btn_active:hover {
+  color: #ffffff;
+}
+
+/* Card */
+.hometrack_pg_card {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+  padding: 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+  text-align: left;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+}
+
+.hometrack_pg_card_left {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hometrack_pg_badge {
+  background-color: #eef1e6;
+  color: #720263;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.hometrack_pg_card_title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 22px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  font-weight: 500;
+  margin: 0 0 26px;
+}
+
+.hometrack_pg_card_btn {
+  background-color: #4a2b4a;
+  color: #ffffff;
+  border: none;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.hometrack_pg_card_btn:hover {
+  background-color: #630766;
+  transform: translateY(-2px);
+}
+
+.hometrack_pg_card_right {
+  flex: 1;
+  display: flex;
+  gap: 60px;
+}
+
+.hometrack_pg_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hometrack_pg_list_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #2b2b2b;
+  font-weight: 500;
+}
+
+.hometrack_pg_dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #310041;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hometrack_pg_heading {
+    font-size: 30px;
+  }
+
+  .hometrack_pg_card {
+    gap: 32px;
+    padding: 40px;
+  }
+
+  .hometrack_pg_card_left {
+    flex: 0 0 240px;
+  }
+
+  .hometrack_pg_card_right {
+    gap: 36px;
+  }
+}
+
+@media (max-width: 860px) {
+  .hometrack_pg_card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hometrack_pg_card_left {
+    flex: none;
+  }
+
+  .hometrack_pg_card_btn {
+    align-self: flex-start;
+  }
+
+  .hometrack_pg_card_right {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hometrack_pg_container {
+    padding: 60px 20px 60px;
+  }
+
+  .hometrack_pg_heading {
+    font-size: 25px;
+  }
+
+  .hometrack_pg_subtext {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .hometrack_pg_tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+
+  .hometrack_pg_tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hometrack_pg_tab_btn {
+    flex-shrink: 0;
+  }
+
+  .hometrack_pg_card {
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .hometrack_pg_card_right {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hometrack_pg_card_title {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hometrack_pg_heading {
+    font-size: 21px;
+  }
+
+  .hometrack_pg_card_btn {
+    width: 100%;
+    text-align: center;
+  }
+}

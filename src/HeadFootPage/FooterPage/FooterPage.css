@@ -1,0 +1,181 @@
+.zuppa_footer_pg_wrapper {
+  width: 100%;
+  background-color: #fffeff;
+  font-family: 'Manrope', 'Roboto', sans-serif;
+}
+
+.zuppa_footer_pg_container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 70px 32px 32px;
+  box-sizing: border-box;
+}
+
+/* TOP SECTION */
+.zuppa_footer_pg_top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.zuppa_footer_pg_col {
+  flex: 1;
+}
+
+.zuppa_footer_pg_col_brand {
+  flex: 1.4;
+}
+
+/* Logo */
+.zuppa_footer_pg_logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.zuppa_footer_pg_logo_img {
+  height: 128px;
+  width: auto;
+  object-fit: contain;
+}
+
+.zuppa_footer_pg_logo_text {
+  font-size: 19px;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: 0.5px;
+}
+
+.zuppa_footer_pg_about_text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #000000;
+  max-width: 320px;
+  margin: 0;
+}
+
+/* Column Titles */
+.zuppa_footer_pg_col_title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #000000;
+  margin: 0 0 20px;
+}
+
+/* Links */
+.zuppa_footer_pg_link_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.zuppa_footer_pg_link {
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.zuppa_footer_pg_link:hover {
+  color: #e0a83d;
+}
+
+/* Divider */
+.zuppa_footer_pg_divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 24px;
+}
+
+/* Bottom */
+.zuppa_footer_pg_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.zuppa_footer_pg_copyright {
+  font-size: 13px;
+  color: #000000;
+  margin: 0;
+}
+
+.zuppa_footer_pg_bottom_links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zuppa_footer_pg_bottom_link {
+  font-size: 13px;
+  color: #0a0007;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.zuppa_footer_pg_bottom_link:hover {
+  color: #e0a83d;
+}
+
+.zuppa_footer_pg_dot {
+  color: #000000;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .zuppa_footer_pg_top {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+
+  .zuppa_footer_pg_col_brand {
+    flex: 1 1 100%;
+  }
+
+  .zuppa_footer_pg_about_text {
+    max-width: 100%;
+  }
+
+  .zuppa_footer_pg_col {
+    flex: 1 1 calc(33.33% - 27px);
+  }
+}
+
+@media (max-width: 700px) {
+  .zuppa_footer_pg_container {
+    padding: 50px 24px 24px;
+  }
+
+  .zuppa_footer_pg_col {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .zuppa_footer_pg_top {
+    flex-direction: column;
+    row-gap: 32px;
+  }
+
+  .zuppa_footer_pg_col {
+    flex: 1 1 100%;
+  }
+
+  .zuppa_footer_pg_bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .zuppa_footer_pg_logo_text {
+    font-size: 17px;
+  }
+}
