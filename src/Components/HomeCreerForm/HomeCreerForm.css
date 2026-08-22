@@ -283,3 +283,9 @@
     font-size: 19px;
   }
 }
+
+.career_home_pg_error {
+  color: #d92d20;
+  font-size: 13px;
+  margin: -8px 0 8px;
+}

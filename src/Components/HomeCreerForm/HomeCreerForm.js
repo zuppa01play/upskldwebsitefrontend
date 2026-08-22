@@ -1,42 +1,57 @@
 import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import "./HomeCreerForm.css";
 
-const HomeCreerForm = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phone: "",
-    email: "",
-    role: "Working professional",
-  });
+const validationSchema = Yup.object({
+  fullName: Yup.string()
+    .trim()
+    .min(2, "Name is too short")
+    .required("Full name is required"),
+  phone: Yup.string()
+    .trim()
+    .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
+    .required("Phone number is required"),
+  email: Yup.string()
+    .trim()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  role: Yup.string().required("Please select a role"),
+});
 
+const HomeCreerForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await fetch("http://localhost:4000/api/student-form", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-    if (data.success) setIsSubmitted(true);
-  } catch (err) {
-    console.error("Submit failed:", err);
-  }
-};
-
-  const handleReset = () => {
-    setFormData({
+  const formik = useFormik({
+    initialValues: {
       fullName: "",
       phone: "",
       email: "",
       role: "Working professional",
-    });
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      try {
+        const res = await fetch("https://upskldwebbackend.vercel.app/api/student-form", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
+        if (data.success) {
+          setIsSubmitted(true);
+          resetForm();
+        }
+      } catch (err) {
+        console.error("Submit failed:", err);
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
+
+  const handleReset = () => {
+    formik.resetForm();
     setIsSubmitted(false);
   };
 
@@ -65,7 +80,7 @@ const HomeCreerForm = () => {
         {/* Right Form */}
         <div className="career_home_pg_right">
           {!isSubmitted ? (
-            <form className="career_home_pg_form" onSubmit={handleSubmit}>
+            <form className="career_home_pg_form" onSubmit={formik.handleSubmit} noValidate>
 
               <label className="career_home_pg_label" htmlFor="fullName">
                 Full name
@@ -76,10 +91,13 @@ const HomeCreerForm = () => {
                 name="fullName"
                 className="career_home_pg_input"
                 placeholder="e.g. Priya Sharma"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                required
+                value={formik.values.fullName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.touched.fullName && formik.errors.fullName && (
+                <p className="career_home_pg_error">{formik.errors.fullName}</p>
+              )}
 
               <label className="career_home_pg_label" htmlFor="phone">
                 Phone / WhatsApp
@@ -89,11 +107,19 @@ const HomeCreerForm = () => {
                 id="phone"
                 name="phone"
                 className="career_home_pg_input"
-                placeholder="+91"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
+                placeholder="10 digit mobile number"
+                maxLength={10}
+                value={formik.values.phone}
+                onChange={(e) => {
+                  // allow digits only, cap at 10
+                  const digitsOnly = e.target.value.replace(/\D/g, "").slice(0, 10);
+                  formik.setFieldValue("phone", digitsOnly);
+                }}
+                onBlur={formik.handleBlur}
               />
+              {formik.touched.phone && formik.errors.phone && (
+                <p className="career_home_pg_error">{formik.errors.phone}</p>
+              )}
 
               <label className="career_home_pg_label" htmlFor="email">
                 Email
@@ -104,10 +130,13 @@ const HomeCreerForm = () => {
                 name="email"
                 className="career_home_pg_input"
                 placeholder="you@example.com"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.touched.email && formik.errors.email && (
+                <p className="career_home_pg_error">{formik.errors.email}</p>
+              )}
 
               <label className="career_home_pg_label" htmlFor="role">
                 I am a...
@@ -116,17 +145,26 @@ const HomeCreerForm = () => {
                 id="role"
                 name="role"
                 className="career_home_pg_select"
-                value={formData.role}
-                onChange={handleInputChange}
+                value={formik.values.role}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               >
                 <option value="Working professional">Working professional</option>
                 <option value="Business leader">Business leader</option>
                 <option value="Student">Student</option>
                 <option value="Entrepreneur">Entrepreneur</option>
               </select>
+              {formik.touched.role && formik.errors.role && (
+                <p className="career_home_pg_error">{formik.errors.role}</p>
+              )}
 
-              <button type="submit" className="career_home_pg_submit_btn">
-                Book My Free Slot <span className="career_home_pg_arrow">→</span>
+              <button
+                type="submit"
+                className="career_home_pg_submit_btn"
+                disabled={formik.isSubmitting}
+              >
+                {formik.isSubmitting ? "Submitting..." : "Book My Free Slot"}{" "}
+                <span className="career_home_pg_arrow">→</span>
               </button>
 
               <p className="career_home_pg_consent">
@@ -139,9 +177,7 @@ const HomeCreerForm = () => {
               <div className="career_home_pg_success_icon">✓</div>
               <h3 className="career_home_pg_success_title">You're all set!</h3>
               <p className="career_home_pg_success_text">
-                Thanks, {formData.fullName || "there"}. We'll reach out on{" "}
-                {formData.phone || "your phone"} or {formData.email || "your email"} shortly
-                to schedule your free session.
+                Thanks! We'll reach out shortly to schedule your free session.
               </p>
               <button className="career_home_pg_reset_btn" onClick={handleReset}>
                 Submit Another Response
