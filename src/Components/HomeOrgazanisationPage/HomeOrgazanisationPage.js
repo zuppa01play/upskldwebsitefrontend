@@ -33,7 +33,7 @@ const HomeOrgazanisationPage = () => {
   };
 
   return (
-    <section className="orgai_home_pg_wrapper">
+    <section id="organisations" className="orgai_home_pg_wrapper">
       <div className="orgai_home_pg_container">
 
         {/* Left Content */}

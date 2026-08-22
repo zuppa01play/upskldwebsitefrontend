@@ -49,7 +49,7 @@ const HomePage = () => {
         {/* Right Image */}
         <div className="upskld_home_pg_right">
           <img
-            src="https://cdn.edu.buncee.com/assets/01f3b9c907a79909b2b039a7e59dff7e/animation-people-remotelearning-041420.gif?timestamp=1586899651"
+            src="https://cdn.dribbble.com/userupload/35032201/file/original-bd29704daa2c99f4b7406afd3f5ee4fc.gif"
             alt="AI and human intelligence concept"
             className="upskld_home_pg_hero_img"
           />

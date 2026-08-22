@@ -64,7 +64,7 @@ const HomeTrackPage = () => {
   const activeData = tracksData[activeTab];
 
   return (
-    <section className="hometrack_pg_wrapper">
+    <section id="ai-for-your-job" className="hometrack_pg_wrapper">
       <div className="hometrack_pg_container">
 
         <p className="hometrack_pg_tagline">FIND YOUR TRACK</p>

@@ -15,11 +15,20 @@ const HomeCreerForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("http://localhost:4000/api/student-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    if (data.success) setIsSubmitted(true);
+  } catch (err) {
+    console.error("Submit failed:", err);
+  }
+};
 
   const handleReset = () => {
     setFormData({
@@ -32,7 +41,7 @@ const HomeCreerForm = () => {
   };
 
   return (
-    <section className="career_home_pg_wrapper">
+    <section id="book-session" className="career_home_pg_wrapper">
       <div className="career_home_pg_container">
 
         {/* Left Content */}

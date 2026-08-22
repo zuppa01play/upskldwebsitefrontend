@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "./HeaderPage.css";
 
 const HeaderPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef(null);
 
   const navLinks = [
-    { label: "AI for Your Job", href: "#" },
-    { label: "Courses", href: "#" },
-    { label: "Experts", href: "#" },
-    { label: "Organisations", href: "#" },
-    { label: "FAQ", href: "#" },
+    { label: "AI for Your Job", id: "ai-for-your-job" },
+    { label: "Courses", id: "courses" },
+    { label: "Experts", id: "experts" },
+    { label: "Organisations", id: "organisations" },
+    { label: "FAQ", id: "faq" },
   ];
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = headerRef.current ? headerRef.current.offsetHeight : 80;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10; // -10 small breathing gap
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    scrollToId(id);
+    closeMenu();
   };
 
   return (
@@ -25,21 +35,24 @@ const HeaderPage = () => {
       <div className="upskld_heade_pg_container">
 
         {/* Logo */}
-      {/* Logo */}
-<div className="upskld_heade_pg_logo">
-  <img
-    src="https://res.cloudinary.com/dk50cmtps/image/upload/v1787297680/5bd19aef-80dc-489e-8228-5f05a920b79b_zvnpme.png"
-    alt="UPSKLD logo"
-    className="upskld_heade_pg_logo_img"
-  />
-</div>
+        <div className="upskld_heade_pg_logo">
+          <img
+            src="https://res.cloudinary.com/dk50cmtps/image/upload/v1787297680/5bd19aef-80dc-489e-8228-5f05a920b79b_zvnpme.png"
+            alt="UPSKLD logo"
+            className="upskld_heade_pg_logo_img"
+          />
+        </div>
 
         {/* Desktop Nav */}
         <nav className="upskld_heade_pg_nav_desktop">
           <ul className="upskld_heade_pg_nav_list">
             {navLinks.map((link, index) => (
               <li key={index} className="upskld_heade_pg_nav_item">
-                <a href={link.href} className="upskld_heade_pg_nav_link">
+                
+               <a   href={`#${link.id}`}
+                  className="upskld_heade_pg_nav_link"
+                  onClick={(e) => handleNavClick(e, link.id)}
+                >
                   {link.label}
                 </a>
               </li>
@@ -49,10 +62,13 @@ const HeaderPage = () => {
 
         {/* Desktop Right Actions */}
         <div className="upskld_heade_pg_actions_desktop">
-          <a href="#" className="upskld_heade_pg_login_link">
-            Login
-          </a>
-          <button className="upskld_heade_pg_book_btn">Book Free Session</button>
+      
+          <button
+            className="upskld_heade_pg_book_btn"
+            onClick={() => scrollToId("book-session")}
+          >
+            Book Free Session
+          </button>
         </div>
 
         {/* Mobile Menu Icon */}
@@ -80,10 +96,10 @@ const HeaderPage = () => {
         <ul className="upskld_heade_pg_mobile_nav_list">
           {navLinks.map((link, index) => (
             <li key={index} className="upskld_heade_pg_mobile_nav_item">
-              
-              <a    href={link.href}
+                <a 
+                href={`#${link.id}`}
                 className="upskld_heade_pg_mobile_nav_link"
-                onClick={closeMenu}
+                onClick={(e) => handleNavClick(e, link.id)}
               >
                 {link.label}
               </a>
@@ -92,10 +108,14 @@ const HeaderPage = () => {
         </ul>
 
         <div className="upskld_heade_pg_mobile_actions">
-          <a href="#" className="upskld_heade_pg_mobile_login_link" onClick={closeMenu}>
-            Login
-          </a>
-          <button className="upskld_heade_pg_mobile_book_btn" onClick={closeMenu}>
+         
+          <button
+            className="upskld_heade_pg_mobile_book_btn"
+            onClick={() => {
+              scrollToId("book-session");
+              closeMenu();
+            }}
+          >
             Book Free Session
           </button>
         </div>

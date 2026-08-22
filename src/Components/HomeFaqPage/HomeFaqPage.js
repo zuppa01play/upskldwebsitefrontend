@@ -47,7 +47,7 @@ const HomeFaqPage = () => {
   };
 
   return (
-    <section className="home_faq_pg_wrapper">
+    <section  id="faq"    className="home_faq_pg_wrapper">
       <div className="home_faq_pg_container">
 
         <p className="home_faq_pg_tagline">FAQ</p>

@@ -70,8 +70,8 @@ const peopleData = [
 
 const StudentFooter = () => {
   return (
-    <div>
-      <div className="upskld_people_pg_wrapper">
+    <div >
+      <div id="experts" className="upskld_people_pg_wrapper">
         <div className="upskld_people_pg_header_block">
           <span className="upskld_people_pg_eyebrow">Expert Ecosystem</span>
           <h2 className="upskld_people_pg_title">

@@ -61,7 +61,7 @@ const HomeCoursePage = () => {
   };
 
   return (
-    <section className="upskld_course_pg_wrapper">
+    <section id="courses" className="upskld_course_pg_wrapper">
       <div className="upskld_course_pg_container">
 
         <p className="upskld_course_pg_tagline">COURSES</p>

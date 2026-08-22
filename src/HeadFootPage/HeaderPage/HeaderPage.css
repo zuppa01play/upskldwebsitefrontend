@@ -3,7 +3,8 @@
   background-color: #faf6ec;
   border-bottom: 1px solid #ece5d3;
   font-family: "Manrope", "Roboto", sans-serif;
-  position: relative;
+  position: sticky;   /* changed from relative */
+  top: 0;              /* stick to top */
   z-index: 1000;
 }
 
@@ -25,9 +26,10 @@
 }
 
 .upskld_heade_pg_logo_img {
-  height: 100px;
+  height: 120px;
   display: block;
   object-fit: contain;
+  margin-left: -50px;
 }
 
 /* Desktop Nav */
