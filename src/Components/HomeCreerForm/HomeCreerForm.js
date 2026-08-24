@@ -32,7 +32,7 @@ const HomeCreerForm = () => {
     validationSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
-        const res = await fetch("https://upskldwebbackend.vercel.app/api/student-form", {
+        const res = await fetch("https://upskldai.com/api/student-form", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
