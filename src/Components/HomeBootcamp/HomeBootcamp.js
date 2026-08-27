@@ -4,11 +4,11 @@ import "./HomeBootcamp.css";
 const HomeBootcamp = () => {
   const comparisons = [
     {
-      title: "Generic AI Courses",
-      teaches: "AI concepts in general",
-      bestFor: "Broad awareness",
+   title:"Jargon-Heavy AI Courses",
+      teaches: "Complex theories and technical terms",
+      bestFor: "IT professionals & engineers",
       extraLabel: "Not built for:",
-      extraValue: "Your specific job",
+      extraValue: "Improving your current job",
     },
     {
       title: "YouTube / ChatGPT Tutorials",
@@ -40,8 +40,8 @@ const HomeBootcamp = () => {
         <p className="upskld_bootcamp_pg_tagline">WHY UPSKLD</p>
 
         <h2 className="upskld_bootcamp_pg_heading">
-          Not just a YouTube tutorial, or a{" "}
-          <span className="upskld_bootcamp_pg_heading_italic">coding bootcamp.</span>
+      Not just a YouTube tutorial. No coding, no heavy jargon
+          <span className="upskld_bootcamp_pg_heading_italic">Coding Bootcamps</span>
         </h2>
 
         <p className="upskld_bootcamp_pg_subtext">

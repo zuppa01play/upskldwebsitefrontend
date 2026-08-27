@@ -1,29 +1,28 @@
-import React from 'react';
+import React from "react";
 import "./HomePage.css";
 
 const HomePage = () => {
   return (
     <div className="upskld_home_pg_wrapper">
       <div className="upskld_home_pg_container">
-
         {/* Left Content */}
         <div className="upskld_home_pg_left">
           <p className="upskld_home_pg_tagline">HUMAN INTELLIGENCE + AI</p>
 
-          <h1 className="upskld_home_pg_heading">
-            AI won't replace your experience. But knowing how to use it will
-            change what you do with it.
-          </h1>
+          <h1 className="upskld_home_pg_heading">Learn AI. Lead the Future.</h1>
 
           <p className="upskld_home_pg_desc">
-            UPSKLD helps working professionals, business leaders and students
-            apply AI to the job they already do — no coding, no jargon, no
-            chatbot-building required.
+            India's AI upskilling ecosystem built specifically for non-tech
+            students, universities, and enterprises.
           </p>
-
+          <p className="upskld_home_pg_desc">
+            {" "}
+            No coding. No heavy jargon. Just practical skills for real growth
+          </p>
           <div className="upskld_home_pg_btn_group">
             <button className="upskld_home_pg_primary_btn">
-              Explore AI for Your Role <span className="upskld_home_pg_arrow">→</span>
+              Explore AI for Your Role{" "}
+              <span className="upskld_home_pg_arrow">→</span>
             </button>
             <button className="upskld_home_pg_secondary_btn">
               See How It Works
@@ -54,7 +53,6 @@ const HomePage = () => {
             className="upskld_home_pg_hero_img"
           />
         </div>
-
       </div>
     </div>
   );

@@ -26,10 +26,6 @@
   margin-bottom: 14px;
 }
 
-
-
-
-
 .upskld_people_pg_avatar {
   width: 164px;
   height: 184px;
@@ -70,15 +66,38 @@
   font-weight: 400;
 }
 
-.upskld_people_pg_grid {
+/* ---------- Slider shell ---------- */
+
+.upskld_people_pg_slider {
+  position: relative;
   width: 100%;
   max-width: 1200px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.upskld_people_pg_grid {
+  width: 100%;
+  display: flex;
   gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 8px 4px 20px;
+  /* hide native scrollbar (cross-browser) */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.upskld_people_pg_grid::-webkit-scrollbar {
+  display: none;
 }
 
 .upskld_people_pg_card {
+  flex: 0 0 auto;
+  width: calc((100% - 3 * 24px) / 4);
+  scroll-snap-align: start;
   background: #ffffff;
   border: 1px solid #e8e2d2;
   border-radius: 14px;
@@ -87,14 +106,15 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .upskld_people_pg_card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
-
 
 .upskld_people_pg_avatar_text {
   color: #ffffff;
@@ -126,10 +146,51 @@
   font-weight: 400;
 }
 
+/* ---------- Arrow buttons ---------- */
+
+.upskld_people_pg_arrow {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #e8e2d2;
+  background: #ffffff;
+  color: #1c1c1c;
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.upskld_people_pg_arrow:hover:not(:disabled) {
+  background: #b8862f;
+  border-color: #b8862f;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(184, 134, 47, 0.28);
+}
+
+.upskld_people_pg_arrow:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.upskld_people_pg_arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
-  .upskld_people_pg_grid {
-    grid-template-columns: repeat(2, 1fr);
+  .upskld_people_pg_card {
+    width: calc((100% - 24px) / 2);
   }
 
   .upskld_people_pg_title {
@@ -143,9 +204,19 @@
     padding: 48px 16px 60px;
   }
 
-  .upskld_people_pg_grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  .upskld_people_pg_slider {
+    gap: 8px;
+  }
+
+  .upskld_people_pg_card {
+    width: 78%;
+    padding: 26px 18px;
+  }
+
+  .upskld_people_pg_arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
   }
 
   .upskld_people_pg_title {
@@ -154,10 +225,6 @@
 
   .upskld_people_pg_subtitle {
     font-size: 14px;
-  }
-
-  .upskld_people_pg_card {
-    padding: 26px 18px;
   }
 }
 
@@ -174,5 +241,9 @@
   .upskld_people_pg_avatar {
     width: 56px;
     height: 56px;
+  }
+
+  .upskld_people_pg_card {
+    width: 88%;
   }
 }

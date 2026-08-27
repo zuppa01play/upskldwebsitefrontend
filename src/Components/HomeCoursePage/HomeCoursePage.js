@@ -24,6 +24,8 @@ const HomeCoursePage = () => {
   const trackRef = useRef(null);
   const isFirstRender = useRef(true);
   const prevCardStepRef = useRef(0);
+  const touchStartX = useRef(null);
+  const touchDeltaX = useRef(0);
 
   const handleCardClick = (i) => {
     setBlinkIndex(i);
@@ -89,6 +91,28 @@ const HomeCoursePage = () => {
   const goPrev = () => setIndex((i) => Math.max(0, i - 1));
   const goNext = () => setIndex((i) => Math.min(maxIndex, i + 1));
 
+  // ---- touch / swipe support for mobile & tablet ----
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchStartX.current === null) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+
+  const handleTouchEnd = () => {
+    const SWIPE_THRESHOLD = 40;
+    if (touchDeltaX.current > SWIPE_THRESHOLD) {
+      goPrev();
+    } else if (touchDeltaX.current < -SWIPE_THRESHOLD) {
+      goNext();
+    }
+    touchStartX.current = null;
+    touchDeltaX.current = 0;
+  };
+
   return (
     <section id="courses" className="upskld_course_pg_wrapper">
       <div className="upskld_course_pg_container">
@@ -115,7 +139,12 @@ const HomeCoursePage = () => {
             &#8249;
           </button>
 
-          <div className="upskld_course_pg_viewport">
+          <div
+            className="upskld_course_pg_viewport"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className="upskld_course_pg_grid" ref={trackRef}>
               {courses.map((course, i) => (
                 <div
