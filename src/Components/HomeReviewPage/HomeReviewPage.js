@@ -4,24 +4,24 @@ import "./HomeReviewPage.css";
 const HomeReviewPage = () => {
   const reviews = [
     {
-      quote: "I never thought I'd use AI as a B.Com student — now I use it every week for my project work and I feel ready for placements.",
-      name: "Sharanya Desai",
-      role: "B.Com Student",
+      quote: "The way of teaching about the Ai and the how they were used the ai in the mangement and the era of mangement was good",
+      name: "Prasanth Kumar",
+      role: "BE Student",
     },
     {
-      quote: "I was worried AI would replace my role in operations. This course showed me exactly where I can use it to my advantage instead.",
-      name: "Rakesh Patel",
-      role: "Operations",
+      quote: "So good to understand love the way of teaching and got good experience and learned many things about Ai",
+      name: "Stany Iniyan",
+      role: "BE Student",
     },
     {
-      quote: "I thought AI might replace my role in operations. This course helped me see how I can use AI to make my work smarter and more effective.",
-      name: "Santhiya PK",
-      role: "Developer",
+      quote: "The master class is really good. I learned some of things like the level of AI.",
+      name: "Puvan Rohith",
+      role: "BE Student",
     },
     {
-      quote: "I used to see AI as a threat to my role in operations. This course showed me how to turn AI into a powerful advantage in my everyday work.",
-      name: "Keerthi",
-      role: "Marketing",
+      quote: "I understood about AI and how to use it . How to use a correct input prompt for AI to avoid wrong information.",
+      name: "Vignesh",
+      role: "BE Student",
     },
   ];
 
@@ -47,7 +47,7 @@ const HomeReviewPage = () => {
             <div className="home_review_pg_card" key={index}>
               <div className="home_review_pg_stars">★★★★★</div>
 
-              <p className="home_review_pg_quote">"{review.quote}"</p>
+              <p className="home_review_pg_quote">{review.quote}</p>
 
               <div className="home_review_pg_person">
                 <p className="home_review_pg_name">{review.name}</p>

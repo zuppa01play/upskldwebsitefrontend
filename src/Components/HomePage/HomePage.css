@@ -1,6 +1,6 @@
 .upskld_home_pg_wrapper {
   width: 100%;
-  background-color: #ffffff;
+  background-image: linear-gradient(to right, rgb(251, 244, 252) , rgb(252, 224, 242));
   overflow: hidden;
   font-family: 'Manrope', 'Roboto', sans-serif;
 }
@@ -132,7 +132,7 @@
 /* RIGHT SIDE - IMAGE */
 .upskld_home_pg_right {
   flex: 1;
-  max-width: 560px;
+  max-width: 960px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,11 +143,9 @@
 }
 
 .upskld_home_pg_hero_img {
-  width: 100%;
-  max-width: 480px;
+  width: 40rem;
   height: auto;
- /* border-radius: 24px; */
-
+padding: 10px;
 }
 
 /* ANIMATIONS */

@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomePage.css";
+import HomeGif from "./home.gif"
 
 const HomePage = () => {
   return (
@@ -48,7 +49,7 @@ const HomePage = () => {
         {/* Right Image */}
         <div className="upskld_home_pg_right">
           <img
-            src="https://cdn.dribbble.com/userupload/35032201/file/original-bd29704daa2c99f4b7406afd3f5ee4fc.gif"
+            src={HomeGif}
             alt="AI and human intelligence concept"
             className="upskld_home_pg_hero_img"
           />
