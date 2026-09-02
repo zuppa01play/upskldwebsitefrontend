@@ -3,9 +3,9 @@ import "./HomeCelibrityPage.css";
 
 const HomeCelibrityPage = () => {
   const stats = [
-    { target: 2400, suffix: "+", label: "Verified learner count" },
-    { target: 18, suffix: "+", label: "International learner locations" },
-    { target: 35, suffix: "+", label: "Institutional partnerships" },
+    { target: 300, suffix: "+", label: "Learners attended free sessions" },
+    { target: 100, suffix: "+", label: "Students trained on job-ready AI skills" },
+    { target: 200, suffix: "+", label: "Working Professionals trained across functions" },
   ];
 
   const [counts, setCounts] = useState(stats.map(() => 0));
