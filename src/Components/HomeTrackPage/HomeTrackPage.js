@@ -3,6 +3,15 @@ import "./HomeTrackPage.css";
 
 const HomeTrackPage = () => {
   const tracksData = {
+     Marketing: {
+      badge: "AI FOR MARKETING",
+      title: "Create campaigns that connect, faster.",
+      btnText: "Explore AI for Marketing",
+      columns: [
+        ["Content ideation", "Ad copywriting", "Campaign briefs", "Audience research"],
+        ["Social calendars", "Performance analysis", "SEO drafts"],
+      ],
+    },
     Sales: {
       badge: "AI FOR SALES",
       title: "Move faster from research to relationship.",
@@ -10,15 +19,6 @@ const HomeTrackPage = () => {
       columns: [
         ["Lead research", "Personalised outreach", "Meeting preparation", "CRM productivity"],
         ["Prospect analysis", "Sales proposals", "Follow-up"],
-      ],
-    },
-    Marketing: {
-      badge: "AI FOR MARKETING",
-      title: "Create campaigns that connect, faster.",
-      btnText: "Explore AI for Marketing",
-      columns: [
-        ["Content ideation", "Ad copywriting", "Campaign briefs", "Audience research"],
-        ["Social calendars", "Performance analysis", "SEO drafts"],
       ],
     },
     HR: {
@@ -60,7 +60,7 @@ const HomeTrackPage = () => {
   };
 
   const tabs = Object.keys(tracksData);
-  const [activeTab, setActiveTab] = useState("Sales");
+  const [activeTab, setActiveTab] = useState("Marketing");
   const activeData = tracksData[activeTab];
 
   return (
@@ -71,13 +71,13 @@ const HomeTrackPage = () => {
 
         <h2 className="hometrack_pg_heading">
           Don't learn AI for its own sake. Learn how it applies to{" "}
-          <span className="hometrack_pg_heading_italic">the work you already do.</span>
+          <span className="hometrack_pg_heading_italic">the business you already do.</span>
         </h2>
 
         <p className="hometrack_pg_subtext">
           A marketing professional doesn't need to build a chatbot. A
           salesperson doesn't need to learn Python. What they need is
-          simpler: to know exactly where AI fits into the work they already
+          simpler: to know exactly where AI fits into the business they already
           do well.
         </p>
 

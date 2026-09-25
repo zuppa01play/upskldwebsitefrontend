@@ -4,8 +4,8 @@ import "./HomeCoursePage.css";
 
 const HomeCoursePage = () => {
   const courses = [
-    { tag: "PROFESSIONALS", title: "AI for Sales", desc: "Lead research, outreach and proposals — faster, without losing the personal touch.", meta: null },
     { tag: "PROFESSIONALS", title: "AI for Marketing", desc: "Campaign ideation, content and market intelligence, built around real briefs.", meta: null },
+    { tag: "PROFESSIONALS", title: "AI for Sales", desc: "Lead research, outreach and proposals — faster, without losing the personal touch.", meta: null },
     { tag: "LEADERSHIP", title: "AI for Business Leaders", desc: "Evaluate AI adoption, lead with confidence, without becoming a technologist.", meta: null },
     { tag: "PROFESSIONALS", title: "AI for HR", desc: "Recruitment, communication and L&D, with less manual process.", meta: null },
     { tag: "PROFESSIONALS", title: "AI for Finance", desc: "Reporting, forecasting support and documentation, done faster.", meta: null },

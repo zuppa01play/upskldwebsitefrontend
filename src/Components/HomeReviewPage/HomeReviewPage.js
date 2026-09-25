@@ -8,20 +8,28 @@ const HomeReviewPage = () => {
       name: "Prasanth Kumar",
       role: "BE Student",
     },
-    {
-      quote: "So good to understand love the way of teaching and got good experience and learned many things about Ai",
-      name: "Stany Iniyan",
-      role: "BE Student",
-    },
-    {
-      quote: "The master class is really good. I learned some of things like the level of AI.",
-      name: "Puvan Rohith",
-      role: "BE Student",
-    },
+    // {
+    //   quote: "So good to understand love the way of teaching and got good experience and learned many things about Ai",
+    //   name: "Stany Iniyan",
+    //   role: "BE Student",
+    // },
+    // {
+    //   quote: "The master class is really good. I learned some of things like the level of AI.",
+    //   name: "Puvan Rohith",
+    //   role: "BE Student",
+    // },
     {
       quote: "I understood about AI and how to use it . How to use a correct input prompt for AI to avoid wrong information.",
       name: "Vignesh",
       role: "BE Student",
+    },
+    {
+      quote: "Before this training, I only used it to ask a few minor questions .However , I Learned how to use ChatGPT securely by applying Privacy settings and how to generate perfect posters by giving the right prompts. She also taught us exactly what kind of questions we should ask ChatGPT to take our Business to the next level and drive business growth . This class was highly usefull for me , and I am fully confident that if we follow these techniques correctly , Our business will definitely experience significant growth.",
+      name: "Food store owner",
+      
+    },{
+      quote: "After getting training from  UPSKLD , we now use AI to easily track localized pricing trends for our products . By focusing on execution, this training has completely streamlined our admin tasks, saving us hoursof manual work and boosting our productivity.",
+      name: "Retail store owner",
     },
   ];
 

@@ -28,7 +28,7 @@ const HomePhilosophyPage = () => {
         </h2>
 
         <p className="upskld_philos_pg_subtext">
-          AI can generate, analyse, automate and accelerate. What it can't do
+          AI can generate, analyse, automate and accelerate to grow Business. What it can't do
           is replace judgement, creativity, context, empathy, leadership or
           the ability to make a hard call with incomplete information. Those
           still belong to you.
@@ -61,7 +61,7 @@ const HomePhilosophyPage = () => {
         </div>
 
         <p className="upskld_philos_pg_quote">
-          "Not tools for their own sake. Not hype. Just your job, done with a
+          "Not tools for their own sake. Not hype. Just your sales, done with a
           new capability attached to it."
         </p>
 

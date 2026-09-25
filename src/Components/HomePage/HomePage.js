@@ -13,7 +13,7 @@ const HomePage = () => {
           <h1 className="upskld_home_pg_heading">Learn AI. Lead the Future.</h1>
 
           <p className="upskld_home_pg_desc">
-            India's AI upskilling ecosystem built specifically for non-tech
+            India's AI upskilling ecosystem built specifically for Small Business & non-tech
             students, universities, and enterprises.
           </p>
           <p className="upskld_home_pg_desc">
