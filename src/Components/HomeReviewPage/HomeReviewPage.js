@@ -3,10 +3,31 @@ import "./HomeReviewPage.css";
 
 const HomeReviewPage = () => {
   const reviews = [
+    
+    {
+      quote: "Upskld AI has given me a great opportunity to enhance my software development knowledge through practical and engaging learning. The hands-on approach helped me understand programming concepts better and apply them while working on real-world challenges. It also improved my logical thinking, coding skills, and confidence in developing software solutions. I’m grateful for the learning experience and believe it will play an important role in my future career as a software developer.",
+      name: "Ajith AKVP",
+      role: "Software Developer",
+
+    }, {
+      quote: "Upskld AI has been really helpful in improving my graphic designing and video editing skills. The platform gave me practical knowledge that I can apply directly to my work. It Helped me build more confidence and improve my creative Skills. Overall, Upskld AI has been a valuable part of my upcoming career growth.",
+      name: "Keerthi prasadh K",
+      role: "Graphic Designer ",
+
+    },
+    {
+      quote: "Before this training, I only used it to ask a few minor questions .However , I Learned how to use ChatGPT securely by applying Privacy settings and how to generate perfect posters by giving the right prompts. She also taught us exactly what kind of questions we should ask ChatGPT to take our Business to the next level and drive business growth . This class was highly usefull for me , and I am fully confident that if we follow these techniques correctly , Our business will definitely experience significant growth.",
+      name: "Food store owner",
+      
+    },{
+      quote: "After getting training from  UPSKLD , we now use AI to easily track localized pricing trends for our products . By focusing on execution, this training has completely streamlined our admin tasks, saving us hoursof manual work and boosting our productivity.",
+      name: "Retail store owner",
+    },
+   
     {
       quote: "The way of teaching about the Ai and the how they were used the ai in the mangement and the era of mangement was good",
       name: "Prasanth Kumar",
-      role: "BE Student",
+      role: "Student",
     },
     // {
     //   quote: "So good to understand love the way of teaching and got good experience and learned many things about Ai",
@@ -21,15 +42,7 @@ const HomeReviewPage = () => {
     {
       quote: "I understood about AI and how to use it . How to use a correct input prompt for AI to avoid wrong information.",
       name: "Vignesh",
-      role: "BE Student",
-    },
-    {
-      quote: "Before this training, I only used it to ask a few minor questions .However , I Learned how to use ChatGPT securely by applying Privacy settings and how to generate perfect posters by giving the right prompts. She also taught us exactly what kind of questions we should ask ChatGPT to take our Business to the next level and drive business growth . This class was highly usefull for me , and I am fully confident that if we follow these techniques correctly , Our business will definitely experience significant growth.",
-      name: "Food store owner",
-      
-    },{
-      quote: "After getting training from  UPSKLD , we now use AI to easily track localized pricing trends for our products . By focusing on execution, this training has completely streamlined our admin tasks, saving us hoursof manual work and boosting our productivity.",
-      name: "Retail store owner",
+      role: "Student",
     },
   ];
 
