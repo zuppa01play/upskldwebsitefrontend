@@ -1,0 +1,181 @@
+/* ===================== TRACK (scroll space) ===================== */
+.upskld_showcase_track {
+  --showcase_nav: 0px;
+  --showcase_safe: 0px;
+  position: relative;
+  z-index: 0; /* header mela varadhu */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===================== STAGE (pinned screen) ===================== */
+.upskld_showcase_stage {
+  position: sticky;
+  top: var(--showcase_nav, 0px);
+  z-index: 0;
+  width: 100%;
+  /* vh = mobile la stable (address bar show/hide ku maaradhu) */
+  height: calc(100vh - var(--showcase_nav, 0px));
+  overflow: hidden;
+  background: #ffffff;
+  isolation: isolate;
+}
+
+/* ===================== SLIDE ===================== */
+.upskld_showcase_slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.upskld_showcase_layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* content fit: width + min-height + --fit JS la set aagum */
+.upskld_showcase_inner {
+  position: absolute;
+  top: calc(50% - (var(--showcase_safe, 0px) / 2));
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transform: translate(-50%, -50%) scale(var(--fit, 1));
+  transform-origin: 50% 50%;
+}
+
+.upskld_showcase_ready .upskld_showcase_inner {
+  transition: transform 0.35s ease;
+}
+
+/* section full height edukkum, content center la irukkum */
+.upskld_showcase_inner > section {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ===================== PROGRESS BAR ===================== */
+.upskld_showcase_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 100%;
+  height: 3px;
+  background: rgba(122, 31, 196, 0.12);
+  pointer-events: none;
+}
+
+.upskld_showcase_bar_fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #40159f, #7a1fc4);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ===================== DOTS NAV ===================== */
+.upskld_showcase_dots {
+  position: absolute;
+  top: calc(50% - (var(--showcase_safe, 0px) / 2));
+  right: 6px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: translateY(-50%);
+}
+
+.upskld_showcase_dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.upskld_showcase_dot::before {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(64, 21, 159, 0.28);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.upskld_showcase_dot_active::before {
+  background: #7a1fc4;
+  transform: scale(1.7);
+}
+
+.upskld_showcase_dot_label {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-right: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #40159f;
+  color: #ffffff;
+  font-family: "Sora", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .upskld_showcase_dot:hover::before {
+    background: #7a1fc4;
+    transform: scale(1.5);
+  }
+
+  .upskld_showcase_dot:hover .upskld_showcase_dot_label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .upskld_showcase_dots {
+    right: 18px;
+    gap: 6px;
+  }
+
+  .upskld_showcase_dot {
+    width: 26px;
+    height: 26px;
+  }
+
+  .upskld_showcase_dot::before {
+    width: 9px;
+    height: 9px;
+  }
+}

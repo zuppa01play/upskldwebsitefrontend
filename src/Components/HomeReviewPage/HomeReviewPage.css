@@ -1,121 +1,175 @@
+
 .home_review_pg_wrapper {
+  position: relative;
   width: 100%;
-  background-color: #fbf4ee;
-  font-family: 'Manrope', 'Roboto', sans-serif;
+  box-sizing: border-box;
+  background-color: #f9f3fc;
+  font-family: "Sora", sans-serif;
+  overflow: hidden;
+}
+
+.home_review_pg_wrapper *,
+.home_review_pg_wrapper *::before,
+.home_review_pg_wrapper *::after {
+  box-sizing: border-box;
+}
+
+
+
+.home_review_pg_wrapper::after {
+  content: "";
+  position: absolute;
+  right: -140px;
+  bottom: -140px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 132, 42, 0.2) 0%, rgba(181, 132, 42, 0) 70%);
+  pointer-events: none;
 }
 
 .home_review_pg_container {
+  position: relative;
+  z-index: 1;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 70px 32px 90px;
+  padding: 50px 20px 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
+/* ===================== HEADING ===================== */
 .home_review_pg_tagline {
-  color: #b5842a;
-  font-size: 12.5px;
+  margin: 0 0 12px;
+ color: #550979;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  margin: 0 0 14px;
+  opacity: 0;
 }
 
 .home_review_pg_heading {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 32px;
+  margin: 0 0 14px;
+  font-family: "Sora", sans-serif;
+  font-size: 24px;
   line-height: 1.3;
-  color: #1a1a1a;
   font-weight: 500;
-  margin: 0 0 16px;
+  color: #1a1a1a;
+  opacity: 0;
 }
 
 .home_review_pg_heading_italic {
-  color: #b5842a;
-  font-style: italic;
+  color: #550979;
 }
 
 .home_review_pg_subtext {
-  font-size: 15px;
+  max-width: 650px;
+  margin: 0 0 32px;
+  font-size: 14px;
   line-height: 1.7;
   color: #5a5a5a;
-  max-width: 650px;
-  margin: 0 0 48px;
+
+  opacity: 0;
 }
 
-/* GRID */
-.home_review_pg_grid {
+/* ===================== SLIDER ===================== */
+.home_review_pg_slider {
+  position: relative;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  opacity: 0;
+  outline: none;
 }
 
-/* CARD */
+.home_review_pg_slider:focus-visible {
+  outline: 2px solid #ff00ff;
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
+.home_review_pg_viewport {
+  width: 100%;
+  padding: 14px 0 26px;
+  overflow: hidden;
+}
+
+.home_review_pg_track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+.home_review_pg_slide {
+  flex: 0 0 calc(100% / var(--home_review_per_view, 1));
+  min-width: 0;
+  padding: 0 8px;
+  display: flex;
+}
+
+/* ===================== CARD ===================== */
 .home_review_pg_card {
-  background-color: #ffffff;
-  border-radius: 14px;
-  padding: 24px;
-  text-align: left;
+  width: 100%;
+  padding: 22px 20px;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid rgba(181, 132, 42, 0.12);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(120, 80, 20, 0.08);
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-.home_review_pg_card:hover {
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.09);
-  transform: translateY(-4px);
-}
-
 .home_review_pg_stars {
-  color: #d9a125;
+  margin-bottom: 14px;
+  color: #ffae00;
   font-size: 14px;
   letter-spacing: 2px;
-  margin-bottom: 14px;
 }
 
 .home_review_pg_quote {
-  font-size: 13.5px;
-  line-height: 1.7;
-  color: #3a3a3a;
-  font-style: italic;
-  margin: 0 0 20px;
   flex-grow: 1;
+  margin: 0 0 20px;
+  font-family: "Sora", sans-serif;
+  font-size: 16px !important;
+  line-height: 1.7;
+  text-align: justify;
+  color: #3a3a3a;
 }
 
 .home_review_pg_person {
+  margin-bottom: 16px;
   padding-top: 14px;
   border-top: 1px dashed #e6d9cd;
-  margin-bottom: 16px;
 }
 
 .home_review_pg_name {
+  margin: 0 0 3px;
   font-size: 14px;
   font-weight: 700;
   color: #1a1a1a;
-  margin: 0 0 3px;
 }
 
 .home_review_pg_role {
+  margin: 0;
   font-size: 12.5px;
   color: #8a8a8a;
-  margin: 0;
 }
 
 .home_review_pg_verify_btn {
+  width: 100%;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 999px;
   background-color: #fbeecb;
   color: #a3720f;
-  border: none;
-  padding: 11px 14px;
-  border-radius: 999px;
+  font-family: "Sora", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.4px;
   cursor: pointer;
-  width: 100%;
   transition: background-color 0.2s ease;
 }
 
@@ -123,28 +177,280 @@
   background-color: #f5e2b3;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1100px) {
-  .home_review_pg_grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ===================== ARROWS ===================== */
+.home_review_pg_arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #ead8bb;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #a3720f;
+  box-shadow: 0 6px 16px rgba(120, 80, 20, 0.14);
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (max-width: 560px) {
-  .home_review_pg_container {
-    padding: 50px 20px 60px;
-  }
+.home_review_pg_arrow:hover {
+  background: #b5842a;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(181, 132, 42, 0.35);
+}
 
-  .home_review_pg_grid {
-    grid-template-columns: 1fr;
+.home_review_pg_arrow:active {
+  transform: scale(0.92);
+}
+
+.home_review_pg_arrow:focus-visible,
+.home_review_pg_dot:focus-visible,
+.home_review_pg_verify_btn:focus-visible {
+  outline: 2px solid #b5842a;
+  outline-offset: 3px;
+}
+
+/* side arrows hidden on mobile */
+.home_review_pg_arrow_side {
+  display: none;
+}
+
+/* ===================== BOTTOM CONTROLS (mobile default) ===================== */
+.home_review_pg_controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 6px;
+  opacity: 0;
+}
+
+.home_review_pg_dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 180px;
+}
+
+.home_review_pg_dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #d8c3a0;
+  cursor: pointer;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.home_review_pg_dot_active {
+  width: 24px;
+  background: #b5842a;
+}
+
+/* ===================== ENTRANCE FADE ===================== */
+.home_review_pg_visible .home_review_pg_tagline {
+  animation: home_review_pg_fade_up 0.7s ease 0.05s forwards;
+}
+
+.home_review_pg_visible .home_review_pg_heading {
+  animation: home_review_pg_fade_up 0.8s ease 0.2s forwards;
+}
+
+.home_review_pg_visible .home_review_pg_subtext {
+  animation: home_review_pg_fade_up 0.8s ease 0.4s forwards;
+}
+
+.home_review_pg_visible .home_review_pg_slider {
+  animation: home_review_pg_fade_up 0.9s ease 0.6s forwards;
+}
+
+.home_review_pg_visible .home_review_pg_controls {
+  animation: home_review_pg_fade_in 0.8s ease 1s forwards;
+}
+
+/* ===================== 360px ANDROID ===================== */
+@media (max-width: 360px) {
+  .home_review_pg_container {
+    padding: 42px 14px 48px;
   }
 
   .home_review_pg_heading {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .home_review_pg_subtext {
+    font-size: 13px;
+  }
+
+  .home_review_pg_slide {
+    padding: 0 4px;
+  }
+
+  .home_review_pg_card {
+    padding: 18px 16px;
+  }
+
+  .home_review_pg_quote {
+    font-size: 13px;
+  }
+}
+
+/* ===================== BIG PHONE ===================== */
+@media (min-width: 480px) {
+  .home_review_pg_heading {
+    font-size: 27px;
+  }
+
+  .home_review_pg_slide {
+    padding: 0 10px;
+  }
+
+  .home_review_pg_card {
+    padding: 24px;
+  }
+}
+
+/* ===================== TABLET (700px+ : 2 cards) ===================== */
+@media (min-width: 700px) {
+  .home_review_pg_container {
+    padding: 64px 28px 70px;
+  }
+
+  .home_review_pg_heading {
+    font-size: 30px;
+  }
+
+  .home_review_pg_subtext {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .home_review_pg_slider {
+    padding: 0 56px;
+  }
+
+  .home_review_pg_slide {
+    padding: 0 10px;
+  }
+
+  /* side arrows ON, bottom arrows OFF */
+  .home_review_pg_arrow_side {
+    display: inline-flex;
+    position: absolute;
+    top: calc(50% - 22px);
+    z-index: 2;
+  }
+
+  .home_review_pg_arrow_prev {
+    left: 0;
+  }
+
+  .home_review_pg_arrow_next {
+    right: 0;
+  }
+
+  .home_review_pg_arrow_bottom {
+    display: none;
+  }
+
+  .home_review_pg_controls {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 700px) and (hover: hover) {
+  .home_review_pg_card:hover {
+    box-shadow: 0 16px 34px rgba(120, 80, 20, 0.16);
+    transform: translateY(-4px);
+  }
+
+  .home_review_pg_arrow_prev:hover {
+    transform: translateX(-3px);
+  }
+
+  .home_review_pg_arrow_next:hover {
+    transform: translateX(3px);
+  }
+}
+
+/* ===================== DESKTOP (1100px+ : 3 cards) ===================== */
+@media (min-width: 1100px) {
+  .home_review_pg_container {
+    padding: 80px 32px 90px;
+  }
+
+  .home_review_pg_heading {
+    font-size: 34px;
+  }
+
+  .home_review_pg_slider {
+    padding: 0 64px;
+  }
+
+  .home_review_pg_arrow {
+    width: 48px;
+    height: 48px;
+  }
+
+  .home_review_pg_arrow_side {
+    top: calc(50% - 24px);
+  }
+
+  .home_review_pg_slide {
+    padding: 0 12px;
+  }
+
+  .home_review_pg_card {
+    padding: 26px;
+  }
+
+  .home_review_pg_quote {
     font-size: 14px;
-    margin-bottom: 36px;
+  }
+}
+
+/* ===================== KEYFRAMES ===================== */
+@keyframes home_review_pg_fade_up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes home_review_pg_fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+@media (prefers-reduced-motion: reduce) {
+  .home_review_pg_tagline,
+  .home_review_pg_heading,
+  .home_review_pg_subtext,
+  .home_review_pg_slider,
+  .home_review_pg_controls {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .home_review_pg_track,
+  .home_review_pg_card,
+  .home_review_pg_dot,
+  .home_review_pg_arrow {
+    transition: none !important;
   }
 }

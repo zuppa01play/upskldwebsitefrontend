@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import "./HomeCreerForm.css";
+
+// .env la REACT_APP_API_URL=http://localhost:4002 nu kudutha local backend ku pogum
+const API_URL = process.env.REACT_APP_API_URL || "https://upskldai.com/api";
+const REQUEST_TIMEOUT = 15000; // 15s
 
 const validationSchema = Yup.object({
   fullName: Yup.string()
@@ -31,20 +36,48 @@ const HomeCreerForm = () => {
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+
       try {
-        const res = await fetch("https://upskldai.com/api/student-form", {
+        const res = await fetch(`${API_URL}/student-form`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
+          signal: controller.signal,
         });
-        const data = await res.json();
-        if (data.success) {
+
+        // server JSON anuppala na (404 html page etc.) crash aagaama handle
+        let data = null;
+        try {
+          data = await res.json();
+        } catch (parseErr) {
+          data = null;
+        }
+
+        if (res.ok && data && data.success) {
+          toast.success("Submitted successfully! We'll reach out shortly.");
           setIsSubmitted(true);
           resetForm();
+        } else {
+          const message =
+            (data && data.message) ||
+            (res.status === 404
+              ? "Service not found. Please contact support."
+              : "Something went wrong. Please try again.");
+          toast.error(message);
         }
       } catch (err) {
         console.error("Submit failed:", err);
+        if (err.name === "AbortError") {
+          toast.error("Request timed out. Please try again.");
+        } else {
+          toast.error(
+            "Unable to reach the server. Please check your internet connection and try again."
+          );
+        }
       } finally {
+        clearTimeout(timer);
         setSubmitting(false);
       }
     },
@@ -179,7 +212,11 @@ const HomeCreerForm = () => {
               <p className="career_home_pg_success_text">
                 Thanks! We'll reach out shortly to schedule your free session.
               </p>
-              <button className="career_home_pg_reset_btn" onClick={handleReset}>
+              <button
+                type="button"
+                className="career_home_pg_reset_btn"
+                onClick={handleReset}
+              >
                 Submit Another Response
               </button>
             </div>

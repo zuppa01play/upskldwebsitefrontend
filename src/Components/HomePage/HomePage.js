@@ -1,61 +1,53 @@
 import React from "react";
 import "./HomePage.css";
-import HomeGif from "./home.gif"
 
 const HomePage = () => {
   return (
-    <div className="upskld_home_pg_wrapper">
-      <div className="upskld_home_pg_container">
-        {/* Left Content */}
-        <div className="upskld_home_pg_left">
-          <p className="upskld_home_pg_tagline">HUMAN INTELLIGENCE + AI</p>
+    <section className="impac_home_pg_section">
+      {/* Animated white background */}
+      <div className="impac_home_pg_bg" aria-hidden="true">
+        <span className="impac_home_pg_dots"></span>
+        <span className="impac_home_pg_blob impac_home_pg_blob_one"></span>
+        <span className="impac_home_pg_blob impac_home_pg_blob_two"></span>
+        <span className="impac_home_pg_blob impac_home_pg_blob_three"></span>
+      </div>
 
-          <h1 className="upskld_home_pg_heading">Learn AI. Lead the Future.</h1>
+      <div className="impac_home_pg_container">
+        {/* Left content */}
+        <div className="impac_home_pg_content">
+          <h1 className="impac_home_pg_title">
+        UPSKLD
+          </h1>
 
-          <p className="upskld_home_pg_desc">
-            India's AI upskilling ecosystem built specifically for Small Business & non-tech
-            students, universities, and enterprises.
+          <p className="impac_home_pg_subtitle">
+            From AI Anxiety to AI Advantage
           </p>
-          <p className="upskld_home_pg_desc">
-            {" "}
-            No coding. No heavy jargon. Just practical skills for real growth
-          </p>
-          <div className="upskld_home_pg_btn_group">
-            <button className="upskld_home_pg_primary_btn">
-              Explore AI for Your Role{" "}
-              <span className="upskld_home_pg_arrow">→</span>
-            </button>
-            <button className="upskld_home_pg_secondary_btn">
-              See How It Works
-            </button>
-          </div>
 
-          <div className="upskld_home_pg_points">
-            <div className="upskld_home_pg_point_item">
-              <span className="upskld_home_pg_dot"></span>
-              <span>Job-specific tracks, not tool tutorials</span>
-            </div>
-            <div className="upskld_home_pg_point_item">
-              <span className="upskld_home_pg_dot"></span>
-              <span>No coding, ever</span>
-            </div>
-            <div className="upskld_home_pg_point_item">
-              <span className="upskld_home_pg_dot"></span>
-              <span>Vernacular delivery available</span>
-            </div>
-          </div>
+          <span className="impac_home_pg_divider"></span>
+
+          <p className="impac_home_pg_desc">
+           A practical AI learning ecosystem for the people
+and institutions shaping the future of work.
+          </p>
         </div>
 
-        {/* Right Image */}
-        <div className="upskld_home_pg_right">
-          <img
-            src={HomeGif}
-            alt="AI and human intelligence concept"
-            className="upskld_home_pg_hero_img"
-          />
+        {/* Right image */}
+        <div className="impac_home_pg_visual">
+          <span className="impac_home_pg_visual_shape" aria-hidden="true"></span>
+          <div className="impac_home_pg_img_wrap">
+            <img
+              className="impac_home_pg_img"
+              src="https://www.instructure.com/sites/default/files/image/2025-07/k12-hero-v1.jpg"
+              alt="Upskld for small businesses - team learning practical AI skills"
+              width="800"
+              height="600"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

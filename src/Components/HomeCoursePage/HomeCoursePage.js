@@ -1,196 +1,158 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useRef } from 'react';
 import "./HomeCoursePage.css";
+import imageOne from "./arrediness.png";
+import imageTwo from "./dataanaly.png";
+import imageThree from "./group.png";
+
+
+const courses = [
+  {
+    key: "job_readiness",
+    title: "AI for Job Readiness",
+    description:
+      "Build stronger resumes, profiles and interview preparation, with AI as a career co-pilot.",
+    image: imageOne,
+    alt: "Smiling woman working at her desk in a modern office",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2a1a8a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 2.8l2.1 1.5 2.6-.1.8 2.5 2.1 1.5-.8 2.5.8 2.5-2.1 1.5-.8 2.5-2.6-.1L12 19.2l-2.1-1.5-2.6.1-.8-2.5-2.1-1.5.8-2.5-.8-2.5 2.1-1.5.8-2.5 2.6.1z" />
+        <path d="M8.8 12.2l2.3 2.3 4.2-4.6" />
+      </svg>
+    ),
+  },
+  {
+    key: "data_analytics",
+    title: "AI for Data Analytics",
+    description:
+      "Analyse data, extract insights and communicate findings without needing to code.",
+    image: imageTwo,
+    alt: "Colleagues analysing data together on a laptop",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2a1a8a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="12" width="4" height="8" />
+        <rect x="10" y="4" width="4" height="16" />
+        <rect x="17" y="9" width="4" height="11" />
+      </svg>
+    ),
+  },
+  {
+    key: "prompting_sense",
+    title: "Prompting Sense",
+    description:
+      "Move beyond casual chat. Learn structured, task-based prompting that produces workplace-ready outputs.",
+    image: imageThree,
+    alt: "Professional working at a computer with code on the screen",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2a1a8a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 20.5l1.6-5.2A8.4 8.4 0 1 1 21 11.5z" />
+        <circle cx="8.5" cy="11.5" r="0.6" fill="#2a1a8a" />
+        <circle cx="12" cy="11.5" r="0.6" fill="#2a1a8a" />
+        <circle cx="15.5" cy="11.5" r="0.6" fill="#2a1a8a" />
+      </svg>
+    ),
+  },
+];
 
 const HomeCoursePage = () => {
-  const courses = [
-    { tag: "PROFESSIONALS", title: "AI for Marketing", desc: "Campaign ideation, content and market intelligence, built around real briefs.", meta: null },
-    { tag: "PROFESSIONALS", title: "AI for Sales", desc: "Lead research, outreach and proposals — faster, without losing the personal touch.", meta: null },
-    { tag: "LEADERSHIP", title: "AI for Business Leaders", desc: "Evaluate AI adoption, lead with confidence, without becoming a technologist.", meta: null },
-    { tag: "PROFESSIONALS", title: "AI for HR", desc: "Recruitment, communication and L&D, with less manual process.", meta: null },
-    { tag: "PROFESSIONALS", title: "AI for Finance", desc: "Reporting, forecasting support and documentation, done faster.", meta: null },
-    { tag: "EVERYONE", title: "AI for Productivity", desc: "Practical daily-work habits that apply across any role or team.", meta: null },
-    { tag: "FOUNDERS", title: "AI for Entrepreneurs", desc: "Build, automate and scale a lean operation using AI across the business.", meta: null },
-    { tag: "LIVE EXAMPLE", title: "AI for Students", desc: "Graduate more employable than your syllabus alone would make you. AI fundamentals, academic & research assistance, resume building, career guidance.", meta: "Live + self-paced · 4–6 weeks · ₹12,000–₹15,000 · English + regional · Certificate on completion" },
-    { tag: "GROWTH", title: "AI for Growth", desc: "Graduate more employable than your syllabus alone would make you. AI fundamentals, academic & research assistance, resume building, career guidance.", meta: "Live + self-paced · 4–6 weeks · ₹12,000–₹15,000 · English + regional · Certificate on completion" },
-    { tag: "INTERVIEW", title: "AI for Interview", desc: "Graduate more employable than your syllabus alone would make you. AI fundamentals, academic & research assistance, resume building, career guidance.", meta: "Live + self-paced · 4–6 weeks · ₹12,000–₹15,000 · English + regional · Certificate on completion" },
-  ];
+  const sectionRef = useRef(null);
 
-  const [blinkIndex, setBlinkIndex] = useState(null);
-  const [index, setIndex] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(4);
-  const [cardStep, setCardStep] = useState(0);
-
-  const trackRef = useRef(null);
-  const isFirstRender = useRef(true);
-  const prevCardStepRef = useRef(0);
-  const touchStartX = useRef(null);
-  const touchDeltaX = useRef(0);
-
-  const handleCardClick = (i) => {
-    setBlinkIndex(i);
-    setTimeout(() => setBlinkIndex(null), 400);
-  };
-
-  // how many cards fit, matches CSS breakpoints below
+  /* Scroll reveal */
   useEffect(() => {
-    const updateVisible = () => {
-      const w = window.innerWidth;
-      if (w <= 560) setVisibleCards(1);
-      else if (w <= 820) setVisibleCards(2);
-      else if (w <= 1100) setVisibleCards(3);
-      else setVisibleCards(4);
-    };
-    updateVisible();
-    window.addEventListener('resize', updateVisible);
-    return () => window.removeEventListener('resize', updateVisible);
+    const node = sectionRef.current;
+    if (!node) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      node.classList.add("career_home_pg_visible");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            node.classList.add("career_home_pg_visible");
+            observer.unobserve(node);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
-  // measure actual rendered card width + gap
-  const measure = useCallback(() => {
-    if (!trackRef.current) return;
-    const firstCard = trackRef.current.children[0];
-    if (!firstCard) return;
-    const cardWidth = firstCard.getBoundingClientRect().width;
-    const styles = window.getComputedStyle(trackRef.current);
-    const gap = parseFloat(styles.columnGap || styles.gap || 0);
-    setCardStep(cardWidth + gap);
-  }, []);
+  /* 3D tilt (desktop + mouse devices only) */
+  const canTilt = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (min-width: 1024px)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  useEffect(() => {
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, [visibleCards, measure]);
+  const handleMove = (e) => {
+    if (!canTilt()) return;
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rx = (y / rect.height - 0.5) * -14;
+    const ry = (x / rect.width - 0.5) * 14;
 
-  // clamp index so we never scroll past the last full set
-  useEffect(() => {
-    const maxIndex = Math.max(0, courses.length - visibleCards);
-    setIndex((i) => Math.min(i, maxIndex));
-  }, [visibleCards, courses.length]);
-
-  // move the track — instant reposition on resize, animated slide on index change
-  useEffect(() => {
-    if (!trackRef.current || !cardStep) return;
-    const resized = prevCardStepRef.current !== cardStep;
-    prevCardStepRef.current = cardStep;
-
-    if (isFirstRender.current || resized) {
-      isFirstRender.current = false;
-      gsap.set(trackRef.current, { x: -index * cardStep });
-    } else {
-      gsap.to(trackRef.current, {
-        x: -index * cardStep,
-        duration: 0.7,
-        ease: "power3.out",
-      });
-    }
-  }, [index, cardStep]);
-
-  const maxIndex = Math.max(0, courses.length - visibleCards);
-  const goPrev = () => setIndex((i) => Math.max(0, i - 1));
-  const goNext = () => setIndex((i) => Math.min(maxIndex, i + 1));
-
-  // ---- touch / swipe support for mobile & tablet ----
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchDeltaX.current = 0;
+    card.style.setProperty("--career_rx", `${rx.toFixed(2)}deg`);
+    card.style.setProperty("--career_ry", `${ry.toFixed(2)}deg`);
+    card.style.setProperty("--career_mx", `${((x / rect.width) * 100).toFixed(1)}%`);
+    card.style.setProperty("--career_my", `${((y / rect.height) * 100).toFixed(1)}%`);
   };
 
-  const handleTouchMove = (e) => {
-    if (touchStartX.current === null) return;
-    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
-  };
-
-  const handleTouchEnd = () => {
-    const SWIPE_THRESHOLD = 40;
-    if (touchDeltaX.current > SWIPE_THRESHOLD) {
-      goPrev();
-    } else if (touchDeltaX.current < -SWIPE_THRESHOLD) {
-      goNext();
-    }
-    touchStartX.current = null;
-    touchDeltaX.current = 0;
+  const handleLeave = (e) => {
+    const card = e.currentTarget;
+    card.style.setProperty("--career_rx", "0deg");
+    card.style.setProperty("--career_ry", "0deg");
   };
 
   return (
-    <section id="courses" className="upskld_course_pg_wrapper">
-      <div className="upskld_course_pg_container">
-
-        <p className="upskld_course_pg_tagline">COURSES</p>
-
-        <h2 className="upskld_course_pg_heading">
-          Built around <span className="upskld_course_pg_heading_italic">outcomes</span>, not tools.
-        </h2>
-
-        <p className="upskld_course_pg_subtext">
-          "Learn ChatGPT" teaches a tool. "AI for Sales" teaches an outcome —
-          and includes whichever tools help you get there, taught in context.
-        </p>
-
-        <div className="upskld_course_pg_slider_wrap">
-          <button
-            type="button"
-            className="upskld_course_pg_arrow_btn upskld_course_pg_arrow_prev"
-            onClick={goPrev}
-            disabled={index === 0}
-            aria-label="Previous courses"
-          >
-            &#8249;
-          </button>
-
-          <div
-            className="upskld_course_pg_viewport"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div className="upskld_course_pg_grid" ref={trackRef}>
-              {courses.map((course, i) => (
-                <div
-                  className={`upskld_course_pg_card ${
-                    blinkIndex === i ? "upskld_course_pg_card_blink" : ""
-                  }`}
-                  key={i}
-                  onClick={() => handleCardClick(i)}
-                >
-                  <span className="upskld_course_pg_tag">{course.tag}</span>
-
-                  <h3 className="upskld_course_pg_card_title">{course.title}</h3>
-                  <p className="upskld_course_pg_card_desc">{course.desc}</p>
-
-                  {course.meta && (
-                    <>
-                      <div className="upskld_course_pg_divider"></div>
-                      <p className="upskld_course_pg_meta">{course.meta}</p>
-                    </>
-                  )}
-
-                  <div className="upskld_course_pg_card_bottom">
-                    {!course.meta && <div className="upskld_course_pg_divider"></div>}
-                    <button className="upskld_course_pg_link_btn">
-                      ADD PRICING &amp; CURRICULUM
-                    </button>
-                    <button className="upskld_course_pg_reserve_btn">
-                      Reserve Free Counselling
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button
-            type="button"
-            className="upskld_course_pg_arrow_btn upskld_course_pg_arrow_next"
-            onClick={goNext}
-            disabled={index === maxIndex}
-            aria-label="Next courses"
-          >
-            &#8250;
-          </button>
+    <section className="career_home_pg_section" ref={sectionRef}>
+      <div className="career_home_pg_container">
+        <div className="career_home_pg_head">
+          <h2 className="career_home_pg_title">
+            Three skills that make AI part of a career for any student.
+          </h2>
+          <span className="career_home_pg_underline" />
         </div>
 
+        <div className="career_home_pg_grid">
+          {courses.map((item) => (
+            <div
+              key={item.key}
+              className={`career_home_pg_item career_home_pg_item_${item.key}`}
+            >
+              <article
+                className="career_home_pg_card"
+                onMouseMove={handleMove}
+                onMouseLeave={handleLeave}
+              >
+                <div className="career_home_pg_image_wrap">
+                  <img
+                    className="career_home_pg_image"
+                    src={item.image}
+                    alt={item.alt}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                <div className="career_home_pg_body">
+                  <div className="career_home_pg_card_head">
+                    <span className="career_home_pg_icon">{item.icon}</span>
+                    <h3 className="career_home_pg_card_title">{item.title}</h3>
+                  </div>
+                  <p className="career_home_pg_card_desc">{item.description}</p>
+                </div>
+
+                <span className="career_home_pg_glare" aria-hidden="true" />
+              </article>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

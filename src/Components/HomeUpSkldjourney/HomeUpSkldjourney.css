@@ -1,0 +1,220 @@
+.impact_journay_ho_pg_section {
+  --impact_journay_ho_pg_chart_h: clamp(150px, 20vw, 250px);
+  --impact_journay_ho_pg_ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: clamp(36px, 6vw, 72px);
+  background: #ffffff;
+  overflow: hidden;
+  font-family: "Sora", sans-serif;
+  color: #1a1a1a;
+}
+.impact_journay_ho_pg_section *,
+.impact_journay_ho_pg_section *::before,
+.impact_journay_ho_pg_section *::after { box-sizing: border-box; }
+
+.impact_journay_ho_pg_container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 48px);
+}
+
+/* ===== Heading ===== */
+.impact_journay_ho_pg_title {
+  margin: 0;
+  max-width: 720px;
+  font-size: clamp(1.8rem, 3.8vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #1a1a1a;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s var(--impact_journay_ho_pg_ease);
+}
+.impact_journay_ho_pg_underline {
+  display: block;
+  width: 0;
+  height: 2px;
+  margin: 14px 0 clamp(28px, 4vw, 44px);
+  background: #8b0abf;
+  transition: width 0.9s var(--impact_journay_ho_pg_ease) 0.35s;
+}
+.impact_journay_ho_pg_in .impact_journay_ho_pg_title { opacity: 1; transform: none; }
+.impact_journay_ho_pg_in .impact_journay_ho_pg_underline { width: 64px; }
+
+/* ===== Stages (5 columns) ===== */
+.impact_journay_ho_pg_stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 1.2vw, 14px);
+  perspective: 1100px;
+}
+.impact_journay_ho_pg_stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+/* text block: fade + 3D flip up */
+.impact_journay_ho_pg_text {
+  padding-bottom: 20px;
+  opacity: 0;
+  transform-origin: 50% 0;
+  transform: translateY(28px) rotateX(-28deg);
+  transition: opacity 0.7s ease, transform 0.9s var(--impact_journay_ho_pg_ease);
+  transition-delay: calc(0.25s + var(--i) * 0.14s);
+}
+.impact_journay_ho_pg_in .impact_journay_ho_pg_text { opacity: 1; transform: none; }
+
+.impact_journay_ho_pg_no {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #8b0abf;
+}
+.impact_journay_ho_pg_stage_title {
+  margin: 0 0 4px;
+  font-size: clamp(0.95rem, 1.35vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #1a1a1a;
+}
+.impact_journay_ho_pg_stage_sub {
+  margin: 0 0 14px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.impact_journay_ho_pg_stage_desc {
+  margin: 0;
+  font-size: clamp(0.72rem, 1vw, 0.8rem);
+  line-height: 1.6;
+  color: #555555;
+}
+
+/* bars: grow up + fade + 3D tilt */
+.impact_journay_ho_pg_bar_slot {
+  height: var(--impact_journay_ho_pg_chart_h);
+  display: flex;
+  align-items: flex-end;
+}
+.impact_journay_ho_pg_bar {
+  display: block;
+  width: 100%;
+  height: var(--h);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 12px 20px rgba(67, 25, 91, 0.25);
+  transform-origin: 50% 100%;
+  opacity: 0;
+  transform: scaleY(0) rotateX(-40deg) translateZ(-60px);
+  transition: opacity 0.6s ease, transform 1.2s var(--impact_journay_ho_pg_ease);
+  transition-delay: calc(0.6s + var(--i) * 0.18s);
+}
+.impact_journay_ho_pg_in .impact_journay_ho_pg_bar { opacity: 1; transform: none; }
+.impact_journay_ho_pg_stage:hover .impact_journay_ho_pg_bar { filter: brightness(1.12) saturate(1.1); }
+
+.impact_journay_ho_pg_bar_1 { background: linear-gradient(180deg, #d3aee6, #c9a0e0); }
+.impact_journay_ho_pg_bar_2 { background: linear-gradient(180deg, #b47fd2, #a86cc8); }
+.impact_journay_ho_pg_bar_3 { background: linear-gradient(180deg, #9650ba, #8b44b0); }
+.impact_journay_ho_pg_bar_4 { background: linear-gradient(180deg, #7d35a1, #6d2c92); }
+.impact_journay_ho_pg_bar_5 { background: linear-gradient(180deg, #52206d, #43195b); }
+
+/* baseline + label */
+.impact_journay_ho_pg_baseline {
+  height: 2px;
+  background: #2a0f3a;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  transition: transform 1.2s var(--impact_journay_ho_pg_ease) 0.5s;
+}
+.impact_journay_ho_pg_in .impact_journay_ho_pg_baseline { transform: scaleX(1); }
+
+.impact_journay_ho_pg_label {
+  margin: 10px 0 0;
+  font-size: clamp(0.6rem, 0.9vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #3a2a45;
+  opacity: 0;
+  transition: opacity 0.8s ease 1.6s;
+}
+.impact_journay_ho_pg_in .impact_journay_ho_pg_label { opacity: 1; }
+
+/* footer strip */
+.impact_journay_ho_pg_footer {
+  /* margin-top: clamp(20px, 3vw, 28px); */
+  padding: 18px clamp(18px, 4vw, 48px);
+  background-image: linear-gradient(to right, rgb(246, 222, 253),rgb(225, 119, 247),rgb(154, 64, 177),rgb(122, 1, 146),rgb(90, 1, 117),rgb(73, 4, 100));
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease 1.8s, transform 0.9s var(--impact_journay_ho_pg_ease) 1.8s;
+}
+.impact_journay_ho_pg_in .impact_journay_ho_pg_footer { opacity: 1; transform: none; }
+.impact_journay_ho_pg_footer_text {
+  max-width: 1144px;
+  margin: 0 auto;
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+  line-height: 1.5;
+  color: #fdfcfd;
+}
+
+/* ===== Small laptops ===== */
+@media (max-width: 1100px) {
+  .impact_journay_ho_pg_stage_desc { line-height: 1.5; }
+}
+
+/* ===== Tablet + mobile: stages become a list, bars grow sideways ===== */
+@media (max-width: 900px) {
+  .impact_journay_ho_pg_stages {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .impact_journay_ho_pg_stage {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: #faf6fd;
+    border: 1px solid #eadcf5;
+    transform-origin: 50% 0;
+  }
+  .impact_journay_ho_pg_text { padding-bottom: 14px; }
+  .impact_journay_ho_pg_no { margin-bottom: 8px; }
+  .impact_journay_ho_pg_stage_sub { margin-bottom: 10px; font-size: 0.75rem; }
+  .impact_journay_ho_pg_stage_title { font-size: 1.05rem; }
+  .impact_journay_ho_pg_stage_desc { font-size: 0.85rem; }
+
+  .impact_journay_ho_pg_bar_slot { height: auto; display: block; }
+  .impact_journay_ho_pg_bar {
+    height: 14px;
+    width: var(--w);
+    border-radius: 0 8px 8px 0;
+    transform-origin: 0 50%;
+    transform: scaleX(0) rotateY(35deg);
+  }
+  .impact_journay_ho_pg_in .impact_journay_ho_pg_bar { transform: none; }
+
+  .impact_journay_ho_pg_baseline { display: none; }
+  .impact_journay_ho_pg_label { margin-top: 22px; }
+}
+
+@media (max-width: 480px) {
+  .impact_journay_ho_pg_title { letter-spacing: -0.5px; }
+  .impact_journay_ho_pg_stage { padding: 16px; }
+  .impact_journay_ho_pg_label { letter-spacing: 1px; line-height: 1.5; }
+}
+
+/* ===== Reduced motion: show everything immediately ===== */
+@media (prefers-reduced-motion: reduce) {
+  .impact_journay_ho_pg_title, .impact_journay_ho_pg_underline,
+  .impact_journay_ho_pg_text, .impact_journay_ho_pg_bar,
+  .impact_journay_ho_pg_baseline, .impact_journay_ho_pg_label,
+  .impact_journay_ho_pg_footer {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .impact_journay_ho_pg_underline { width: 64px; }
+}

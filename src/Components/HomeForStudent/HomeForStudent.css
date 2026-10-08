@@ -1,0 +1,629 @@
+
+.for_student_ho_pg_section {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 36px 16px 44px;
+  background: #ffffff;
+  font-family: "Sora", sans-serif;
+  overflow: hidden;
+}
+
+.for_student_ho_pg_section *,
+.for_student_ho_pg_section *::before,
+.for_student_ho_pg_section *::after {
+  box-sizing: border-box;
+}
+
+.for_student_ho_pg_container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---------- Animated background ---------- */
+.for_student_ho_pg_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.for_student_ho_pg_blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.45;
+}
+
+.for_student_ho_pg_blob_one {
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: #cdb8ff;
+  animation: for_student_ho_pg_float_one 12s ease-in-out infinite;
+}
+
+.for_student_ho_pg_blob_two {
+  bottom: 40px;
+  left: -70px;
+  width: 180px;
+  height: 180px;
+  background: #b9d6ff;
+  animation: for_student_ho_pg_float_two 14s ease-in-out infinite;
+}
+
+.for_student_ho_pg_blob_three {
+  top: 45%;
+  right: 20%;
+  width: 120px;
+  height: 120px;
+  background: #e3d4ff;
+  animation: for_student_ho_pg_float_three 16s ease-in-out infinite;
+}
+
+.for_student_ho_pg_dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(63, 18, 160, 0.12) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
+  opacity: 0.55;
+  animation: for_student_ho_pg_dots_move 24s linear infinite;
+}
+
+/* ---------- Heading ---------- */
+.for_student_ho_pg_title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f0f23;
+  opacity: 0;
+}
+
+.for_student_ho_pg_underline {
+  display: block;
+  width: 70px;
+  height: 2px;
+  margin: 14px 0 20px;
+  background: #7a1fc4;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.for_student_ho_pg_quote {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #2b2b3d;
+  opacity: 0;
+}
+
+/* ---------- Layout ---------- */
+.for_student_ho_pg_content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+/* Image wrapper (mobile: ratio based, no fixed height) */
+.for_student_ho_pg_image_wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 3.4;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+
+
+  opacity: 0;
+}
+
+.for_student_ho_pg_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.for_student_ho_pg_right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.for_student_ho_pg_lead {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #0f0f23;
+  opacity: 0;
+}
+
+/* ---------- Light card ---------- */
+.for_student_ho_pg_card_light {
+  padding: 18px 18px 20px;
+  border: 1px solid #ececf3;
+  border-radius: 12px;
+  background: #ffffff;
+  opacity: 0;
+}
+
+.for_student_ho_pg_label_dark {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #6a6a7c;
+}
+
+.for_student_ho_pg_say {
+  margin: 8px 0 0;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #6f6f80;
+}
+
+/* ---------- Dark card ---------- */
+.for_student_ho_pg_card_dark {
+  position: relative;
+  margin-top: 16px;
+  padding: 18px 16px 18px;
+  border-radius: 12px;
+  background: #40159f;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.for_student_ho_pg_card_dark::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.for_student_ho_pg_label_light {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.for_student_ho_pg_prove {
+  margin: 8px 0 12px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.for_student_ho_pg_example {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #1f1f33;
+}
+
+/* ===================== VISIBLE STATE (animations play) ===================== */
+.for_student_ho_pg_visible .for_student_ho_pg_title {
+  animation: for_student_ho_pg_fade_up 0.8s ease 0.1s forwards;
+}
+
+.for_student_ho_pg_visible .for_student_ho_pg_underline {
+  animation: for_student_ho_pg_line_grow 0.7s ease 0.45s forwards;
+}
+
+.for_student_ho_pg_visible .for_student_ho_pg_quote {
+  animation: for_student_ho_pg_fade_up 0.8s ease 0.6s forwards;
+}
+
+/* mobile: simple fade-up for image (no side slide) */
+.for_student_ho_pg_visible .for_student_ho_pg_image_wrap {
+  animation: for_student_ho_pg_fade_up 0.8s ease 0.8s forwards;
+}
+
+.for_student_ho_pg_visible .for_student_ho_pg_lead {
+  animation: for_student_ho_pg_fade_up 0.8s ease 1s forwards;
+}
+
+.for_student_ho_pg_visible .for_student_ho_pg_card_light {
+  animation: for_student_ho_pg_fade_up 0.8s ease 1.2s forwards;
+}
+
+.for_student_ho_pg_visible .for_student_ho_pg_card_dark {
+  animation: for_student_ho_pg_fade_up 0.8s ease 1.5s forwards;
+}
+
+.for_student_ho_pg_visible .for_student_ho_pg_card_dark::after {
+  animation: for_student_ho_pg_shine 3.5s ease-in-out 2.4s infinite;
+}
+
+/* ===================== 360px ANDROID ===================== */
+@media (max-width: 360px) {
+  .for_student_ho_pg_section {
+    padding: 30px 12px 38px;
+  }
+
+  .for_student_ho_pg_title {
+    font-size: 24px;
+  }
+
+  .for_student_ho_pg_quote {
+    font-size: 13px;
+  }
+
+  .for_student_ho_pg_image_wrap {
+    aspect-ratio: 4 / 3.5;
+    border-radius: 12px;
+  }
+
+  .for_student_ho_pg_lead {
+    font-size: 14px;
+  }
+
+  .for_student_ho_pg_say {
+    font-size: 22px;
+  }
+
+  .for_student_ho_pg_prove {
+    font-size: 20px;
+  }
+
+  .for_student_ho_pg_example {
+    font-size: 12.5px;
+  }
+}
+
+/* ===================== BIG PHONE ===================== */
+@media (min-width: 480px) {
+  .for_student_ho_pg_title {
+    font-size: 32px;
+  }
+
+  .for_student_ho_pg_image_wrap {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ===================== TABLET (768px+) ===================== */
+@media (min-width: 768px) {
+  .for_student_ho_pg_section {
+    padding: 56px 32px 64px;
+  }
+
+  .for_student_ho_pg_blob {
+    filter: blur(50px);
+  }
+
+  .for_student_ho_pg_blob_one {
+    width: 340px;
+    height: 340px;
+    top: -90px;
+    right: -80px;
+  }
+
+  .for_student_ho_pg_blob_two {
+    width: 300px;
+    height: 300px;
+    left: -100px;
+  }
+
+  .for_student_ho_pg_blob_three {
+    width: 200px;
+    height: 200px;
+  }
+
+  .for_student_ho_pg_title {
+    max-width: 640px;
+    font-size: 38px;
+  }
+
+  .for_student_ho_pg_underline {
+    width: 80px;
+    margin: 16px 0 24px;
+  }
+
+  .for_student_ho_pg_quote {
+    margin-bottom: 28px;
+    padding-left: 12px;
+    font-size: 15px;
+  }
+
+  .for_student_ho_pg_content {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 28px;
+  }
+
+  .for_student_ho_pg_image_wrap {
+    flex: 0 0 40%;
+    width: 40%;
+    max-width: none;
+    margin: 0;
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
+  .for_student_ho_pg_visible .for_student_ho_pg_image_wrap {
+    animation: for_student_ho_pg_slide_left 0.9s ease 0.8s forwards;
+  }
+
+  .for_student_ho_pg_visible .for_student_ho_pg_image {
+    animation: for_student_ho_pg_image_zoom 1.4s ease 0.8s both;
+  }
+
+  .for_student_ho_pg_right {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .for_student_ho_pg_lead {
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+
+  .for_student_ho_pg_say {
+    font-size: 26px;
+  }
+
+  .for_student_ho_pg_prove {
+    font-size: 25px;
+  }
+}
+
+@media (min-width: 768px) and (hover: hover) {
+  .for_student_ho_pg_card_light {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .for_student_ho_pg_card_light:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(63, 18, 160, 0.1);
+  }
+
+  .for_student_ho_pg_image {
+    transition: transform 0.6s ease;
+  }
+
+  .for_student_ho_pg_image_wrap:hover .for_student_ho_pg_image {
+    transform: scale(1.04);
+  }
+}
+
+/* ===================== DESKTOP (1024px+) ===================== */
+@media (min-width: 1024px) {
+  .for_student_ho_pg_section {
+    padding: 64px 48px 80px;
+  }
+
+  .for_student_ho_pg_blob_one {
+    width: 420px;
+    height: 420px;
+  }
+
+  .for_student_ho_pg_blob_two {
+    width: 380px;
+    height: 380px;
+  }
+
+  .for_student_ho_pg_title {
+    max-width: 720px;
+    font-size: 46px;
+  }
+
+  .for_student_ho_pg_quote {
+    margin-bottom: 32px;
+    padding-left: 14px;
+    font-size: 16px;
+  }
+
+  .for_student_ho_pg_content {
+    gap: 36px;
+  }
+
+  .for_student_ho_pg_image_wrap {
+    flex: 0 0 36%;
+    width: 36%;
+    min-height: 340px;
+  }
+
+  .for_student_ho_pg_lead {
+    font-size: 17px;
+  }
+
+  .for_student_ho_pg_card_light {
+    padding: 22px 24px 24px;
+  }
+
+  .for_student_ho_pg_label_dark,
+  .for_student_ho_pg_label_light {
+    font-size: 11px;
+  }
+
+  .for_student_ho_pg_say {
+    font-size: 30px;
+  }
+
+  .for_student_ho_pg_card_dark {
+    padding: 22px 22px 22px;
+  }
+
+  .for_student_ho_pg_prove {
+    font-size: 30px;
+  }
+
+  .for_student_ho_pg_example {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+}
+
+/* ===================== LARGE DESKTOP ===================== */
+@media (min-width: 1440px) {
+  .for_student_ho_pg_title {
+    max-width: 800px;
+    font-size: 52px;
+  }
+
+  .for_student_ho_pg_image_wrap {
+    min-height: 380px;
+  }
+
+  .for_student_ho_pg_say,
+  .for_student_ho_pg_prove {
+    font-size: 34px;
+  }
+}
+
+/* ===================== KEYFRAMES ===================== */
+@keyframes for_student_ho_pg_fade_up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes for_student_ho_pg_slide_left {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes for_student_ho_pg_line_grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes for_student_ho_pg_image_zoom {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes for_student_ho_pg_shine {
+  0% {
+    left: -60%;
+  }
+  60%,
+  100% {
+    left: 130%;
+  }
+}
+
+@keyframes for_student_ho_pg_float_one {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 40px) scale(1.12);
+  }
+}
+
+@keyframes for_student_ho_pg_float_two {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -36px) scale(1.1);
+  }
+}
+
+@keyframes for_student_ho_pg_float_three {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-24px, 28px);
+  }
+}
+
+@keyframes for_student_ho_pg_dots_move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 52px 52px;
+  }
+}
+
+/* ===================== REDUCED MOTION ===================== */
+@media (prefers-reduced-motion: reduce) {
+  .for_student_ho_pg_title,
+  .for_student_ho_pg_quote,
+  .for_student_ho_pg_image_wrap,
+  .for_student_ho_pg_lead,
+  .for_student_ho_pg_card_light,
+  .for_student_ho_pg_card_dark {
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .for_student_ho_pg_underline {
+    transform: scaleX(1) !important;
+    animation: none !important;
+  }
+
+  .for_student_ho_pg_blob,
+  .for_student_ho_pg_dots,
+  .for_student_ho_pg_image,
+  .for_student_ho_pg_card_dark::after {
+    animation: none !important;
+  }
+}

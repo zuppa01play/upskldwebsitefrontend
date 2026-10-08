@@ -99,7 +99,7 @@ const StudentFooter = () => {
     const track = trackRef.current;
     if (!track) return;
     const card = track.querySelector(".upskld_people_pg_card");
-    const cardWidth = card ? card.getBoundingClientRect().width : 260;
+    const cardWidth = card ? card.getBoundingClientRect().width : 260; 
     const gap = 24;
     const scrollAmount = (cardWidth + gap) * direction;
     track.scrollBy({ left: scrollAmount, behavior: "smooth" });

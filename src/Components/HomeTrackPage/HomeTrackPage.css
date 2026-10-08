@@ -1,274 +1,466 @@
-.hometrack_pg_wrapper {
+/* =====================================================
+   Base = MOBILE (360px+): single column, mobile-first
+   ===================================================== */
+.impac_trac_ho_pg_section {
+  position: relative;
   width: 100%;
-  background-color: #faf6ec;
-  font-family: 'Manrope', 'Roboto', sans-serif;
-}
-
-.hometrack_pg_container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 80px 32px 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.hometrack_pg_tagline {
-  color: #440052;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  margin: 0 0 16px;
-}
-
-.hometrack_pg_heading {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 36px;
-  line-height: 1.35;
-  color: #1a1a1a;
-  font-weight: 500;
-  max-width: 800px;
-  margin: 0 0 24px;
-}
-
-.hometrack_pg_heading_italic {
-  color: #b5842a;
-  font-style: italic;
-}
-
-.hometrack_pg_subtext {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #5a5a5a;
-  max-width: 700px;
-  margin: 0 0 40px;
-}
-
-/* Tabs */
-.hometrack_pg_tabs {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.hometrack_pg_tab_btn {
+  padding: 48px 0 56px;
   background-color: #ffffff;
-  color: #2b2b2b;
-  border: 1px solid #e3dcc9;
-  padding: 11px 22px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.25s ease;
+  font-family: "Sora", sans-serif;
 }
 
-.hometrack_pg_tab_btn:hover {
-  border-color: #2f4a2b;
-  color: #2f4a2b;
-}
-
-.hometrack_pg_tab_btn_active {
-  background-color: #4d006b;
-  color: #ffffff;
-  border-color: #2f4a2b;
-}
-
-.hometrack_pg_tab_btn_active:hover {
-  color: #ffffff;
-}
-
-/* Card */
-.hometrack_pg_card {
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
-  padding: 48px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 48px;
-  text-align: left;
+.impac_trac_ho_pg_section *,
+.impac_trac_ho_pg_section *::before,
+.impac_trac_ho_pg_section *::after {
   box-sizing: border-box;
-  transition: opacity 0.3s ease;
 }
 
-.hometrack_pg_card_left {
-  flex: 0 0 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.impac_trac_ho_pg_container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.hometrack_pg_badge {
-  background-color: #eef1e6;
-  color: #720263;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  margin-bottom: 18px;
+/* ===== Fade animation ===== */
+.impac_trac_ho_pg_fade {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.hometrack_pg_card_title {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 22px;
-  line-height: 1.4;
-  color: #1a1a1a;
-  font-weight: 500;
-  margin: 0 0 26px;
+.impac_trac_ho_pg_fade_show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.hometrack_pg_card_btn {
-  background-color: #4a2b4a;
-  color: #ffffff;
-  border: none;
-  padding: 13px 24px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.25s ease, transform 0.2s ease;
-}
-
-.hometrack_pg_card_btn:hover {
-  background-color: #630766;
-  transform: translateY(-2px);
-}
-
-.hometrack_pg_card_right {
-  flex: 1;
-  display: flex;
-  gap: 60px;
-}
-
-.hometrack_pg_list {
-  list-style: none;
+/* ===== Heading ===== */
+.impac_trac_ho_pg_title {
   margin: 0;
-  padding: 0;
-  flex: 1;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  color: #1c1c1c;
+}
+
+.impac_trac_ho_pg_title_line {
+  display: block;
+}
+
+.impac_trac_ho_pg_line_box {
+  margin: 14px 0 0;
+}
+
+.impac_trac_ho_pg_line_bar {
+  display: block;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #1c1c1c;
+  transition: width 0.9s ease 0.2s;
+}
+
+.impac_trac_ho_pg_fade_show .impac_trac_ho_pg_line_bar {
+  width: 56px;
+}
+
+/* ===== Cards ===== */
+.impac_trac_ho_pg_cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.impac_trac_ho_pg_card_wrap {
+  display: flex;
+}
+
+.impac_trac_ho_pg_card {
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 auto;
+  padding: 22px;
+  overflow: hidden;
+  border: 1px solid #ece8f5;
+  border-radius: 16px;
+  background-color: #ffffff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.impac_trac_ho_pg_card_accent {
+  border-color: #e9defb;
+  background-color: #f5f1fd;
+}
+
+/* purple layer: fades in on hover */
+.impac_trac_ho_pg_card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, #5b21b6 0%, #8e0fc9 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+/* shine that sweeps across on hover */
+.impac_trac_ho_pg_card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  z-index: -1;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-18deg);
+  transition: left 0.8s ease;
+}
+
+.impac_trac_ho_pg_card_label {
+  margin: 0;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #5a5a66;
+  transition: color 0.35s ease;
+}
+
+.impac_trac_ho_pg_card_accent .impac_trac_ho_pg_card_label {
+  color: #5b2fc0;
+}
+
+.impac_trac_ho_pg_card_title {
+  margin: 14px 0 0;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: #6b6b7a;
+  transition: color 0.35s ease;
+}
+
+.impac_trac_ho_pg_card_accent .impac_trac_ho_pg_card_title {
+  color: #4a1fa8;
+}
+
+.impac_trac_ho_pg_list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.hometrack_pg_list_item {
+.impac_trac_ho_pg_item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  font-size: 15px;
-  color: #2b2b2b;
+  font-size: 0.88rem;
   font-weight: 500;
+  line-height: 1.5;
+  color: #444444;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.6s ease, transform 0.6s ease, color 0.35s ease;
 }
 
-.hometrack_pg_dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #310041;
-  flex-shrink: 0;
+.impac_trac_ho_pg_card_accent .impac_trac_ho_pg_item {
+  color: #333333;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .hometrack_pg_heading {
-    font-size: 30px;
-  }
+.impac_trac_ho_pg_fade_show .impac_trac_ho_pg_item {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-  .hometrack_pg_card {
-    gap: 32px;
-    padding: 40px;
-  }
+.impac_trac_ho_pg_check {
+  display: inline-flex;
+  flex: 0 0 auto;
+  margin-top: 5px;
+  color: #4a1fa8;
+  transition: color 0.35s ease;
+}
 
-  .hometrack_pg_card_left {
-    flex: 0 0 240px;
-  }
+/* ===== Card hover: turns purple ===== */
+.impac_trac_ho_pg_card:hover {
+  transform: translateY(-8px);
+  border-color: transparent;
+  box-shadow: 0 22px 44px rgba(91, 33, 182, 0.32);
+}
 
-  .hometrack_pg_card_right {
-    gap: 36px;
+.impac_trac_ho_pg_card:hover::before {
+  opacity: 1;
+}
+
+.impac_trac_ho_pg_card:hover::after {
+  left: 130%;
+}
+
+.impac_trac_ho_pg_card:hover .impac_trac_ho_pg_card_label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.impac_trac_ho_pg_card:hover .impac_trac_ho_pg_card_title,
+.impac_trac_ho_pg_card:hover .impac_trac_ho_pg_item,
+.impac_trac_ho_pg_card:hover .impac_trac_ho_pg_check {
+  color: #ffffff;
+}
+
+.impac_trac_ho_pg_card:hover .impac_trac_ho_pg_check {
+  animation: impac_trac_ho_pg_pop 0.5s ease;
+}
+
+@keyframes impac_trac_ho_pg_pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
-@media (max-width: 860px) {
-  .hometrack_pg_card {
-    flex-direction: column;
-    align-items: stretch;
+/* ===== Missing bridge ===== */
+.impac_trac_ho_pg_bridge {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.impac_trac_ho_pg_bridge_label {
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #666666;
+}
+
+.impac_trac_ho_pg_bridge_para {
+  margin: 0;
+}
+
+.impac_trac_ho_pg_bridge_text {
+  padding-bottom: 3px;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.5;
+  color: #4a1fa8;
+  background: linear-gradient(90deg, #8e0fc9, #4a1fa8) no-repeat 0 100% / 0% 2px;
+  transition: background-size 1s ease 0.9s;
+}
+
+.impac_trac_ho_pg_fade_show .impac_trac_ho_pg_bridge_text {
+  background-size: 100% 2px;
+}
+
+/* ===== 360px Android and small phones ===== */
+@media (max-width: 360px) {
+  .impac_trac_ho_pg_section {
+    padding: 40px 0 48px;
   }
 
-  .hometrack_pg_card_left {
-    flex: none;
+  .impac_trac_ho_pg_container {
+    padding: 0 16px;
   }
 
-  .hometrack_pg_card_btn {
-    align-self: flex-start;
+  .impac_trac_ho_pg_title {
+    font-size: 1.35rem;
   }
 
-  .hometrack_pg_card_right {
-    gap: 40px;
+  .impac_trac_ho_pg_card {
+    padding: 18px;
+  }
+
+  .impac_trac_ho_pg_card_title {
+    font-size: 1.8rem;
+  }
+
+  .impac_trac_ho_pg_item {
+    font-size: 0.84rem;
   }
 }
 
-@media (max-width: 640px) {
-  .hometrack_pg_container {
-    padding: 60px 20px 60px;
+/* ===== Large phones ===== */
+@media (min-width: 600px) {
+  .impac_trac_ho_pg_section {
+    padding: 60px 0 68px;
   }
 
-  .hometrack_pg_heading {
-    font-size: 25px;
+  .impac_trac_ho_pg_container {
+    padding: 0 32px;
   }
 
-  .hometrack_pg_subtext {
-    font-size: 15px;
-    margin-bottom: 32px;
+  .impac_trac_ho_pg_title {
+    font-size: 2rem;
   }
 
-  .hometrack_pg_tabs {
-    justify-content: flex-start;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    width: 100%;
-    padding-bottom: 6px;
-    scrollbar-width: none;
+  .impac_trac_ho_pg_card {
+    padding: 26px;
   }
 
-  .hometrack_pg_tabs::-webkit-scrollbar {
-    display: none;
+  .impac_trac_ho_pg_item {
+    font-size: 0.95rem;
   }
 
-  .hometrack_pg_tab_btn {
-    flex-shrink: 0;
+  .impac_trac_ho_pg_bridge_text {
+    font-size: 1.1rem;
+  }
+}
+
+/* ===== Tablets: cards side by side, bridge in one row ===== */
+@media (min-width: 768px) {
+  .impac_trac_ho_pg_title {
+    font-size: 2.2rem;
   }
 
-  .hometrack_pg_card {
-    padding: 28px;
-    border-radius: 18px;
-  }
-
-  .hometrack_pg_card_right {
-    flex-direction: column;
+  .impac_trac_ho_pg_cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
+    margin-top: 40px;
   }
 
-  .hometrack_pg_card_title {
-    font-size: 19px;
+  .impac_trac_ho_pg_card {
+    padding: 26px 24px;
+  }
+
+  .impac_trac_ho_pg_card_title {
+    font-size: 2.3rem;
+  }
+
+  .impac_trac_ho_pg_item {
+    font-size: 0.86rem;
+  }
+
+  .impac_trac_ho_pg_bridge {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
   }
 }
 
-@media (max-width: 400px) {
-  .hometrack_pg_heading {
-    font-size: 21px;
+/* ===== Laptops ===== */
+@media (min-width: 1024px) {
+  .impac_trac_ho_pg_section {
+    padding: 72px 0 80px;
   }
 
-  .hometrack_pg_card_btn {
-    width: 100%;
-    text-align: center;
+  .impac_trac_ho_pg_container {
+    padding: 0 48px;
+  }
+
+  .impac_trac_ho_pg_title {
+    font-size: 2.6rem;
+  }
+
+  .impac_trac_ho_pg_cards {
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .impac_trac_ho_pg_card {
+    padding: 32px 34px;
+  }
+
+  .impac_trac_ho_pg_card_title {
+    font-size: 2.5rem;
+  }
+
+  .impac_trac_ho_pg_item {
+    font-size: 0.95rem;
+  }
+
+  .impac_trac_ho_pg_bridge {
+    margin-top: 36px;
+  }
+}
+
+/* ===== Desktop ===== */
+@media (min-width: 1200px) {
+  .impac_trac_ho_pg_title {
+    font-size: 2.9rem;
+  }
+
+  .impac_trac_ho_pg_card_title {
+    font-size: 2.7rem;
+  }
+
+  .impac_trac_ho_pg_card_label {
+    font-size: 0.7rem;
+  }
+
+  .impac_trac_ho_pg_bridge_text {
+    font-size: 1.15rem;
+  }
+}
+
+/* ===== Large screens ===== */
+@media (min-width: 1600px) {
+  .impac_trac_ho_pg_container {
+    max-width: 1440px;
+  }
+
+  .impac_trac_ho_pg_title {
+    font-size: 3.3rem;
+  }
+
+  .impac_trac_ho_pg_card {
+    padding: 40px 42px;
+  }
+
+  .impac_trac_ho_pg_card_title {
+    font-size: 3rem;
+  }
+
+  .impac_trac_ho_pg_item {
+    font-size: 1.05rem;
+  }
+
+  .impac_trac_ho_pg_bridge_text {
+    font-size: 1.3rem;
+  }
+}
+
+/* ===== Reduced motion: no fade / no movement ===== */
+@media (prefers-reduced-motion: reduce) {
+  .impac_trac_ho_pg_fade,
+  .impac_trac_ho_pg_item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .impac_trac_ho_pg_line_bar {
+    width: 56px;
+    transition: none;
+  }
+
+  .impac_trac_ho_pg_bridge_text {
+    background-size: 100% 2px;
+    transition: none;
+  }
+
+  .impac_trac_ho_pg_card,
+  .impac_trac_ho_pg_card::before,
+  .impac_trac_ho_pg_card::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  .impac_trac_ho_pg_card:hover .impac_trac_ho_pg_check {
+    animation: none;
   }
 }
