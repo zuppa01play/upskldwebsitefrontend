@@ -17,6 +17,12 @@ import HomeInstitution from "./Components/HomeInstitution/HomeInstitution";
 import HomeHelpingPeople from "./Components/HomeHelpingPeople/HomeHelpingPeople";
 import HomeShowcase from "./Components/HomeShowcase";
 import HomeFaqPage from "./Components/HomeFaqPage/HomeFaqPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
+
 
 function App() {
   return (
@@ -39,6 +45,10 @@ function App() {
 
       <HomeFaqPage />
       <FooterPage />
+
+
+
+      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 }
