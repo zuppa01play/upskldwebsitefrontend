@@ -233,39 +233,7 @@
   }
 }
 
-/* ===== Missing bridge ===== */
-.impac_trac_ho_pg_bridge {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 28px;
-}
 
-.impac_trac_ho_pg_bridge_label {
-  font-size: 0.64rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #666666;
-}
-
-.impac_trac_ho_pg_bridge_para {
-  margin: 0;
-}
-
-.impac_trac_ho_pg_bridge_text {
-  padding-bottom: 3px;
-  font-size: 1rem;
-  font-weight: 800;
-  line-height: 1.5;
-  color: #4a1fa8;
-  background: linear-gradient(90deg, #8e0fc9, #4a1fa8) no-repeat 0 100% / 0% 2px;
-  transition: background-size 1s ease 0.9s;
-}
-
-.impac_trac_ho_pg_fade_show .impac_trac_ho_pg_bridge_text {
-  background-size: 100% 2px;
-}
 
 /* ===== 360px Android and small phones ===== */
 @media (max-width: 360px) {
@@ -316,9 +284,7 @@
     font-size: 0.95rem;
   }
 
-  .impac_trac_ho_pg_bridge_text {
-    font-size: 1.1rem;
-  }
+ 
 }
 
 /* ===== Tablets: cards side by side, bridge in one row ===== */
@@ -345,12 +311,7 @@
     font-size: 0.86rem;
   }
 
-  .impac_trac_ho_pg_bridge {
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-    margin-top: 32px;
-  }
+  
 }
 
 /* ===== Laptops ===== */
@@ -384,9 +345,7 @@
     font-size: 0.95rem;
   }
 
-  .impac_trac_ho_pg_bridge {
-    margin-top: 36px;
-  }
+ 
 }
 
 /* ===== Desktop ===== */
@@ -403,9 +362,7 @@
     font-size: 0.7rem;
   }
 
-  .impac_trac_ho_pg_bridge_text {
-    font-size: 1.15rem;
-  }
+ 
 }
 
 /* ===== Large screens ===== */
@@ -429,10 +386,6 @@
   .impac_trac_ho_pg_item {
     font-size: 1.05rem;
   }
-
-  .impac_trac_ho_pg_bridge_text {
-    font-size: 1.3rem;
-  }
 }
 
 /* ===== Reduced motion: no fade / no movement ===== */
@@ -446,11 +399,6 @@
 
   .impac_trac_ho_pg_line_bar {
     width: 56px;
-    transition: none;
-  }
-
-  .impac_trac_ho_pg_bridge_text {
-    background-size: 100% 2px;
     transition: none;
   }
 

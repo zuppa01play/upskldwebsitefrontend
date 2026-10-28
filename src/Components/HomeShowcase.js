@@ -5,8 +5,7 @@ import HomeForEnterprises from "./HomeForEnterprises/HomeForEnterprises";
 import HomeUniversities from "./HomeUniversities/HomeUniversities";
 import HomeForStudent from "./HomeForStudent/HomeForStudent";
 import HomeCoursePage from "./HomeCoursePage/HomeCoursePage";
-import HomeInstitution from "./HomeInstitution/HomeInstitution";
-import HomeHelpingPeople from "./HomeHelpingPeople/HomeHelpingPeople";
+
 
 /* ===================== SETTINGS ===================== */
 const HEADER_SELECTOR = "header"; // unga header selector (eg: ".navbar", "#main-header"). Header illana "" kudunga

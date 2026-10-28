@@ -1,131 +1,250 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./FooterPage.css";
+import { openBookingModal } from "../../Components/Openbookingmodal";
 
-const FooterPage = () => {
+/* ---------- Content (replace the [placeholders] when ready) ---------- */
+
+const navLinks = [
+  { label: "Small Business", id: "home" },
+  { label: "Working Professionals", id: "home" },
+  { label: "Students", id: "home" },
+];
+
+const socialLinks = [
+  { label: "[Instagram]", href: "#" },
+  { label: "[YouTube]", href: "#" },
+  { label: "[Contact]", href: "#" },
+];
+
+const legalLinks = [
+  { label: "Privacy", href: "#" },
+  { label: "Terms", href: "#" },
+];
+
+const SOURCES =
+  "Sources: Nucleus Research; Salesforce State of Sales India 2023; Annuitas Group; ActiveCampaign × Talker Research 2025; Buffer 2025; Omnisend 2025; Harvard Business Review. Figures show typical results and vary by business.";
+
+/* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
+const PROGRAMS = [
+  {
+    name: "AI for Small Businesses",
+    status: "Enrollment closed",
+  },
+  {
+    name: "AI for Working Professionals",
+    status: "Enrollment closed",
+  },
+  {
+    name: "AI for Students",
+    status: "Enrollment closed",
+  },
+];
+
+const SHOW_BAR_AFTER = 400; // px scrolled before the enroll bar slides up
+
+const CapIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M22 9L12 4 2 9l10 5 10-5z" />
+    <path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" />
+    <path d="M22 9v6" />
+  </svg>
+);
+
+const FooterPage = ({ activeIndex = 0 }) => {
+  const PROGRAM = PROGRAMS[activeIndex] || PROGRAMS[0];
   const footerRef = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [barVisible, setBarVisible] = useState(false);
 
-  const navLinks = [
-    { label: "AI for Your Job", id: "ai-for-your-job" },
-    { label: "Courses", id: "courses" },
-    { label: "Experts", id: "experts" },
-    { label: "Organisations", id: "organisations" },
-    { label: "FAQ", id: "faq" },
-  ];
+  /* footer content fades up once when it scrolls into view */
+  useEffect(() => {
+    const node = footerRef.current;
+    if (!node) return undefined;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  /* enroll bar slides up after the visitor has scrolled a little */
+  useEffect(() => {
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      setBarVisible(window.pageYOffset > SHOW_BAR_AFTER);
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToId = (id) => {
     const el = document.getElementById(id);
-
     if (!el) return;
 
-    const header = document.querySelector(
-      ".upskld_heade_pg_header"
-    );
-
+    const header = document.querySelector(".upskld_heade_pg_header");
     const offset = header ? header.offsetHeight : 80;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
 
-    const top =
-      el.getBoundingClientRect().top +
-      window.pageYOffset -
-      offset -
-      10;
-
-    window.scrollTo({
-      top,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
     scrollToId(id);
   };
+ const handlePlaceholder = (e, href) => {
+    if (href === "#") e.preventDefault();
+  };
 
   return (
-    <footer
-      ref={footerRef}
-      className="upskld_footer_pg_wrapper"
-    >
-      <div className="upskld_footer_pg_container">
-
-        {/* Footer Top */}
-        <div className="upskld_footer_pg_top">
-
-          {/* Logo & Description */}
-          <div className="upskld_footer_pg_brand">
-
-            <div className="upskld_footer_pg_logo">
-              <img
-                src="https://res.cloudinary.com/dk50cmtps/image/upload/v1787297680/5bd19aef-80dc-489e-8228-5f05a920b79b_zvnpme.png"
-                alt="UPSKLD logo"
-                className="upskld_footer_pg_logo_img"
-              />
+    <>
+      <footer
+        ref={footerRef}
+        className={`upskld_footer_pg_wrapper ${inView ? "upskld_footer_pg_in" : ""}`}
+      >
+        <div className="upskld_footer_pg_container">
+          {/* ---------- Top row ---------- */}
+          <div className="upskld_footer_pg_top">
+            <div className="upskld_footer_pg_brand upskld_footer_pg_reveal" style={{ "--d": "0ms" }}>
+              <p className="upskld_footer_pg_logo">UPSKLD</p>
+              <p className="upskld_footer_pg_about">
+                a brand of Impactree Data Technologies · upskldai.com
+              </p>
             </div>
 
-            <p className="upskld_footer_pg_about">
-              Human Intelligence, Amplified by AI. Practical AI
-              learning designed to help you work smarter, grow
-              faster, and stay ahead in an AI-powered world.
-            </p>
+            <nav
+              className="upskld_footer_pg_navigation upskld_footer_pg_reveal"
+              style={{ "--d": "120ms" }}
+              aria-label="Footer"
+            >
+              <ul className="upskld_footer_pg_link_list">
+                {navLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={`#${link.id}`}
+                      className="upskld_footer_pg_link"
+                      onClick={(e) => handleNavClick(e, link.id)}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          </div>
-
-          {/* Navigation */}
-          <div className="upskld_footer_pg_navigation">
-
-            <p className="upskld_footer_pg_title">
-              EXPLORE
-            </p>
-
-            <ul className="upskld_footer_pg_link_list">
-              {navLinks.map((link) => (
-                <li key={link.id}>
+            <ul
+              className="upskld_footer_pg_socials upskld_footer_pg_reveal"
+              style={{ "--d": "240ms" }}
+            >
+              {socialLinks.map((link) => (
+                <li key={link.label}>
                   <a
-                    href={`#${link.id}`}
+                    href={link.href}
                     className="upskld_footer_pg_link"
-                    onClick={(e) =>
-                      handleNavClick(e, link.id)
-                    }
+                    onClick={(e) => handlePlaceholder(e, link.href)}
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
-
           </div>
 
-          {/* Book Session */}
-          <div className="upskld_footer_pg_session">
+          {/* ---------- Divider ---------- */}
+          <div className="upskld_footer_pg_divider" aria-hidden="true"></div>
 
-            <p className="upskld_footer_pg_title">
-              GET STARTED
+          {/* ---------- Bottom row ---------- */}
+          <div className="upskld_footer_pg_bottom">
+            <p className="upskld_footer_pg_sources upskld_footer_pg_reveal" style={{ "--d": "420ms" }}>
+              {SOURCES}
             </p>
 
-            <button
-              className="upskld_footer_pg_book_btn"
-              onClick={() => scrollToId("book-session")}
-            >
-              Book Free Session
-            </button>
+            <ul className="upskld_footer_pg_legal upskld_footer_pg_reveal" style={{ "--d": "520ms" }}>
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="upskld_footer_pg_link upskld_footer_pg_link_small"
+                    onClick={(e) => handlePlaceholder(e, link.href)}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </footer>
 
+      {/* ---------- Enroll bar (fixed to the bottom of the screen) ---------- */}
+      <div
+        className={`upskld_footer_pg_bar ${barVisible ? "upskld_footer_pg_bar_visible" : ""}`}
+        aria-hidden={!barVisible}
+      >
+        <div className="upskld_footer_pg_bar_inner">
+          <span className="upskld_footer_pg_bar_icon">
+            <CapIcon />
+          </span>
+
+          <div key={activeIndex} className="upskld_footer_pg_bar_text">
+            <p className="upskld_footer_pg_bar_title">{PROGRAM.name}</p>
+            <p className="upskld_footer_pg_bar_status">{PROGRAM.status}</p>
           </div>
 
+          <div className="upskld_footer_pg_bar_actions">
+            <button
+              type="button"
+              className="upskld_footer_pg_bar_enquire"
+              tabIndex={barVisible ? 0 : -1}
+              onClick={openBookingModal}
+            >
+              Enquire
+            </button>
+            <button
+              type="button"
+              className="upskld_footer_pg_bar_enroll"
+              tabIndex={barVisible ? 0 : -1}
+              onClick={() => scrollToId("courses")}
+            >
+              Enroll now
+            </button>
+          </div>
         </div>
-
-        {/* Divider */}
-        <div className="upskld_footer_pg_divider"></div>
-
-        {/* Bottom */}
-        <div className="upskld_footer_pg_bottom">
-
-          <p className="upskld_footer_pg_copyright">
-            © 2026 UPSKLD. All rights reserved.
-          </p>
-
-        </div>
-
       </div>
-    </footer>
+    </>
   );
 };
 

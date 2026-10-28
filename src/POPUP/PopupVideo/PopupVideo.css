@@ -1,0 +1,306 @@
+/* =====================================================================
+   PopupVideo (intro video popup)  |  prefix: popup_video_pg_
+   overlay (fixed) > dialog > player + footer
+   ===================================================================== */
+
+/* ---------- Overlay ---------- */
+.popup_video_pg_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001; /* header / drawer-ku mela */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(24, 10, 52, 0.58);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: popup_video_pg_overlay_in 0.3s ease both;
+}
+
+.popup_video_pg_overlay_out {
+  animation: popup_video_pg_overlay_out 0.26s ease both;
+}
+
+/* ---------- Dialog ---------- */
+.popup_video_pg_dialog {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  padding: 12px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f2ff 100%);
+  box-shadow: 0 30px 80px rgba(24, 10, 52, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  font-family: "Manrope", "Sora", sans-serif;
+  color: #0f0a2a;
+  box-sizing: border-box;
+  animation: popup_video_pg_dialog_in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.popup_video_pg_overlay_out .popup_video_pg_dialog {
+  animation: popup_video_pg_dialog_out 0.26s ease both;
+}
+
+.popup_video_pg_dialog *,
+.popup_video_pg_dialog *::before,
+.popup_video_pg_dialog *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Player ---------- */
+.popup_video_pg_player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: #1a0a3a;
+  overflow: hidden;
+  transform: translateZ(0); /* keeps the rounded corners on video in Safari */
+}
+
+.popup_video_pg_video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #1a0a3a;
+  pointer-events: none; /* no native controls / menus */
+}
+
+/* dark fade at the bottom so the time + button stay readable */
+.popup_video_pg_shade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38%;
+  background: linear-gradient(180deg, rgba(20, 8, 44, 0) 0%, rgba(20, 8, 44, 0.55) 100%);
+  pointer-events: none;
+}
+
+.popup_video_pg_time {
+  position: absolute;
+  left: 14px;
+  bottom: 16px;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Unmute ---------- */
+.popup_video_pg_mute {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(20, 8, 44, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.popup_video_pg_mute:hover {
+  background: rgba(64, 21, 159, 0.85);
+  transform: translateY(-1px);
+}
+
+.popup_video_pg_mute:focus-visible,
+.popup_video_pg_btn_primary:focus-visible,
+.popup_video_pg_btn_ghost:focus-visible {
+  outline: 3px solid #e0a83d;
+  outline-offset: 2px;
+}
+
+/* ---------- Progress line ---------- */
+.popup_video_pg_track {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  z-index: 2;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+
+.popup_video_pg_fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: #e0a83d;
+  transition: width 0.3s linear;
+}
+
+/* ---------- Footer ---------- */
+.popup_video_pg_footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 4px 4px;
+}
+
+.popup_video_pg_caption {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #5d5978;
+}
+
+.popup_video_pg_actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.popup_video_pg_btn_primary,
+.popup_video_pg_btn_ghost {
+  min-height: 42px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.popup_video_pg_btn_primary {
+  border: 0;
+  background: linear-gradient(100deg, #40159f 0%, #7a1fc4 100%);
+  box-shadow: 0 10px 22px rgba(64, 21, 159, 0.32);
+  color: #ffffff;
+}
+
+.popup_video_pg_btn_ghost {
+  border: 1px solid #e4dcf9;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(64, 21, 159, 0.08);
+  color: #0f0a2a;
+}
+
+.popup_video_pg_btn_primary:active,
+.popup_video_pg_btn_ghost:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) {
+  .popup_video_pg_btn_primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(64, 21, 159, 0.42);
+  }
+
+  .popup_video_pg_btn_ghost:hover {
+    transform: translateY(-2px);
+    background: #f4eefe;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 560px) {
+  .popup_video_pg_overlay {
+    padding: 10px;
+  }
+
+  .popup_video_pg_dialog {
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .popup_video_pg_player {
+    border-radius: 11px;
+  }
+
+  .popup_video_pg_footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 2px 2px;
+  }
+
+  .popup_video_pg_actions {
+    width: 100%;
+  }
+
+  .popup_video_pg_btn_primary {
+    flex: 1;
+  }
+
+  .popup_video_pg_mute {
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .popup_video_pg_overlay {
+    align-items: flex-start;
+    padding: 8px;
+  }
+
+  .popup_video_pg_dialog {
+    max-width: min(640px, calc((100dvh - 120px) * 16 / 9));
+  }
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes popup_video_pg_overlay_in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes popup_video_pg_overlay_out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes popup_video_pg_dialog_in {
+  from { opacity: 0; transform: translateY(34px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes popup_video_pg_dialog_out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(22px) scale(0.96); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .popup_video_pg_overlay,
+  .popup_video_pg_dialog {
+    animation: none !important;
+  }
+
+  .popup_video_pg_fill,
+  .popup_video_pg_mute,
+  .popup_video_pg_btn_primary,
+  .popup_video_pg_btn_ghost {
+    transition: none !important;
+  }
+}

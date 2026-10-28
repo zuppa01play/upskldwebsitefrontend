@@ -162,13 +162,7 @@ const HomeTrackPage = () => {
           ))}
         </div>
 
-        {/* Missing bridge */}
-        <Reveal className="impac_trac_ho_pg_bridge" delay={450}>
-          <span className="impac_trac_ho_pg_bridge_label">{bridge.label}</span>
-          <p className="impac_trac_ho_pg_bridge_para">
-            <span className="impac_trac_ho_pg_bridge_text">{bridge.text}</span>
-          </p>
-        </Reveal>
+   
       </div>
     </section>
   );

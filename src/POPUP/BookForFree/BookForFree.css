@@ -1,0 +1,417 @@
+/* =====================================================================
+   BookForFree (booking form popup)  |  prefix: book_free_pg_
+   overlay (fixed) > dialog
+   ===================================================================== */
+
+/* ---------- Overlay ---------- */
+.book_free_pg_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000; /* header / drawer / video-ku mela */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(24, 10, 52, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: book_free_pg_overlay_in 0.28s ease both;
+}
+
+.book_free_pg_overlay_out {
+  animation: book_free_pg_overlay_out 0.26s ease both;
+}
+
+/* ---------- Dialog ---------- */
+.book_free_pg_dialog {
+  position: relative;
+  width: 100%;
+  max-width: 372px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 26px 26px 24px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf9ff 100%);
+  box-shadow: 0 30px 80px rgba(24, 10, 52, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  font-family: "Manrope", "Sora", sans-serif;
+  color: #0f0a2a;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  animation: book_free_pg_dialog_in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.book_free_pg_overlay_out .book_free_pg_dialog {
+  animation: book_free_pg_dialog_out 0.26s ease both;
+}
+
+.book_free_pg_dialog *,
+.book_free_pg_dialog *::before,
+.book_free_pg_dialog *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Close ---------- */
+.book_free_pg_close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #ece4fb;
+  color: #2a1170;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.3s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.book_free_pg_close:hover {
+  background: #40159f;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.book_free_pg_close:focus-visible {
+  outline: 3px solid rgba(122, 31, 196, 0.45);
+  outline-offset: 2px;
+}
+
+/* ---------- Head ---------- */
+.book_free_pg_head {
+  padding-right: 44px; /* space for the close button */
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: book_free_pg_fade 0.5s ease 0.1s forwards;
+}
+
+.book_free_pg_pill {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #ece4fb;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #4a1a9e;
+}
+
+.book_free_pg_title {
+  margin: 0 0 8px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #0f0a2a;
+}
+
+.book_free_pg_subtitle {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #5d5978;
+}
+
+/* ---------- Form ---------- */
+.book_free_pg_form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0;
+  animation: book_free_pg_fade 0.5s ease 0.2s forwards;
+}
+
+.book_free_pg_field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.book_free_pg_row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.book_free_pg_label {
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0f0a2a;
+}
+
+.book_free_pg_req {
+  margin-left: 1px;
+}
+
+.book_free_pg_input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid #ddd5f0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: #0f0a2a;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.book_free_pg_input::placeholder {
+  color: #9a97ab;
+  opacity: 1;
+}
+
+.book_free_pg_input:hover {
+  border-color: #b9a6e6;
+}
+
+.book_free_pg_input:focus {
+  border-color: #7a1fc4;
+  box-shadow: 0 0 0 3px rgba(122, 31, 196, 0.16);
+}
+
+.book_free_pg_input:-webkit-autofill,
+.book_free_pg_input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f0a2a;
+  -webkit-box-shadow: 0 0 0 40px #ffffff inset;
+  transition: background-color 9999s ease 0s;
+}
+
+.book_free_pg_select {
+  padding-right: 34px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a1fc4' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 13px 13px;
+}
+
+.book_free_pg_select::-ms-expand {
+  display: none;
+}
+
+.book_free_pg_error {
+  margin: 5px 0 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #d6293e;
+}
+
+.book_free_pg_consent {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #6a6a7c;
+}
+
+/* ---------- Submit ---------- */
+.book_free_pg_submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(100deg, #40159f 0%, #7a1fc4 100%);
+  box-shadow: 0 10px 22px rgba(64, 21, 159, 0.3);
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.book_free_pg_submit:focus-visible,
+.book_free_pg_again:focus-visible {
+  outline: 3px solid rgba(122, 31, 196, 0.4);
+  outline-offset: 2px;
+}
+
+.book_free_pg_submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.book_free_pg_submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .book_free_pg_submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(64, 21, 159, 0.4);
+  }
+}
+
+/* ---------- Success ---------- */
+.book_free_pg_success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0 2px;
+  text-align: center;
+}
+
+.book_free_pg_success_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #40159f 0%, #7a1fc4 100%);
+  box-shadow: 0 10px 22px rgba(64, 21, 159, 0.28);
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  animation: book_free_pg_pop 0.6s ease both;
+}
+
+.book_free_pg_success_title {
+  margin: 0 0 8px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0f0a2a;
+}
+
+.book_free_pg_success_text {
+  margin: 0 0 20px;
+  max-width: 300px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #5d5978;
+}
+
+.book_free_pg_again {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a1a9e;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.book_free_pg_again:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+  .book_free_pg_overlay {
+    padding: 10px;
+  }
+
+  .book_free_pg_dialog {
+    max-height: calc(100dvh - 20px);
+    padding: 22px 18px 20px;
+    border-radius: 16px;
+  }
+
+  /* 16px stops iOS from zooming into the field */
+  .book_free_pg_input {
+    height: 44px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 340px) {
+  .book_free_pg_row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .book_free_pg_overlay {
+    align-items: flex-start;
+    padding: 8px;
+  }
+
+  .book_free_pg_dialog {
+    max-height: calc(100dvh - 16px);
+  }
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes book_free_pg_overlay_in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes book_free_pg_overlay_out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes book_free_pg_dialog_in {
+  from { opacity: 0; transform: translateY(34px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes book_free_pg_dialog_out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(22px) scale(0.96); }
+}
+
+@keyframes book_free_pg_fade {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes book_free_pg_pop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  70%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .book_free_pg_overlay,
+  .book_free_pg_dialog,
+  .book_free_pg_head,
+  .book_free_pg_form,
+  .book_free_pg_success_icon {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .book_free_pg_close,
+  .book_free_pg_input,
+  .book_free_pg_submit {
+    transition: none !important;
+  }
+}

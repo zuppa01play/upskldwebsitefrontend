@@ -1,494 +1,206 @@
+/* ============================================================
+   HomePhilosophyPage — "Trusted by people who take AI seriously"
+   Prefix: impac_phiso_ho_pg_ · no :root variables · no green
+   ============================================================ */
+
 .impac_phiso_ho_pg_section {
-  position: relative;
   width: 100%;
-  padding: 48px 0 56px;
+  padding: 72px 0 80px;
+  background: linear-gradient(180deg, #fbf9ff 0%, #f6f2ff 100%);
+  font-family: "Manrope", "Roboto", sans-serif;
   overflow: hidden;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f3ff 55%, #efe2ff 100%);
-  font-family: "Sora", sans-serif;
-}
-
-.impac_phiso_ho_pg_section *,
-.impac_phiso_ho_pg_section *::before,
-.impac_phiso_ho_pg_section *::after {
-  box-sizing: border-box;
-}
-
-/* ===== Decoration ===== */
-.impac_phiso_ho_pg_glow {
-  position: absolute;
-  right: -140px;
-  bottom: -140px;
-  z-index: 0;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(160, 100, 255, 0.35) 0%,
-    rgba(160, 100, 255, 0) 70%
-  );
-  pointer-events: none;
-  animation: impac_phiso_ho_pg_glow_pulse 8s ease-in-out infinite;
-}
-
-.impac_phiso_ho_pg_dots {
-  display: none;
-  position: absolute;
-  right: 18px;
-  top: 38%;
-  z-index: 0;
-  width: 64px;
-  height: 128px;
-  background-image: radial-gradient(#9a2fd0 1.3px, transparent 1.5px);
-  background-size: 12px 12px;
-  opacity: 0.35;
-  pointer-events: none;
 }
 
 .impac_phiso_ho_pg_container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
-/* ===== Fade animation ===== */
-.impac_phiso_ho_pg_fade {
+/* ---------- Heading ---------- */
+
+.impac_phiso_ho_pg_heading {
+  margin: 0 0 36px;
+  text-align: center;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #0f0a2a;
+  text-wrap: balance;
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.impac_phiso_ho_pg_fade_show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== Heading ===== */
-.impac_phiso_ho_pg_title {
-  margin: 0;
-  font-size: 1.7rem;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-  color: #1c1c1c;
-}
-
-.impac_phiso_ho_pg_title_accent {
-  display: block;
-  color: #9014c8;
-}
-
-.impac_phiso_ho_pg_line_box {
-  margin: 16px 0 12px;
-}
-
-.impac_phiso_ho_pg_line_bar {
-  display: block;
-  width: 0;
-  height: 2px;
-  border-radius: 2px;
-  background-color: #9014c8;
-  transition: width 0.9s ease 0.2s;
-}
-
-.impac_phiso_ho_pg_fade_show .impac_phiso_ho_pg_line_bar {
-  width: 72px;
-}
-
-.impac_phiso_ho_pg_subtitle {
-  margin: 0;
-  max-width: 760px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.6;
-  color: #333333;
-}
-
-/* ===== Numbers ===== */
-.impac_phiso_ho_pg_stats {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  margin-top: 30px;
-}
-
-.impac_phiso_ho_pg_count {
-  font-variant-numeric: tabular-nums;
-}
-
-.impac_phiso_ho_pg_stat_label {
-  margin: 0 0 6px;
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #7b1fa2;
-}
-
-.impac_phiso_ho_pg_main_value {
-  margin: 0;
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -1px;
-  color: #ff6b4a;
-}
-
-.impac_phiso_ho_pg_main_caption {
-  margin: 10px 0 0;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: #333333;
-}
-
-/* divider: horizontal on mobile, vertical on bigger screens */
-.impac_phiso_ho_pg_divider {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(80, 40, 140, 0.2);
-}
-
-.impac_phiso_ho_pg_side_stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.impac_phiso_ho_pg_side_value {
-  margin: 0;
-  font-size: 1.75rem;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
-  color: #3a1f95;
-}
-
-.impac_phiso_ho_pg_side_caption {
-  margin: 6px 0 0;
-  font-size: 0.8rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: #444444;
-}
-
-/* ===== Cards ===== */
-.impac_phiso_ho_pg_cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  margin-top: 32px;
-}
+/* ---------- Card ---------- */
 
 .impac_phiso_ho_pg_card {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 24px 12px;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 18px 50px rgba(74, 26, 158, 0.12), 0 2px 6px rgba(74, 26, 158, 0.05);
+  opacity: 0;
+  transform: translateY(34px) scale(0.98);
+  transition:
+    opacity 0.8s ease 0.1s,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+/* ---------- Single stat ---------- */
+
+.impac_phiso_ho_pg_stat {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  padding: 4px 22px;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s ease var(--d, 0ms),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.impac_phiso_ho_pg_bar {
+  flex-shrink: 0;
+  width: 6px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #ffbf1f 0%, #f29900 100%);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0ms) + 150ms);
+}
+
+.impac_phiso_ho_pg_text {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border-radius: 18px;
-  background-color: #ffffff;
-  box-shadow: 0 14px 34px rgba(110, 60, 190, 0.12);
+  min-width: 0;
 }
 
-.impac_phiso_ho_pg_card_icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: #f1e6fb;
-}
-
-.impac_phiso_ho_pg_card_title {
-  margin: 14px 0 0;
-  font-size: 1rem;
-  font-weight: 800;
-  line-height: 1.3;
-  color: #ff6b4a;
-}
-
-.impac_phiso_ho_pg_card_line {
+.impac_phiso_ho_pg_number {
   display: block;
-  width: 100%;
-  height: 2px;
-  margin: 8px 0 12px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #8e2de2 0%, #ff6b4a 100%);
-}
-
-.impac_phiso_ho_pg_card_desc {
-  margin: 0;
-  font-size: 0.86rem;
-  font-weight: 500;
-  line-height: 1.6;
-  color: #333333;
-}
-
-.impac_phiso_ho_pg_card_desc strong {
+  font-size: clamp(34px, 3.6vw, 46px);
   font-weight: 800;
-  color: #111111;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #4a1a9e;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.1em;
 }
 
-@keyframes impac_phiso_ho_pg_glow_pulse {
-  0%,
-  100% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
+.impac_phiso_ho_pg_label {
+  margin: 6px 0 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #6b6784;
+  text-align: left;
 }
 
-/* ===== 360px Android and small phones ===== */
-@media (max-width: 360px) {
+/* ---------- Entrance: triggered when the section scrolls into view ---------- */
+
+.impac_phiso_ho_pg_in .impac_phiso_ho_pg_heading,
+.impac_phiso_ho_pg_in .impac_phiso_ho_pg_card,
+.impac_phiso_ho_pg_in .impac_phiso_ho_pg_stat {
+  opacity: 1;
+  transform: none;
+}
+
+.impac_phiso_ho_pg_in .impac_phiso_ho_pg_bar {
+  transform: scaleY(1);
+}
+
+/* hover: lift the stat and make the bar glow */
+.impac_phiso_ho_pg_in .impac_phiso_ho_pg_stat:hover .impac_phiso_ho_pg_bar {
+  box-shadow: 0 0 14px rgba(242, 153, 0, 0.55);
+}
+
+.impac_phiso_ho_pg_in .impac_phiso_ho_pg_stat:hover .impac_phiso_ho_pg_number {
+  color: #3b003d;
+}
+
+.impac_phiso_ho_pg_number {
+  transition: color 0.3s ease;
+}
+
+/* ============================================================
+   Responsive — 1100 / 820 / 560
+   ============================================================ */
+
+@media (max-width: 1100px) {
   .impac_phiso_ho_pg_section {
-    padding: 40px 0 48px;
+    padding: 60px 0 68px;
+  }
+
+  .impac_phiso_ho_pg_stat {
+    padding: 4px 14px;
+    gap: 12px;
+  }
+
+  .impac_phiso_ho_pg_label {
+    font-size: 13.5px;
+  }
+}
+
+/* two by two */
+@media (max-width: 820px) {
+  .impac_phiso_ho_pg_section {
+    padding: 52px 0 60px;
+  }
+
+  .impac_phiso_ho_pg_card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 28px;
+    padding: 26px 14px;
+  }
+
+  .impac_phiso_ho_pg_stat {
+    padding: 4px 16px;
+  }
+}
+
+/* single column */
+@media (max-width: 560px) {
+  .impac_phiso_ho_pg_section {
+    padding: 44px 0 52px;
   }
 
   .impac_phiso_ho_pg_container {
     padding: 0 16px;
   }
 
-  .impac_phiso_ho_pg_title {
-    font-size: 1.55rem;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 3.2rem;
-  }
-
-  .impac_phiso_ho_pg_side_value {
-    font-size: 1.55rem;
+  .impac_phiso_ho_pg_heading {
+    margin-bottom: 26px;
   }
 
   .impac_phiso_ho_pg_card {
-    padding: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 24px;
+    padding: 24px 10px;
+    border-radius: 18px;
+  }
+
+  .impac_phiso_ho_pg_stat {
+    padding: 2px 14px;
+  }
+
+  .impac_phiso_ho_pg_label {
+    font-size: 14px;
   }
 }
 
-/* ===== Large phones ===== */
-@media (min-width: 600px) {
-  .impac_phiso_ho_pg_section {
-    padding: 60px 0 68px;
-  }
+/* ---------- Reduced motion ---------- */
 
-  .impac_phiso_ho_pg_container {
-    padding: 0 32px;
-  }
-
-  .impac_phiso_ho_pg_title {
-    font-size: 2.4rem;
-  }
-
-  .impac_phiso_ho_pg_subtitle {
-    font-size: 1rem;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 4rem;
-  }
-
-  .impac_phiso_ho_pg_side_value {
-    font-size: 2.1rem;
-  }
-
-  .impac_phiso_ho_pg_side_caption {
-    font-size: 0.88rem;
-  }
-
-  .impac_phiso_ho_pg_card_desc {
-    font-size: 0.92rem;
-  }
-}
-
-/* ===== Tablets: numbers in one row, 3 cards ===== */
-@media (min-width: 768px) {
-  .impac_phiso_ho_pg_stats {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) 1px minmax(0, 1fr);
-    align-items: center;
-    gap: 32px;
-    margin-top: 36px;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 4.2rem;
-  }
-
-  .impac_phiso_ho_pg_divider {
-    width: 1px;
-    height: 100%;
-    min-height: 120px;
-    align-self: stretch;
-  }
-
-  .impac_phiso_ho_pg_side_stats {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-
-  .impac_phiso_ho_pg_cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 40px;
-  }
-
-  .impac_phiso_ho_pg_card {
-    padding: 20px 18px;
-  }
-
-  .impac_phiso_ho_pg_card_title {
-    font-size: 0.95rem;
-  }
-
-  .impac_phiso_ho_pg_card_desc {
-    font-size: 0.8rem;
-  }
-
-  .impac_phiso_ho_pg_dots {
-    display: block;
-  }
-}
-
-/* ===== Small laptops ===== */
-@media (min-width: 900px) {
-  .impac_phiso_ho_pg_section {
-    padding: 72px 0 80px;
-  }
-
-  .impac_phiso_ho_pg_title {
-    font-size: 2.7rem;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 5rem;
-  }
-
-  .impac_phiso_ho_pg_side_value {
-    font-size: 2.3rem;
-  }
-
-  .impac_phiso_ho_pg_card {
-    padding: 24px 22px;
-  }
-
-  .impac_phiso_ho_pg_card_title {
-    font-size: 1rem;
-  }
-
-  .impac_phiso_ho_pg_card_desc {
-    font-size: 0.86rem;
-  }
-}
-
-/* ===== Laptops ===== */
-@media (min-width: 1024px) {
-  .impac_phiso_ho_pg_container {
-    padding: 0 48px;
-  }
-
-  .impac_phiso_ho_pg_title {
-    font-size: 3rem;
-  }
-
-  .impac_phiso_ho_pg_subtitle {
-    font-size: 1.05rem;
-  }
-
-  .impac_phiso_ho_pg_stats {
-    gap: 48px;
-    margin-top: 44px;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 5.6rem;
-  }
-
-  .impac_phiso_ho_pg_side_value {
-    font-size: 2.6rem;
-  }
-
-  .impac_phiso_ho_pg_cards {
-    gap: 24px;
-    margin-top: 48px;
-  }
-}
-
-/* ===== Desktop ===== */
-@media (min-width: 1200px) {
-  .impac_phiso_ho_pg_title {
-    font-size: 3.2rem;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 6.2rem;
-  }
-
-  .impac_phiso_ho_pg_main_caption {
-    font-size: 1rem;
-  }
-
-  .impac_phiso_ho_pg_side_caption {
-    font-size: 0.95rem;
-  }
-
-  .impac_phiso_ho_pg_card {
-    padding: 28px 26px;
-  }
-
-  .impac_phiso_ho_pg_card_desc {
-    font-size: 0.92rem;
-  }
-}
-
-/* ===== Large screens ===== */
-@media (min-width: 1600px) {
-  .impac_phiso_ho_pg_container {
-    max-width: 1440px;
-  }
-
-  .impac_phiso_ho_pg_title {
-    font-size: 3.6rem;
-  }
-
-  .impac_phiso_ho_pg_main_value {
-    font-size: 7rem;
-  }
-
-  .impac_phiso_ho_pg_side_value {
-    font-size: 3rem;
-  }
-
-  .impac_phiso_ho_pg_card_title {
-    font-size: 1.15rem;
-  }
-
-  .impac_phiso_ho_pg_card_desc {
-    font-size: 1rem;
-  }
-}
-
-/* ===== Reduced motion: no fade / no movement ===== */
 @media (prefers-reduced-motion: reduce) {
-  .impac_phiso_ho_pg_fade {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .impac_phiso_ho_pg_line_bar {
-    width: 72px;
-    transition: none;
-  }
-
-  .impac_phiso_ho_pg_glow {
-    animation: none;
+  .impac_phiso_ho_pg_heading,
+  .impac_phiso_ho_pg_card,
+  .impac_phiso_ho_pg_stat,
+  .impac_phiso_ho_pg_bar {
+    transition: opacity 0.2s ease !important;
+    transition-delay: 0s !important;
+    transform: none !important;
   }
 }

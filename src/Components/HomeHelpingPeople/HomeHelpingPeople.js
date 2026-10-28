@@ -1,77 +1,76 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import "./HomeHelpingPeople.css";
+import   openBookingModal  from "../Openbookingmodal"
 
 const REPLAY_ON_REENTER = false; // true = animation replays every time the section re-enters the screen
 
-const testimonials = [
-  {
-    key: "student",
-    role: "Student",
-    quote:
-      "I was afraid I would fall behind. Now I know how to use AI to move ahead.",
-    icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="#8a14c9" aria-hidden="true">
-        <circle cx="12" cy="7" r="3.6" />
-        <path d="M4.5 21v-5c0-1.7 1.4-3 3.1-3h8.8c1.7 0 3.1 1.3 3.1 3v5z" />
-        <path d="M12 14v7" stroke="#f1e8ff" strokeWidth="1.2" fill="none" />
-      </svg>
-    ),
-  },
-  {
-    key: "enterprise",
-    role: "Enterprise Leader",
-    quote:
-      "We bought the tools. UpSkld helped our people turn them into results.",
-    icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="#8a14c9" aria-hidden="true">
-        <circle cx="10" cy="7" r="3.6" />
-        <path d="M3 21c0-3.6 2.9-6.4 6.5-6.4 1.1 0 2.1.3 3 .7L11 21z" />
-        <path d="M18 13.2l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z" />
-      </svg>
-    ),
-  },
-  {
-    key: "university",
-    role: "University Leader",
-    quote:
-      "AI readiness is now something our students can carry beyond the classroom.",
-    icon: (
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="#8a14c9" aria-hidden="true">
-        <path d="M12 2.2l9.2 3.9L12 10 2.8 6.1z" />
-        <path d="M6.6 9.6v1.9c0 .9 2.4 1.7 5.4 1.7s5.4-.8 5.4-1.7V9.6L12 11.8z" />
-        <circle cx="12" cy="14.4" r="2.6" />
-        <path d="M6 22c0-3 2.7-5 6-5s6 2 6 5z" />
-      </svg>
-    ),
-  },
+const beliefs = [
+  { num: "01", text: "Students become more confident." },
+  { num: "02", text: "Enterprises become more capable." },
+  { num: "03", text: "Universities become more future-ready." },
 ];
+
+const ArrowIcon = () => (
+  <svg
+    className="impac_helping_pg_btn_arrow"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14" />
+    <path d="M13 6l6 6-6 6" />
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg
+    className="impac_helping_pg_check"
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle className="impac_helping_pg_check_ring" cx="12" cy="12" r="9.5" pathLength="1" />
+    <path className="impac_helping_pg_check_tick" d="M8 12.4l2.8 2.8L16.2 9.4" pathLength="1" />
+  </svg>
+);
 
 const HomeHelpingPeople = () => {
   const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
-    if (!node) return;
-
-    const visibleClass = "impac_helping_pg_visible";
+    if (!node) return undefined;
 
     const reduceMotion =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduceMotion || typeof IntersectionObserver === "undefined") {
-      node.classList.add(visibleClass);
-      return;
+      setInView(true);
+      return undefined;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
-            node.classList.add(visibleClass);
+            setInView(true);
             if (!REPLAY_ON_REENTER) observer.unobserve(node);
           } else if (!entry.isIntersecting && REPLAY_ON_REENTER) {
-            node.classList.remove(visibleClass);
+            setInView(false);
           }
         });
       },
@@ -82,40 +81,81 @@ const HomeHelpingPeople = () => {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <section id="organisations" className="impac_helping_pg_section" ref={sectionRef}>
-      {/* decorative background */}
-      <span className="impac_helping_pg_dots" aria-hidden="true" />
-      <span className="impac_helping_pg_glow" aria-hidden="true" />
-      <span className="impac_helping_pg_circle" aria-hidden="true" />
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const header = document.querySelector(".upskld_heade_pg_header");
+    const offset = header ? header.offsetHeight : 80;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
 
-      <div className="impac_helping_pg_container">
-        <h2 className="impac_helping_pg_title">
-          UpSkld is not just about learning AI. It is about helping people
-          believe they still have a place in the future.
-        </h2>
-        <span className="impac_helping_pg_underline" />
+  return (
+    <section
+      id="organisations"
+      ref={sectionRef}
+      className={`impac_helping_pg_section ${inView ? "impac_helping_pg_visible" : ""}`}
+    >
+      <div className="impac_helping_pg_card">
+        <span className="impac_helping_pg_dots" aria-hidden="true" />
+        <span className="impac_helping_pg_glow" aria-hidden="true" />
 
         <div className="impac_helping_pg_grid">
-          {testimonials.map((item) => (
-            <div
-              key={item.key}
-              className={`impac_helping_pg_item impac_helping_pg_item_${item.key}`}
-            >
-              <article className="impac_helping_pg_card">
-                <div className="impac_helping_pg_card_head">
-                  <span className="impac_helping_pg_icon">{item.icon}</span>
-                  <h3 className="impac_helping_pg_role">{item.role}</h3>
-                </div>
+          {/* ---------- Left: message ---------- */}
+          <div className="impac_helping_pg_copy">
+            <span className="impac_helping_pg_tag impac_helping_pg_reveal" style={{ "--d": "0ms" }}>
+              <span className="impac_helping_pg_tag_dot" />
+              Our belief
+            </span>
 
-                <span className="impac_helping_pg_divider" />
+            <h2 className="impac_helping_pg_title">
+              <span
+                className="impac_helping_pg_title_line impac_helping_pg_reveal"
+                style={{ "--d": "120ms" }}
+              >
+                You don't need to become an AI expert.
+              </span>
+              <span
+                className="impac_helping_pg_title_line impac_helping_pg_title_accent impac_helping_pg_reveal"
+                style={{ "--d": "260ms" }}
+              >
+                You need to get better at what you already do — with AI.
+              </span>
+            </h2>
 
-                <p className="impac_helping_pg_quote">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-              </article>
+            <p className="impac_helping_pg_text impac_helping_pg_reveal" style={{ "--d": "400ms" }}>
+              A practical, job-specific way to work with AI, at your pace, without needing to become
+              someone else to do it. No pitch. No pressure. Just a short conversation to map your AI
+              roadmap.
+            </p>
+
+            <div className="impac_helping_pg_actions impac_helping_pg_reveal" style={{ "--d": "520ms" }}>
+              <button
+                type="button"
+                className="impac_helping_pg_btn"
+               onClick={openBookingModal}
+              >
+                <span>Book a free session</span>
+                <ArrowIcon />
+              </button>
+              <span className="impac_helping_pg_note">Free · 15 minutes · No pressure</span>
             </div>
-          ))}
+          </div>
+
+          {/* ---------- Right: three beliefs ---------- */}
+          <ul className="impac_helping_pg_list">
+            {beliefs.map((item, index) => (
+              <li
+                key={item.num}
+                className="impac_helping_pg_row"
+                style={{ "--r": index }}
+              >
+                <span className="impac_helping_pg_num">{item.num}</span>
+                <span className="impac_helping_pg_row_text">{item.text}</span>
+                <CheckIcon />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
