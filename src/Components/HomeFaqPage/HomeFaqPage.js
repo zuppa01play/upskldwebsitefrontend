@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./HomeFaqPage.css";
+import { openEnquiryModal } from "../../Components/Openbookingmodal";
+
+
+
+
+
 
 const faqs = [
   {
@@ -121,7 +127,7 @@ const HomeFaqPage = () => {
             type="button"
             className="home_faq_pg_ask home_faq_pg_reveal"
             style={{ "--d": "300ms" }}
-            onClick={() => scrollToId("book-session")}
+         onClick={openEnquiryModal}
           >
             Ask a question
           </button>

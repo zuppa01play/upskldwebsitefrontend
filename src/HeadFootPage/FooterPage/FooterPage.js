@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./FooterPage.css";
-import { openBookingModal } from "../../Components/Openbookingmodal";
+import { openEnquiryModal } from "../../Components/Openbookingmodal";
 
 /* ---------- Content (replace the [placeholders] when ready) ---------- */
 
@@ -11,7 +11,7 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { label: "[Instagram]", href: "#" },
+  { label: "[Instagram]", href: "https://www.instagram.com/upskldai/" },
   { label: "[YouTube]", href: "#" },
   { label: "[Contact]", href: "#" },
 ];
@@ -27,15 +27,15 @@ const SOURCES =
 /* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
 const PROGRAMS = [
   {
-    name: "AI for Small Businesses",
+    name: "[Program name] · AI for Small Businesses",
     status: "Enrollment closed",
   },
   {
-    name: "AI for Working Professionals",
+    name: "[Program name] · AI for Working Professionals",
     status: "Enrollment closed",
   },
   {
-    name: "AI for Students",
+    name: "[Program name] · AI for Students",
     status: "Enrollment closed",
   },
 ];
@@ -229,7 +229,7 @@ const FooterPage = ({ activeIndex = 0 }) => {
               type="button"
               className="upskld_footer_pg_bar_enquire"
               tabIndex={barVisible ? 0 : -1}
-              onClick={openBookingModal}
+              onClick={openEnquiryModal}
             >
               Enquire
             </button>

@@ -11,6 +11,13 @@ export const openBookingModal = () => {
   window.dispatchEvent(new CustomEvent(BOOKING_EVENT));
 };
 
+/* ---------- Enquiry popup (EnquirePage) — only the footer "Enquire" button ---------- */
+export const ENQUIRY_EVENT = "upskld:open-enquiry";
+
+export const openEnquiryModal = () => {
+  window.dispatchEvent(new CustomEvent(ENQUIRY_EVENT));
+};
+
 /* ---------- Intro video popup (PopupVideo) ---------- */
 export const VIDEO_EVENT = "upskld:open-video";
 

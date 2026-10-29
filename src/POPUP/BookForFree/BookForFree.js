@@ -13,11 +13,10 @@ import {
 import "./BookForFree.css";
 
 
-const API_URL = process.env.REACT_APP_API_URL || "https://upskldai.com/";
+const API_URL = process.env.REACT_APP_API_URL || "https://upskldai.com/api";
 const REQUEST_TIMEOUT = 15000; // 15s
 const CLOSE_MS = 260; // CSS exit animation duration-oda match aaganum
 
-// header tab -> default "I am a..." value
 const ROLE_BY_TAB = ["Small business owner", "Working professional", "Student"];
 
 const ROLES = [
@@ -27,6 +26,15 @@ const ROLES = [
   "Business leader",
   "Entrepreneur",
 ];
+
+
+
+
+
+
+
+
+
 
 // header tab -> the extra input next to "City"
 //   0 Small Business -> Type of business · 1 Working Professionals -> Your role · 2 Students -> College / course

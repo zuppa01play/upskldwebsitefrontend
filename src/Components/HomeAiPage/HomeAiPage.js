@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./HomeAiPage.css";
 import { openBookingModal, SELECT_BUSINESS_EVENT } from "../Openbookingmodal";
+import HomeUpSkldjourney from "../Homeupskldjourney/Homeupskldjourney";
 
 
 
@@ -985,13 +986,19 @@ const HomeAiPage = ({ activeIndex = 0 }) => {
   }
 
   return (
-    <div key={view} className={switchedRef.current ? "impac_ai_home_pg_swap" : undefined}>
+<div>
+      <div key={view} className={switchedRef.current ? "impac_ai_home_pg_swap" : undefined}>
       {data ? (
         <ImpactExplorer instant={switchedRef.current} data={data} />
       ) : (
         <BusinessTypeView instant={switchedRef.current} />
       )}
     </div>
+      {/* Small Business tab mattum — Working Professionals / Students la varaadhu */}
+      {activeIndex === 0 && <HomeUpSkldjourney />}
+    </div>
+
+   
   );
 };
 

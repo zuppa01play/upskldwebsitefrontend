@@ -11,11 +11,11 @@ import {
   isBookingOpen,
 } from "../../Components/Openbookingmodal";
 import "./PopupVideo.css";
- 
+ import popupvideo from "./popupvideo.mp4"
 
 
 
-const DEFAULT_SRC = "https://res.cloudinary.com/dk50cmtps/video/upload/v1780034028/drone_yzbva8.mp4";
+const DEFAULT_SRC =popupvideo;
 const OPEN_DELAY_MS = 5000; // website open aanadhum 5s apram
 const CLOSE_MS = 260; // CSS exit animation-oda match aaganum
 
@@ -54,7 +54,7 @@ const PopupVideo = (props) => {
   // props can never crash this popup, even if it is called without any
   const {
     src = DEFAULT_SRC,
-    caption = "[Upskld intro video · 30–60 sec]",
+   
     delay = OPEN_DELAY_MS,
   } = props || {};
 
@@ -295,7 +295,7 @@ const PopupVideo = (props) => {
 
         {/* ---------- Footer ---------- */}
         <div className="popup_video_pg_footer">
-          <p className="popup_video_pg_caption">{caption}</p>
+       
 
           <div className="popup_video_pg_actions">
             <button
