@@ -27,13 +27,10 @@ function App() {
       <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
       <HomePage activeIndex={activeIndex} />
       <HomePhilosophyPage />
-      {/* header tab-ku ettha maarum: Small Business = By business type, Professionals = Impact explorer */}
-      <HomeAiPage activeIndex={activeIndex} />
+     <HomeAiPage activeIndex={activeIndex} />
       <br />
 
-{/* <HomeUpSkldjourney /> */}
 
-      {/* activeIndex kudukkanum -> header tab-ku ettha courses maarum */}
       <HomeAiReplace activeIndex={activeIndex} />
       <br />
       <HomeTrackPage />
@@ -43,8 +40,7 @@ function App() {
       <HomeHelpingPeople />
       <HomeFaqPage />
       <FooterPage activeIndex={activeIndex} />
-      {/* popups: 5s apram intro video -> video mudinjathum / skip pannina booking form */}
-      <PopupVideo />
+     <PopupVideo />
       <EnquirePage activeIndex={activeIndex} />
       <BookForFree activeIndex={activeIndex} />
       <ToastContainer position="top-right" autoClose={4000} />
