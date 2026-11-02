@@ -88,15 +88,15 @@ const SOURCES =
 /* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
 const PROGRAMS = [
   {
-    name: "[Program name] · AI for Small Businesses",
+    name: " AI for Small Businesses",
     status: "Enrollment closed",
   },
   {
-    name: "[Program name] · AI for Working Professionals",
+    name: " AI for Working Professionals",
     status: "Enrollment closed",
   },
   {
-    name: "[Program name] · AI for Students",
+    name: " AI for Students",
     status: "Enrollment closed",
   },
 ];

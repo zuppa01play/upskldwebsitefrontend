@@ -94,10 +94,6 @@ const BUSINESS_IDS = {
   "Other": "other",
 };
 
-const DEFAULT_RATIO = 1.35;
-const MIN_RATIO = 0.9; // never taller than ~10:11
-const MAX_RATIO = 1.35; // wide videos are cropped a little so the card stays tall
-
 const ArrowIcon = ({ className = "impac_home_pg_arrow" }) => (
   <svg
     className={className}
@@ -152,15 +148,54 @@ const UsersIcon = () => (
   </svg>
 );
 
+const SoundOnIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M11 5L6 9H2v6h4l5 4V5z" />
+    <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+    <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+  </svg>
+);
+
+const SoundOffIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M11 5L6 9H2v6h4l5 4V5z" />
+    <path d="M23 9l-6 6" />
+    <path d="M17 9l6 6" />
+  </svg>
+);
+
 /*
-  Muted, looping, autoplaying video.
-  - React does not reliably write the `muted` attribute to the DOM, which makes
-    browsers block autoplay. We set video.muted = true in a ref callback, before
-    the source starts loading.
+  Looping, autoplaying video.
+  - Always starts MUTED (browsers block autoplay with sound).
+  - `soundOn` is controlled by the parent. Sound button click = user gesture,
+    so unmuting + play() is allowed.
+  - If the browser still blocks playback with sound, we fall back to muted
+    and tell the parent via onSoundBlocked.
   - Plays only while its slide is active, restarts when the slide returns.
-  - Reports its natural aspect ratio so the card can fit the video exactly.
+  - Card has a fixed aspect-ratio (CSS) and the video uses object-fit: cover,
+    so the video always fills the whole card — no gaps, no size jumps.
 */
-const SlideVideo = ({ src, label, active, eager, onRatio }) => {
+const SlideVideo = ({ src, label, active, eager, soundOn, onSoundBlocked }) => {
   const ref = useRef(null);
 
   const setRef = useCallback((node) => {
@@ -176,11 +211,21 @@ const SlideVideo = ({ src, label, active, eager, onRatio }) => {
   const tryPlay = useCallback(() => {
     const video = ref.current;
     if (!video) return;
-    video.muted = true;
     const p = video.play();
-    if (p && p.catch) p.catch(() => {});
-  }, []);
+    if (p && p.catch) {
+      p.catch(() => {
+        // sound-oda play block aana -> muted-ku maathi thirumba play
+        if (!video.muted) {
+          video.muted = true;
+          if (onSoundBlocked) onSoundBlocked();
+          const retry = video.play();
+          if (retry && retry.catch) retry.catch(() => {});
+        }
+      });
+    }
+  }, [onSoundBlocked]);
 
+  // slide active / inactive
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
@@ -190,16 +235,22 @@ const SlideVideo = ({ src, label, active, eager, onRatio }) => {
       } catch (e) {
         /* metadata not ready yet; onCanPlay will start it */
       }
+      video.muted = !soundOn;
       tryPlay();
     } else {
+      video.muted = true;
       video.pause();
     }
-  }, [active, tryPlay]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
-  const handleMeta = (e) => {
-    const { videoWidth, videoHeight } = e.currentTarget;
-    if (videoWidth && videoHeight && onRatio) onRatio(videoWidth / videoHeight);
-  };
+  // sound toggle (video restart aagama, same position-la sound on/off)
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || !active) return;
+    video.muted = !soundOn;
+    if (video.paused) tryPlay();
+  }, [soundOn, active, tryPlay]);
 
   return (
     <video
@@ -214,7 +265,6 @@ const SlideVideo = ({ src, label, active, eager, onRatio }) => {
       preload={eager ? "auto" : "metadata"}
       disablePictureInPicture
       controls={false}
-      onLoadedMetadata={handleMeta}
       onCanPlay={() => active && tryPlay()}
     />
   );
@@ -223,8 +273,8 @@ const SlideVideo = ({ src, label, active, eager, onRatio }) => {
 const HomePage = ({ activeIndex = 0 }) => {
   // selected chip per slide  { 0: "Retail shop", 1: "Sales" }
   const [selectedOption, setSelectedOption] = useState({});
-  // natural aspect ratio per slide video  { 0: 1.77, 1: 0.56 }
-  const [ratios, setRatios] = useState({});
+  // sound on/off (default: muted)
+  const [soundOn, setSoundOn] = useState(false);
 
   const scrollToId = (id) => {
     const el = document.getElementById(id);
@@ -249,10 +299,8 @@ const HomePage = ({ activeIndex = 0 }) => {
     }));
   };
 
-  const handleRatio = (index, ratio) => {
-    const clamped = Math.min(MAX_RATIO, Math.max(MIN_RATIO, ratio));
-    setRatios((prev) => (prev[index] === clamped ? prev : { ...prev, [index]: clamped }));
-  };
+  const toggleSound = () => setSoundOn((prev) => !prev);
+  const handleSoundBlocked = useCallback(() => setSoundOn(false), []);
 
   return (
     <section className="impac_home_pg_section" id="home" lang="en">
@@ -354,17 +402,31 @@ const HomePage = ({ activeIndex = 0 }) => {
 
               {/* ---------- Right video ---------- */}
               <div className="impac_home_pg_visual">
-                <div
-                  className="impac_home_pg_video_card"
-                  style={{ aspectRatio: ratios[index] || DEFAULT_RATIO }}
-                >
+                <div className="impac_home_pg_video_card">
                   <SlideVideo
                     src={item.video}
                     label={item.imageAlt}
                     active={isActive}
                     eager={index === 0}
-                    onRatio={(r) => handleRatio(index, r)}
+                    soundOn={soundOn}
+                    onSoundBlocked={handleSoundBlocked}
                   />
+
+                  <button
+                    type="button"
+                    tabIndex={tab}
+                    className={`impac_home_pg_sound_btn ${
+                      soundOn ? "impac_home_pg_sound_btn_on" : ""
+                    }`}
+                    onClick={toggleSound}
+                    aria-pressed={soundOn}
+                    aria-label={soundOn ? "Mute video" : "Unmute video"}
+                  >
+                    {soundOn ? <SoundOnIcon /> : <SoundOffIcon />}
+                    <span className="impac_home_pg_sound_text">
+                      {soundOn ? "Sound on" : "Tap for sound"}
+                    </span>
+                  </button>
                 </div>
 
                 <div className="impac_home_pg_badge impac_home_pg_badge_top">

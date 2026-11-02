@@ -296,7 +296,8 @@
 
 .impac_home_pg_chip:focus-visible,
 .impac_home_pg_btn_primary:focus-visible,
-.impac_home_pg_btn_secondary:focus-visible {
+.impac_home_pg_btn_secondary:focus-visible,
+.impac_home_pg_sound_btn:focus-visible {
   outline: 3px solid #e0a83d;
   outline-offset: 3px;
 }
@@ -465,7 +466,9 @@
 .impac_home_pg_video_card {
   position: relative;
   width: 100%;
-  /* aspect-ratio is set inline from the video's real size */
+  /* FIXED ratio: size never jumps when a video loads.
+     Video uses object-fit: cover so it always fills the whole card. */
+  aspect-ratio: 5 / 4;
   border-radius: 28px;
   overflow: hidden;
   background: #3b003d;
@@ -490,10 +493,13 @@
 
 .impac_home_pg_video {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   display: block;
   width: 100%;
   height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
   background: #3b003d;
@@ -510,6 +516,62 @@
 .impac_home_pg_slide_active .impac_home_pg_video_card:hover .impac_home_pg_video {
   transform: scale(1.04);
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Sound button (inside video card, bottom-right) ---------- */
+
+.impac_home_pg_sound_btn {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px 0 12px;
+  border: 1px solid rgba(224, 168, 61, 0.6);
+  border-radius: 999px;
+  background: rgba(59, 0, 61, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.impac_home_pg_sound_btn:hover {
+  background: #e0a83d;
+  color: #3b003d;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.impac_home_pg_sound_btn:active {
+  transform: scale(0.96);
+}
+
+.impac_home_pg_sound_btn_on {
+  background: #e0a83d;
+  color: #3b003d;
+}
+
+.impac_home_pg_sound_btn_on:hover {
+  background: #ffffff;
+}
+
+.impac_home_pg_sound_btn svg {
+  flex-shrink: 0;
 }
 
 /* ---------- Floating badges ---------- */
@@ -635,6 +697,10 @@
     padding-top: 72px; /* room for the top badge above the video */
   }
 
+  .impac_home_pg_video_card {
+    aspect-ratio: 16 / 10;
+  }
+
   .impac_home_pg_badge_top {
     top: 0;
   }
@@ -687,6 +753,7 @@
   }
 
   .impac_home_pg_video_card {
+    aspect-ratio: 4 / 3.4;
     border-radius: 22px;
   }
 
@@ -722,6 +789,21 @@
 
   .impac_home_pg_badge_label {
     font-size: 11px;
+  }
+
+  /* phone: only icon in the sound button, card-oda top-right la */
+  .impac_home_pg_sound_btn {
+    top: 12px;
+    right: 12px;
+    bottom: auto;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .impac_home_pg_sound_text {
+    display: none;
   }
 }
 
