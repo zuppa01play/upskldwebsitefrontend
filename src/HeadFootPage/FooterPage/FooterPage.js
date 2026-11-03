@@ -96,7 +96,7 @@ const PROGRAMS = [
     status: "Enrollment closed",
   },
   {
-    name: " AI for Students",
+    name: "AI for Students",
     status: "Enrollment closed",
   },
 ];

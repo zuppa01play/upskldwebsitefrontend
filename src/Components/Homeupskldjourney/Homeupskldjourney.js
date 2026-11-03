@@ -204,8 +204,8 @@ const smallBusinessMetrics = [
   {
     id: "finance",
     name: "Finance & invoicing",
-    short: "₹[X]",
-    value: "₹[X]",
+    short: "+28",
+    value: "28",
     unit: "[saved per month]",
     taught: "Finance automation",
     bars: [

@@ -189,8 +189,8 @@ const professionalMetrics = [
   {
     id: "reports",
     name: "Reports in minutes",
-    short: "[X]%",
-    value: "[X]%",
+    short: "25%",
+    value: "25%",
     unit: "faster reporting",
     taught: "Role-based AI",
     bars: [
@@ -203,8 +203,8 @@ const professionalMetrics = [
   {
     id: "analysis",
     name: "Analysis without code",
-    short: "[X]%",
-    value: "[X]%",
+    short: "30%",
+    value: "30%",
     unit: "faster analysis",
     taught: "Workflow automation",
     bars: [
@@ -217,8 +217,8 @@ const professionalMetrics = [
   {
     id: "career",
     name: "Career readiness",
-    short: "[X]%",
-    value: "[X]%",
+    short: "85%",
+    value: "85%",
     unit: "of employers expect AI skills",
     taught: "Agentic AI builder",
     bars: [
@@ -231,8 +231,8 @@ const professionalMetrics = [
   {
     id: "workflows",
     name: "Repeatable workflows",
-    short: "[X]%",
-    value: "[X]%",
+    short: "18%",
+    value: "18%",
     unit: "less repeated effort",
     taught: "Workflow automation",
     bars: [
@@ -249,8 +249,8 @@ const studentMetrics = [
   {
     id: "interviews",
     name: "Stand out in interviews",
-    short: "[X]%",
-    value: "[X]%",
+    short: "85%",
+    value: "85%",
     unit: "more confident",
     taught: "AI for job readiness",
     bars: [
@@ -263,8 +263,8 @@ const studentMetrics = [
   {
     id: "study",
     name: "Study smarter",
-    short: "[X]%",
-    value: "[X]%",
+    short: "40%",
+    value: "40%",
     unit: "faster revision",
     taught: "AI basics for students",
     bars: [
@@ -277,8 +277,8 @@ const studentMetrics = [
   {
     id: "portfolio",
     name: "Build a portfolio",
-    short: "[X]%",
-    value: "[X]%",
+    short: "80%",
+    value: "80%",
     unit: "more projects shipped",
     taught: "Data analytics & prompting",
     bars: [
@@ -291,8 +291,8 @@ const studentMetrics = [
   {
     id: "pay",
     name: "Higher starting pay",
-    short: "[X]%",
-    value: "[X]%",
+    short: "80%",
+    value: "80%",
     unit: "salary premium",
     taught: "Bootcamp + placement",
     bars: [

@@ -1,14 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import "./HomePage.css";
-import VideoOne from "./HomePageVideo/videoOne.mp4";
-import VideoTwo from "./HomePageVideo/videoTwo.mp4";
-import VideoThree from "./HomePageVideo/videoThree.mp4";
+import SmallBusiness from "./HomePageImage/SmallBusiness.png";
+import WorkingProfessionals from "./HomePageImage/WorkingProf.png";
+import Students from "./HomePageImage/Student.png";
 import { openBookingModal, selectBusiness } from "../Openbookingmodal";
-/*
-  HomePage is controlled from App.js:
-    <HomePage activeIndex={activeIndex} />
-  Order of `content` MUST match the order of navLinks in HeaderPage.jsx
-*/
 
 const content = [
   {
@@ -35,7 +30,7 @@ const content = [
       { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
       { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
     ],
-    video: VideoOne,
+    image: SmallBusiness,
     imageAlt: "Small business owner using AI in her shop",
     badgeTop: { value: "+451%", label: "more qualified leads · Annuitas Group" },
     badgeBottom: { value: "300+", label: "learners in free sessions" },
@@ -43,7 +38,7 @@ const content = [
   {
     title: "Working Professionals",
     tag: "For working professionals",
-    heading: "We are entrepreneurs, and we'll show you how we use AI to build smarter businesses",
+    heading: "We are working professionals, and we'll show you how AI makes everyday work smarter and easier.",
     description:
       "Practical AI for people in non-tech roles — reports, emails, analysis and workflows, without writing code.",
     question: "What's your role?",
@@ -56,7 +51,7 @@ const content = [
       { value: "27%", label: "of the week Indian sales reps spend actually selling", source: "Salesforce 2023" },
       { value: "200+", label: "working professionals trained", source: "Upskld" },
     ],
-    video: VideoTwo,
+    image: WorkingProfessionals,
     imageAlt: "Professionals using AI in a team meeting",
     badgeTop: { value: "32.5%", label: "of the week saved · ActiveCampaign" },
     badgeBottom: { value: "200+", label: "professionals trained" },
@@ -64,7 +59,7 @@ const content = [
   {
     title: "Student",
     tag: "For students",
-    heading: "We are entrepreneurs, and we'll show you how we use AI to build smarter businesses",
+    heading: "We are future innovators, and we'll show you how AI helps you learn smarter, build new skills, and prepare for tomorrow",
     description: "Graduate job-ready, with AI on your side.",
     question: "What are you studying?",
     hint: "Tap an option to explore what fits you",
@@ -76,7 +71,7 @@ const content = [
       { value: "24+ Lakh", label: "arts & science graduates", source: "Source" },
       { value: "100+", label: "students trained", source: "Upskld" },
     ],
-    video: VideoThree,
+    image: Students,
     imageAlt: "Students learning together on campus",
     badgeTop: { value: "24+ Lakh", label: "arts & science graduates" },
     badgeBottom: { value: "100+", label: "students trained" },
@@ -148,133 +143,9 @@ const UsersIcon = () => (
   </svg>
 );
 
-const SoundOnIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M11 5L6 9H2v6h4l5 4V5z" />
-    <path d="M15.5 8.5a5 5 0 0 1 0 7" />
-    <path d="M18.5 5.5a9 9 0 0 1 0 13" />
-  </svg>
-);
-
-const SoundOffIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M11 5L6 9H2v6h4l5 4V5z" />
-    <path d="M23 9l-6 6" />
-    <path d="M17 9l6 6" />
-  </svg>
-);
-
-/*
-  Looping, autoplaying video.
-  - Always starts MUTED (browsers block autoplay with sound).
-  - `soundOn` is controlled by the parent. Sound button click = user gesture,
-    so unmuting + play() is allowed.
-  - If the browser still blocks playback with sound, we fall back to muted
-    and tell the parent via onSoundBlocked.
-  - Plays only while its slide is active, restarts when the slide returns.
-  - Card has a fixed aspect-ratio (CSS) and the video uses object-fit: cover,
-    so the video always fills the whole card — no gaps, no size jumps.
-*/
-const SlideVideo = ({ src, label, active, eager, soundOn, onSoundBlocked }) => {
-  const ref = useRef(null);
-
-  const setRef = useCallback((node) => {
-    ref.current = node;
-    if (node) {
-      node.muted = true;
-      node.defaultMuted = true;
-      node.setAttribute("muted", "");
-      node.setAttribute("playsinline", "");
-    }
-  }, []);
-
-  const tryPlay = useCallback(() => {
-    const video = ref.current;
-    if (!video) return;
-    const p = video.play();
-    if (p && p.catch) {
-      p.catch(() => {
-        // sound-oda play block aana -> muted-ku maathi thirumba play
-        if (!video.muted) {
-          video.muted = true;
-          if (onSoundBlocked) onSoundBlocked();
-          const retry = video.play();
-          if (retry && retry.catch) retry.catch(() => {});
-        }
-      });
-    }
-  }, [onSoundBlocked]);
-
-  // slide active / inactive
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-    if (active) {
-      try {
-        video.currentTime = 0;
-      } catch (e) {
-        /* metadata not ready yet; onCanPlay will start it */
-      }
-      video.muted = !soundOn;
-      tryPlay();
-    } else {
-      video.muted = true;
-      video.pause();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
-
-  // sound toggle (video restart aagama, same position-la sound on/off)
-  useEffect(() => {
-    const video = ref.current;
-    if (!video || !active) return;
-    video.muted = !soundOn;
-    if (video.paused) tryPlay();
-  }, [soundOn, active, tryPlay]);
-
-  return (
-    <video
-      ref={setRef}
-      className="impac_home_pg_video"
-      src={eager ? src : `${src}#t=0.001`}
-      aria-label={label}
-      muted
-      loop
-      playsInline
-      autoPlay={active}
-      preload={eager ? "auto" : "metadata"}
-      disablePictureInPicture
-      controls={false}
-      onCanPlay={() => active && tryPlay()}
-    />
-  );
-};
-
 const HomePage = ({ activeIndex = 0 }) => {
   // selected chip per slide  { 0: "Retail shop", 1: "Sales" }
   const [selectedOption, setSelectedOption] = useState({});
-  // sound on/off (default: muted)
-  const [soundOn, setSoundOn] = useState(false);
 
   const scrollToId = (id) => {
     const el = document.getElementById(id);
@@ -298,9 +169,6 @@ const HomePage = ({ activeIndex = 0 }) => {
       [slideIndex]: prev[slideIndex] === option ? null : option,
     }));
   };
-
-  const toggleSound = () => setSoundOn((prev) => !prev);
-  const handleSoundBlocked = useCallback(() => setSoundOn(false), []);
 
   return (
     <section className="impac_home_pg_section" id="home" lang="en">
@@ -400,33 +268,18 @@ const HomePage = ({ activeIndex = 0 }) => {
                 </div>
               </div>
 
-              {/* ---------- Right video ---------- */}
+              {/* ---------- Right image ---------- */}
               <div className="impac_home_pg_visual">
                 <div className="impac_home_pg_video_card">
-                  <SlideVideo
-                    src={item.video}
-                    label={item.imageAlt}
-                    active={isActive}
-                    eager={index === 0}
-                    soundOn={soundOn}
-                    onSoundBlocked={handleSoundBlocked}
+                  <img
+                    className="impac_home_pg_img"
+                    src={item.image}
+                    alt={item.imageAlt}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchpriority={index === 0 ? "high" : "auto"}
+                    decoding="async"
+                    draggable="false"
                   />
-
-                  <button
-                    type="button"
-                    tabIndex={tab}
-                    className={`impac_home_pg_sound_btn ${
-                      soundOn ? "impac_home_pg_sound_btn_on" : ""
-                    }`}
-                    onClick={toggleSound}
-                    aria-pressed={soundOn}
-                    aria-label={soundOn ? "Mute video" : "Unmute video"}
-                  >
-                    {soundOn ? <SoundOnIcon /> : <SoundOffIcon />}
-                    <span className="impac_home_pg_sound_text">
-                      {soundOn ? "Sound on" : "Tap for sound"}
-                    </span>
-                  </button>
                 </div>
 
                 <div className="impac_home_pg_badge impac_home_pg_badge_top">
