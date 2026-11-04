@@ -11,7 +11,7 @@ export const openBookingModal = () => {
   window.dispatchEvent(new CustomEvent(BOOKING_EVENT));
 };
 
-/* ---------- Enquiry popup (EnquirePage) — only the footer "Enquire" button ---------- */
+/* ---------- Enquiry popup (EnquirePage) — footer / FAQ "Enquire" buttons ---------- */
 export const ENQUIRY_EVENT = "upskld:open-enquiry";
 
 export const openEnquiryModal = () => {
@@ -34,27 +34,17 @@ export const selectBusiness = (id) => {
   window.dispatchEvent(new CustomEvent(SELECT_BUSINESS_EVENT, { detail: { id } }));
 };
 
-/* ---------- Auto popup: "already closed it" flag ---------- */
-const DISMISS_KEY = "upskld_popup_dismissed";
-const DISMISS_DAYS = 7; // 0 = never show the auto popup again
+/* ---------- Auto popup: "already closed it" flag ----------
+   Kept in memory only (NOT localStorage):
+   - close pannina / form submit pannina -> same visit-la thirumba auto popup varaadhu
+   - page refresh / new tab -> memory reset aagum, so 5 second-la popup thirumba varum
+   Test-ku localStorage clear panna vendiya avasiyam illa. */
+let popupDismissed = false;
 
-export const wasPopupDismissed = () => {
-  try {
-    const raw = window.localStorage.getItem(DISMISS_KEY);
-    if (!raw) return false;
-    if (DISMISS_DAYS === 0) return true;
-    return Date.now() - Number(raw) < DISMISS_DAYS * 24 * 60 * 60 * 1000;
-  } catch (e) {
-    return false;
-  }
-};
+export const wasPopupDismissed = () => popupDismissed;
 
 export const markPopupDismissed = () => {
-  try {
-    window.localStorage.setItem(DISMISS_KEY, String(Date.now()));
-  } catch (e) {
-    /* private mode — ignore */
-  }
+  popupDismissed = true;
 };
 
 /* ---------- Is the booking form open right now? ---------- */
