@@ -4,10 +4,69 @@ import   openBookingModal  from "../Openbookingmodal"
 
 const REPLAY_ON_REENTER = false; // true = animation replays every time the section re-enters the screen
 
-const beliefs = [
-  { num: "01", text: "Students become more confident." },
-  { num: "02", text: "Enterprises become more capable." },
-  { num: "03", text: "Universities become more future-ready." },
+/* header tab -> content
+   0 Small Business · 1 Working Professionals · 2 Students */
+const content = [
+  {
+    title: "You don't need to become an AI expert.",
+    accent: "You need to get better at what you already do — with AI.",
+    text:
+      "A practical, job-specific way to work with AI, at your pace, without needing to become someone else to do it. No pitch. No pressure. Just a short conversation to map your AI roadmap.",
+    note: "Free · 15 minutes · No pressure",
+    beliefs: [
+      { num: "01", title: "Students become more confident." },
+      { num: "02", title: "Enterprises become more capable." },
+      { num: "03", title: "Universities become more future-ready." },
+    ],
+  },
+  {
+    title: "Master practical AI to automate your daily office workflows",
+    accent: "without learning complex theory or writing code.",
+    text:
+      "Designed for non-technical professionals, book a quick call to map your personalized AI roadmap.",
+    note: "Free · 15 minutes · No pressure",
+    beliefs: [
+      {
+        num: "01",
+        title: "10x Task Velocity",
+        desc: "Multiply your output quality and speed on routine tasks without experiencing burnout.",
+      },
+      {
+        num: "02",
+        title: "Sharper Decisions",
+        desc: "Gain instant market synthesis, data processing, and rapid scenario modeling capabilities.",
+      },
+      {
+        num: "03",
+        title: "Career Future-Proofing",
+        desc: "Achieve unmatched workplace visibility and position yourself for salary acceleration potential.",
+      },
+    ],
+  },
+  {
+    title: "You don't need to become an AI expert.",
+    accent: "You just need practical AI skills to get hired.",
+    text:
+      "A practical, step-by-step way to learn AI at your own pace, without writing a single line of code. No pressure. Just a short conversation to map your career roadmap.",
+    note: "Free · 15 minutes · No pressure",
+    beliefs: [
+      {
+        num: "01",
+        title: "AI for Job Readiness",
+        desc: "Build stronger resumes and prepare for interviews with AI as your career co-pilot.",
+      },
+      {
+        num: "02",
+        title: "No-Code Data Analytics",
+        desc: "Analyze complex data and extract insights without learning how to code.",
+      },
+      {
+        num: "03",
+        title: "Structured Prompting Sense",
+        desc: "Move beyond casual chat. Learn to write prompts that produce workplace-ready results.",
+      },
+    ],
+  },
 ];
 
 const ArrowIcon = () => (
@@ -46,7 +105,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-const HomeHelpingPeople = () => {
+const HomeHelpingPeople = ({ activeIndex = 0 }) => {
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
 
@@ -81,14 +140,10 @@ const HomeHelpingPeople = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const header = document.querySelector(".upskld_heade_pg_header");
-    const offset = header ? header.offsetHeight : 80;
-    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
+  // after the first header-tab change the new text fades in again
+  const data = content[activeIndex] || content[0];
+  const firstTab = useRef(activeIndex);
+  const swapped = firstTab.current !== activeIndex;
 
   return (
     <section
@@ -100,7 +155,10 @@ const HomeHelpingPeople = () => {
         <span className="impac_helping_pg_dots" aria-hidden="true" />
         <span className="impac_helping_pg_glow" aria-hidden="true" />
 
-        <div className="impac_helping_pg_grid">
+        <div
+          key={activeIndex}
+          className={`impac_helping_pg_grid ${swapped ? "impac_helping_pg_grid_swap" : ""}`}
+        >
           {/* ---------- Left: message ---------- */}
           <div className="impac_helping_pg_copy">
             <span className="impac_helping_pg_tag impac_helping_pg_reveal" style={{ "--d": "0ms" }}>
@@ -113,20 +171,18 @@ const HomeHelpingPeople = () => {
                 className="impac_helping_pg_title_line impac_helping_pg_reveal"
                 style={{ "--d": "120ms" }}
               >
-                You don't need to become an AI expert.
+                {data.title}
               </span>
               <span
                 className="impac_helping_pg_title_line impac_helping_pg_title_accent impac_helping_pg_reveal"
                 style={{ "--d": "260ms" }}
               >
-                You need to get better at what you already do — with AI.
+                {data.accent}
               </span>
             </h2>
 
             <p className="impac_helping_pg_text impac_helping_pg_reveal" style={{ "--d": "400ms" }}>
-              A practical, job-specific way to work with AI, at your pace, without needing to become
-              someone else to do it. No pitch. No pressure. Just a short conversation to map your AI
-              roadmap.
+              {data.text}
             </p>
 
             <div className="impac_helping_pg_actions impac_helping_pg_reveal" style={{ "--d": "520ms" }}>
@@ -138,20 +194,23 @@ const HomeHelpingPeople = () => {
                 <span>Book a free session</span>
                 <ArrowIcon />
               </button>
-              <span className="impac_helping_pg_note">Free · 15 minutes · No pressure</span>
+              <span className="impac_helping_pg_note">{data.note}</span>
             </div>
           </div>
 
           {/* ---------- Right: three beliefs ---------- */}
           <ul className="impac_helping_pg_list">
-            {beliefs.map((item, index) => (
+            {data.beliefs.map((item, index) => (
               <li
                 key={item.num}
                 className="impac_helping_pg_row"
                 style={{ "--r": index }}
               >
                 <span className="impac_helping_pg_num">{item.num}</span>
-                <span className="impac_helping_pg_row_text">{item.text}</span>
+                <span className="impac_helping_pg_row_body">
+                  <span className="impac_helping_pg_row_text">{item.title}</span>
+                  {item.desc && <span className="impac_helping_pg_row_desc">{item.desc}</span>}
+                </span>
                 <CheckIcon />
               </li>
             ))}

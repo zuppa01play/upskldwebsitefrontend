@@ -33,11 +33,11 @@ function App() {
 
       <HomeAiReplace activeIndex={activeIndex} />
       <br />
-      <HomeTrackPage />
+      <HomeTrackPage activeIndex={activeIndex}/>
       <HomeThreeAudience />
       <StudendFooter />
       <HomeReviewPage activeIndex={activeIndex} />
-      <HomeHelpingPeople />
+     <HomeHelpingPeople activeIndex={activeIndex} />
       <HomeFaqPage />
       <FooterPage activeIndex={activeIndex} />
      <PopupVideo />

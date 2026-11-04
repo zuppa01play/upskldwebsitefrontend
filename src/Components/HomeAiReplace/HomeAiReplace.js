@@ -218,7 +218,7 @@ const audiences = [
   },
   {
     id: "professionals",
-    title: "From first prompt to fully automated workflows.",
+    title: "Stop Doing Manual Work. Build Fully Automated Workflows.",
     courses: professionalCourses,
   },
   {

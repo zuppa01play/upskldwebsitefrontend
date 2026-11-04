@@ -131,13 +131,14 @@
 .impac_home_pg_heading {
   margin: 20px 0 16px;
   max-width: 640px;
-  font-size: clamp(28px, 3.3vw, 44px);
+  font-size: clamp(28px, 3.3vw, 35px);
   line-height: 1.15;
   font-weight: 800;
   letter-spacing: -0.015em;
   color: #3b003d;
-  text-align: left;
+  /* text-align: left; */
   text-wrap: balance;
+   text-align: justify;
 }
 
 .impac_home_pg_desc {

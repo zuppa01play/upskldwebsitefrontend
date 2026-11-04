@@ -38,9 +38,9 @@ const content = [
   {
     title: "Working Professionals",
     tag: "For working professionals",
-    heading: "We are working professionals, and we'll show you how AI makes everyday work smarter and easier.",
+    heading: "Turn the AI Skill Gap into Your Biggest Career Advantage.",
     description:
-      "Practical AI for people in non-tech roles — reports, emails, analysis and workflows, without writing code.",
+      "Practical, job-aligned AI training for non-technical professionals. Learn to automate your daily corporate workflows, make sharper decisions, and future-proof your career without writing a single line of code",
     question: "What's your role?",
     hint: "Tap an option to explore what fits you",
     options: ["Sales", "HR", "Operations", "Finance", "Marketing", "Other"],
@@ -59,8 +59,8 @@ const content = [
   {
     title: "Student",
     tag: "For students",
-    heading: "We are future innovators, and we'll show you how AI helps you learn smarter, build new skills, and prepare for tomorrow",
-    description: "Graduate job-ready, with AI on your side.",
+    heading: "Turn AI Uncertainty Into Your Career Advantage.Stop worrying about AI replacing you.",
+    description: " Learn structured, task-based prompting so you can walk into your next interview not just saying “I know AI,” but proving exactly how you use it.",
     question: "What are you studying?",
     hint: "Tap an option to explore what fits you",
     options: ["Commerce", "Arts", "Science", "Engineering", "Management", "Other"],
@@ -78,15 +78,36 @@ const content = [
   },
 ];
 
-// Slide 0 chips -> matching tab id in HomeAiPage
-const BUSINESS_IDS = {
-  "Retail shop": "retail",
-  "Food business": "food",
-  "Apparel & fashion": "fashion",
-  "Services": "services",
-  "Manufacturing": "manufacturing",
-  "Online seller": "online",
-  "Other": "other",
+// chip text -> matching item id in HomeAiPage (per header tab)
+//   0 Small Business        -> "By business type" tabs
+//   1 Working Professionals -> Impact explorer items (professionalMetrics ids)
+//   2 Students              -> Impact explorer items (studentMetrics ids)
+const CHIP_IDS = {
+  0: {
+    "Retail shop": "retail",
+    "Food business": "food",
+    "Apparel & fashion": "fashion",
+    "Services": "services",
+    "Manufacturing": "manufacturing",
+    "Online seller": "online",
+    "Other": "other",
+  },
+  1: {
+    Sales: "hours",
+    HR: "focus",
+    Operations: "Operations",
+    Finance: "Finance",
+    Marketing: "Marketing",
+    Other: "Others",
+  },
+  2: {
+    Commerce: "Commerce",
+    Arts: "Arts",
+    Science: "Science",
+    Engineering: "Engineering",
+    Management: "Management",
+    Other: "StudentOthers",
+  },
 };
 
 const ArrowIcon = ({ className = "impac_home_pg_arrow" }) => (
@@ -157,9 +178,9 @@ const HomePage = ({ activeIndex = 0 }) => {
   };
 
   const handleOptionClick = (slideIndex, option) => {
-    const businessId = slideIndex === 0 ? BUSINESS_IDS[option] : null;
+    const businessId = CHIP_IDS[slideIndex] ? CHIP_IDS[slideIndex][option] : null;
     if (businessId) {
-      // always select + open that business in the "By business type" section
+      // always select + open that item in HomeAiPage (business type / impact explorer)
       setSelectedOption((prev) => ({ ...prev, [slideIndex]: option }));
       selectBusiness(businessId);
       return;
@@ -276,7 +297,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                     src={item.image}
                     alt={item.imageAlt}
                     loading={index === 0 ? "eager" : "lazy"}
-                    fetchpriority={index === 0 ? "high" : "auto"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
                     decoding="async"
                     draggable="false"
                   />

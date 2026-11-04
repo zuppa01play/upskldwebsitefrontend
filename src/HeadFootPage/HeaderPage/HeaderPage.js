@@ -8,16 +8,16 @@ const navLinks = [
     label: "Small Business",
     announce: "This month: AI for small businesses · Book a free session →",
   },
-  // {
-  //   label: "Working Professionals",
-  //   announce:
-  //     "For working professionals · Free 15-minute AI roadmap session · Book now →",
-  // },
-  // {
-  //   label: "Students",
-  //   announce:
-  //     "For students · Free 15-minute career counselling session · Book now →",
-  // },
+  {
+    label: "Working Professionals",
+    announce:
+      "For working professionals · Free 15-minute AI roadmap session · Book now →",
+  },
+  {
+    label: "Students",
+    announce:
+      "For students · Free 15-minute career counselling session · Book now →",
+  },
 ];
 
 const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {

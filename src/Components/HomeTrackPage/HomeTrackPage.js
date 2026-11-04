@@ -1,20 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./HomeTrackPage.css";
 
-/* ---------- Content (edit here) ---------- */
-const cards = [
-  {
-    key: "build",
-    variant: "plain",
-    label: "Most AI learning today",
-    title: "Build AI",
-    checks: false,
-    points: [
-      "Built around technology creation",
-      "Tool-first: what a tool can do",
-      "Designed for engineers and developers",
-    ],
-  },
+/* ---------- Content (edit here) ----------
+   header tab: 0 Small Business · 1 Working Professionals · 2 Students
+   "Build AI" card never changes; only the heading and the "Use AI" card change. */
+const buildCard = {
+  key: "build",
+  variant: "plain",
+  label: "Most AI learning today",
+  title: "Build AI",
+  checks: false,
+  points: [
+    "Built around technology creation",
+    "Tool-first: what a tool can do",
+    "Designed for engineers and developers",
+  ],
+};
+
+const defaultCards = [
+  buildCard,
   {
     key: "use",
     variant: "accent",
@@ -28,6 +32,35 @@ const cards = [
     ],
   },
 ];
+
+const defaultTitle = [
+  "Most AI learning teaches people to build AI.",
+  "Non-tech learners need to use it.",
+];
+
+const byTab = {
+  1: {
+    title: [
+      "Most AI courses teach people to build AI.",
+      "Working professionals need to use it to automate their daily work.",
+    ],
+    cards: [
+      buildCard,
+      {
+        key: "use-pro",
+        variant: "accent",
+        label: "What working professionals need",
+        title: "Use AI",
+        checks: true,
+        points: [
+          "Confidence to deploy AI in daily corporate workflows.",
+          "Task-first: Automate MIS reporting, synthesize market data, and speed up decision-making.",
+          "Practical, job-aligned skills that save 5-15 hours every week.",
+        ],
+      },
+    ],
+  },
+};
 
 const bridge = {
   label: "The missing bridge",
@@ -100,19 +133,21 @@ const CheckIcon = () => (
 );
 
 /* ---------- Page ---------- */
-const HomeTrackPage = () => {
+const HomeTrackPage = ({ activeIndex = 0 }) => {
+  const view = byTab[activeIndex] || { title: defaultTitle, cards: defaultCards };
+  const cards = view.cards;
+
   return (
     <section id="ai-for-your-job"  className="impac_trac_ho_pg_section">
-      <div className="impac_trac_ho_pg_container">
+      <div key={activeIndex} className="impac_trac_ho_pg_container">
         {/* Heading */}
         <header className="impac_trac_ho_pg_header">
           <Reveal as="h2" className="impac_trac_ho_pg_title">
-            <span className="impac_trac_ho_pg_title_line">
-              Most AI learning teaches people to build AI.
-            </span>
-            <span className="impac_trac_ho_pg_title_line">
-              Non-tech learners need to use it.
-            </span>
+            {view.title.map((line) => (
+              <span key={line} className="impac_trac_ho_pg_title_line">
+                {line}
+              </span>
+            ))}
           </Reveal>
 
           <Reveal className="impac_trac_ho_pg_line_box" delay={150}>

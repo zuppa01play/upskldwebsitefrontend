@@ -154,13 +154,26 @@ const impactIcons = {
   ),
 };
 
+/* icons for the professional role ids (Operations / Finance / Marketing / Others) */
+impactIcons.Operations = impactIcons.workflows;
+impactIcons.Finance = impactIcons.pay;
+impactIcons.Marketing = impactIcons.career;
+impactIcons.Others = impactIcons.portfolio;
+/* student streams */
+impactIcons.Commerce = impactIcons.pay;
+impactIcons.Arts = impactIcons.portfolio;
+impactIcons.Science = impactIcons.study;
+impactIcons.Engineering = impactIcons.analysis;
+impactIcons.Management = impactIcons.career;
+impactIcons.StudentOthers = impactIcons.community;
+
 /* ---------- Content ---------- */
 
 /* ---- Working Professionals: Impact explorer data ---- */
 const professionalMetrics = [
   {
     id: "hours",
-    name: "Hours back every week",
+    name: "Sales",
     short: "32.5%",
     value: "32.5%",
     unit: "of the work week saved",
@@ -169,26 +182,26 @@ const professionalMetrics = [
       { label: "Without AI", value: "100%", fill: 100 },
       { label: "With AI (time spent)", value: "67.5%", fill: 67.5 },
     ],
-    text: "Drafting, summarising and chasing updates shrink dramatically when AI handles the first pass.",
+    text: "Leverage AI for rapid prospect research, hyper-personalized outreach, and pipeline workflows.",
     source: "ActiveCampaign × Talker Research 2025",
   },
   {
     id: "focus",
-    name: "More time for real work",
+    name: "HR",
     short: "27%",
     value: "27%",
     unit: "selling time for Indian reps",
     taught: "Role-based AI",
     bars: [
       { label: "Time actually selling", value: "27%", fill: 27 },
-      { label: "Goal with automation", value: "[X]%", fill: 55 },
+      { label: "Goal with automation", value: "55%", fill: 55 },
     ],
-    text: "Most of the week goes to admin. Automation hands that time back to real work.",
+    text: "Deploy AI to automate employee onboarding, summarize performance reviews, and track workforce data.",
     source: "Salesforce State of Sales India 2023",
   },
   {
-    id: "reports",
-    name: "Reports in minutes",
+    id: "Operations",
+    name: "Operations",
     short: "25%",
     value: "25%",
     unit: "faster reporting",
@@ -197,26 +210,26 @@ const professionalMetrics = [
       { label: "[Before]", value: "[Before]", fill: 80 },
       { label: "[After]", value: "[After]", fill: 25 },
     ],
-    text: "Turn raw numbers into clean MIS reports without wrestling spreadsheets.",
+    text: "Command AI for demand forecasting, inventory reconciliation, and automating daily administrative reporting",
     source: "[Source needed]",
   },
   {
-    id: "analysis",
-    name: "Analysis without code",
+    id: "Finance",
+    name: "Finance",
     short: "30%",
     value: "30%",
-    unit: "faster analysis",
+    unit: "faster Finance reporting",
     taught: "Workflow automation",
     bars: [
       { label: "[Before]", value: "[Before]", fill: 75 },
       { label: "[After]", value: "[After]", fill: 30 },
     ],
-    text: "Ask questions of your data in plain language and get answers you can act on.",
+    text: "Master AI for MIS reporting, cash-flow tracking, and financial analysis.",
     source: "[Source needed]",
   },
   {
-    id: "career",
-    name: "Career readiness",
+    id: "Marketing",
+    name: "Marketing",
     short: "85%",
     value: "85%",
     unit: "of employers expect AI skills",
@@ -225,12 +238,12 @@ const professionalMetrics = [
       { label: "[Before]", value: "[Before]", fill: 40 },
       { label: "[After]", value: "[After]", fill: 85 },
     ],
-    text: "AI fluency is becoming a baseline skill for the next role you want.",
+    text: "Automate your content generation, campaign structuring, and audience engagement workflows.",
     source: "[Source needed]",
   },
   {
-    id: "workflows",
-    name: "Repeatable workflows",
+    id: "Others",
+    name: "Other roles",
     short: "18%",
     value: "18%",
     unit: "less repeated effort",
@@ -239,7 +252,7 @@ const professionalMetrics = [
       { label: "[Before]", value: "[Before]", fill: 85 },
       { label: "[After]", value: "[After]", fill: 18 },
     ],
-    text: "Build a prompt or workflow once, reuse it every week.",
+    text: "Build custom AI workflows tailored to your specific daily tasks, internal reporting, and document processing.",
     source: "[Source needed]",
   },
 ];
@@ -247,8 +260,8 @@ const professionalMetrics = [
 /* ---- Students: Impact explorer data ---- */
 const studentMetrics = [
   {
-    id: "interviews",
-    name: "Stand out in interviews",
+    id: "Commerce",
+    name: "Commerce",
     short: "85%",
     value: "85%",
     unit: "more confident",
@@ -257,12 +270,12 @@ const studentMetrics = [
       { label: "[Before]", value: "[Before]", fill: 33 },
       { label: "[After]", value: "[After]", fill: 85 },
     ],
-    text: "Practice mock interviews and sharpen answers with an AI coach.",
+    text: "Master AI to analyze financial data, automate reports, and build a standout resume for corporate roles—no coding required.",
     source: "[Source needed]",
   },
   {
-    id: "study",
-    name: "Study smarter",
+    id: "Arts",
+    name: "Arts",
     short: "40%",
     value: "40%",
     unit: "faster revision",
@@ -271,12 +284,12 @@ const studentMetrics = [
       { label: "[Before]", value: "[Before]", fill: 87 },
       { label: "[After]", value: "[After]", fill: 40 },
     ],
-    text: "Summaries, flashcards and explanations on demand.",
+    text: "Turn your creativity into a career advantage. Use AI to accelerate your research, draft compelling content, and ace your interviews.",
     source: "[Source needed]",
   },
   {
-    id: "portfolio",
-    name: "Build a portfolio",
+    id: "Science",
+    name: "Science",
     short: "80%",
     value: "80%",
     unit: "more projects shipped",
@@ -285,12 +298,12 @@ const studentMetrics = [
       { label: "[Before]", value: "[Before]", fill: 28 },
       { label: "[After]", value: "[After]", fill: 80 },
     ],
-    text: "Turn class assignments into portfolio pieces employers can see.",
+    text: "Deploy AI as your research co-pilot. Quickly analyze complex data, summarize literature, and present your findings like a professional.",
     source: "[Source needed]",
   },
   {
-    id: "pay",
-    name: "Higher starting pay",
+    id: "Engineering",
+    name: "Engineering",
     short: "80%",
     value: "80%",
     unit: "salary premium",
@@ -299,12 +312,12 @@ const studentMetrics = [
       { label: "[Before]", value: "[Before]", fill: 55 },
       { label: "[After]", value: "[After]", fill: 80 },
     ],
-    text: "Candidates with AI skills often negotiate from a stronger position.",
+    text: "Move beyond textbook theory. Learn to use AI for workflow automation, project reporting, and proving your practical skills to employers.",
     source: "[Source needed]",
   },
   {
-    id: "stream",
-    name: "Any stream welcome",
+    id: "Management",
+    name: "Management",
     short: "24+ Lakh",
     value: "24+ Lakh",
     unit: "arts & science graduates",
@@ -313,12 +326,12 @@ const studentMetrics = [
       { label: "Technical roles only", value: "Few", fill: 22 },
       { label: "With AI skills", value: "Many", fill: 90 },
     ],
-    text: "You do not need to code. AI opens doors for every stream.",
+    text: "Command AI to synthesize market data, build rapid case study presentations, and crack your placement interviews with confidence.",
     source: "[Source]",
   },
   {
-    id: "community",
-    name: "Learn in a community",
+    id: "StudentOthers",
+    name: "Other",
     short: "100+",
     value: "100+",
     unit: "students trained",
@@ -327,7 +340,7 @@ const studentMetrics = [
       { label: "Learning alone", value: "1×", fill: 22 },
       { label: "Learning together", value: "100+", fill: 88 },
     ],
-    text: "Peers, mentors and entrepreneurs who share real opportunities.",
+    text: "Learn structured, task-based prompting to build stronger profiles, prepare for interviews, and become the AI-ready candidate employers are hunting for.",
     source: "Upskld",
   },
 ];
@@ -336,16 +349,16 @@ const studentMetrics = [
 const impactAudiences = {
   1: {
     id: "professionals",
-    eyebrow: "The benefit · Impact explorer",
-    title: "What AI changes in your working week — in numbers.",
-    subtitle: "Pick an area to see the before-and-after. Every figure comes from published research.",
+    eyebrow: "THE UPSKLD MULTIPLIER",
+    title: "Translating AI Fluency into Career Growth — In Numbers.",
+    subtitle: "Explore the data behind the AI skill gap. Every figure is backed by 2026 industry benchmarks",
     metrics: professionalMetrics,
   },
   2: {
     id: "students",
-    eyebrow: "The benefit · Impact explorer",
-    title: "What AI changes for your career — in numbers.",
-    subtitle: "Pick an area to see the before-and-after. Figures are placeholders until sourced.",
+    eyebrow: "YOUR PLACEMENT ADVANTAGE",
+    title: "Prove You Are Ready for the Future of Work",
+    subtitle: "Explore how AI transforms your employability by moving from just saying \"I know AI\" to actually proving it to employers.",
     metrics: studentMetrics,
   },
 };
@@ -826,6 +839,38 @@ const ImpactExplorer = ({ instant, data }) => {
     const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
     window.scrollTo({ top, behavior: "smooth" });
   };
+
+  // hero chips (HomePage) -> open that role here and scroll to this section
+  useEffect(() => {
+    const onSelect = (e) => {
+      const id = e.detail && e.detail.id;
+      const index = metrics.findIndex((m) => m.id === id);
+      if (index === -1) return;
+      setActiveIndex(index);
+      setInView(true);
+
+      // keep the chosen item visible when the list scrolls sideways (phones)
+      requestAnimationFrame(() => {
+        const item = itemRefs.current[index];
+        const list = item && item.parentElement;
+        if (list && list.scrollWidth > list.clientWidth) {
+          const t = item.getBoundingClientRect();
+          const l = list.getBoundingClientRect();
+          list.scrollLeft += t.left - l.left - (list.clientWidth - t.width) / 2;
+        }
+      });
+
+      const el = document.getElementById("business-types");
+      if (el) {
+        const header = document.querySelector(".upskld_heade_pg_header");
+        const offset = header ? header.offsetHeight : 80;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    };
+    window.addEventListener(SELECT_BUSINESS_EVENT, onSelect);
+    return () => window.removeEventListener(SELECT_BUSINESS_EVENT, onSelect);
+  }, [metrics]);
 
   const selectItem = (index) => {
     setActiveIndex(index);

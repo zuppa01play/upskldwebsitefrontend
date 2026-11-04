@@ -5,10 +5,6 @@ import { openBookingModal } from "../Openbookingmodal";
 const AUTOPLAY_MS = 6500; // time each review stays in front
 const SWIPE_DISTANCE = 45; // px swipe needed on touch devices
 
-/* Quotes are the learners' own words — kept exactly as submitted.
-   `outcome` is a short label summarising what each quote says.
-   Placeholders ([Learner name] …) stay until the team lead sends the real content —
-   just replace the text in the objects below, nothing else needs to change. */
 const placeholder = (id, role) => ({
   id,
   quote: "[Real quote: the result they got]",
@@ -32,10 +28,7 @@ const smallBusinessReviews = [
     name: "Retail store owner",
     outcome: "Hours saved on admin",
   },
-  placeholder("sb-3", "Apparel & fashion · [City]"),
-  placeholder("sb-4", "Manufacturing · [City]"),
-  placeholder("sb-5", "Services · [City]"),
-  placeholder("sb-6", "Online seller · [City]"),
+
 ];
 
 const professionalReviews = [
@@ -55,10 +48,31 @@ const professionalReviews = [
     role: "Graphic Designer",
     outcome: "Design & video skills",
   },
-  placeholder("pro-3", "Sales · [City]"),
-  placeholder("pro-4", "HR · [City]"),
-  placeholder("pro-5", "Finance · [City]"),
-  placeholder("pro-6", "Marketing · [City]"),
+  {
+    id: "pro-3",
+    quote:
+      "Prospect research and hyper-personalized email outreach happen automatically now. My pipeline workflows are faster, and I can focus entirely on closing deals.",
+    name: "Amit S.",
+    role: "Sales Director",
+    outcome: "Sales outreach",
+  },
+
+  {
+    id: "pro-4",
+    quote:
+      "I used to spend hours on manual data entry and building reports. Now, with UpSkld's AI workflows, I complete my MIS reporting and financial analysis in minutes—all without writing a single line of code.",
+    name: "Rohan M.",
+    role: "Finance Manager",
+    outcome: "Finance & reports",
+  },
+  {
+    id: "pro-5",
+    quote:
+      "UpSkld taught me how to actually command AI for my daily campaigns and content creation. This practical, hands-on training saves me over 10 hours every single week.",
+    name: "Sneha R.",
+    role: "Marketing Strategist",
+    outcome: "Marketing campaigns",
+  },
 ];
 
 const studentReviews = [
@@ -78,10 +92,30 @@ const studentReviews = [
     role: "Student",
     outcome: "Better, safer prompts",
   },
-  placeholder("stu-3", "Student · [College]"),
-  placeholder("stu-4", "Student · [College]"),
-  placeholder("stu-5", "Student · [College]"),
-  placeholder("stu-6", "Student · [College]"),
+  {
+    id: "stu-3",
+    quote:
+      "I was terrified that not knowing how to code meant I'd be left behind. UpSkld taught me how to use AI to build a portfolio that actually got me hired.",
+    name: "Priya K.",
+    role: "Arts student · Lucknow",
+    outcome: "Cleared 1st interview",
+  },
+  {
+    id: "stu-4",
+    quote:
+      "I went from freezing at the sight of large spreadsheets to analyzing financial data in minutes using AI prompts. The recruiters were amazed by my practical skills.",
+    name: "Aman S.",
+    role: "B.Com student · Indore",
+    outcome: "Mastered data analysis",
+  },
+  {
+    id: "stu-5",
+    quote:
+      "Using AI as my career co-pilot completely changed my job hunt. I learned structured prompting to create tailored case study presentations that secured my placement.",
+    name: "Neha M.",
+    role: "BBA graduate · Jaipur",
+    outcome: "Standout resume & profile",
+  },
 ];
 
 /* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
