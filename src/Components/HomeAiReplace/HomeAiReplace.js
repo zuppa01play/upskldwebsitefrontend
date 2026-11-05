@@ -45,10 +45,10 @@ const modes = {
     label: "Self-paced",
     description: "Recorded lessons, templates and checklists — learn whenever your business is quiet.",
   },
-  // guided: {
-  //   label: "Guided",
-  //   description: "Live sessions with an Upskld trainer and a small group of business owners.",
-  // },
+  guided: {
+    label: "Guided",
+    description: "Live sessions with an Upskld trainer and a small group of business owners.",
+  },
 };
 
 const smallBusinessCourses = [
@@ -356,7 +356,7 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
             {audience.title}
           </h2>
 
-          <div className="home_course_ho_pg_toggle" role="tablist" aria-label="Learning format">
+          {/* <div className="home_course_ho_pg_toggle" role="tablist" aria-label="Learning format">
             <span
               className="home_course_ho_pg_toggle_pill"
               style={{ transform: `translateX(${modeKeys.indexOf(mode) * 100}%)` }}
@@ -376,7 +376,7 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
                 {modes[key].label}
               </button>
             ))}
-          </div>
+          </div> */}
 
           <p key={mode} className="home_course_ho_pg_desc">
             {modes[mode].description}
