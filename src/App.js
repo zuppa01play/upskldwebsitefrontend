@@ -40,7 +40,7 @@ function App() {
      <HomeHelpingPeople activeIndex={activeIndex} />
       <HomeFaqPage />
       <FooterPage activeIndex={activeIndex} />
-     <PopupVideo />
+     <PopupVideo activeIndex={activeIndex} />
       <EnquirePage activeIndex={activeIndex} />
       <BookForFree activeIndex={activeIndex} />
       <ToastContainer position="top-right" autoClose={4000} />

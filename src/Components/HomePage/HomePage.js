@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./HomePage.css";
-import { openBookingModal, selectBusiness } from "../Openbookingmodal";
+import { openBookingModal, openIntroVideo, selectBusiness } from "../Openbookingmodal";
 
 const content = [
   {
@@ -256,7 +256,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                     type="button"
                     tabIndex={tab}
                     className="impac_home_pg_btn_primary"
-                    onClick={openBookingModal}
+                    onClick={index === 0 ? openIntroVideo : openBookingModal}
                   >
                     <span>{item.primaryBtn}</span>
                     <ArrowIcon />

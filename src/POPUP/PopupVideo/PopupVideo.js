@@ -51,11 +51,10 @@ const SpeakerIcon = ({ muted }) => (
 );
 
 const PopupVideo = (props) => {
-  // props can never crash this popup, even if it is called without any
   const {
     src = DEFAULT_SRC,
-   
     delay = OPEN_DELAY_MS,
+    activeIndex = 0,
   } = props || {};
 
   const [isOpen, setIsOpen] = useState(false); // popup mounted?
@@ -109,8 +108,9 @@ const PopupVideo = (props) => {
 
   const skipToBooking = useCallback(() => finish(true), [finish]);
 
-  /* ---------- 5 seconds after the website opens ---------- */
+  /* ---------- 5 seconds after the website opens — Small Business only ---------- */
   useEffect(() => {
+    if (activeIndex !== 0) return undefined;
     if (wasPopupDismissed()) return undefined;
     const id = setTimeout(() => {
       // user already opened the form by himself / closed it earlier -> do not interrupt
@@ -120,15 +120,15 @@ const PopupVideo = (props) => {
     return () => clearTimeout(id);
   }, [delay, openPopup]);
 
-  /* ---------- header tab (Working Professionals / Students) -> video after 5 seconds ---------- */
   const tabTimerRef = useRef(null);
 
+  /* ---------- VIDEO_EVENT — Small Business only ---------- */
   useEffect(() => {
     const onVideo = () => {
-      // tab click panna udane illa — 5s apram. Adutha tab click vandha timer-ah restart pannum
+      if (activeIndex !== 0) return;
       clearTimeout(tabTimerRef.current);
       tabTimerRef.current = setTimeout(() => {
-        if (isBookingOpen()) return; // form already open -> do not interrupt
+        if (isBookingOpen()) return;
         openPopup();
       }, delay);
     };
@@ -137,7 +137,7 @@ const PopupVideo = (props) => {
       window.removeEventListener(VIDEO_EVENT, onVideo);
       clearTimeout(tabTimerRef.current);
     };
-  }, [delay, openPopup]);
+  }, [delay, openPopup, activeIndex]);
 
   /* ---------- a "Book a free session" button was clicked -> hide the video quietly ---------- */
   useEffect(() => {
