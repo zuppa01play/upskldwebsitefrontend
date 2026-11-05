@@ -471,14 +471,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%; /* keeps faces in frame when cropped */
+  object-position: center top;
   transform: scale(1.12);
   transition: transform 0.2s ease;
   -webkit-user-select: none;
   user-select: none;
   border-radius: 28px;
   -webkit-user-drag: none;
-  padding:10px;
 }
 
 .impac_home_pg_slide_active .impac_home_pg_img {

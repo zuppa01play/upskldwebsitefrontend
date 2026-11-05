@@ -191,22 +191,22 @@ const studentCourses = [
     id: "stu_data",
     tag: "Level 3",
     title: "Data analytics & prompting",
-    duration: "[Duration]",
+    duration: "4–6 weeks · 2–3 hrs/week",
     points: ["Plain-language analysis", "Prompting that avoids wrong information", "Certificate"],
     price: "4999",
     open: false,
     k: -14,
   },
-  {
-    id: "stu_bootcamp",
-    tag: "Level 4",
-    title: "[Bootcamp + placement support]",
-    duration: "[Duration]",
-    points: ["[Module]", "[Module]", "[Placement support]"],
-    price: "4999",
-    open: false,
-    k: -22,
-  },
+  // {
+  //   id: "stu_bootcamp",
+  //   tag: "Level 4",
+  //   title: "[Bootcamp + placement support]",
+  //   duration: "[Duration]",
+  //   points: ["[Module]", "[Module]", "[Placement support]"],
+  //   price: "4999",
+  //   open: false,
+  //   k: -22,
+  // },
 ];
 
 /* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
