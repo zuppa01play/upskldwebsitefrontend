@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./HomePage.css";
-import SmallBusiness from "./HomePageImage/SmallBusiness.png";
-import WorkingProfessionals from "./HomePageImage/WorkingProf.png";
-import Students from "./HomePageImage/Student.png";
 import { openBookingModal, selectBusiness } from "../Openbookingmodal";
 
 const content = [
@@ -30,7 +27,7 @@ const content = [
       { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
       { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
     ],
-    image: SmallBusiness,
+    image: "/assests/images/Small_Business_Owner.png",
     imageAlt: "Small business owner using AI in her shop",
     badgeTop: { value: "+451%", label: "more qualified leads · Annuitas Group" },
     badgeBottom: { value: "300+", label: "learners in free sessions" },
@@ -51,7 +48,7 @@ const content = [
       { value: "27%", label: "of the week Indian sales reps spend actually selling", source: "Salesforce 2023" },
       { value: "200+", label: "working professionals trained", source: "Upskld" },
     ],
-    image: WorkingProfessionals,
+    image: "/assests/images/working_professionals.png",
     imageAlt: "Professionals using AI in a team meeting",
     badgeTop: { value: "32.5%", label: "of the week saved · ActiveCampaign" },
     badgeBottom: { value: "200+", label: "professionals trained" },
@@ -59,8 +56,8 @@ const content = [
   {
     title: "Student",
     tag: "For students",
-    heading: "Turn AI Uncertainty Into Your Career Advantage.Stop worrying about AI replacing you.",
-    description: " Learn structured, task-based prompting so you can walk into your next interview not just saying “I know AI,” but proving exactly how you use it.",
+    heading: "From AI Anxiety to AI Advantage.",
+    description: " You don't need to be an engineer to be AI-ready. We help non-tech students master practical AI skills, changing the question from “Will AI replace me?” to “What can I achieve with AI beside me?”,",
     question: "What are you studying?",
     hint: "Tap an option to explore what fits you",
     options: ["Commerce", "Arts", "Science", "Engineering", "Management", "Other"],
@@ -71,7 +68,7 @@ const content = [
       { value: "24+ Lakh", label: "arts & science graduates", source: "Source" },
       { value: "100+", label: "students trained", source: "Upskld" },
     ],
-    image: Students,
+    image: "/assests/images/students.png",
     imageAlt: "Students learning together on campus",
     badgeTop: { value: "24+ Lakh", label: "arts & science graduates" },
     badgeBottom: { value: "100+", label: "students trained" },
@@ -215,7 +212,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                     className="impac_home_pg_tag_text"
                   >
                     {item.tag}
-                    {selectedOption[index] ? ` · ${selectedOption[index]}` : ""}
+                    {/* {selectedOption[index] ? ` · ${selectedOption[index]}` : ""} */}
                   </span>
                 </span>
 

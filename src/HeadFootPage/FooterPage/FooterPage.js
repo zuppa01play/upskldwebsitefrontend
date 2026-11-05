@@ -285,17 +285,9 @@ const FooterPage = ({ activeIndex = 0 }) => {
           <div className="upskld_footer_pg_bar_actions">
             <button
               type="button"
-              className="upskld_footer_pg_bar_enquire"
-              tabIndex={barVisible ? 0 : -1}
-              onClick={openEnquiryModal}
-            >
-              Enquire
-            </button>
-            <button
-              type="button"
               className="upskld_footer_pg_bar_enroll"
               tabIndex={barVisible ? 0 : -1}
-              onClick={() => scrollToId("courses")}
+              onClick={openEnquiryModal}
             >
               Enroll now
             </button>

@@ -20,7 +20,7 @@ const content = [
     ],
   },
   {
-    title: "Master practical AI to automate your daily office workflows",
+    title: "Master practical AI to automate your daily office workflows.",
     accent: "without learning complex theory or writing code.",
     text:
       "Designed for non-technical professionals, book a quick call to map your personalized AI roadmap.",

@@ -207,8 +207,8 @@ const professionalMetrics = [
     unit: "faster reporting",
     taught: "Role-based AI",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 80 },
-      { label: "[After]", value: "[After]", fill: 25 },
+      { label: "Without AI", value: "80%", fill: 80 },
+      { label: "With AI (time spent)", value: "25%", fill: 25 },
     ],
     text: "Command AI for demand forecasting, inventory reconciliation, and automating daily administrative reporting",
     source: "[Source needed]",
@@ -221,8 +221,8 @@ const professionalMetrics = [
     unit: "faster Finance reporting",
     taught: "Workflow automation",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 75 },
-      { label: "[After]", value: "[After]", fill: 30 },
+      { label: "Without AI", value: "75%", fill: 75 },
+      { label: "With AI (time spent)", value: "30%", fill: 30 },
     ],
     text: "Master AI for MIS reporting, cash-flow tracking, and financial analysis.",
     source: "[Source needed]",
@@ -235,8 +235,8 @@ const professionalMetrics = [
     unit: "of employers expect AI skills",
     taught: "Agentic AI builder",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 40 },
-      { label: "[After]", value: "[After]", fill: 85 },
+      { label: "Without AI", value: "40%", fill: 40 },
+      { label: "With AI (time spent)", value: "85%", fill: 85 },
     ],
     text: "Automate your content generation, campaign structuring, and audience engagement workflows.",
     source: "[Source needed]",
@@ -249,8 +249,8 @@ const professionalMetrics = [
     unit: "less repeated effort",
     taught: "Workflow automation",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 85 },
-      { label: "[After]", value: "[After]", fill: 18 },
+      { label: "Without AI", value: "85%", fill: 85 },
+      { label: "With AI (time spent)", value: "18%", fill: 18 },
     ],
     text: "Build custom AI workflows tailored to your specific daily tasks, internal reporting, and document processing.",
     source: "[Source needed]",
@@ -267,8 +267,8 @@ const studentMetrics = [
     unit: "more confident",
     taught: "AI for job readiness",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 33 },
-      { label: "[After]", value: "[After]", fill: 85 },
+      { label: "Without AI", value: "33%", fill: 33 },
+      { label: "With AI (time spent)", value: "85%", fill: 85 },
     ],
     text: "Master AI to analyze financial data, automate reports, and build a standout resume for corporate roles—no coding required.",
     source: "[Source needed]",
@@ -281,8 +281,8 @@ const studentMetrics = [
     unit: "faster revision",
     taught: "AI basics for students",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 87 },
-      { label: "[After]", value: "[After]", fill: 40 },
+      { label: "Without AI", value: "87%", fill: 87 },
+      { label: "With AI (time spent)", value: "40%", fill: 40 },
     ],
     text: "Turn your creativity into a career advantage. Use AI to accelerate your research, draft compelling content, and ace your interviews.",
     source: "[Source needed]",
@@ -295,8 +295,8 @@ const studentMetrics = [
     unit: "more projects shipped",
     taught: "Data analytics & prompting",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 28 },
-      { label: "[After]", value: "[After]", fill: 80 },
+      { label: "Without AI", value: "28%", fill: 28 },
+      { label: "With AI (time spent)", value: "80%", fill: 80 },
     ],
     text: "Deploy AI as your research co-pilot. Quickly analyze complex data, summarize literature, and present your findings like a professional.",
     source: "[Source needed]",
@@ -309,8 +309,8 @@ const studentMetrics = [
     unit: "salary premium",
     taught: "Bootcamp + placement",
     bars: [
-      { label: "[Before]", value: "[Before]", fill: 55 },
-      { label: "[After]", value: "[After]", fill: 80 },
+      { label: "Without AI", value: "55%", fill: 55 },
+      { label: "With AI (time spent)", value: "80%", fill: 80 },
     ],
     text: "Move beyond textbook theory. Learn to use AI for workflow automation, project reporting, and proving your practical skills to employers.",
     source: "[Source needed]",
@@ -987,7 +987,7 @@ const ImpactExplorer = ({ instant, data }) => {
               </p>
 
               <p className="impac_ai_home_pg_x_source impac_ai_home_pg_x_step" style={{ "--s": 4 }}>
-                Source: {active.source}
+                {/* Source: {active.source} */}
               </p>
 
               <div className="impac_ai_home_pg_x_actions impac_ai_home_pg_x_step" style={{ "--s": 5 }}>

@@ -129,16 +129,15 @@
 }
 
 .impac_home_pg_heading {
-  margin: 20px 0 16px;
+  margin: 10px 0 10px;
   max-width: 640px;
   font-size: clamp(28px, 3.3vw, 35px);
   line-height: 1.15;
   font-weight: 800;
   letter-spacing: -0.015em;
   color: #3b003d;
-  /* text-align: left; */
   text-wrap: balance;
-   text-align: justify;
+  text-align: left;
 }
 
 .impac_home_pg_desc {
@@ -147,10 +146,7 @@
   font-size: 16.5px;
   line-height: 1.75;
   color: #4e3a50;
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-  -webkit-hyphens: auto;
+  text-align: left;
   overflow-wrap: break-word;
 }
 
