@@ -45,10 +45,10 @@ const modes = {
     label: "Self-paced",
     description: "Recorded lessons, templates and checklists — learn whenever your business is quiet.",
   },
-  guided: {
-    label: "Guided",
-    description: "Live sessions with an Upskld trainer and a small group of business owners.",
-  },
+  // guided: {
+  //   label: "Guided",
+  //   description: "Live sessions with an Upskld trainer and a small group of business owners.",
+  // },
 };
 
 const smallBusinessCourses = [
@@ -432,7 +432,7 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
 
                 <div className="home_course_ho_pg_footer">
             <span className="home_course_ho_pg_price">
-  ₹ {course.price} + GST
+  {/* ₹ {course.price} + GST */}
 </span>
                   <button
                     type="button"
