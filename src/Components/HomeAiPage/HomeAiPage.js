@@ -174,86 +174,56 @@ const professionalMetrics = [
   {
     id: "hours",
     name: "Sales",
-    short: "32.5%",
-    value: "32.5%",
-    unit: "of the work week saved",
+    value: "Automate Outreach. Close Faster.",
+    unit: "Shift your time from pipeline management to actual selling.",
     taught: "Role-based AI",
-    bars: [
-      { label: "Without AI", value: "100%", fill: 100 },
-      { label: "With AI (time spent)", value: "67.5%", fill: 67.5 },
-    ],
-    text: "Leverage AI for rapid prospect research, hyper-personalized outreach, and pipeline workflows.",
-    source: "ActiveCampaign × Talker Research 2025",
+    // bars: [],
+    text: "Stop wasting hours on manual prospect research and drafting generic emails. Master AI workflows to generate highly personalized outreach, automate CRM data entry, and synthesize call notes instantly. Reclaim your week and focus purely on revenue-generating conversations.",
   },
   {
     id: "focus",
     name: "HR",
-    short: "27%",
-    value: "27%",
-    unit: "selling time for Indian reps",
+    value: "Streamline Talent & People Ops.",
+    unit: "Turn AI into your ultimate recruiting and policy co-pilot.",
     taught: "Role-based AI",
-    bars: [
-      { label: "Time actually selling", value: "27%", fill: 27 },
-      { label: "Goal with automation", value: "55%", fill: 55 },
-    ],
-    text: "Deploy AI to automate employee onboarding, summarize performance reviews, and track workforce data.",
-    source: "Salesforce State of Sales India 2023",
+    // bars: [],
+    text: "Transform how you manage the employee lifecycle without needing any technical background. Learn to rapidly draft compliance policies, automate ATS candidate screening, and build team productivity dashboards. Become the strategic HR leader who leverages AI to scale corporate culture and efficiency.",
   },
   {
     id: "Operations",
     name: "Operations",
-    short: "25%",
-    value: "25%",
-    unit: "faster reporting",
+    value: "Scale Efficiency. Eliminate Bottlenecks.",
+    unit: "Build self-running workflows for daily operational tasks.",
     taught: "Role-based AI",
-    bars: [
-      { label: "Without AI", value: "80%", fill: 80 },
-      { label: "With AI (time spent)", value: "25%", fill: 25 },
-    ],
-    text: "Command AI for demand forecasting, inventory reconciliation, and automating daily administrative reporting",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Move beyond manual data tracking and endless status update meetings. Deploy practical AI tools to automate routine project reporting, synthesize cross-departmental data, and monitor continuous workflows. Drive massive operational output without increasing your own working hours.",
   },
   {
     id: "Finance",
     name: "Finance",
-    short: "30%",
-    value: "30%",
-    unit: "faster Finance reporting",
+    value: "Accelerate Financial Analysis.",
+    unit: "From manual MIS reporting to instant strategic insights.",
     taught: "Workflow automation",
-    bars: [
-      { label: "Without AI", value: "75%", fill: 75 },
-      { label: "With AI (time spent)", value: "30%", fill: 30 },
-    ],
-    text: "Master AI for MIS reporting, cash-flow tracking, and financial analysis.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Stop spending your entire week buried in complex spreadsheet reconciliation and data extraction. Command AI to instantly track cash-flow trends, automate routine MIS reporting, and perform rapid scenario modeling. Elevate your role from a manual data cruncher to a key financial decision architect.",
   },
   {
     id: "Marketing",
     name: "Marketing",
-    short: "85%",
-    value: "85%",
-    unit: "of employers expect AI skills",
+    value: "Scale Content. Drive Engagement.",
+    unit: "Execute full-scale campaigns at 10x the speed.",
     taught: "Agentic AI builder",
-    bars: [
-      { label: "Without AI", value: "40%", fill: 40 },
-      { label: "With AI (time spent)", value: "85%", fill: 85 },
-    ],
-    text: "Automate your content generation, campaign structuring, and audience engagement workflows.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Break free from creative block and tedious content formatting. Use structured AI prompting to instantly generate campaign briefs, build robust content calendars, and synthesize audience research. Deliver high-performing marketing assets faster while maintaining your brand's unique voice.",
   },
   {
     id: "Others",
-    name: "Other roles",
-    short: "18%",
-    value: "18%",
-    unit: "less repeated effort",
+    name: "Other",
+    value: "Future-Proof Your Corporate Career.",
+    unit: "Turn AI from a buzzword into your daily workplace advantage.",
     taught: "Workflow automation",
-    bars: [
-      { label: "Without AI", value: "85%", fill: 85 },
-      { label: "With AI (time spent)", value: "18%", fill: 18 },
-    ],
-    text: "Build custom AI workflows tailored to your specific daily tasks, internal reporting, and document processing.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "No matter your specific department, manual repetitive tasks are slowing down your career growth. Learn structured, task-based prompting to automate your unique daily workflows, clear your inbox faster, and become the most efficient, AI-fluent professional in your organization.",
   },
 ];
 
@@ -262,86 +232,56 @@ const studentMetrics = [
   {
     id: "Commerce",
     name: "Commerce",
-    short: "85%",
-    value: "85%",
-    unit: "more confident",
+    value: "Stand Out in Finance & Accounting.",
+    unit: "Turn spreadsheets into a strategic advantage without writing code.",
     taught: "AI for job readiness",
-    bars: [
-      { label: "Without AI", value: "33%", fill: 33 },
-      { label: "With AI (time spent)", value: "85%", fill: 85 },
-    ],
-    text: "Master AI to analyze financial data, automate reports, and build a standout resume for corporate roles—no coding required.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Don't let large datasets or complex software intimidate you. Learn how to use AI to instantly analyze market trends, automate routine financial reports, and build a resume that corporate recruiters can't ignore. Move from a standard graduate to an AI-fluent analyst ready for day one.",
   },
   {
     id: "Arts",
     name: "Arts",
-    short: "40%",
-    value: "40%",
-    unit: "faster revision",
+    value: "Supercharge Your Creative Career.",
+    unit: "Use AI as your personal research and content co-pilot.",
     taught: "AI basics for students",
-    bars: [
-      { label: "Without AI", value: "87%", fill: 87 },
-      { label: "With AI (time spent)", value: "40%", fill: 40 },
-    ],
-    text: "Turn your creativity into a career advantage. Use AI to accelerate your research, draft compelling content, and ace your interviews.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Your non-tech background is a strength, not a weakness. We will teach you how to command AI to overcome writer's block, accelerate deep research, and draft compelling portfolios. Walk into your first interview with confidence, proving exactly how you combine creativity with smart AI tools.",
   },
   {
     id: "Science",
     name: "Science",
-    short: "80%",
-    value: "80%",
-    unit: "more projects shipped",
+    value: "Accelerate Your Research & Data Skills.",
+    unit: "Process complex information faster and present it like a pro.",
     taught: "Data analytics & prompting",
-    bars: [
-      { label: "Without AI", value: "28%", fill: 28 },
-      { label: "With AI (time spent)", value: "80%", fill: 80 },
-    ],
-    text: "Deploy AI as your research co-pilot. Quickly analyze complex data, summarize literature, and present your findings like a professional.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Leave the fear of technical data processing behind. Discover how to use AI to quickly summarize heavy literature, extract key insights from raw data, and create stunning presentations. Show employers that you can handle high-level research workflows efficiently and accurately.",
   },
   {
     id: "Engineering",
     name: "Engineering",
-    short: "80%",
-    value: "80%",
-    unit: "salary premium",
+    value: "Bridge the Gap Between Theory and Practice.",
+    unit: "Move beyond exams to actual workplace automation.",
     taught: "Bootcamp + placement",
-    bars: [
-      { label: "Without AI", value: "55%", fill: 55 },
-      { label: "With AI (time spent)", value: "80%", fill: 80 },
-    ],
-    text: "Move beyond textbook theory. Learn to use AI for workflow automation, project reporting, and proving your practical skills to employers.",
-    source: "[Source needed]",
+    // bars: [],
+    text: "Knowing the technical concepts isn't enough to get hired today; you need to show practical application. Learn to deploy AI to automate your project reporting, structure your code, and build impressive case studies. Become the highly efficient, job-ready candidate that top companies are actively seeking.",
   },
   {
     id: "Management",
     name: "Management",
-    short: "24+ Lakh",
-    value: "24+ Lakh",
-    unit: "arts & science graduates",
+    value: "Crack Your Placement Interviews.",
+    unit: "Master AI to analyze markets and build rapid business strategies.",
     taught: "AI basics for students",
-    bars: [
-      { label: "Technical roles only", value: "Few", fill: 22 },
-      { label: "With AI skills", value: "Many", fill: 90 },
-    ],
-    text: "Command AI to synthesize market data, build rapid case study presentations, and crack your placement interviews with confidence.",
-    source: "[Source]",
+    // bars: [],
+    text: "Stop relying on generic case study templates for your job hunt. Learn structured AI prompting to quickly synthesize competitive data, draft operational plans, and prepare for tough interview questions. Prove to recruiters that you can make faster, smarter business decisions with AI by your side.",
   },
   {
     id: "StudentOthers",
     name: "Other",
-    short: "100+",
-    value: "100+",
-    unit: "students trained",
+    value: "Become the Candidate Employers Want.",
+    unit: "Master practical AI skills for any non-tech career path.",
     taught: "AI for job readiness",
-    bars: [
-      { label: "Learning alone", value: "1×", fill: 22 },
-      { label: "Learning together", value: "100+", fill: 88 },
-    ],
-    text: "Learn structured, task-based prompting to build stronger profiles, prepare for interviews, and become the AI-ready candidate employers are hunting for.",
-    source: "Upskld",
+    // bars: [],
+    text: "No matter your degree, AI anxiety shouldn't hold you back from a great job. We teach you step-by-step how to use task-based prompting to build a standout profile, prepare for any interview, and automate daily tasks. Gain the exact confidence needed to prove you are completely ready for the modern workplace.",
   },
 ];
 
@@ -905,7 +845,7 @@ const ImpactExplorer = ({ instant, data }) => {
         <div className="impac_ai_home_pg_x_head">
           <span className="impac_ai_home_pg_x_eyebrow">{data.eyebrow}</span>
           <h2 className="impac_ai_home_pg_x_title">{data.title}</h2>
-          <p className="impac_ai_home_pg_x_subtitle">{data.subtitle}</p>
+          {/* <p className="impac_ai_home_pg_x_subtitle">{data.subtitle}</p> */}
         </div>
 
         {/* ---------- Explorer ---------- */}
@@ -933,7 +873,7 @@ const ImpactExplorer = ({ instant, data }) => {
                 >
                   <span className="impac_ai_home_pg_x_item_icon">{impactIcons[item.id]}</span>
                   <span className="impac_ai_home_pg_x_item_name">{item.name}</span>
-                  <span className="impac_ai_home_pg_x_item_value">{item.short}</span>
+                  <span className="impac_ai_home_pg_x_item_value">{item.value}</span>
                 </button>
               );
             })}
@@ -953,10 +893,11 @@ const ImpactExplorer = ({ instant, data }) => {
               </div>
 
               <div className="impac_ai_home_pg_x_figure impac_ai_home_pg_x_step" style={{ "--s": 1 }}>
-                <ImpactCount value={active.value} />
+                <p className="impac_ai_home_pg_x_heading">{active.value}</p>
                 <p className="impac_ai_home_pg_x_unit">{active.unit}</p>
               </div>
 
+              {active.bars && active.bars.length > 0 && (
               <div className="impac_ai_home_pg_x_bars impac_ai_home_pg_x_step" style={{ "--s": 2 }}>
                 {active.bars.map((bar, i) => (
                   <div key={bar.label} className="impac_ai_home_pg_x_bar_row">
@@ -981,6 +922,7 @@ const ImpactExplorer = ({ instant, data }) => {
                   </div>
                 ))}
               </div>
+              )}
 
               <p className="impac_ai_home_pg_x_text impac_ai_home_pg_x_step" style={{ "--s": 3 }}>
                 {active.text}
@@ -1003,10 +945,10 @@ const ImpactExplorer = ({ instant, data }) => {
           </div>
         </div>
 
-        <p className="impac_ai_home_pg_x_note">
+        {/* <p className="impac_ai_home_pg_x_note">
           Figures come from global studies and show typical results. Your results will depend on your
           business.
-        </p>
+        </p> */}
       </div>
     </section>
   );

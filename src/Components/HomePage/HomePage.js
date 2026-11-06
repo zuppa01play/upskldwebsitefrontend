@@ -64,9 +64,9 @@ const content = [
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
     stats: [
-      { value: "4+ Crore", label: "students in higher education", source: "Source" },
-      { value: "24+ Lakh", label: "arts & science graduates", source: "Source" },
-      { value: "100+", label: "students trained", source: "Upskld" },
+      { value: "4.5+ Crore", label: "students in higher education", source: "AISHE Report" },
+      { value: "24+ Lakh", label: "arts & science graduates", source: "AISHE Report" },
+      { value: "100+", label: "students trained", source: "UPSKLD" },
     ],
     image: "/assests/images/students.png",
     imageAlt: "Students learning together on campus",
