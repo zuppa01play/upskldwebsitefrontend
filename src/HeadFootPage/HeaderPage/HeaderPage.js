@@ -8,6 +8,7 @@ const navLinks = [
     label: "Small Business",
     announce: "This month: AI for small businesses · Book a free session →",
   },
+
   {
     label: "Working Professionals",
     announce:
