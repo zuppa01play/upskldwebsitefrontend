@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./HeaderPage.css";
 import HeaderLogo from "./headerLogo.png";
 import { openBookingModal, openIntroVideo } from "../../Components/Openbookingmodal";
@@ -6,24 +7,42 @@ import { openBookingModal, openIntroVideo } from "../../Components/Openbookingmo
 const navLinks = [
   {
     label: "Small Business",
+    path: "/",
     announce: "This month: AI for small businesses · Book a free session →",
   },
 
   {
     label: "Working Professionals",
+    path: "/",
     announce:
       "For working professionals · Free 15-minute AI roadmap session · Book now →",
   },
   {
     label: "Students",
+    path: "/",
     announce:
       "For students · Free 15-minute career counselling session · Book now →",
   },
+  {
+    label: "About Us",
+    path: "/aboutus",
+    announce:
+      "Learn more about our mission and values · Book a free session →",
+  },
 ];
+
+const ABOUT_INDEX = navLinks.findIndex((l) => l.path === "/aboutus");
 
 const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const isAboutPage = pathname === "/aboutus";
+  // About page-la irundha About Us highlight, illana state-la irukkura tab
+  const currentIndex = isAboutPage ? ABOUT_INDEX : activeIndex;
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
@@ -76,29 +95,37 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const header = document.querySelector(".upskld_heade_pg_header");
-    const offset = header ? header.offsetHeight : 80;
-    const top =
-      el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
   const handleTabClick = (index) => {
+    const link = navLinks[index];
+    closeMenu();
+
+    // About Us -> separate route, video popup illa
+    if (link.path === "/aboutus") {
+      navigate("/aboutus");
+      return;
+    }
+
+    // audience tabs (Small Business / Working Professionals / Students)
     onTabChange(index);
-    if (window.pageYOffset > 80) {
+
+    if (pathname !== "/") {
+      // About page-la irundhu vandha first home-ku po
+      navigate("/");
+    } else if (window.pageYOffset > 80) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    closeMenu();
-    // every tab (Small Business / Working Professionals / Students) -> intro video popup after 5 s
+
+    // intro video popup after 5 s
     openIntroVideo();
   };
 
   const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     closeMenu();
+    if (pathname !== "/") {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -111,8 +138,8 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
         className="upskld_heade_pg_announce"
         onClick={openBookingModal}
       >
-        <span key={activeIndex} className="upskld_heade_pg_announce_text">
-          {navLinks[activeIndex].announce}
+        <span key={currentIndex} className="upskld_heade_pg_announce_text">
+          {navLinks[currentIndex].announce}
         </span>
       </button>
 
@@ -139,11 +166,11 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
                 <button
                   type="button"
                   className={`upskld_heade_pg_nav_link ${
-                    activeIndex === index
+                    currentIndex === index
                       ? "upskld_heade_pg_nav_link_active"
                       : ""
                   }`}
-                  aria-current={activeIndex === index ? "page" : undefined}
+                  aria-current={currentIndex === index ? "page" : undefined}
                   onClick={() => handleTabClick(index)}
                 >
                   {link.label}
@@ -206,7 +233,7 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
                 type="button"
                 tabIndex={isMenuOpen ? 0 : -1}
                 className={`upskld_heade_pg_mobile_nav_link ${
-                  activeIndex === index
+                  currentIndex === index
                     ? "upskld_heade_pg_mobile_nav_link_active"
                     : ""
                 }`}

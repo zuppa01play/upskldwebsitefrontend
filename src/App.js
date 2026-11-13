@@ -3,42 +3,54 @@ import HeaderPage from "./HeadFootPage/HeaderPage/HeaderPage";
 import HomePage from "./Components/HomePage/HomePage";
 import HomeAiPage from "./Components/HomeAiPage/HomeAiPage";
 import HomePhilosophyPage from "./Components/HomePhilosophyPage/HomePhilosophyPage";
-import HomeTrackPage from "./Components/HomeTrackPage/HomeTrackPage";
-import StudendFooter from "./Components/StudentFooter/StudentFooter";
 import HomeReviewPage from "./Components/HomeReviewPage/HomeReviewPage";
 import BookForFree from "./POPUP/BookForFree/BookForFree";
 import EnquirePage from "./POPUP/EnquirePage/EnquirePage";
 import PopupVideo from "./POPUP/PopupVideo/PopupVideo";
 import FooterPage from "./HeadFootPage/FooterPage/FooterPage";
 import HomeAiReplace from "./Components/HomeAiReplace/HomeAiReplace";
-import HomeThreeAudience from "./Components/HomeThreeAudience/HomeThreeAudience";
 import HomeHelpingPeople from "./Components/HomeHelpingPeople/HomeHelpingPeople";
 import HomeFaqPage from "./Components/HomeFaqPage/HomeFaqPage";
+import AboutPage from "./Pages/AboutPage/AboutPage"; // path unga folder structure-ku match pannunga
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
-// import HomeUpSkldjourney from "./Components/Homeupskldjourney/Homeupskldjourney";
+import { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+
+function HomeContent({ activeIndex }) {
+  return (
+    <>
+      <HomePage activeIndex={activeIndex} />
+      <HomePhilosophyPage />
+      <HomeAiPage activeIndex={activeIndex} />
+      <br />
+      <HomeAiReplace activeIndex={activeIndex} />
+      <br />
+      <HomeReviewPage activeIndex={activeIndex} />
+      <HomeHelpingPeople activeIndex={activeIndex} />
+      <HomeFaqPage />
+    </>
+  );
+}
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { pathname } = useLocation();
+
+  // route maarum bodhu page top-ku scroll
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [pathname]);
 
   return (
     <div>
       <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
-      <HomePage activeIndex={activeIndex} />
-      <HomePhilosophyPage />
-     <HomeAiPage activeIndex={activeIndex} />
-      <br />
 
+      <Routes>
+        <Route path="/" element={<HomeContent activeIndex={activeIndex} />} />
+        <Route path="/aboutus" element={<AboutPage />} />
+      </Routes>
 
-      <HomeAiReplace activeIndex={activeIndex} />
-      <br />
-      <HomeTrackPage activeIndex={activeIndex}/>
-      <HomeThreeAudience />
-      <StudendFooter />
-      <HomeReviewPage activeIndex={activeIndex} />
-     <HomeHelpingPeople activeIndex={activeIndex} />
-      <HomeFaqPage />
       <FooterPage activeIndex={activeIndex} />
      <PopupVideo activeIndex={activeIndex} />
       <EnquirePage activeIndex={activeIndex} />
