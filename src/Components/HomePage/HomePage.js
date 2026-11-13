@@ -26,9 +26,9 @@ const content = [
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
     stats: [
-      { value: "+14.5%", label: "sales productivity with marketing automation", source: "Nucleus Research" },
-      { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
-      { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
+      // { value: "+14.5%", label: "sales productivity with marketing automation", source: "Nucleus Research" },
+      // { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
+      // { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
     ],
     image: SmallBusiness,
     imageAlt: "Small business owner using AI in her shop",
