@@ -17,7 +17,7 @@ import "./EnquirePage.css";
   Usage in App.js:  <EnquirePage activeIndex={activeIndex} />
 */
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4002/api";
+const API_URL = process.env.REACT_APP_API_URL || "/api";
 // "https://upskldai.com/api"
 const REQUEST_TIMEOUT = 15000; // 15s
 const CLOSE_MS = 260; // CSS exit animation duration-oda match aaganum

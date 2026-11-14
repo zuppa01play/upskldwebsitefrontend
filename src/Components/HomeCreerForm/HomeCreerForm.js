@@ -7,7 +7,7 @@ import { BOOKING_EVENT } from "../Openbookingmodal";
 import "./HomeCreerForm.css";
 
 // .env la REACT_APP_API_URL=http://localhost:4002 nu kudutha local backend ku pogum
-const API_URL = process.env.REACT_APP_API_URL || "https://upskldai.com/api";
+const API_URL = process.env.REACT_APP_API_URL || "/api";
 const REQUEST_TIMEOUT = 15000; // 15s
 const AUTO_OPEN_MS = 15000; // site open aanadhum 15s apram auto popup
 const DISMISS_KEY = "upskld_booking_popup_dismissed";

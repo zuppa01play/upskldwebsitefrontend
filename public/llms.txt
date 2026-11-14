@@ -1,0 +1,14 @@
+# Upskld AI
+
+> Upskld AI is an AI education and upskilling platform offering drone and AI courses with video lessons and MCQ assessments, and free career counselling. It serves students, working professionals, enterprises, universities and small businesses. Upskld is a brand of Impactree Data Technologies.
+
+## Who it is for
+- Students: AI and drone courses and career guidance
+- Small businesses: practical AI adoption training
+- Enterprises and universities: AI upskilling programmes
+
+## Key page
+- [Home](https://upskldai.com/): Overview of Upskld AI, audiences, learning approach and free 15-minute session booking
+
+## Contact
+- Website: https://upskldai.com

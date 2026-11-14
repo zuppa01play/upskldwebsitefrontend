@@ -13,7 +13,8 @@ import {
 import "./BookForFree.css";
 
 
-const API_URL = process.env.REACT_APP_API_URL || "https://upskldai.com/api";
+// Relative "/api" -> live la same origin, localhost:4002 la local backend, npm start la proxy (package.json)
+const API_URL = process.env.REACT_APP_API_URL || "/api";
 const REQUEST_TIMEOUT = 15000; // 15s
 const CLOSE_MS = 260; // CSS exit animation duration-oda match aaganum
 
@@ -26,15 +27,6 @@ const ROLES = [
   "Business leader",
   "Entrepreneur",
 ];
-
-
-
-
-
-
-
-
-
 
 // header tab -> the extra input next to "City"
 //   0 Small Business -> Type of business · 1 Working Professionals -> Your role · 2 Students -> College / course
