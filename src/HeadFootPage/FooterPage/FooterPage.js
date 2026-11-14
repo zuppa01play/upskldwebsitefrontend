@@ -82,8 +82,6 @@ const legalLinks = [
   { label: "Terms", href: "#" },
 ];
 
-const SOURCES =
-  "Sources: Nucleus Research; Salesforce State of Sales India 2023; Annuitas Group; ActiveCampaign × Talker Research 2025; Buffer 2025; Omnisend 2025; Harvard Business Review. Figures show typical results and vary by business.";
 
 /* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
 const PROGRAMS = [
@@ -240,12 +238,7 @@ const FooterPage = ({ activeIndex = 0 }) => {
 
           {/* ---------- Bottom row ---------- */}
           <div className="upskld_footer_pg_bottom">
-            <p
-              className="upskld_footer_pg_sources upskld_footer_pg_reveal"
-              style={{ "--d": "420ms" }}
-            >
-              {SOURCES}
-            </p>
+    
 
             <ul
               className="upskld_footer_pg_legal upskld_footer_pg_reveal"

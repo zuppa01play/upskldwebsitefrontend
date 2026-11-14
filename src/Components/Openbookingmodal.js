@@ -22,8 +22,10 @@ export const openEnquiryModal = () => {
 export const VIDEO_EVENT = "upskld:open-video";
 
 // header "Working Professionals" / "Students" tab  ->  openIntroVideo()
-export const openIntroVideo = () => {
-  window.dispatchEvent(new CustomEvent(VIDEO_EVENT));
+export const openIntroVideo = (immediate = false) => {
+  window.dispatchEvent(
+    new CustomEvent(VIDEO_EVENT, { detail: { immediate: immediate === true } })
+  );
 };
 
 /* ---------- Hero chip -> HomeAiPage tab ---------- */

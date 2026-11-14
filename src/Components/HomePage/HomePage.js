@@ -256,7 +256,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                     type="button"
                     tabIndex={tab}
                     className="impac_home_pg_btn_primary"
-                    onClick={index === 0 ? openIntroVideo : openBookingModal}
+          onClick={openBookingModal}
                   >
                     <span>{item.primaryBtn}</span>
                     <ArrowIcon />

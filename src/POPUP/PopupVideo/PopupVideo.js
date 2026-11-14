@@ -123,21 +123,30 @@ const PopupVideo = (props) => {
   const tabTimerRef = useRef(null);
 
   /* ---------- VIDEO_EVENT — Small Business only ---------- */
-  useEffect(() => {
-    const onVideo = () => {
-      if (activeIndex !== 0) return;
-      clearTimeout(tabTimerRef.current);
-      tabTimerRef.current = setTimeout(() => {
-        if (isBookingOpen()) return;
-        openPopup();
-      }, delay);
-    };
-    window.addEventListener(VIDEO_EVENT, onVideo);
-    return () => {
-      window.removeEventListener(VIDEO_EVENT, onVideo);
-      clearTimeout(tabTimerRef.current);
-    };
-  }, [delay, openPopup, activeIndex]);
+useEffect(() => {
+  const onVideo = (e) => {
+    if (activeIndex !== 0) return;
+    if (isBookingOpen() || closingRef.current) return;
+    clearTimeout(tabTimerRef.current);
+
+    // hero button click -> udane open
+    if (e && e.detail && e.detail.immediate) {
+      openPopup();
+      return;
+    }
+
+    // header tab click -> 5 s apram open
+    tabTimerRef.current = setTimeout(() => {
+      if (isBookingOpen()) return;
+      openPopup();
+    }, delay);
+  };
+  window.addEventListener(VIDEO_EVENT, onVideo);
+  return () => {
+    window.removeEventListener(VIDEO_EVENT, onVideo);
+    clearTimeout(tabTimerRef.current);
+  };
+}, [delay, openPopup, activeIndex]);
 
   /* ---------- a "Book a free session" button was clicked -> hide the video quietly ---------- */
   useEffect(() => {

@@ -29,6 +29,13 @@ const navLinks = [
     announce:
       "Learn more about our mission and values · Book a free session →",
   },
+
+  //   {
+  //   label: "Blog",
+  //   path: "/blog",
+  //   announce:
+  //     "Learn more about our mission and values · Book a free session →",
+  // },
 ];
 
 const ABOUT_INDEX = navLinks.findIndex((l) => l.path === "/aboutus");

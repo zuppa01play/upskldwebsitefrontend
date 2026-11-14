@@ -129,15 +129,15 @@
 }
 
 .impac_home_pg_heading {
-  margin: 10px 0 10px;
+  margin: 20px 0 16px;
   max-width: 640px;
-  font-size: clamp(28px, 3.3vw, 35px);
+  font-size: clamp(28px, 3.3vw, 44px);
   line-height: 1.15;
   font-weight: 800;
   letter-spacing: -0.015em;
   color: #3b003d;
-  text-wrap: balance;
   text-align: left;
+  text-wrap: balance;
 }
 
 .impac_home_pg_desc {
@@ -146,7 +146,10 @@
   font-size: 16.5px;
   line-height: 1.75;
   color: #4e3a50;
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
   overflow-wrap: break-word;
 }
 
@@ -438,16 +441,40 @@
   padding: 0 16px 30px 0;
 }
 
+/* gold frame sitting behind the card, offset down-right */
+.impac_home_pg_visual::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 0;
+  bottom: 14px;
+  left: 16px;
+  border: 2px solid #e0a83d;
+  border-radius: 30px;
+  opacity: 0;
+  transform: translate(14px, -14px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.impac_home_pg_slide_active .impac_home_pg_visual::before {
+  opacity: 0.7;
+  transform: translate(0, 0);
+  transition: opacity 0.8s ease 0.5s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
+}
 
 .impac_home_pg_video_card {
   position: relative;
   width: 100%;
+  /* FIXED ratio: size never jumps while the image loads.
+     Image uses object-fit: cover so it always fills the whole card. */
   aspect-ratio: 5 / 4;
+  border-radius: 28px;
   overflow: hidden;
-  background: #f1dffa; 
- clip-path: inset(0 0 100% 0 round 28px);
+  background: #f1dffa; /* soft lilac placeholder while the image loads */
+  box-shadow: 0 30px 60px rgba(59, 0, 61, 0.24), 0 0 0 1px rgba(224, 168, 61, 0.35);
+  clip-path: inset(0 0 100% 0 round 28px);
   transition: clip-path 0.2s ease;
-  transform: translateZ(0); 
+  transform: translateZ(0); /* keeps rounded clipping in Safari */
 }
 
 .impac_home_pg_slide_active .impac_home_pg_video_card {
@@ -471,12 +498,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 30%; /* keeps faces in frame when cropped */
+  background: #f1dffa;
   transform: scale(1.12);
   transition: transform 0.2s ease;
   -webkit-user-select: none;
   user-select: none;
-  border-radius: 28px;
   -webkit-user-drag: none;
 }
 
