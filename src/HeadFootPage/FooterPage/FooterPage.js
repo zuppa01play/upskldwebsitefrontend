@@ -72,7 +72,7 @@ const socialLinks = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/company/upskldai/?viewAsMember=true",
+    href: "https://www.linkedin.com/company/upskldai/home",
     Icon: LinkedinIcon,
   },
 ];
