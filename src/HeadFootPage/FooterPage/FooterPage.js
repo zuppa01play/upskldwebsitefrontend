@@ -78,8 +78,8 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy", href: "#" },
-  { label: "Terms", href: "#" },
+  { label: "Privacy", href: "/privacypolicy" },
+  { label: "Terms", href: "/termsandconditions" },
 ];
 
 

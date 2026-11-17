@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useLocation } from "react-router-dom";
 import {
   BOOKING_EVENT,
   VIDEO_EVENT,
@@ -18,6 +19,7 @@ import "./PopupVideo.css";
 const DEFAULT_SRC =popupvideo;
 const OPEN_DELAY_MS = 5000; // website open aanadhum 5s apram
 const CLOSE_MS = 260; // CSS exit animation-oda match aaganum
+const HIDDEN_PATHS = ["/privacypolicy", "/termsandconditions"]; // inga video popup varaadhu
 
 const formatTime = (seconds) => {
   const total = Math.max(0, Math.floor(seconds || 0));
@@ -56,6 +58,11 @@ const PopupVideo = (props) => {
     delay = OPEN_DELAY_MS,
     activeIndex = 0,
   } = props || {};
+
+  const { pathname } = useLocation();
+  const isBlockedPage = HIDDEN_PATHS.includes(
+    pathname.toLowerCase().replace(/\/+$/, "")
+  );
 
   const [isOpen, setIsOpen] = useState(false); // popup mounted?
   const [isClosing, setIsClosing] = useState(false); // exit animation running?
@@ -110,7 +117,7 @@ const PopupVideo = (props) => {
 
   /* ---------- 5 seconds after the website opens — Small Business only ---------- */
   useEffect(() => {
-    if (activeIndex !== 0) return undefined;
+    if (activeIndex !== 0 || isBlockedPage) return undefined;
     if (wasPopupDismissed()) return undefined;
     const id = setTimeout(() => {
       // user already opened the form by himself / closed it earlier -> do not interrupt
@@ -118,14 +125,14 @@ const PopupVideo = (props) => {
       openPopup();
     }, delay);
     return () => clearTimeout(id);
-  }, [delay, openPopup]);
+  }, [delay, openPopup, activeIndex, isBlockedPage]);
 
   const tabTimerRef = useRef(null);
 
   /* ---------- VIDEO_EVENT — Small Business only ---------- */
 useEffect(() => {
   const onVideo = (e) => {
-    if (activeIndex !== 0) return;
+    if (activeIndex !== 0 || isBlockedPage) return;
     if (isBookingOpen() || closingRef.current) return;
     clearTimeout(tabTimerRef.current);
 
@@ -146,7 +153,16 @@ useEffect(() => {
     window.removeEventListener(VIDEO_EVENT, onVideo);
     clearTimeout(tabTimerRef.current);
   };
-}, [delay, openPopup, activeIndex]);
+}, [delay, openPopup, activeIndex, isBlockedPage]);
+
+  /* ---------- Privacy / Terms page-ku vandha udane popup-a close pannidu ---------- */
+  useEffect(() => {
+    if (!isBlockedPage) return;
+    clearTimeout(tabTimerRef.current);
+    if (videoRef.current) videoRef.current.pause();
+    setIsOpen(false);
+    setIsClosing(false);
+  }, [isBlockedPage]);
 
   /* ---------- a "Book a free session" button was clicked -> hide the video quietly ---------- */
   useEffect(() => {
@@ -246,7 +262,7 @@ useEffect(() => {
     if (!next) tryPlay();
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || isBlockedPage) return null;
 
   const modal = (
     <div

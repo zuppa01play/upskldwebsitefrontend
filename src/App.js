@@ -16,6 +16,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import PrivacyPolicy from "./HeadFootPage/PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "./HeadFootPage/TermsAndConditions/TermsAndConditions";
 
 function HomeContent({ activeIndex }) {
   return (
@@ -37,7 +39,10 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { pathname } = useLocation();
 
-  // route maarum bodhu page top-ku scroll
+  const hidePopupVideo = ["/privacypolicy", "/termsandconditions"].includes(
+    pathname.toLowerCase()
+  );
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [pathname]);
@@ -49,10 +54,12 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeContent activeIndex={activeIndex} />} />
         <Route path="/aboutus" element={<AboutPage />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsandconditions" element={<TermsAndConditions />} />
       </Routes>
 
       <FooterPage activeIndex={activeIndex} />
-     <PopupVideo activeIndex={activeIndex} />
+      {!hidePopupVideo && <PopupVideo activeIndex={activeIndex} />}
       <EnquirePage activeIndex={activeIndex} />
       <BookForFree activeIndex={activeIndex} />
       <ToastContainer position="top-right" autoClose={4000} />

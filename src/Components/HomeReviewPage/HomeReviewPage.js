@@ -37,7 +37,7 @@ const professionalReviews = [
     quote:
       "Upskld AI has given me a great opportunity to enhance my software development knowledge through practical and engaging learning. The hands-on approach helped me understand programming concepts better and apply them while working on real-world challenges.",
     name: "Ajith AKVP",
-    role: "Software Developer",
+
     outcome: "Software skills",
   },
   {
@@ -45,7 +45,7 @@ const professionalReviews = [
     quote:
       "Upskld AI has been really helpful in improving my graphic designing and video editing skills. The platform gave me practical knowledge that I can apply directly to my work. It Helped me build more confidence and improve my creative Skills. ",
     name: "Keerthi prasadh K",
-    role: "Graphic Designer",
+
     outcome: "Design & video skills",
   },
   {
@@ -53,7 +53,7 @@ const professionalReviews = [
     quote:
       "Prospect research and hyper-personalized email outreach happen automatically now. My pipeline workflows are faster, and I can focus entirely on closing deals.",
     name: "Amit S.",
-    role: "Sales Director",
+
     outcome: "Sales outreach",
   },
 
@@ -62,7 +62,7 @@ const professionalReviews = [
     quote:
       "I used to spend hours on manual data entry and building reports. Now, with UpSkld's AI workflows, I complete my MIS reporting and financial analysis in minutes—all without writing a single line of code.",
     name: "Rohan M.",
-    role: "Finance Manager",
+
     outcome: "Finance & reports",
   },
   {
@@ -70,7 +70,7 @@ const professionalReviews = [
     quote:
       "UpSkld taught me how to actually command AI for my daily campaigns and content creation. This practical, hands-on training saves me over 10 hours every single week.",
     name: "Sneha R.",
-    role: "Marketing Strategist",
+  
     outcome: "Marketing campaigns",
   },
 ];
@@ -81,7 +81,7 @@ const studentReviews = [
     quote:
       "The way of teaching about the Ai and the how they were used the ai in the mangement and the era of mangement was good",
     name: "Prasanth Kumar",
-    role: "Student",
+   
     outcome: "AI in management",
   },
   {
@@ -89,7 +89,7 @@ const studentReviews = [
     quote:
       "I understood AI and how to use it — and how to write the correct prompt to avoid wrong information.",
     name: "Vignesh",
-    role: "Student",
+
     outcome: "Better, safer prompts",
   },
   {
@@ -105,7 +105,7 @@ const studentReviews = [
     quote:
       "I went from freezing at the sight of large spreadsheets to analyzing financial data in minutes using AI prompts. The recruiters were amazed by my practical skills.",
     name: "Aman S.",
-    role: "B.Com student · Indore",
+   
     outcome: "Mastered data analysis",
   },
   {
@@ -113,7 +113,7 @@ const studentReviews = [
     quote:
       "Using AI as my career co-pilot completely changed my job hunt. I learned structured prompting to create tailored case study presentations that secured my placement.",
     name: "Neha M.",
-    role: "BBA graduate · Jaipur",
+   
     outcome: "Standout resume & profile",
   },
 ];
@@ -367,7 +367,7 @@ const HomeReviewPage = ({ activeIndex = 0 }) => {
                     </span>
                     <div className="home_review_pg_who">
                       <p className="home_review_pg_name">{review.name}</p>
-                      {review.role && <p className="home_review_pg_role">{review.role}</p>}
+                     
                     </div>
                     <span className="home_review_pg_count">
                       {pad(i + 1)} / {pad(total)}

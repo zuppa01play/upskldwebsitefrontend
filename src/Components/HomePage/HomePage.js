@@ -27,7 +27,7 @@ const content = [
       // { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
       // { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
     ],
-    image: "/assests/images/Small_Business_Owner.png",
+    image: "https://media.assettype.com/outlookbusiness/2026-10-26/b1hnmhbx/olbadvertorial520261026.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
     imageAlt: "Small business owner using AI in her shop",
     badgeTop: { value: "+451%", label: "more qualified leads · Annuitas Group" },
     badgeBottom: { value: "300+", label: "learners in free sessions" },
