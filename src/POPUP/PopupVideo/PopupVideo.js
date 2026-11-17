@@ -12,14 +12,13 @@ import {
   isBookingOpen,
 } from "../../Components/Openbookingmodal";
 import "./PopupVideo.css";
- import popupvideo from "./popupvideo.mp4"
+import popupvideo from "./popupvideo-720p.mp4"; // compressed 720p (target < 4 MB)
+import popupPoster from "./popup-poster.png"; // first-frame poster
 
-
-
-const DEFAULT_SRC =popupvideo;
+const DEFAULT_SRC = popupvideo;
 const OPEN_DELAY_MS = 5000; // website open aanadhum 5s apram
 const CLOSE_MS = 260; // CSS exit animation-oda match aaganum
-const HIDDEN_PATHS = ["/privacypolicy", "/termsandconditions"]; // inga video popup varaadhu
+const HIDDEN_PATHS = ["/privacypolicy", "/termsandconditions"]; 
 
 const formatTime = (seconds) => {
   const total = Math.max(0, Math.floor(seconds || 0));
@@ -55,6 +54,7 @@ const SpeakerIcon = ({ muted }) => (
 const PopupVideo = (props) => {
   const {
     src = DEFAULT_SRC,
+    poster = popupPoster,
     delay = OPEN_DELAY_MS,
     activeIndex = 0,
   } = props || {};
@@ -98,6 +98,7 @@ const PopupVideo = (props) => {
   const finish = useCallback((goToForm) => {
     if (closingRef.current) return;
     closingRef.current = true;
+    markPopupDismissed(); // Close / Skip / video end - ethu aanalum once per visitor
     const video = videoRef.current;
     if (video) video.pause();
     setIsClosing(true);
@@ -108,10 +109,7 @@ const PopupVideo = (props) => {
     }, CLOSE_MS);
   }, []);
 
-  const closeAll = useCallback(() => {
-    markPopupDismissed(); // Close pannina thirumba auto popup varaadhu
-    finish(false);
-  }, [finish]);
+  const closeAll = useCallback(() => finish(false), [finish]);
 
   const skipToBooking = useCallback(() => finish(true), [finish]);
 
@@ -130,30 +128,30 @@ const PopupVideo = (props) => {
   const tabTimerRef = useRef(null);
 
   /* ---------- VIDEO_EVENT — Small Business only ---------- */
-useEffect(() => {
-  const onVideo = (e) => {
-    if (activeIndex !== 0 || isBlockedPage) return;
-    if (isBookingOpen() || closingRef.current) return;
-    clearTimeout(tabTimerRef.current);
+  useEffect(() => {
+    const onVideo = (e) => {
+      if (activeIndex !== 0 || isBlockedPage) return;
+      if (isBookingOpen() || closingRef.current) return;
+      clearTimeout(tabTimerRef.current);
 
-    // hero button click -> udane open
-    if (e && e.detail && e.detail.immediate) {
-      openPopup();
-      return;
-    }
+      // hero button click -> udane open
+      if (e && e.detail && e.detail.immediate) {
+        openPopup();
+        return;
+      }
 
-    // header tab click -> 5 s apram open
-    tabTimerRef.current = setTimeout(() => {
-      if (isBookingOpen()) return;
-      openPopup();
-    }, delay);
-  };
-  window.addEventListener(VIDEO_EVENT, onVideo);
-  return () => {
-    window.removeEventListener(VIDEO_EVENT, onVideo);
-    clearTimeout(tabTimerRef.current);
-  };
-}, [delay, openPopup, activeIndex, isBlockedPage]);
+      // header tab click -> 5 s apram open
+      tabTimerRef.current = setTimeout(() => {
+        if (isBookingOpen()) return;
+        openPopup();
+      }, delay);
+    };
+    window.addEventListener(VIDEO_EVENT, onVideo);
+    return () => {
+      window.removeEventListener(VIDEO_EVENT, onVideo);
+      clearTimeout(tabTimerRef.current);
+    };
+  }, [delay, openPopup, activeIndex, isBlockedPage]);
 
   /* ---------- Privacy / Terms page-ku vandha udane popup-a close pannidu ---------- */
   useEffect(() => {
@@ -284,10 +282,11 @@ useEffect(() => {
             ref={setVideoRef}
             className="popup_video_pg_video"
             src={src}
+            poster={poster}
             autoPlay
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             controls={false}
             disablePictureInPicture
             onLoadedMetadata={handleMeta}
@@ -320,8 +319,6 @@ useEffect(() => {
 
         {/* ---------- Footer ---------- */}
         <div className="popup_video_pg_footer">
-       
-
           <div className="popup_video_pg_actions">
             <button
               ref={skipRef}

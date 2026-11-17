@@ -1,20 +1,22 @@
 import React from "react";
 import "./PrivacyPolicy.css";
 
-const CONTACT_EMAIL = "privacy@upskld.com"; // TODO: replace with your real grievance/contact email
+const CONTACT_EMAIL = "privacy@upskld.com"; 
 const LAST_UPDATED = "17 November 2026";
 
 const sections = [
   {
     id: "collect",
     title: "What we collect",
-    body: (
-      <ul>
-        <li>Your name, email and phone number when you fill our forms.</li>
-        <li>Your login details when you create an account.</li>
-        <li>Basic usage info like browser and pages visited.</li>
-      </ul>
-    ),
+ body: (
+  <ul>
+    <li>Your name, email, phone number and city when you fill our forms.</li>
+    <li>Your consent to contact you by call or WhatsApp, when you give it.</li>
+    <li>Your login details when you create an account.</li>
+    <li>Your learning activity, such as video progress and quiz results.</li>
+    <li>Basic usage info like browser and pages visited.</li>
+  </ul>
+),
   },
   {
     id: "use",

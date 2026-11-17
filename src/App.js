@@ -12,12 +12,15 @@ import HomeAiReplace from "./Components/HomeAiReplace/HomeAiReplace";
 import HomeHelpingPeople from "./Components/HomeHelpingPeople/HomeHelpingPeople";
 import HomeFaqPage from "./Components/HomeFaqPage/HomeFaqPage";
 import AboutPage from "./Pages/AboutPage/AboutPage"; // path unga folder structure-ku match pannunga
+import ScrollToTop from "./ScrollToTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PrivacyPolicy from "./HeadFootPage/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./HeadFootPage/TermsAndConditions/TermsAndConditions";
+
+import PageNotFound from "./Components/PageNotFound/PageNotFound";
 
 function HomeContent({ activeIndex }) {
   return (
@@ -43,12 +46,9 @@ function App() {
     pathname.toLowerCase()
   );
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [pathname]);
-
   return (
     <div>
+      <ScrollToTop />
       <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
 
       <Routes>
@@ -56,6 +56,7 @@ function App() {
         <Route path="/aboutus" element={<AboutPage />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandconditions" element={<TermsAndConditions />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
       <FooterPage activeIndex={activeIndex} />
@@ -63,6 +64,7 @@ function App() {
       <EnquirePage activeIndex={activeIndex} />
       <BookForFree activeIndex={activeIndex} />
       <ToastContainer position="top-right" autoClose={4000} />
+
     </div>
   );
 }
