@@ -1,0 +1,65 @@
+/* Image slider inside .impac_home_pg_video_card (same spot as the old single image) */
+
+.impac_home_pg_slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* every image fades; the first one stays in normal flow so the card keeps its size */
+.impac_home_pg_slider_img {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.impac_home_pg_slider_img_active {
+  opacity: 1;
+}
+
+/* images 2..n are stacked exactly on top of the first one */
+.impac_home_pg_slider_img_abs {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.impac_home_pg_slider_dots {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  padding: 6px 10px;
+  background: rgba(20, 20, 20, 0.35);
+  border-radius: 100px;
+  z-index: 3;
+}
+
+.impac_home_pg_slider_dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.impac_home_pg_slider_dot_active {
+  width: 20px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .impac_home_pg_slider_img,
+  .impac_home_pg_slider_dot {
+    transition: none;
+  }
+}

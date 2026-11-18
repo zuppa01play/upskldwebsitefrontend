@@ -1,6 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
+import "./HomePageSlider.css";
 import { openBookingModal, openIntroVideo, selectBusiness } from "../Openbookingmodal";
+import smallbusinessImgOne from "./Smallbusiness_1.jpg";
+import smallbusinessImgTwo from "./Smallbusiness_2.jpeg";
+import smallbusinessImgThree from "./Smallbusiness_3.jpeg";
+import smallbusinessImgFour from "./Smallbusiness_4.jpeg";
+import smallbusinessImgFive from "./SmallBusiness_5.jpg";
+import WorkingProfessionalsImgOne from "./WP_1.jpeg";
+import WorkingProfessionalsImgTwo from "./WP_2.jpeg";
+import WorkingProfessionalsImgThree from "./WP_3.jpeg";
+import WorkingProfessionalsImgFour from "./WP_4.jpeg";
+import StudentsImgOne from "./S_1.jpeg";
+
+// images change automatically every 3 seconds
+const SLIDE_INTERVAL = 3000;
 
 const content = [
   {
@@ -27,7 +41,13 @@ const content = [
       // { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
       // { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
     ],
-    image: "https://media.assettype.com/outlookbusiness/2026-10-26/b1hnmhbx/olbadvertorial520261026.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+    images: [
+      smallbusinessImgOne,
+      smallbusinessImgTwo,
+      smallbusinessImgThree,
+      smallbusinessImgFour,
+      smallbusinessImgFive,
+    ],
     imageAlt: "Small business owner using AI in her shop",
     badgeTop: { value: "+451%", label: "more qualified leads · Annuitas Group" },
     badgeBottom: { value: "300+", label: "learners in free sessions" },
@@ -48,7 +68,12 @@ const content = [
       // { value: "27%", label: "of the week Indian sales reps spend actually selling", source: "Salesforce 2023" },
       // { value: "200+", label: "working professionals trained", source: "Upskld" },
     ],
-    image: "/assests/images/working_professionals.png",
+    images: [
+      WorkingProfessionalsImgOne,
+      WorkingProfessionalsImgTwo,
+      WorkingProfessionalsImgThree,
+      WorkingProfessionalsImgFour,
+    ],
     imageAlt: "Professionals using AI in a team meeting",
     badgeTop: { value: "32.5%", label: "of the week saved · ActiveCampaign" },
     badgeBottom: { value: "200+", label: "professionals trained" },
@@ -68,7 +93,8 @@ const content = [
       // { value: "24+ Lakh", label: "arts & science graduates", source: "AISHE Report" },
       // { value: "100+", label: "students trained", source: "UPSKLD" },
     ],
-    image: "/assests/images/students.png",
+    // add more student images here and they will slide automatically too
+    images: [StudentsImgOne],
     imageAlt: "Students learning together on campus",
     badgeTop: { value: "24+ Lakh", label: "arts & science graduates" },
     badgeBottom: { value: "100+", label: "students trained" },
@@ -160,6 +186,65 @@ const UsersIcon = () => (
     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
   </svg>
 );
+
+/* Auto image slider - sits exactly where the old single <img> was.
+   Runs only while its slide is the active one, and restarts from image 1 when you come back. */
+const ImageSlider = ({ images, alt, active, eager }) => {
+  const [current, setCurrent] = useState(0);
+  const count = images.length;
+
+  useEffect(() => {
+    if (!active) {
+      setCurrent(0);
+      return undefined;
+    }
+    if (count < 2) return undefined;
+
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % count);
+    }, SLIDE_INTERVAL);
+
+    return () => clearInterval(timer);
+    // `current` is in the deps so clicking a dot restarts the 3 second timer
+  }, [active, count, current]);
+
+  return (
+    <div className="impac_home_pg_slider">
+      {images.map((src, i) => (
+        <img
+          key={src}
+          className={`impac_home_pg_img impac_home_pg_slider_img ${
+            i === 0 ? "" : "impac_home_pg_slider_img_abs"
+          } ${i === current ? "impac_home_pg_slider_img_active" : ""}`}
+          src={src}
+          alt={i === current ? alt : ""}
+          aria-hidden={i !== current}
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager && i === 0 ? "high" : "auto"}
+          decoding="async"
+          draggable="false"
+        />
+      ))}
+
+      {count > 1 && (
+        <div className="impac_home_pg_slider_dots">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              tabIndex={active ? 0 : -1}
+              aria-label={`Show image ${i + 1}`}
+              className={`impac_home_pg_slider_dot ${
+                i === current ? "impac_home_pg_slider_dot_active" : ""
+              }`}
+              onClick={() => setCurrent(i)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const HomePage = ({ activeIndex = 0 }) => {
   // selected chip per slide  { 0: "Retail shop", 1: "Sales" }
@@ -256,7 +341,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                     type="button"
                     tabIndex={tab}
                     className="impac_home_pg_btn_primary"
-          onClick={openBookingModal}
+                    onClick={openBookingModal}
                   >
                     <span>{item.primaryBtn}</span>
                     <ArrowIcon />
@@ -286,17 +371,14 @@ const HomePage = ({ activeIndex = 0 }) => {
                 </div>
               </div>
 
-              {/* ---------- Right image ---------- */}
+              {/* ---------- Right image slider (same place as before) ---------- */}
               <div className="impac_home_pg_visual">
                 <div className="impac_home_pg_video_card">
-                  <img
-                    className="impac_home_pg_img"
-                    src={item.image}
+                  <ImageSlider
+                    images={item.images}
                     alt={item.imageAlt}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                    decoding="async"
-                    draggable="false"
+                    active={isActive}
+                    eager={index === 0}
                   />
                 </div>
 

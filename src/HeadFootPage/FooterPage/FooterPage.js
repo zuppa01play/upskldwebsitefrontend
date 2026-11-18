@@ -77,9 +77,9 @@ const CapIcon = () => (
 /* ---------- Content ---------- */
 
 /* TODO: fill these 3 before deploying */
-const CONTACT_EMAIL = "hello@upskldai.com"; // replace with real email
-const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // country code + number, no + or spaces
-const ADDRESS = ""; // registered address of Impactree Data Technologies (optional)
+const CONTACT_EMAIL = "upskldai.com"; 
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const ADDRESS = "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu 600032"; 
 
 const navLinks = [
   { label: "Small Business", id: "home" },
