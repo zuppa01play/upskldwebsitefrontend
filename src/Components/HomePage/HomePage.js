@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import "./HomePageSlider.css";
+import "./HomePageSliderFade.css";
 import { openBookingModal, openIntroVideo, selectBusiness } from "../Openbookingmodal";
 import smallbusinessImgOne from "./Smallbusiness_1.jpg";
 import smallbusinessImgTwo from "./Smallbusiness_2.jpeg";
@@ -12,6 +13,18 @@ import WorkingProfessionalsImgTwo from "./WP_2.jpeg";
 import WorkingProfessionalsImgThree from "./WP_3.jpeg";
 import WorkingProfessionalsImgFour from "./WP_4.jpeg";
 import StudentsImgOne from "./S_1.jpeg";
+import StudentsImgTwo from "./S_2.jpg";
+import StudentsImgThree from "./S_3.jpg";
+import StudentsImgFour from "./S_4.jpg";
+import StudentsImgFive from "./S_5.jpg";
+import StudentsImgSix from "./S_6.png";
+
+
+
+
+
+
+
 
 // images change automatically every 3 seconds
 const SLIDE_INTERVAL = 3000;
@@ -94,7 +107,7 @@ const content = [
       // { value: "100+", label: "students trained", source: "UPSKLD" },
     ],
     // add more student images here and they will slide automatically too
-    images: [StudentsImgOne],
+    images: [StudentsImgOne, StudentsImgTwo, StudentsImgThree, StudentsImgFour, StudentsImgFive, StudentsImgSix],
     imageAlt: "Students learning together on campus",
     badgeTop: { value: "24+ Lakh", label: "arts & science graduates" },
     badgeBottom: { value: "100+", label: "students trained" },
@@ -191,40 +204,55 @@ const UsersIcon = () => (
    Runs only while its slide is the active one, and restarts from image 1 when you come back. */
 const ImageSlider = ({ images, alt, active, eager }) => {
   const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState(null); // image that is sliding out
   const count = images.length;
 
   useEffect(() => {
     if (!active) {
       setCurrent(0);
+      setPrev(null);
       return undefined;
     }
     if (count < 2) return undefined;
 
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % count);
+    const timer = setTimeout(() => {
+      setPrev(current);
+      setCurrent((current + 1) % count);
     }, SLIDE_INTERVAL);
 
-    return () => clearInterval(timer);
-    // `current` is in the deps so clicking a dot restarts the 3 second timer
+    return () => clearTimeout(timer);
+    // `current` is in the deps so every change (auto or dot click) restarts the 3 second timer
   }, [active, count, current]);
+
+  const goTo = (i) => {
+    if (i === current) return;
+    setPrev(current);
+    setCurrent(i);
+  };
 
   return (
     <div className="impac_home_pg_slider">
-      {images.map((src, i) => (
-        <img
-          key={src}
-          className={`impac_home_pg_img impac_home_pg_slider_img ${
-            i === 0 ? "" : "impac_home_pg_slider_img_abs"
-          } ${i === current ? "impac_home_pg_slider_img_active" : ""}`}
-          src={src}
-          alt={i === current ? alt : ""}
-          aria-hidden={i !== current}
-          loading={eager ? "eager" : "lazy"}
-          fetchPriority={eager && i === 0 ? "high" : "auto"}
-          decoding="async"
-          draggable="false"
-        />
-      ))}
+      {images.map((src, i) => {
+        const isCurrent = i === current;
+        const isLeaving = i === prev && prev !== current;
+        return (
+          <img
+            key={src}
+            className={`impac_home_pg_img impac_home_pg_slider_img ${
+              i === 0 ? "" : "impac_home_pg_slider_img_abs"
+            } ${isCurrent ? "impac_home_pg_slider_img_active" : ""} ${
+              isLeaving ? "impac_home_pg_slider_img_leaving" : ""
+            }`}
+            src={src}
+            alt={isCurrent ? alt : ""}
+            aria-hidden={!isCurrent}
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={eager && i === 0 ? "high" : "auto"}
+            decoding="async"
+            draggable="false"
+          />
+        );
+      })}
 
       {count > 1 && (
         <div className="impac_home_pg_slider_dots">
@@ -237,7 +265,7 @@ const ImageSlider = ({ images, alt, active, eager }) => {
               className={`impac_home_pg_slider_dot ${
                 i === current ? "impac_home_pg_slider_dot_active" : ""
               }`}
-              onClick={() => setCurrent(i)}
+              onClick={() => goTo(i)}
             />
           ))}
         </div>

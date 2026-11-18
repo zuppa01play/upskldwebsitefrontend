@@ -1,7 +1,7 @@
 import React from "react";
 import "./PrivacyPolicy.css";
 
-const CONTACT_EMAIL = "privacy@upskld.com"; 
+const CONTACT_EMAIL = "growth@impactree.ai"; 
 const LAST_UPDATED = "17 November 2026";
 
 const sections = [

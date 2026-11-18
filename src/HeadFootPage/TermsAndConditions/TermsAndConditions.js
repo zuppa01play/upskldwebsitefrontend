@@ -1,7 +1,7 @@
 import React from "react";
 import "./TermsAndConditions.css";
 
-const CONTACT_EMAIL = "support@upskld.com"; // TODO: replace with your real contact email
+const CONTACT_EMAIL = "growth@impactree.ai"; 
 const LAST_UPDATED = "17 November 2026";
 
 const sections = [

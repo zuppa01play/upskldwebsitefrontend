@@ -1,0 +1,63 @@
+/*
+  Fade + slide effect for the image slider.
+  Import AFTER HomePageSlider.css (already done in HomePage.jsx) - it overrides only the transition.
+  Next image: slides in from the right + fades in + zooms out softly.
+  Old image : slides out to the left + fades out.
+*/
+
+.impac_home_pg_slider {
+  position: relative;
+  overflow: hidden;
+}
+
+/* waiting images: parked on the right, invisible, no transition (so they never flash) */
+.impac_home_pg_slider .impac_home_pg_slider_img {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(8%, 0, 0) scale(1.06);
+  transition: none;
+  filter: none;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+
+.impac_home_pg_slider .impac_home_pg_slider_img_abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* image coming in */
+.impac_home_pg_slider .impac_home_pg_slider_img.impac_home_pg_slider_img_active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0) scale(1);
+  z-index: 2;
+  transition:
+    opacity 0.9s ease,
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* image going out */
+.impac_home_pg_slider .impac_home_pg_slider_img.impac_home_pg_slider_img_leaving {
+  opacity: 0;
+  visibility: visible;
+  transform: translate3d(-8%, 0, 0) scale(0.98);
+  z-index: 1;
+  transition:
+    opacity 0.7s ease,
+    transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* dots always above the images */
+.impac_home_pg_slider .impac_home_pg_slider_dots {
+  z-index: 5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .impac_home_pg_slider .impac_home_pg_slider_img.impac_home_pg_slider_img_active,
+  .impac_home_pg_slider .impac_home_pg_slider_img.impac_home_pg_slider_img_leaving {
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+}
