@@ -3,4 +3,8 @@
   <url>
     <loc>https://upskldai.com/</loc>
   </url>
+  <url>
+    <loc>https://upskldai.com/aboutus</loc>
+  </url>
+  <!-- add one <url> block for each public page -->
 </urlset>
