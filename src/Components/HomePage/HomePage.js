@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import "./HomePageSlider.css";
 import "./HomePageSliderFade.css";
-import { openBookingModal, openIntroVideo, selectBusiness } from "../Openbookingmodal";
+import { openBookingModal, selectBusiness,
+} from "../Openbookingmodal";
+
+/* NOTE: file names are case-sensitive on the Linux server.
+   Make sure each name below matches the real file name exactly. */
 import smallbusinessImgOne from "./Smallbusiness_1.jpg";
 import smallbusinessImgTwo from "./Smallbusiness_2.jpeg";
 import smallbusinessImgThree from "./Smallbusiness_3.jpeg";
 import smallbusinessImgFour from "./Smallbusiness_4.jpeg";
 import smallbusinessImgFive from "./SmallBusiness_5.jpg";
+
 import WorkingProfessionalsImgOne from "./WP_1.jpeg";
 import WorkingProfessionalsImgTwo from "./WP_2.jpeg";
 import WorkingProfessionalsImgThree from "./WP_3.jpeg";
 import WorkingProfessionalsImgFour from "./WP_4.jpeg";
+
 import StudentsImgOne from "./S_1.jpeg";
 import StudentsImgTwo from "./S_2.jpg";
 import StudentsImgThree from "./S_3.jpg";
@@ -23,17 +29,14 @@ import StudentsImgSix from "./S_6.png";
 
 
 
-
-
-
-// images change automatically every 3 seconds
 const SLIDE_INTERVAL = 3000;
 
 const content = [
   {
     title: "Small Business",
     tag: "For small businesses",
-    heading: "We are entrepreneurs, and we'll show you how we use AI to build smarter businesses",
+    heading:
+      "We are entrepreneurs, and we'll show you how we use AI to build smarter businesses",
     description:
       "Learn to automate sales, marketing, follow-ups and accounts — in plain language, with tools that work for a business like yours.",
     question: "What kind of business do you run?",
@@ -49,11 +52,6 @@ const content = [
     ],
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
-    stats: [
-      // { value: "+14.5%", label: "sales productivity with marketing automation", source: "Nucleus Research" },
-      // { value: "+451%", label: "more qualified leads with automated follow-ups", source: "Annuitas Group" },
-      // { value: "−12.2%", label: "marketing costs with marketing automation", source: "Nucleus Research" },
-    ],
     images: [
       smallbusinessImgOne,
       smallbusinessImgTwo,
@@ -61,72 +59,109 @@ const content = [
       smallbusinessImgFour,
       smallbusinessImgFive,
     ],
-    imageAlt: "Small business owner using AI in her shop",
-    badgeTop: { value: "+451%", label: "more qualified leads · Annuitas Group" },
-    badgeBottom: { value: "300+", label: "learners in free sessions" },
+    // Alt text for each slide image. Refine against the real photo content.
+    imageAlts: [
+      "Small business learning practical ways to use AI in daily business operations",
+      "Small business owner exploring AI tools for business growth",
+      "Entrepreneur developing digital skills to improve a small business",
+      "Small business team learning to streamline everyday work with technology",
+      "Business owner building practical skills for sales, marketing and operations",
+    ],
+    badgeTop: {
+      value: "+451%",
+      label: "more qualified leads · Annuitas Group",
+    },
+    badgeBottom: {
+      value: "300+",
+      label: "learners in free sessions",
+    },
   },
   {
     title: "Working Professionals",
     tag: "For working professionals",
     heading: "Turn the AI Skill Gap into Your Biggest Career Advantage.",
     description:
-      "Practical, job-aligned AI training for non-technical professionals. Learn to automate your daily corporate workflows, make sharper decisions, and future-proof your career without writing a single line of code",
+      "Practical, job-aligned AI training for non-technical professionals. Learn to automate your daily corporate workflows, make sharper decisions, and future-proof your career without writing a single line of code.",
     question: "What's your role?",
     hint: "Tap an option to explore what fits you",
     options: ["Sales", "HR", "Operations", "Finance", "Marketing", "Other"],
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
-    stats: [
-      // { value: "32.5%", label: "of the work week saved by professionals using AI", source: "ActiveCampaign 2025" },
-      // { value: "27%", label: "of the week Indian sales reps spend actually selling", source: "Salesforce 2023" },
-      // { value: "200+", label: "working professionals trained", source: "Upskld" },
-    ],
     images: [
       WorkingProfessionalsImgOne,
       WorkingProfessionalsImgTwo,
       WorkingProfessionalsImgThree,
       WorkingProfessionalsImgFour,
     ],
-    imageAlt: "Professionals using AI in a team meeting",
-    badgeTop: { value: "32.5%", label: "of the week saved · ActiveCampaign" },
-    badgeBottom: { value: "200+", label: "professionals trained" },
+    imageAlts: [
+      "Working professionals developing practical artificial intelligence skills",
+      "Corporate team exploring AI tools for everyday workplace tasks",
+      "Professionals learning to improve business workflows with AI",
+      "Workplace learning session focused on digital and AI skills",
+    ],
+    badgeTop: {
+      value: "32.5%",
+      label: "of the week saved · ActiveCampaign",
+    },
+    badgeBottom: {
+      value: "200+",
+      label: "professionals trained",
+    },
   },
   {
     title: "Student",
     tag: "For students",
     heading: "From AI Anxiety to AI Advantage.",
-    description: " You don't need to be an engineer to be AI-ready. We help non-tech students master practical AI skills, changing the question from “Will AI replace me?” to “What can I achieve with AI beside me?”,",
+    description:
+      "You don't need to be an engineer to be AI-ready. We help non-tech students master practical AI skills, changing the question from “Will AI replace me?” to “What can I achieve with AI beside me?”",
     question: "What are you studying?",
     hint: "Tap an option to explore what fits you",
-    options: ["Commerce", "Arts", "Science", "Engineering", "Management", "Other"],
+    options: [
+      "Commerce",
+      "Arts",
+      "Science",
+      "Engineering",
+      "Management",
+      "Other",
+    ],
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
-    stats: [
-      // { value: "4.5+ Crore", label: "students in higher education", source: "AISHE Report" },
-      // { value: "24+ Lakh", label: "arts & science graduates", source: "AISHE Report" },
-      // { value: "100+", label: "students trained", source: "UPSKLD" },
+    images: [
+      StudentsImgOne,
+      StudentsImgTwo,
+      StudentsImgThree,
+      StudentsImgFour,
+      StudentsImgFive,
+      StudentsImgSix,
     ],
-    // add more student images here and they will slide automatically too
-    images: [StudentsImgOne, StudentsImgTwo, StudentsImgThree, StudentsImgFour, StudentsImgFive, StudentsImgSix],
-    imageAlt: "Students learning together on campus",
-    badgeTop: { value: "24+ Lakh", label: "arts & science graduates" },
-    badgeBottom: { value: "100+", label: "students trained" },
+    imageAlts: [
+      "Students building practical AI skills for their future careers",
+      "Student learning session focused on artificial intelligence skills",
+      "College students exploring digital tools and AI learning",
+      "Students developing technology skills for academic and career growth",
+      "Higher education students preparing for an AI-enabled workplace",
+      "Student-focused practical learning for artificial intelligence",
+    ],
+    badgeTop: {
+      value: "24+ Lakh",
+      label: "arts & science graduates",
+    },
+    badgeBottom: {
+      value: "100+",
+      label: "students trained",
+    },
   },
 ];
 
-// chip text -> matching item id in HomeAiPage (per header tab)
-//   0 Small Business        -> "By business type" tabs
-//   1 Working Professionals -> Impact explorer items (professionalMetrics ids)
-//   2 Students              -> Impact explorer items (studentMetrics ids)
 const CHIP_IDS = {
   0: {
     "Retail shop": "retail",
     "Food business": "food",
     "Apparel & fashion": "fashion",
-    "Services": "services",
-    "Manufacturing": "manufacturing",
+    Services: "services",
+    Manufacturing: "manufacturing",
     "Online seller": "online",
-    "Other": "other",
+    Other: "other",
   },
   1: {
     Sales: "hours",
@@ -200,12 +235,20 @@ const UsersIcon = () => (
   </svg>
 );
 
-/* Auto image slider - sits exactly where the old single <img> was.
-   Runs only while its slide is the active one, and restarts from image 1 when you come back. */
-const ImageSlider = ({ images, alt, active, eager }) => {
+const ImageSlider = ({
+  images = [],
+  imageAlts = [],
+  alt = "",
+  active,
+  eager,
+}) => {
+  const safeImages = Array.isArray(images) ? images : [];
+  const safeAlts = Array.isArray(imageAlts) ? imageAlts : [];
+
   const [current, setCurrent] = useState(0);
-  const [prev, setPrev] = useState(null); // image that is sliding out
-  const count = images.length;
+  const [prev, setPrev] = useState(null);
+
+  const count = safeImages.length;
 
   useEffect(() => {
     if (!active) {
@@ -213,6 +256,7 @@ const ImageSlider = ({ images, alt, active, eager }) => {
       setPrev(null);
       return undefined;
     }
+
     if (count < 2) return undefined;
 
     const timer = setTimeout(() => {
@@ -221,33 +265,39 @@ const ImageSlider = ({ images, alt, active, eager }) => {
     }, SLIDE_INTERVAL);
 
     return () => clearTimeout(timer);
-    // `current` is in the deps so every change (auto or dot click) restarts the 3 second timer
   }, [active, count, current]);
 
-  const goTo = (i) => {
-    if (i === current) return;
+  const goTo = (index) => {
+    if (index === current || index < 0 || index >= count) return;
     setPrev(current);
-    setCurrent(i);
+    setCurrent(index);
   };
+
+  if (count === 0) {
+    return null;
+  }
 
   return (
     <div className="impac_home_pg_slider">
-      {images.map((src, i) => {
-        const isCurrent = i === current;
-        const isLeaving = i === prev && prev !== current;
+      {safeImages.map((src, index) => {
+        const isCurrent = index === current;
+        const isLeaving = index === prev && prev !== current;
+        const imageAlt = safeAlts[index] || alt;
+
         return (
           <img
-            key={src}
+            key={`${src}-${index}`}
             className={`impac_home_pg_img impac_home_pg_slider_img ${
-              i === 0 ? "" : "impac_home_pg_slider_img_abs"
-            } ${isCurrent ? "impac_home_pg_slider_img_active" : ""} ${
+              index === 0 ? "" : "impac_home_pg_slider_img_abs"
+            } ${
+              isCurrent ? "impac_home_pg_slider_img_active" : ""
+            } ${
               isLeaving ? "impac_home_pg_slider_img_leaving" : ""
             }`}
             src={src}
-            alt={isCurrent ? alt : ""}
+            alt={imageAlt}
             aria-hidden={!isCurrent}
-            loading={eager ? "eager" : "lazy"}
-            fetchPriority={eager && i === 0 ? "high" : "auto"}
+            loading={eager && index === 0 ? "eager" : "lazy"}
             decoding="async"
             draggable="false"
           />
@@ -256,16 +306,17 @@ const ImageSlider = ({ images, alt, active, eager }) => {
 
       {count > 1 && (
         <div className="impac_home_pg_slider_dots">
-          {images.map((_, i) => (
+          {safeImages.map((_, index) => (
             <button
-              key={i}
+              key={index}
               type="button"
               tabIndex={active ? 0 : -1}
-              aria-label={`Show image ${i + 1}`}
+              aria-label={`Show image ${index + 1}`}
+              aria-current={index === current ? "true" : undefined}
               className={`impac_home_pg_slider_dot ${
-                i === current ? "impac_home_pg_slider_dot_active" : ""
+                index === current ? "impac_home_pg_slider_dot_active" : ""
               }`}
-              onClick={() => goTo(i)}
+              onClick={() => goTo(index)}
             />
           ))}
         </div>
@@ -275,29 +326,41 @@ const ImageSlider = ({ images, alt, active, eager }) => {
 };
 
 const HomePage = ({ activeIndex = 0 }) => {
-  // selected chip per slide  { 0: "Retail shop", 1: "Sales" }
+  // Selected chip per slide: { 0: "Retail shop", 1: "Sales" }
   const [selectedOption, setSelectedOption] = useState({});
 
   const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+    const element = document.getElementById(id);
+    if (!element) return;
+
     const header = document.querySelector(".upskld_heade_pg_header");
     const offset = header ? header.offsetHeight : 80;
-    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
+    const top =
+      element.getBoundingClientRect().top +
+      window.pageYOffset -
+      offset -
+      10;
+
     window.scrollTo({ top, behavior: "smooth" });
   };
 
   const handleOptionClick = (slideIndex, option) => {
-    const businessId = CHIP_IDS[slideIndex] ? CHIP_IDS[slideIndex][option] : null;
+    const businessId = CHIP_IDS[slideIndex]
+      ? CHIP_IDS[slideIndex][option]
+      : null;
+
     if (businessId) {
-      // always select + open that item in HomeAiPage (business type / impact explorer)
-      setSelectedOption((prev) => ({ ...prev, [slideIndex]: option }));
+      setSelectedOption((previous) => ({
+        ...previous,
+        [slideIndex]: option,
+      }));
       selectBusiness(businessId);
       return;
     }
-    setSelectedOption((prev) => ({
-      ...prev,
-      [slideIndex]: prev[slideIndex] === option ? null : option,
+
+    setSelectedOption((previous) => ({
+      ...previous,
+      [slideIndex]: previous[slideIndex] === option ? null : option,
     }));
   };
 
@@ -306,8 +369,12 @@ const HomePage = ({ activeIndex = 0 }) => {
       <div className="impac_home_pg_stage">
         {content.map((item, index) => {
           const isActive = index === activeIndex;
-          const state = isActive ? "active" : index < activeIndex ? "prev" : "next";
-          const tab = isActive ? 0 : -1; // keep hidden slides out of the tab order
+          const state = isActive
+            ? "active"
+            : index < activeIndex
+            ? "prev"
+            : "next";
+          const tab = isActive ? 0 : -1;
 
           return (
             <article
@@ -315,40 +382,53 @@ const HomePage = ({ activeIndex = 0 }) => {
               className={`impac_home_pg_slide impac_home_pg_slide_${state}`}
               aria-hidden={!isActive}
             >
-              {/* ---------- Left content ---------- */}
+              {/* Left content */}
               <div className="impac_home_pg_info">
-                <span className="impac_home_pg_tag impac_home_pg_reveal" style={{ "--d": "0ms" }}>
+                <span
+                  className="impac_home_pg_tag impac_home_pg_reveal"
+                  style={{ "--d": "0ms" }}
+                >
                   <span className="impac_home_pg_tag_dot"></span>
-                  {/* key changes with the chip -> text fades in again */}
                   <span
                     key={selectedOption[index] || "none"}
                     className="impac_home_pg_tag_text"
                   >
                     {item.tag}
-                    {/* {selectedOption[index] ? ` · ${selectedOption[index]}` : ""} */}
                   </span>
                 </span>
 
-                <h1 className="impac_home_pg_heading impac_home_pg_reveal" style={{ "--d": "80ms" }}>
+                <h1
+                  className="impac_home_pg_heading impac_home_pg_reveal"
+                  style={{ "--d": "80ms" }}
+                >
                   {item.heading}
                 </h1>
 
-                <p className="impac_home_pg_desc impac_home_pg_reveal" style={{ "--d": "160ms" }}>
+                <p
+                  className="impac_home_pg_desc impac_home_pg_reveal"
+                  style={{ "--d": "160ms" }}
+                >
                   {item.description}
                 </p>
 
-                <div className="impac_home_pg_picker impac_home_pg_reveal" style={{ "--d": "240ms" }}>
+                <div
+                  className="impac_home_pg_picker impac_home_pg_reveal"
+                  style={{ "--d": "240ms" }}
+                >
                   <p className="impac_home_pg_question">{item.question}</p>
                   <p className="impac_home_pg_hint">{item.hint}</p>
+
                   <div className="impac_home_pg_chips">
-                    {item.options.map((option, i) => (
+                    {item.options.map((option, optionIndex) => (
                       <button
                         key={option}
                         type="button"
                         tabIndex={tab}
-                        style={{ "--i": i }}
+                        style={{ "--i": optionIndex }}
                         className={`impac_home_pg_chip ${
-                          selectedOption[index] === option ? "impac_home_pg_chip_selected" : ""
+                          selectedOption[index] === option
+                            ? "impac_home_pg_chip_selected"
+                            : ""
                         }`}
                         aria-pressed={selectedOption[index] === option}
                         onClick={() => handleOptionClick(index, option)}
@@ -364,7 +444,10 @@ const HomePage = ({ activeIndex = 0 }) => {
                   </div>
                 </div>
 
-                <div className="impac_home_pg_actions impac_home_pg_reveal" style={{ "--d": "360ms" }}>
+                <div
+                  className="impac_home_pg_actions impac_home_pg_reveal"
+                  style={{ "--d": "360ms" }}
+                >
                   <button
                     type="button"
                     tabIndex={tab}
@@ -374,6 +457,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                     <span>{item.primaryBtn}</span>
                     <ArrowIcon />
                   </button>
+
                   <button
                     type="button"
                     tabIndex={tab}
@@ -383,36 +467,27 @@ const HomePage = ({ activeIndex = 0 }) => {
                     {item.secondaryBtn}
                   </button>
                 </div>
-
-                <div className="impac_home_pg_stats">
-                  {item.stats.map((stat, i) => (
-                    <div
-                      key={stat.value}
-                      className="impac_home_pg_stat impac_home_pg_reveal"
-                      style={{ "--d": `${460 + i * 90}ms` }}
-                    >
-                      <h3 className="impac_home_pg_stat_value">{stat.value}</h3>
-                      <p className="impac_home_pg_stat_label">{stat.label}</p>
-                      <span className="impac_home_pg_stat_source">{stat.source}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
 
-              {/* ---------- Right image slider (same place as before) ---------- */}
+              {/* Right image slider */}
               <div className="impac_home_pg_visual">
                 <div className="impac_home_pg_video_card">
                   <ImageSlider
                     images={item.images}
-                    alt={item.imageAlt}
+                    imageAlts={item.imageAlts}
+                    alt={`${item.title} learning and development`}
                     active={isActive}
                     eager={index === 0}
                   />
                 </div>
 
                 <div className="impac_home_pg_badge impac_home_pg_badge_top">
-                  <strong className="impac_home_pg_badge_value">{item.badgeTop.value}</strong>
-                  <span className="impac_home_pg_badge_label">{item.badgeTop.label}</span>
+                  <strong className="impac_home_pg_badge_value">
+                    {item.badgeTop.value}
+                  </strong>
+                  <span className="impac_home_pg_badge_label">
+                    {item.badgeTop.label}
+                  </span>
                 </div>
 
                 <div className="impac_home_pg_badge impac_home_pg_badge_bottom">
@@ -420,8 +495,12 @@ const HomePage = ({ activeIndex = 0 }) => {
                     <UsersIcon />
                   </span>
                   <div className="impac_home_pg_badge_text">
-                    <strong className="impac_home_pg_badge_value">{item.badgeBottom.value}</strong>
-                    <span className="impac_home_pg_badge_label">{item.badgeBottom.label}</span>
+                    <strong className="impac_home_pg_badge_value">
+                      {item.badgeBottom.value}
+                    </strong>
+                    <span className="impac_home_pg_badge_label">
+                      {item.badgeBottom.label}
+                    </span>
                   </div>
                 </div>
               </div>

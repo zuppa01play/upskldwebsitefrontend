@@ -1,22 +1,25 @@
 import React from "react";
 import "./PrivacyPolicy.css";
 
-const CONTACT_EMAIL = "growth@impactree.ai"; 
-const LAST_UPDATED = "17 November 2026";
+const CONTACT_EMAIL = "growth@impactree.ai";
+const LAST_UPDATED = "19 November 2026";
+
+/* Fill the real name. While empty, the grievance section is hidden. */
+const GRIEVANCE_OFFICER = "Rajashree";
 
 const sections = [
   {
     id: "collect",
     title: "What we collect",
- body: (
-  <ul>
-    <li>Your name, email, phone number and city when you fill our forms.</li>
-    <li>Your consent to contact you by call or WhatsApp, when you give it.</li>
-    <li>Your login details when you create an account.</li>
-    <li>Your learning activity, such as video progress and quiz results.</li>
-    <li>Basic usage info like browser and pages visited.</li>
-  </ul>
-),
+    body: (
+      <ul>
+        <li>Your name, email, phone number and city when you fill our forms.</li>
+        <li>Your consent to contact you by call or WhatsApp, when you give it.</li>
+        <li>Your login details when you create an account.</li>
+        <li>Your learning activity, such as video progress and quiz results.</li>
+        <li>Basic usage info like browser and pages visited.</li>
+      </ul>
+    ),
   },
   {
     id: "use",
@@ -80,6 +83,27 @@ const sections = [
       </p>
     ),
   },
+  ...(GRIEVANCE_OFFICER
+    ? [
+        {
+          id: "grievance",
+          title: "Grievance officer",
+          body: (
+            <p>
+              For any concern about your data, write to our grievance officer,{" "}
+              {GRIEVANCE_OFFICER}, at{" "}
+              <a
+                className="upskld_privacy_pg_link"
+                href={`mailto:${CONTACT_EMAIL}`}
+              >
+                {CONTACT_EMAIL}
+              </a>
+              . We will reply within 30 days.
+            </p>
+          ),
+        },
+      ]
+    : []),
   {
     id: "contact",
     title: "Contact us",
@@ -118,8 +142,8 @@ const PrivacyPolicy = () => {
           </article>
         </div>
       </section>
-      <br/>
-         <br/>
+      <br />
+      <br />
     </div>
   );
 };

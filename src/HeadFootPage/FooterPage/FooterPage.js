@@ -78,7 +78,7 @@ const CapIcon = () => (
 
 /* TODO: fill these 3 before deploying */
 const CONTACT_EMAIL = "growth@impactree.ai"; 
-const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const WHATSAPP_NUMBER = "919360430032";
 const ADDRESS = "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu 600032"; 
 
 const navLinks = [
@@ -130,15 +130,15 @@ const legalLinks = [
 const PROGRAMS = [
   {
     name: "AI for Small Businesses",
-    status: "Enrollment closed",
+  
   },
   {
     name: "AI for Working Professionals",
-    status: "Enrollment closed",
+   
   },
   {
     name: "AI for Students",
-    status: "Enrollment closed",
+  
   },
 ];
 
@@ -320,7 +320,7 @@ const FooterPage = ({ activeIndex = 0 }) => {
 
           <div key={activeIndex} className="upskld_footer_pg_bar_text">
             <p className="upskld_footer_pg_bar_title">{PROGRAM.name}</p>
-            <p className="upskld_footer_pg_bar_status">{PROGRAM.status}</p>
+        
           </div>
 
           <div className="upskld_footer_pg_bar_actions">

@@ -1,8 +1,8 @@
 import React from "react";
 import "./TermsAndConditions.css";
 
-const CONTACT_EMAIL = "growth@impactree.ai"; 
-const LAST_UPDATED = "17 November 2026";
+const CONTACT_EMAIL = "growth@impactree.ai";
+const LAST_UPDATED = "19 November 2026";
 
 const sections = [
   {
@@ -97,7 +97,7 @@ const sections = [
     body: (
       <p>
         These terms are governed by the laws of India. Any dispute will be
-        handled by the courts of the city where UPSKLD is based.
+        handled by the courts of Chennai, Tamil Nadu.
       </p>
     ),
   },
@@ -140,8 +140,8 @@ const TermsAndConditions = () => {
           </article>
         </div>
       </section>
-      <br/>
-      <br/>
+      <br />
+      <br />
     </div>
   );
 };
