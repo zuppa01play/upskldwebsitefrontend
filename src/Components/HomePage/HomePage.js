@@ -18,12 +18,12 @@ import WorkingProfessionalsImgTwo from "./WP_2.jpeg";
 import WorkingProfessionalsImgThree from "./WP_3.jpeg";
 import WorkingProfessionalsImgFour from "./WP_4.jpeg";
 
-import StudentsImgOne from "./S_1.jpeg";
+import StudentsImgOne from "./S_1.jpg";
 import StudentsImgTwo from "./S_2.jpg";
 import StudentsImgThree from "./S_3.jpg";
 import StudentsImgFour from "./S_4.jpg";
 import StudentsImgFive from "./S_5.jpg";
-import StudentsImgSix from "./S_6.png";
+import StudentsImgSix from "./S_6.jpg";
 
 
 
