@@ -68,3 +68,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# server deployment
+cd ~/upskld_com/upskldwebsitefrontend
+
+git pull
+
+npm install
+
+npm run build
+
+sudo rm -rf /var/www/upskldai/*
+
+sudo cp -a build/. /var/www/upskldai/
+
+sudo chown -R root:www-data /var/www/upskldai
+
+sudo find /var/www/upskldai -type d -exec chmod 755 {} \;
+
+sudo find /var/www/upskldai -type f -exec chmod 644 {} \;
+
+curl -I https://upskldai.com
