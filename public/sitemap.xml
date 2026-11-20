@@ -6,5 +6,10 @@
   <url>
     <loc>https://upskldai.com/aboutus</loc>
   </url>
-  <!-- add one <url> block for each public page -->
+  <url>
+    <loc>https://upskldai.com/privacypolicy</loc>
+  </url>
+  <url>
+    <loc>https://upskldai.com/termsandconditions</loc>
+  </url>
 </urlset>
