@@ -29,18 +29,9 @@
  "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
-  "postbuild": "react-snap",
-  "build:debug": "react-scripts build --profile",
-  "postbuild:debug": "react-snap",
+  "postbuild": "node prerender.mjs",
   "test": "react-scripts test",
   "eject": "react-scripts eject"
-},
-"reactSnap": {
-  "inlineCss": false,
-  "crawl": false,
-  "puppeteerExecutablePath": "C:/Program Files/Google/Chrome/Application/chrome.exe",
-  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
-  "include": ["/"]
 },
   "eslintConfig": {
     "extends": [
