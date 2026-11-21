@@ -16,17 +16,62 @@ const server = createServer((req, res) => {
   res.end(indexHtml);
 }).listen(4173);
 
-const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+const browser = await puppeteer.launch({
+  args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+  headless: true,
+});
 
 for (const route of ROUTES) {
   const page = await browser.newPage();
-  await page.goto(`http://localhost:4173${route}`, { waitUntil: 'networkidle0' });
+
+  // Block video/font/image requests to speed up rendering
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const type = req.resourceType();
+    if (['media', 'font', 'image'].includes(type)) {
+      req.abort();
+    } else {
+      req.continue();
+    }
+  });
+
+  await page.goto(`http://localhost:4173${route}`, {
+    waitUntil: 'networkidle0',
+    timeout: 60000,
+  });
+
+  // Wait for React root to have content
+  await page.waitForSelector('#root > *', { timeout: 15000 });
+
+  // Remove popup/modal/overlay elements that shouldn't be in the snapshot
+  await page.evaluate(() => {
+    const selectors = [
+      '[class*="popup"]',
+      '[class*="modal"]',
+      '[class*="overlay"]',
+      '[class*="Popup"]',
+      '[class*="Modal"]',
+      '[class*="video"]',
+      '[class*="Video"]',
+    ];
+    selectors.forEach((sel) => {
+      document.querySelectorAll(sel).forEach((el) => el.remove());
+    });
+  });
+
   const html = await page.content();
-  if (route !== '/') mkdirSync(join(BUILD, route), { recursive: true });
-  writeFileSync(join(BUILD, route, 'index.html'), html);
-  console.log('prerendered', route);
+
+  if (route === '/') {
+    writeFileSync(join(BUILD, 'index.html'), html);
+  } else {
+    mkdirSync(join(BUILD, route), { recursive: true });
+    writeFileSync(join(BUILD, route, 'index.html'), html);
+  }
+
+  console.log('✓ prerendered', route);
   await page.close();
 }
 
 await browser.close();
 server.close();
+console.log('\n✅ Prerender complete. All routes have static HTML.');
