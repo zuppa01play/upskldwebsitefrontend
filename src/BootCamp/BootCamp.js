@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import useRazorpay from "../hooks/useRazorpay";
 import "./BootCamp.css";
 
 // localhost-la irundha local backend, production-la same domain (/api)
@@ -12,6 +13,7 @@ const API_BASE =
 
 const SITE_URL = "https://upskldai.com";
 const PAGE_URL = `${SITE_URL}/bootcamp`;
+const BOOTCAMP_PRICE = 1; // ₹499 — change as needed
 const BOOTCAMP_DATE = "08 December 2026";
 const TIMING = "10:00 AM - 11:30 AM IST";
 const BOOTCAMP_DATE_ISO = "2026-12-08";
@@ -161,6 +163,7 @@ const usePageSeo = () => {
 const BootCamp = () => {
   usePageSeo();
 
+  const { pay, loading: payLoading } = useRazorpay();
   const [formData, setFormData] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -206,29 +209,47 @@ const BootCamp = () => {
     }
 
     setErrors({});
-    setIsSubmitting(true);
 
-    try {
-      const payload = {
-        fullName: formData.fullName.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        college: formData.college.trim(),
-      };
+    const payload = {
+      fullName: formData.fullName.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      college: formData.college.trim(),
+    };
 
-      await axios.post(`${API_BASE}/api/bootcamp-register`, payload);
-
-      setSubmittedEmail(payload.email);
-      setIsSubmitted(true);
-      setFormData(initialForm);
-    } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        "Something went wrong. Please try again.";
-      toast.error(message);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Step 1: open Razorpay — register only after successful payment
+    pay({
+      amount: BOOTCAMP_PRICE,
+      description: "AI Bootcamp Seat",
+      prefill: {
+        name: payload.fullName,
+        email: payload.email,
+        contact: payload.phone,
+      },
+      notes: { college: payload.college, type: "bootcamp" },
+      onSuccess: async (paymentData) => {
+        setIsSubmitting(true);
+        try {
+          await axios.post(`${API_BASE}/api/bootcamp-register`, {
+            ...payload,
+            paymentId: paymentData.razorpay_payment_id,
+            orderId: paymentData.razorpay_order_id,
+          });
+          setSubmittedEmail(payload.email);
+          setIsSubmitted(true);
+          setFormData(initialForm);
+        } catch (error) {
+          toast.error(error.response?.data?.message || "Registration failed. Please contact support.");
+        } finally {
+          setIsSubmitting(false);
+        }
+      },
+      onFailure: (err) => {
+        if (err?.message !== "Payment cancelled") {
+          toast.error(err?.description || err?.message || "Payment failed. Please try again.");
+        }
+      },
+    });
   };
 
   const handleRegisterAgain = () => {
@@ -443,9 +464,9 @@ const BootCamp = () => {
                     <button
                       type="submit"
                       className="bootcamp_pg_btn"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || payLoading}
                     >
-                      {isSubmitting ? "Submitting..." : "Reserve my seat"}
+                      {payLoading ? "Opening payment..." : isSubmitting ? "Confirming..." : `Reserve my seat — ₹${BOOTCAMP_PRICE}`}
                     </button>
                   </form>
                 </>
