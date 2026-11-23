@@ -244,67 +244,60 @@ const BootCamp = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  setIsSubmitting(true);
-
+  // Step 1: Validate form
   try {
-    // Step 1: Validate form data
-    await validationSchema.validate(formData, {
-      abortEarly: false,
+    await validationSchema.validate(formData, { abortEarly: false });
+  } catch (validationError) {
+    const newErrors = {};
+    validationError.inner.forEach((item) => {
+      if (item.path && !newErrors[item.path]) newErrors[item.path] = item.message;
     });
-
-    setErrors({});
-
-    // Step 2: Prepare API payload
-    const payload = {
-      fullName: formData.fullName.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-      college: formData.college.trim(),
-    };
-
-    // Step 3: Submit registration
-    const response = await axios.post(
-      `${API_BASE}/api/bootcamp-register`,
-      payload
-    );
-
-    // Step 4: Handle successful submission
-    setSubmittedEmail(payload.email);
-    setIsSubmitted(true);
-    setFormData(initialForm);
-
-    toast.success(
-      response.data?.message || "Registration successful!"
-    );
-
-  } catch (error) {
-
-    // Step 5: Handle validation errors
-    if (error.name === "ValidationError") {
-      const newErrors = {};
-
-      error.inner.forEach((item) => {
-        if (item.path && !newErrors[item.path]) {
-          newErrors[item.path] = item.message;
-        }
-      });
-
-      setErrors(newErrors);
-    }
-
-    // Step 6: Handle API errors
-    else {
-      const message =
-        error.response?.data?.message ||
-        "Something went wrong. Please try again.";
-
-      toast.error(message);
-    }
-
-  } finally {
-    // Step 7: Reset submitting state
-    setIsSubmitting(false);
+    setErrors(newErrors);
+    return;
   }
+
+  setErrors({});
+
+  const payload = {
+    fullName: formData.fullName.trim(),
+    email: formData.email.trim(),
+    phone: formData.phone.trim(),
+    college: formData.college.trim(),
+  };
+
+  // Step 2: Open Razorpay — register only after successful payment
+  pay({
+    amount: BOOTCAMP_PRICE,
+    description: "AI Bootcamp Seat",
+    prefill: {
+      name: payload.fullName,
+      email: payload.email,
+      contact: payload.phone,
+    },
+    notes: { college: payload.college, type: "bootcamp" },
+    onSuccess: async (paymentData) => {
+      setIsSubmitting(true);
+      try {
+        await axios.post(`${API_BASE}/api/bootcamp-register`, {
+          ...payload,
+          paymentId: paymentData.razorpay_payment_id,
+          orderId: paymentData.razorpay_order_id,
+        });
+        setSubmittedEmail(payload.email);
+        setIsSubmitted(true);
+        setFormData(initialForm);
+      } catch (error) {
+        toast.error(error.response?.data?.message || "Registration failed. Please contact support.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    onFailure: (err) => {
+      if (err?.message !== "Payment cancelled") {
+        toast.error(err?.description || err?.message || "Payment failed. Please try again.");
+      }
+    },
+  });
 };
 
 
