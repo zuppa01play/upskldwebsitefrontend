@@ -64,7 +64,7 @@ const useRazorpay = () => {
       });
       if (!res.ok) throw new Error("Failed to create order");
       const data = await res.json();
-      console.log("[Razorpay] order from backend:", data);
+      // console.log("[Razorpay] order from backend:", data);
       const order = data.order || data;
       const orderId = order.id || order.order_id || order.orderId;
 
@@ -83,7 +83,7 @@ const useRazorpay = () => {
         handler: async (response) => {
           try {
             const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
-            console.log("[Razorpay] handler response:", { razorpay_payment_id, razorpay_order_id, razorpay_signature });
+            // console.log("[Razorpay] handler response:", { razorpay_payment_id, razorpay_order_id, razorpay_signature });
             // Step 3: verify on backend
             const verify = await fetch(`${API_BASE}/api/payment/verify`, {
               method: "POST",
