@@ -13,7 +13,7 @@ const API_BASE =
 
 const SITE_URL = "https://upskldai.com";
 const PAGE_URL = `${SITE_URL}/bootcamp`;
-const BOOTCAMP_PRICE = 1; // ₹499 — change as needed
+const BOOTCAMP_PRICE = 99; // ₹499 — change as needed
 const BOOTCAMP_DATE = "05 December 2026";
 const TIMING = "10:00 AM - 11:30 AM IST";
 const BOOTCAMP_DATE_ISO = "2026-12-05";
