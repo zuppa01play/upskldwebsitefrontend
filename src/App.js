@@ -23,6 +23,13 @@ import TermsAndConditions from "./HeadFootPage/TermsAndConditions/TermsAndCondit
 import PageNotFound from "./Components/PageNotFound/PageNotFound";
 import BootCamp from "./BootCamp/BootCamp";
 
+// intha pages-la intro video popup vara koodaathu
+const POPUP_VIDEO_HIDDEN_PATHS = [
+  "/privacypolicy",
+  "/termsandconditions",
+  "/bootcamp",
+];
+
 function HomeContent({ activeIndex }) {
   return (
     <>
@@ -43,25 +50,14 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { pathname } = useLocation();
 
-  // trailing slash, capital letters irundhalum work aagum (/bootcamp, /Bootcamp/, /bootcamp/)
+  // lowercase + trailing slash remove ("/bootcamp/" kooda match aaganum)
   const currentPath = pathname.toLowerCase().replace(/\/+$/, "") || "/";
-
-  // Bootcamp page: header, footer, popups edhume vara koodadhu
-  const isBootcampPage = currentPath === "/bootcamp";
-
-  // Privacy / Terms page: video popup mattum hide
-  const hidePopupVideo = ["/privacypolicy", "/termsandconditions"].includes(
-    currentPath
-  );
+  const hidePopupVideo = POPUP_VIDEO_HIDDEN_PATHS.includes(currentPath);
 
   return (
     <div>
       <ScrollToTop />
-
-      {/* Header: bootcamp page la hide */}
-      {!isBootcampPage && (
-        <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
-      )}
+      <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
 
       <Routes>
         <Route path="/" element={<HomeContent activeIndex={activeIndex} />} />
@@ -73,19 +69,10 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      {/* Footer: bootcamp page la hide */}
-      {!isBootcampPage && <FooterPage activeIndex={activeIndex} />}
-
-      {/* Video popup: bootcamp, privacy, terms la hide */}
-      {!isBootcampPage && !hidePopupVideo && (
-        <PopupVideo activeIndex={activeIndex} />
-      )}
-
-      {/* Enquire & BookForFree popups: bootcamp page la hide */}
-      {!isBootcampPage && <EnquirePage activeIndex={activeIndex} />}
-      {!isBootcampPage && <BookForFree activeIndex={activeIndex} />}
-
-      {/* Toast: bootcamp form submit success/error message ku venum, adhunaala always irukkum */}
+      <FooterPage activeIndex={activeIndex} />
+      {!hidePopupVideo && <PopupVideo activeIndex={activeIndex} />}
+      <EnquirePage activeIndex={activeIndex} />
+      <BookForFree activeIndex={activeIndex} />
       <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
