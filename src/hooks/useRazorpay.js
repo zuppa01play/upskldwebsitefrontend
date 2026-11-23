@@ -63,8 +63,9 @@ const useRazorpay = () => {
         body: JSON.stringify({ amount, currency: "INR", notes }),
       });
       if (!res.ok) throw new Error("Failed to create order");
-      const order = await res.json();
-      console.log("[Razorpay] order from backend:", order);
+      const data = await res.json();
+      console.log("[Razorpay] order from backend:", data);
+      const order = data.order || data;
       const orderId = order.id || order.order_id || order.orderId;
 
       // Step 2: open Razorpay checkout
