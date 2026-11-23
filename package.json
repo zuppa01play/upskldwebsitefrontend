@@ -1,8 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
- "private": true,
-"proxy": "http://localhost:4002",
+  "private": true,
+  "proxy": "http://localhost:4002",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -26,22 +26,13 @@
     "web-vitals": "^2.1.4",
     "yup": "^1.7.1"
   },
- "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "postbuild": "react-snap",
-  "build:debug": "react-scripts build --profile",
-  "postbuild:debug": "react-snap",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
-"reactSnap": {
-  "inlineCss": false,
-  "crawl": false,
-  "puppeteerExecutablePath": "C:/Program Files/Google/Chrome/Application/chrome.exe",
-  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
-  "include": ["/"]
-},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "node prerender.mjs",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -61,6 +52,8 @@
     ]
   },
   "devDependencies": {
-    "react-snap": "^1.23.0"
+    "puppeteer": "^25.18.1",
+    "react-snap": "^1.23.0",
+    "serve-handler": "^6.1.8"
   }
 }
