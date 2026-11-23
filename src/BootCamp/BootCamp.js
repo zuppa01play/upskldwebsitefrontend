@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import useRazorpay from "../hooks/useRazorpay";
 import "./BootCamp.css";
 
 // localhost-la irundha local backend, production-la same domain (/api)
@@ -12,6 +13,7 @@ const API_BASE =
 
 const SITE_URL = "https://upskldai.com";
 const PAGE_URL = `${SITE_URL}/bootcamp`;
+const BOOTCAMP_PRICE = 1; // ₹499 — change as needed
 const BOOTCAMP_DATE = "05 December 2026";
 const TIMING = "10:00 AM - 11:30 AM IST";
 const BOOTCAMP_DATE_ISO = "2026-12-05";
@@ -206,6 +208,7 @@ const BootCamp = () => {
   usePageSeo();
   const navigate = useNavigate();
 
+  const { pay, loading: payLoading } = useRazorpay();
   const [formData, setFormData] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -254,29 +257,15 @@ const BootCamp = () => {
     }
 
     setErrors({});
-    setIsSubmitting(true);
 
-    try {
-      const payload = {
-        fullName: formData.fullName.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        college: formData.college.trim(),
-      };
+    const payload = {
+      fullName: formData.fullName.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      college: formData.college.trim(),
+    };
 
-      // data ellarukkum store aagum (slot closed aanalum)
       await axios.post(`${API_BASE}/api/bootcamp-register`, payload);
-
-      // 04 December-la irundhu register pannavangalukku slot done toast + home page
-      if (new Date() >= SLOT_CLOSE_AT) {
-        setFormData(initialForm);
-        toast.info(
-          `Slots for the ${BOOTCAMP_DATE} bootcamp are already filled. We have saved your details and will keep you updated about the next batch.`,
-          { autoClose: 6000 }
-        );
-        navigate("/");
-        return;
-      }
 
       setSubmittedEmail(payload.email);
       setIsSubmitted(true);
@@ -544,9 +533,9 @@ const BootCamp = () => {
                     <button
                       type="submit"
                       className="bootcamp_pg_btn"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || payLoading}
                     >
-                      {isSubmitting ? "Submitting..." : "Reserve my seat"}
+                      {payLoading ? "Opening payment..." : isSubmitting ? "Confirming..." : `Reserve my seat — ₹${BOOTCAMP_PRICE}`}
                     </button>
                   </form>
                 </>

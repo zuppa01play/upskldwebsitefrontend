@@ -235,6 +235,43 @@
 
 
 
+/* ===== Enroll CTA ===== */
+.impac_trac_ho_pg_cta {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+}
+
+.impac_trac_ho_pg_enroll_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 36px;
+  border: none;
+  border-radius: 999px;
+  background: #3b003d;
+  color: #faf6ec;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(59, 0, 61, 0.28);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.impac_trac_ho_pg_enroll_btn:hover {
+  background: #e0a83d;
+  color: #3b003d;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(224, 168, 61, 0.45);
+}
+
+.impac_trac_ho_pg_enroll_btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* ===== 360px Android and small phones ===== */
 @media (max-width: 360px) {
   .impac_trac_ho_pg_section {

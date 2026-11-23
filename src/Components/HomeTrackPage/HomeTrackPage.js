@@ -1,5 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./HomeTrackPage.css";
+import useRazorpay from "../../hooks/useRazorpay";
+import { openEnquiryModal } from "../Openbookingmodal";
+
+/* ---------- Course pricing per tab ---------- */
+const COURSE_PRICES = {
+  0: { amount: 1999, label: "AI for Small Business" },
+  1: { amount: 1999, label: "AI for Working Professionals" },
+  2: { amount: 999,  label: "AI for Students" },
+};
 
 /* ---------- Content (edit here) ----------
    header tab: 0 Small Business · 1 Working Professionals · 2 Students
@@ -132,6 +141,26 @@ const CheckIcon = () => (
 const HomeTrackPage = ({ activeIndex = 0 }) => {
   const view = byTab[activeIndex] || { title: defaultTitle, cards: defaultCards };
   const cards = view.cards;
+  const { pay, loading: payLoading } = useRazorpay();
+  const course = COURSE_PRICES[activeIndex] || COURSE_PRICES[0];
+
+  const handleEnroll = () => {
+    pay({
+      amount: course.amount,
+      description: course.label,
+      notes: { type: "course", tab: activeIndex },
+      onSuccess: () => {
+        openEnquiryModal(); // collect details after payment
+      },
+      onFailure: (err) => {
+        if (err?.message !== "Payment cancelled") {
+          import("react-toastify").then(({ toast }) =>
+            toast.error(err?.description || err?.message || "Payment failed. Please try again.")
+          );
+        }
+      },
+    });
+  };
 
   return (
     <section id="ai-for-your-job"  className="impac_trac_ho_pg_section">
@@ -193,7 +222,20 @@ const HomeTrackPage = ({ activeIndex = 0 }) => {
           ))}
         </div>
 
-   
+        {/* Enroll CTA */}
+        <div className="impac_trac_ho_pg_cta">
+          <Reveal delay={300}>
+            <button
+              type="button"
+              className="impac_trac_ho_pg_enroll_btn"
+              onClick={handleEnroll}
+              disabled={payLoading}
+            >
+              {payLoading ? "Opening payment..." : `Enroll now — ₹${course.amount}`}
+            </button>
+          </Reveal>
+        </div>
+
       </div>
     </section>
   );
