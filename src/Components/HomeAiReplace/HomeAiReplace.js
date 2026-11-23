@@ -247,7 +247,7 @@ const shapes = [
 const HomeAiReplace = ({ activeIndex = 0 }) => {
   const audience = audiences[activeIndex] || audiences[0];
   const courses = audience.courses;
-  const [mode, setMode] = useState("self");
+  const [mode] = useState("self");
   const [inView, setInView] = useState(false);
   const sectionRef = useRef(null);
 
@@ -312,8 +312,6 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
     return () => observer.disconnect();
   }, []);
 
-  const modeKeys = Object.keys(modes);
-
   return (
     <section
       ref={sectionRef}
@@ -355,28 +353,6 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
           <h2 key={audience.id} className="home_course_ho_pg_title home_course_ho_pg_title_swap">
             {audience.title}
           </h2>
-
-          {/* <div className="home_course_ho_pg_toggle" role="tablist" aria-label="Learning format">
-            <span
-              className="home_course_ho_pg_toggle_pill"
-              style={{ transform: `translateX(${modeKeys.indexOf(mode) * 100}%)` }}
-              aria-hidden="true"
-            ></span>
-            {modeKeys.map((key) => (
-              <button
-                key={key}
-                type="button"
-                role="tab"
-                aria-selected={mode === key}
-                className={`home_course_ho_pg_toggle_btn ${
-                  mode === key ? "home_course_ho_pg_toggle_btn_active" : ""
-                }`}
-                onClick={() => setMode(key)}
-              >
-                {modes[key].label}
-              </button>
-            ))}
-          </div> */}
 
           <p key={mode} className="home_course_ho_pg_desc">
             {modes[mode].description}
@@ -431,9 +407,9 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
                 )}
 
                 <div className="home_course_ho_pg_footer">
-            <span className="home_course_ho_pg_price">
-  {/* ₹ {course.price} + GST */}
-</span>
+                  <span className="home_course_ho_pg_price">
+                    {/* ₹ {course.price} + GST */}
+                  </span>
                   <button
                     type="button"
                     className="home_course_ho_pg_enroll"

@@ -5,13 +5,6 @@ import { openBookingModal } from "../Openbookingmodal";
 const AUTOPLAY_MS = 6500; // time each review stays in front
 const SWIPE_DISTANCE = 45; // px swipe needed on touch devices
 
-const placeholder = (id, role) => ({
-  id,
-  quote: "[Real quote: the result they got]",
-  name: "[Learner name]",
-  role,
-  outcome: "[Outcome]",
-});
 
 const smallBusinessReviews = [
   {
@@ -281,14 +274,7 @@ const HomeReviewPage = ({ activeIndex = 0 }) => {
     }
   };
 
-  const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const header = document.querySelector(".upskld_heade_pg_header");
-    const offset = header ? header.offsetHeight : 80;
-    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
+
 
   return (
     <section

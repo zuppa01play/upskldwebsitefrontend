@@ -10,7 +10,6 @@ const navLinks = [
     path: "/",
     announce: "This month: AI for small businesses · Book a free session →",
   },
-
   {
     label: "Working Professionals",
     path: "/",
@@ -29,16 +28,13 @@ const navLinks = [
     announce:
       "Learn more about our mission and values · Book a free session →",
   },
-
-  //   {
-  //   label: "Blog",
-  //   path: "/blog",
+  // {
+  //   label: "Bootcamp",
+  //   path: "/bootcamp",
   //   announce:
-  //     "Learn more about our mission and values · Book a free session →",
+  //     "Join our bootcamp · Register now and start your career journey →",
   // },
 ];
-
-const ABOUT_INDEX = navLinks.findIndex((l) => l.path === "/aboutus");
 
 const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,9 +43,14 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const isAboutPage = pathname === "/aboutus";
-  // About page-la irundha About Us highlight, illana state-la irukkura tab
-  const currentIndex = isAboutPage ? ABOUT_INDEX : activeIndex;
+  // "/" illatha path (About Us, Bootcamp) = separate route page
+  // Current pathname ethukku match aagudho antha tab highlight aagum
+  const routeIndex = navLinks.findIndex(
+    (l) => l.path !== "/" && l.path === pathname.toLowerCase()
+  );
+
+  // Route page-la irundha antha tab, illana state-la irukkura audience tab
+  const currentIndex = routeIndex !== -1 ? routeIndex : activeIndex;
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
@@ -106,9 +107,9 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
     const link = navLinks[index];
     closeMenu();
 
-    // About Us -> separate route, video popup illa
-    if (link.path === "/aboutus") {
-      navigate("/aboutus");
+    // About Us / Bootcamp -> separate route, video popup illa
+    if (link.path !== "/") {
+      navigate(link.path);
       return;
     }
 
@@ -116,7 +117,7 @@ const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {
     onTabChange(index);
 
     if (pathname !== "/") {
-      // About page-la irundhu vandha first home-ku po
+      // Route page-la irundhu vandha first home-ku po
       navigate("/");
     } else if (window.pageYOffset > 80) {
       window.scrollTo({ top: 0, behavior: "smooth" });

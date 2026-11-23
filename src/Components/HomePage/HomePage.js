@@ -374,7 +374,8 @@ const HomePage = ({ activeIndex = 0 }) => {
             : index < activeIndex
             ? "prev"
             : "next";
-          const tab = isActive ? 0 : -1;
+               const tab = isActive ? 0 : -1;
+          const Heading = isActive ? "h1" : "h2";
 
           return (
             <article
@@ -397,12 +398,12 @@ const HomePage = ({ activeIndex = 0 }) => {
                   </span>
                 </span>
 
-                <h1
+                                <Heading
                   className="impac_home_pg_heading impac_home_pg_reveal"
                   style={{ "--d": "80ms" }}
                 >
                   {item.heading}
-                </h1>
+                </Heading>
 
                 <p
                   className="impac_home_pg_desc impac_home_pg_reveal"

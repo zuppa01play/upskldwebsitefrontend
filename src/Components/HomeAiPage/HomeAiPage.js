@@ -683,59 +683,7 @@ const BusinessTypeView = ({ instant }) => {
 
 /* ================= Impact explorer (Working Professionals) ================= */
 
-const ImpactCount = ({ value }) => {
-  // "+14.5%" -> prefix "+", number 14.5, suffix "%". Placeholders like "₹[X]" show as they are.
-  const match = value.match(/^([+−-]?)(\d+(?:\.\d+)?)(.*)$/);
-  const [current, setCurrent] = useState(0);
 
-  const prefix = match ? match[1] : "";
-  const target = match ? parseFloat(match[2]) : 0;
-  const decimals = match && match[2].includes(".") ? match[2].split(".")[1].length : 0;
-  const suffix = match ? match[3] : "";
-
-  useEffect(() => {
-    if (!match) return undefined;
-
-    const reduce =
-      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setCurrent(target);
-      return undefined;
-    }
-
-    let raf;
-    let start = null;
-    const tick = (now) => {
-      if (start === null) start = now;
-      const p = Math.min((now - start) / 1100, 1);
-      setCurrent(easeOutCubic(p) * target);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    const timer = setTimeout(() => {
-      raf = requestAnimationFrame(tick);
-    }, 200);
-
-    return () => {
-      clearTimeout(timer);
-      cancelAnimationFrame(raf);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
-
-  if (!match) {
-    return <span className="impac_ai_home_pg_x_big">{value}</span>;
-  }
-
-  return (
-    <span className="impac_ai_home_pg_x_big" aria-label={value}>
-      <span aria-hidden="true">
-        {prefix}
-        {current.toFixed(decimals)}
-        {suffix}
-      </span>
-    </span>
-  );
-};
 
 
 const ImpactExplorer = ({ instant, data }) => {

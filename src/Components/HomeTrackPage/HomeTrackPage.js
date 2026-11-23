@@ -62,10 +62,6 @@ const byTab = {
   },
 };
 
-const bridge = {
-  label: "The missing bridge",
-  text: "Knowing an AI tool is not the same as using AI to do the work.",
-};
 
 /* ---------- Helpers ---------- */
 /* true (once) when the element comes into the screen */

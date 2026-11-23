@@ -93,14 +93,7 @@ const HomeFaqPage = () => {
     setOpenIndex((prev) => (prev === index ? -1 : index)); // one open at a time
   };
 
-  const scrollToId = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const header = document.querySelector(".upskld_heade_pg_header");
-    const offset = header ? header.offsetHeight : 80;
-    const top = el.getBoundingClientRect().top + window.pageYOffset - offset - 10;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
+ 
 
   return (
     <section

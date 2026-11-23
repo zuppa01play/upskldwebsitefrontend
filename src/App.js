@@ -21,6 +21,7 @@ import PrivacyPolicy from "./HeadFootPage/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./HeadFootPage/TermsAndConditions/TermsAndConditions";
 
 import PageNotFound from "./Components/PageNotFound/PageNotFound";
+import BootCamp from "./BootCamp/BootCamp";
 
 function HomeContent({ activeIndex }) {
   return (
@@ -42,29 +43,50 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { pathname } = useLocation();
 
+  // trailing slash, capital letters irundhalum work aagum (/bootcamp, /Bootcamp/, /bootcamp/)
+  const currentPath = pathname.toLowerCase().replace(/\/+$/, "") || "/";
+
+  // Bootcamp page: header, footer, popups edhume vara koodadhu
+  const isBootcampPage = currentPath === "/bootcamp";
+
+  // Privacy / Terms page: video popup mattum hide
   const hidePopupVideo = ["/privacypolicy", "/termsandconditions"].includes(
-    pathname.toLowerCase()
+    currentPath
   );
 
   return (
     <div>
       <ScrollToTop />
-      <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
+
+      {/* Header: bootcamp page la hide */}
+      {!isBootcampPage && (
+        <HeaderPage activeIndex={activeIndex} onTabChange={setActiveIndex} />
+      )}
 
       <Routes>
         <Route path="/" element={<HomeContent activeIndex={activeIndex} />} />
         <Route path="/aboutus" element={<AboutPage />} />
+        <Route path="/bootcamp" element={<BootCamp />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandconditions" element={<TermsAndConditions />} />
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      <FooterPage activeIndex={activeIndex} />
-      {!hidePopupVideo && <PopupVideo activeIndex={activeIndex} />}
-      <EnquirePage activeIndex={activeIndex} />
-      <BookForFree activeIndex={activeIndex} />
-      <ToastContainer position="top-right" autoClose={4000} />
+      {/* Footer: bootcamp page la hide */}
+      {!isBootcampPage && <FooterPage activeIndex={activeIndex} />}
 
+      {/* Video popup: bootcamp, privacy, terms la hide */}
+      {!isBootcampPage && !hidePopupVideo && (
+        <PopupVideo activeIndex={activeIndex} />
+      )}
+
+      {/* Enquire & BookForFree popups: bootcamp page la hide */}
+      {!isBootcampPage && <EnquirePage activeIndex={activeIndex} />}
+      {!isBootcampPage && <BookForFree activeIndex={activeIndex} />}
+
+      {/* Toast: bootcamp form submit success/error message ku venum, adhunaala always irukkum */}
+      <ToastContainer position="top-right" autoClose={4000} />
     </div>
   );
 }
