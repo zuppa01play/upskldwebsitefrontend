@@ -240,24 +240,21 @@ const BootCamp = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ 
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      await validationSchema.validate(formData, { abortEarly: false });
-    } catch (validationError) {
-      const newErrors = {};
-      validationError.inner.forEach((item) => {
-        if (item.path && !newErrors[item.path]) {
-          newErrors[item.path] = item.message;
-        }
-      });
-      setErrors(newErrors);
-      return;
-    }
+  setIsSubmitting(true);
+
+  try {
+    // Step 1: Validate form data
+    await validationSchema.validate(formData, {
+      abortEarly: false,
+    });
 
     setErrors({});
 
+    // Step 2: Prepare API payload
     const payload = {
       fullName: formData.fullName.trim(),
       email: formData.email.trim(),
@@ -265,20 +262,51 @@ const BootCamp = () => {
       college: formData.college.trim(),
     };
 
-      await axios.post(`${API_BASE}/api/bootcamp-register`, payload);
+    // Step 3: Submit registration
+    const response = await axios.post(
+      `${API_BASE}/api/bootcamp-register`,
+      payload
+    );
 
-      setSubmittedEmail(payload.email);
-      setIsSubmitted(true);
-      setFormData(initialForm);
-    } catch (error) {
+    // Step 4: Handle successful submission
+    setSubmittedEmail(payload.email);
+    setIsSubmitted(true);
+    setFormData(initialForm);
+
+    toast.success(
+      response.data?.message || "Registration successful!"
+    );
+
+  } catch (error) {
+
+    // Step 5: Handle validation errors
+    if (error.name === "ValidationError") {
+      const newErrors = {};
+
+      error.inner.forEach((item) => {
+        if (item.path && !newErrors[item.path]) {
+          newErrors[item.path] = item.message;
+        }
+      });
+
+      setErrors(newErrors);
+    }
+
+    // Step 6: Handle API errors
+    else {
       const message =
         error.response?.data?.message ||
         "Something went wrong. Please try again.";
+
       toast.error(message);
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+
+  } finally {
+    // Step 7: Reset submitting state
+    setIsSubmitting(false);
+  }
+};
+
 
   const handleRegisterAgain = () => {
     setIsSubmitted(false);
