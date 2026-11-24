@@ -29,7 +29,7 @@ const POPUP_VIDEO_HIDDEN_PATHS = [
   "/privacypolicy",
   "/termsandconditions",
   "/bootcamp",
-  "/bootcampadmin"
+  "/bootcamp_admin"
 ];
 
 function HomeContent({ activeIndex }) {
@@ -65,7 +65,7 @@ function App() {
         <Route path="/" element={<HomeContent activeIndex={activeIndex} />} />
         <Route path="/aboutus" element={<AboutPage />} />
         <Route path="/bootcamp" element={<BootCamp />} />
-           <Route path="/bootcampadmin" element={<BootCampAdmin />} />
+           <Route path="/bootcamp_admin" element={<BootCampAdmin />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandconditions" element={<TermsAndConditions />} />
 

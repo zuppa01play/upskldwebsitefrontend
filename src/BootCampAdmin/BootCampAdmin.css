@@ -98,6 +98,40 @@
   outline-offset: 1px;
 }
 
+.bootcamp_admin_pg_pw_wrap {
+  position: relative;
+}
+
+.bootcamp_admin_pg_pw_input {
+  padding-right: 46px;
+}
+
+.bootcamp_admin_pg_pw_toggle {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #6b6685;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.bootcamp_admin_pg_pw_toggle:hover {
+  color: #40159f;
+}
+
+.bootcamp_admin_pg_pw_toggle:focus-visible {
+  outline: 2px solid #7a1fc4;
+}
+
 .bootcamp_admin_pg_error {
   margin: 4px 0;
   font-size: 13px;
@@ -238,7 +272,48 @@
   background: #ffe9d6;
 }
 
+@media (max-width: 768px) {
+  .bootcamp_admin_pg_toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bootcamp_admin_pg_tabs {
+    display: flex;
+  }
+  .bootcamp_admin_pg_tab {
+    flex: 1;
+  }
+  .bootcamp_admin_pg_search {
+    max-width: none;
+  }
+}
+
 @media (max-width: 560px) {
+  .bootcamp_admin_pg_wrapper {
+    padding: 20px 12px 40px;
+  }
+  .bootcamp_admin_pg_login {
+    margin: 12px auto;
+    padding: 20px 16px;
+  }
+  .bootcamp_admin_pg_input {
+    font-size: 16px;
+  }
+  .bootcamp_admin_pg_stats {
+    gap: 8px;
+  }
+  .bootcamp_admin_pg_stat {
+    padding: 10px 12px;
+  }
+  .bootcamp_admin_pg_actions {
+    width: 100%;
+  }
+  .bootcamp_admin_pg_actions .bootcamp_admin_pg_btn_ghost {
+    flex: 1;
+  }
+  .bootcamp_admin_pg_btn {
+    width: 100%;
+  }
   .bootcamp_admin_pg_title {
     font-size: 22px;
   }
