@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import "./BootCampAdmin.css";
 
 // localhost-la irundha local backend, production-la same domain (/api)
-const API_BASE =
+const API_BASE = 
   process.env.REACT_APP_API_URL ||
   (window.location.hostname === "localhost" ? "http://localhost:4002" : "");
 
