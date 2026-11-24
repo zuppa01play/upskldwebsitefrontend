@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+"build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "postbuild": "node prerender.mjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -53,8 +53,11 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
+    "png-to-ico": "^3.0.2",
     "puppeteer": "^25.18.1",
     "react-snap": "^1.23.0",
-    "serve-handler": "^6.1.8"
+    "serve-handler": "^6.1.8",
+    "sharp": "^0.35.5"
   }
 }

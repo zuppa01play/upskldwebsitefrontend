@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import "./StudentFooter.css";
-import vivekImg from "./PeopleImage/Vivek.png";
-import rajashriImg from "./PeopleImage/RajaSri.png";
-import venkateshImg from "./PeopleImage/Venkat.png";
-import saiPattabiramImg from "./PeopleImage/Sai.png";
-import rajmohanImg from "./PeopleImage/RajMohan.png";
-import joeImg from "./PeopleImage/Joe.png";
+import vivekImg from "./PeopleImage/Vivek.webp";
+import rajashriImg from "./PeopleImage/RajaSri.webp";
+import venkateshImg from "./PeopleImage/Venkat.webp";
+import saiPattabiramImg from "./PeopleImage/Sai.webp";
+import rajmohanImg from "./PeopleImage/RajMohan.webp";
+import joeImg from "./PeopleImage/Joe.webp";
 import vanitaImg from "./PeopleImage/vanitha.jpeg";
-import aparnaImg from "./PeopleImage/Aparna.png";
+import aparnaImg from "./PeopleImage/Aparna.webp";
 
 const peopleData = [
   {

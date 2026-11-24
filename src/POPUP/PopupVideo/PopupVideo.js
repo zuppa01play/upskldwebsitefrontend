@@ -13,7 +13,7 @@ import {
 } from "../../Components/Openbookingmodal";
 import "./PopupVideo.css";
 import popupvideo from "./popupvideo-720p.mp4"; // compressed 720p (target < 4 MB)
-import popupPoster from "./popup-poster.png"; // first-frame poster
+import popupPoster from "./popup-poster.webp"; // first-frame poster
 
 const DEFAULT_SRC = popupvideo;
 const OPEN_DELAY_MS = 5000; 

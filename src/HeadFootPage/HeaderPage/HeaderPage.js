@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./HeaderPage.css";
-import HeaderLogo from "./headerLogo.png";
+import HeaderLogo from "./headerLogo.webp";
 import { openBookingModal, openIntroVideo } from "../../Components/Openbookingmodal";
 
 const navLinks = [
