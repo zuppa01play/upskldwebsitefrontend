@@ -46,7 +46,11 @@ const validationSchema = Yup.object({
   fullName: Yup.string().trim().min(2, "Name is too short").required("Full name is required"),
   phone: Yup.string()
     .required("Phone number is required")
-    .test("ten-digits", "Enter a valid 10 digit mobile number", (v) => toTenDigits(v).length === 10),
+    .test(
+      "indian-mobile",
+      "Enter a valid 10 digit Indian mobile number",
+      (v) => /^[6-9]\d{9}$/.test(toTenDigits(v))
+    ),
   email: Yup.string().trim().email("Enter a valid email").required("Email is required"),
   role: Yup.string().required("Please select a role"),
   detail: Yup.string().trim(),
@@ -256,6 +260,7 @@ const BookForFree = ({ activeIndex = 0 }) => {
               </p>
             </header>
 
+            {/* noValidate: browser popup illa, Formik/Yup messages dhaan kaattum. required attribute accessibility + audit-ku */}
             <form className="book_free_pg_form" onSubmit={formik.handleSubmit} noValidate>
               <div className="book_free_pg_field">
                 <label className="book_free_pg_label" htmlFor="book_free_pg_fullName">
@@ -268,6 +273,7 @@ const BookForFree = ({ activeIndex = 0 }) => {
                   name="fullName"
                   className="book_free_pg_input"
                   autoComplete="name"
+                  required
                   value={formik.values.fullName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -288,6 +294,7 @@ const BookForFree = ({ activeIndex = 0 }) => {
                   inputMode="tel"
                   autoComplete="tel"
                   maxLength={16}
+                  required
                   value={formik.values.phone}
                   onChange={(e) => {
                     // digits, spaces and a leading + only
@@ -308,6 +315,7 @@ const BookForFree = ({ activeIndex = 0 }) => {
                   name="email"
                   className="book_free_pg_input"
                   autoComplete="email"
+                  required
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -369,7 +377,11 @@ const BookForFree = ({ activeIndex = 0 }) => {
               </div>
 
               <p className="book_free_pg_consent">
-                By submitting you agree to be contacted via WhatsApp, email or call for your session.
+                By submitting you agree to our{" "}
+                <a href="/privacypolicy" target="_blank" rel="noopener noreferrer">
+                  Privacy Policy
+                </a>{" "}
+                and to be contacted via WhatsApp, email or call for your session.
               </p>
 
               <button type="submit" className="book_free_pg_submit" disabled={formik.isSubmitting}>

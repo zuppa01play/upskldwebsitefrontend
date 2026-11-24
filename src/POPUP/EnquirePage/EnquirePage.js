@@ -11,7 +11,6 @@ import {
 } from "../../Components/Openbookingmodal.js";
 import "./EnquirePage.css";
 
-
 /*
   Enquiry popup — opens ONLY when the footer "Enquire" button calls openEnquiryModal()
   Usage in App.js:  <EnquirePage activeIndex={activeIndex} />
@@ -36,7 +35,11 @@ const ROLES = [
 // header tab -> the extra input next to "City"
 //   0 Small Business -> Type of business · 1 Working Professionals -> Your role · 2 Students -> College / course
 const DETAIL_BY_TAB = [
-  { audience: "Small Business", label: "Type of business", key: "businessType" },
+  {
+    audience: "Small Business",
+    label: "Type of business",
+    key: "businessType",
+  },
   { audience: "Working Professionals", label: "Your role", key: "jobRole" },
   { audience: "Students", label: "College / course", key: "college" },
 ];
@@ -44,19 +47,31 @@ const DETAIL_BY_TAB = [
 // "+91 98765 43210" / "98765 43210" / "9876543210"  ->  "9876543210"
 const toTenDigits = (value) => {
   const digits = String(value || "").replace(/\D/g, "");
-  return digits.length > 10 && digits.startsWith("91") ? digits.slice(-10) : digits.slice(0, 10);
+  return digits.length > 10 && digits.startsWith("91")
+    ? digits.slice(-10)
+    : digits.slice(0, 10);
 };
 
 const validationSchema = Yup.object({
-  fullName: Yup.string().trim().min(2, "Name is too short").required("Full name is required"),
+  fullName: Yup.string()
+    .trim()
+    .min(2, "Name is too short")
+    .required("Full name is required"),
   phone: Yup.string()
     .required("Phone number is required")
-    .test("ten-digits", "Enter a valid 10 digit mobile number", (v) => toTenDigits(v).length === 10),
-  email: Yup.string().trim().email("Enter a valid email").required("Email is required"),
+    .test("indian-mobile", "Enter a valid 10 digit Indian mobile number", (v) =>
+      /^[6-9]\d{9}$/.test(toTenDigits(v)),
+    ),
+  email: Yup.string()
+    .trim()
+    .email("Enter a valid email")
+    .required("Email is required"),
   role: Yup.string().required("Please select a role"),
   detail: Yup.string().trim(),
   city: Yup.string().trim(),
-  question: Yup.string().trim().max(1000, "Please keep it under 1000 characters"),
+  question: Yup.string()
+    .trim()
+    .max(1000, "Please keep it under 1000 characters"),
 });
 
 const EnquirePage = ({ activeIndex = 0 }) => {
@@ -133,7 +148,7 @@ const EnquirePage = ({ activeIndex = 0 }) => {
           toast.error("Request timed out. Please try again.");
         } else {
           toast.error(
-            "Unable to reach the server. Please check your internet connection and try again."
+            "Unable to reach the server. Please check your internet connection and try again.",
           );
         }
       } finally {
@@ -192,7 +207,7 @@ const EnquirePage = ({ activeIndex = 0 }) => {
       }
       if (e.key !== "Tab" || !dialogRef.current) return;
       const nodes = dialogRef.current.querySelectorAll(
-        'button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+        'button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
       );
       if (!nodes.length) return;
       const first = nodes[0];
@@ -208,7 +223,8 @@ const EnquirePage = ({ activeIndex = 0 }) => {
     document.addEventListener("keydown", onKey);
 
     const focusTimer = setTimeout(() => {
-      if (firstInputRef.current) firstInputRef.current.focus({ preventScroll: true });
+      if (firstInputRef.current)
+        firstInputRef.current.focus({ preventScroll: true });
     }, 140);
 
     return () => {
@@ -243,8 +259,22 @@ const EnquirePage = ({ activeIndex = 0 }) => {
         aria-modal="true"
         aria-labelledby="enquire_pg_title"
       >
-        <button type="button" className="enquire_pg_close" onClick={closeModal} aria-label="Close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+        <button
+          type="button"
+          className="enquire_pg_close"
+          onClick={closeModal}
+          aria-label="Close"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
             <path d="M6 6l12 12M18 6L6 18" />
           </svg>
         </button>
@@ -263,9 +293,17 @@ const EnquirePage = ({ activeIndex = 0 }) => {
               </p>
             </header>
 
-            <form className="enquire_pg_form" onSubmit={formik.handleSubmit} noValidate>
+            {/* noValidate: browser popup illa, Formik/Yup messages dhaan kaattum. required attribute accessibility + audit-ku */}
+            <form
+              className="enquire_pg_form"
+              onSubmit={formik.handleSubmit}
+              noValidate
+            >
               <div className="enquire_pg_field">
-                <label className="enquire_pg_label" htmlFor="enquire_pg_fullName">
+                <label
+                  className="enquire_pg_label"
+                  htmlFor="enquire_pg_fullName"
+                >
                   Full name<span className="enquire_pg_req">*</span>
                 </label>
                 <input
@@ -275,11 +313,14 @@ const EnquirePage = ({ activeIndex = 0 }) => {
                   name="fullName"
                   className="enquire_pg_input"
                   autoComplete="name"
+                  required
                   value={formik.values.fullName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {showError("fullName") && <p className="enquire_pg_error">{formik.errors.fullName}</p>}
+                {showError("fullName") && (
+                  <p className="enquire_pg_error">{formik.errors.fullName}</p>
+                )}
               </div>
 
               <div className="enquire_pg_field">
@@ -295,14 +336,20 @@ const EnquirePage = ({ activeIndex = 0 }) => {
                   inputMode="tel"
                   autoComplete="tel"
                   maxLength={16}
+                  required
                   value={formik.values.phone}
                   onChange={(e) => {
                     // digits, spaces and a leading + only
-                    setFieldValue("phone", e.target.value.replace(/[^\d+\s]/g, ""));
+                    setFieldValue(
+                      "phone",
+                      e.target.value.replace(/[^\d+\s]/g, ""),
+                    );
                   }}
                   onBlur={formik.handleBlur}
                 />
-                {showError("phone") && <p className="enquire_pg_error">{formik.errors.phone}</p>}
+                {showError("phone") && (
+                  <p className="enquire_pg_error">{formik.errors.phone}</p>
+                )}
               </div>
 
               <div className="enquire_pg_field">
@@ -315,11 +362,14 @@ const EnquirePage = ({ activeIndex = 0 }) => {
                   name="email"
                   className="enquire_pg_input"
                   autoComplete="email"
+                  required
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {showError("email") && <p className="enquire_pg_error">{formik.errors.email}</p>}
+                {showError("email") && (
+                  <p className="enquire_pg_error">{formik.errors.email}</p>
+                )}
               </div>
 
               <div className="enquire_pg_field">
@@ -340,12 +390,17 @@ const EnquirePage = ({ activeIndex = 0 }) => {
                     </option>
                   ))}
                 </select>
-                {showError("role") && <p className="enquire_pg_error">{formik.errors.role}</p>}
+                {showError("role") && (
+                  <p className="enquire_pg_error">{formik.errors.role}</p>
+                )}
               </div>
 
               <div className="enquire_pg_row">
                 <div className="enquire_pg_field">
-                  <label className="enquire_pg_label" htmlFor="enquire_pg_detail">
+                  <label
+                    className="enquire_pg_label"
+                    htmlFor="enquire_pg_detail"
+                  >
                     {detailInfo.label}
                   </label>
                   <input
@@ -376,7 +431,10 @@ const EnquirePage = ({ activeIndex = 0 }) => {
               </div>
 
               <div className="enquire_pg_field">
-                <label className="enquire_pg_label" htmlFor="enquire_pg_question">
+                <label
+                  className="enquire_pg_label"
+                  htmlFor="enquire_pg_question"
+                >
                   Your question
                 </label>
                 <textarea
@@ -389,14 +447,29 @@ const EnquirePage = ({ activeIndex = 0 }) => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {showError("question") && <p className="enquire_pg_error">{formik.errors.question}</p>}
+                {showError("question") && (
+                  <p className="enquire_pg_error">{formik.errors.question}</p>
+                )}
               </div>
 
               <p className="enquire_pg_consent">
-                By submitting you agree to be contacted via WhatsApp, email or call for your session.
+                By submitting you agree to our{" "}
+                <a
+                  href="/privacypolicy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Privacy Policy
+                </a>{" "}
+                and to be contacted via WhatsApp, email or call about your
+                enquiry.
               </p>
 
-              <button type="submit" className="enquire_pg_submit" disabled={formik.isSubmitting}>
+              <button
+                type="submit"
+                className="enquire_pg_submit"
+                disabled={formik.isSubmitting}
+              >
                 {formik.isSubmitting ? "Sending..." : "Send enquiry"}
               </button>
             </form>
@@ -406,12 +479,21 @@ const EnquirePage = ({ activeIndex = 0 }) => {
             <div className="enquire_pg_success_icon">✓</div>
             <h3 className="enquire_pg_success_title">Enquiry sent!</h3>
             <p className="enquire_pg_success_text">
-              Thanks! Our team will get back to you shortly on WhatsApp, email or phone.
+              Thanks! Our team will get back to you shortly on WhatsApp, email
+              or phone.
             </p>
-            <button type="button" className="enquire_pg_submit" onClick={closeModal}>
+            <button
+              type="button"
+              className="enquire_pg_submit"
+              onClick={closeModal}
+            >
               Close
             </button>
-            <button type="button" className="enquire_pg_again" onClick={handleReset}>
+            <button
+              type="button"
+              className="enquire_pg_again"
+              onClick={handleReset}
+            >
               Send another enquiry
             </button>
           </div>

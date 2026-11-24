@@ -28,12 +28,7 @@ const navLinks = [
     announce:
       "Learn more about our mission and values · Book a free session →",
   },
-  // {
-  //   label: "Bootcamp",
-  //   path: "/bootcamp",
-  //   announce:
-  //     "Join our bootcamp · Register now and start your career journey →",
-  // },
+
 ];
 
 const HeaderPage = ({ activeIndex = 0, onTabChange = () => {} }) => {

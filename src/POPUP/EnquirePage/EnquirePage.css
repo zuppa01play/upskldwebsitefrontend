@@ -423,3 +423,9 @@
   font-family: inherit;
 }
 .enquire_pg_dialog { max-height: calc(100vh - 24px); overflow-y: auto; }
+
+.enquire_pg_consent a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}

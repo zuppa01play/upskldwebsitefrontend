@@ -16,8 +16,9 @@ import popupvideo from "./popupvideo-720p.mp4"; // compressed 720p (target < 4 M
 import popupPoster from "./popup-poster.png"; // first-frame poster
 
 const DEFAULT_SRC = popupvideo;
-const OPEN_DELAY_MS = 5000; // website open aanadhum 5s apram
-const CLOSE_MS = 260; // CSS exit animation-oda match aaganum
+const OPEN_DELAY_MS = 5000; 
+const AUTO_OPEN_MS = 30000; 
+const CLOSE_MS = 260; 
 const HIDDEN_PATHS = ["/privacypolicy", "/termsandconditions"]; 
 
 const formatTime = (seconds) => {
@@ -114,16 +115,29 @@ const PopupVideo = (props) => {
   const skipToBooking = useCallback(() => finish(true), [finish]);
 
   /* ---------- 5 seconds after the website opens — Small Business only ---------- */
+  /* ---------- Auto open: 30 s OR 50% scroll — Small Business only, once per visitor ---------- */
   useEffect(() => {
-    if (activeIndex !== 0 || isBlockedPage) return undefined;
-    if (wasPopupDismissed()) return undefined;
-    const id = setTimeout(() => {
-      // user already opened the form by himself / closed it earlier -> do not interrupt
+    if (activeIndex !== 0 || isBlockedPage || wasPopupDismissed()) return undefined;
+
+    let timer;
+    function stop() {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    }
+    function trigger() {
+      stop();
       if (isBookingOpen() || wasPopupDismissed()) return;
       openPopup();
-    }, delay);
-    return () => clearTimeout(id);
-  }, [delay, openPopup, activeIndex, isBlockedPage]);
+    }
+    function onScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max > 0 && window.pageYOffset / max > 0.5) trigger();
+    }
+
+    timer = setTimeout(trigger, AUTO_OPEN_MS);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return stop;
+  }, [openPopup, activeIndex, isBlockedPage]);
 
   const tabTimerRef = useRef(null);
 
@@ -293,7 +307,7 @@ const PopupVideo = (props) => {
             onCanPlay={tryPlay}
             onTimeUpdate={handleTimeUpdate}
             onEnded={skipToBooking} /* video mudinjathum form */
-            onError={skipToBooking} /* video file illana direct-a form */
+           onError={closeAll}
           />
 
           <div className="popup_video_pg_shade" aria-hidden="true"></div>
