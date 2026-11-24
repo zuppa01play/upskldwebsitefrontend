@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -206,7 +206,7 @@ const usePageSeo = () => {
 
 const BootCamp = () => {
   usePageSeo();
-  const navigate = useNavigate();
+
 
   const { pay, loading: payLoading } = useRazorpay();
   const [formData, setFormData] = useState(initialForm);

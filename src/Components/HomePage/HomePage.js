@@ -4,6 +4,7 @@ import "./HomePageSlider.css";
 import "./HomePageSliderFade.css";
 import { openBookingModal, selectBusiness,
 } from "../Openbookingmodal";
+import { Helmet } from "react-helmet-async";
 
 /* NOTE: file names are case-sensitive on the Linux server.
    Make sure each name below matches the real file name exactly. */
@@ -366,6 +367,14 @@ const HomePage = ({ activeIndex = 0 }) => {
 
   return (
     <section className="impac_home_pg_section" id="home" lang="en">
+
+
+      <Helmet>
+  <title>Upskld AI | Practical AI Training for Small Businesses, Professionals & Students</title>
+  <meta name="description" content="Learn to use AI for sales, marketing, finance and your career, in plain language. Book a free 15-minute session with Upskld AI." />
+  <link rel="canonical" href="https://upskldai.com/" />
+  <meta property="og:url" content="https://upskldai.com/" />
+</Helmet>
       <div className="impac_home_pg_stage">
         {content.map((item, index) => {
           const isActive = index === activeIndex;

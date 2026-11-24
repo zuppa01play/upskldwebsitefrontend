@@ -43,6 +43,14 @@ for (const route of ROUTES) {
   // Wait for React root to have content
   await page.waitForSelector('#root > *', { timeout: 15000 });
 
+  // Wait until Helmet has set this route's canonical (path must match route)
+  await page.waitForFunction(() => {
+    const c = document.querySelector('link[rel="canonical"]');
+    if (!c) return false;
+    const norm = (p) => p.replace(/\/+$/, '') || '/';
+    return norm(new URL(c.href).pathname) === norm(location.pathname);
+  }, { timeout: 15000 });
+
   // Remove popup/modal/overlay elements that shouldn't be in the snapshot
   await page.evaluate(() => {
     const selectors = [
@@ -57,6 +65,14 @@ for (const route of ROUTES) {
     selectors.forEach((sel) => {
       document.querySelectorAll(sel).forEach((el) => el.remove());
     });
+
+    // Remove scripts/iframes injected at runtime by GTM/GA.
+    // The original inline GTM snippet in <head> has no src, so it stays.
+    document
+      .querySelectorAll(
+        'script[src*="googletagmanager.com"], script[src*="google-analytics.com"], iframe[src*="googletagmanager.com"]:not(noscript iframe)'
+      )
+      .forEach((el) => el.remove());
   });
 
   const html = await page.content();

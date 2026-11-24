@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./PageNotFound.css";
+import { Helmet } from "react-helmet-async";
 
 const PageNotFound = () => {
   /* keep unknown URLs out of Google; restore title when leaving the page */
@@ -21,6 +22,11 @@ const PageNotFound = () => {
 
   return (
     <main className="upskld_notfound_pg_wrapper">
+
+      <Helmet>
+  <title>Page not found | Upskld AI</title>
+  <meta name="robots" content="noindex" />
+</Helmet>
       <p className="upskld_notfound_pg_code" aria-hidden="true">
         404
       </p>

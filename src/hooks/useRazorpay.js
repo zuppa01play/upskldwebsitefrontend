@@ -1,13 +1,3 @@
-/* =====================================================================
-   useRazorpay — loads Razorpay script once, creates order via backend,
-   opens checkout modal, and verifies payment.
-
-   Usage:
-     const { pay, loading } = useRazorpay();
-     pay({ amount: 999, description: "AI Bootcamp", prefill: { name, email, contact },
-           onSuccess, onFailure });
-   ===================================================================== */
-
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY_ID || "<YOUR_KEY_ID>";
@@ -83,8 +73,6 @@ const useRazorpay = () => {
         handler: async (response) => {
           try {
             const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
-            // console.log("[Razorpay] handler response:", { razorpay_payment_id, razorpay_order_id, razorpay_signature });
-            // Step 3: verify on backend
             const verify = await fetch(`${API_BASE}/api/payment/verify`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
