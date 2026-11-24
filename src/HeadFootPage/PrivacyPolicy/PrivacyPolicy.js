@@ -328,30 +328,7 @@ const sections = [
       },
     ],
   },
-  {
-    title: "Grievance officer",
-    blocks: [
-      {
-        p: `For any complaint or concern about your personal information, contact our Grievance Officer:`,
-      },
-      {
-        kv: [
-          ["Name", "Rajashree"],
-          ["Designation", "Grievance Officer"],
-          ["Organisation", "Impactree Data Technologies (UPSKLD)"],
-          ["Email", CONTACT_EMAIL],
-          [
-            "Address",
-            "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu – 600032, India.",
-          ],
-          ["Working hours", "Monday to Friday, 10:00 AM to 6:00 PM IST."],
-        ],
-      },
-      {
-        p: `We will acknowledge your complaint within 3 working days and resolve it within 30 days of receiving it.`,
-      },
-    ],
-  },
+ 
   {
     title: "Contact information",
     blocks: [

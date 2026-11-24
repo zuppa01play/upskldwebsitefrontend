@@ -365,32 +365,7 @@ const sections = [
       },
     ],
   },
-  {
-    title: "Grievance redressal and contact information",
-    blocks: [
-      {
-        p: `For questions, complaints, course enquiries, payment issues or refund requests, contact us:`,
-      },
-      {
-        kv: [
-          ["Brand", "UPSKLD"],
-          ["Operating Entity", "Impactree Data Technologies"],
-          ["Website", WEBSITE],
-          ["Email", CONTACT_EMAIL],
-          ["Business Address", ADDRESS],
-          [
-            "Grievance Officer",
-            "Rajashree, Impactree Data Technologies (UPSKLD)",
-          ],
-          ["Grievance Email", CONTACT_EMAIL],
-          ["Working hours", "Monday to Friday, 10:00 AM to 6:00 PM IST."],
-        ],
-      },
-      {
-        p: `We will acknowledge your complaint within 3 working days and resolve it within 30 days of receiving it.`,
-      },
-    ],
-  },
+
   {
     title: "General",
     blocks: [
