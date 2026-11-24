@@ -624,27 +624,12 @@ const BootCamp = () => {
             <br />
             <div className="bootcamp_pg_mentor_body">
               <p className="bootcamp_pg_mentor_text">
-                As Co-Founder at <strong>Upskld AI</strong>, {TRAINER} leads the
-                mission to bridge the critical skill gap between rapidly
-                advancing AI technologies and real-world application. Her focus
-                is on empowering non-technical learners, working professionals,
-                and entrepreneurs to leverage AI tools effortlessly in their
-                daily workflows.
+            Is a serial entrepreneur and business leader with over a decade of experience building technology-driven ventures. As Founder of UPSKLD, she leads an AI capacity-development platform for the non-technical segment, offering online courses, bootcamps, and institutional partnerships.
               </p>
-
-              <div className="bootcamp_pg_mentor_note">
-                <p className="bootcamp_pg_mentor_note_label">
-                  <IconAward />
-                  Industry engagement
-                </p>
-                <p className="bootcamp_pg_mentor_note_text">
-                  {TRAINER} was among the trainers involved in a practical AI
-                  training session at the{" "}
-                  <strong>AICCI National Startup Summit 2026</strong>, engaging
-                  more than 60 students. The session focused on practical AI
-                  applications in manufacturing environments.
-                </p>
-              </div>
+<p className="bootcamp_pg_mentor_text">Her entrepreneurial journey spans drone technology, operational intelligence, and social impact. She also serves as an Independent Director at Autoline Industries Ltd. and leads the Impactree Foundation, supporting over 1,000 rural women entrepreneurs across India.</p>
+            <p className="bootcamp_pg_mentor_text">She has been recognised by the President of India as one of the Top 10 Women Entrepreneurs Transforming India and has spoken at the United Nations, the World Economic Forum, and the G20.</p>
+            <p className="bootcamp_pg_mentor_text">In every UPSKLD course, she brings practical, boardroom-to-ground experience to help non-technical professionals learn and apply AI with confidence.</p>
+          
             </div>
           </article>
         </section>
