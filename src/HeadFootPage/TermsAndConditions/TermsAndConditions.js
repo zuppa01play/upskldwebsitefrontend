@@ -5,17 +5,7 @@ import { Helmet } from "react-helmet-async";
 const CONTACT_EMAIL = "growth@impactree.ai";
 const LAST_UPDATED = "24 November 2026";
 const WEBSITE = "https://upskldai.com";
-const ADDRESS =
-  "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu – 600032, India.";
 
-/*
-  Block types used in `sections`:
-  { p: "text" }                  -> paragraph
-  { h: "text" }                  -> sub heading
-  { ul: ["a", "b"] }             -> bullet list
-  { kv: [["Label", "Value"]] }   -> label / value lines
-  **bold** works inside any text. The contact email becomes a mailto link.
-*/
 
 const sections = [
   {
