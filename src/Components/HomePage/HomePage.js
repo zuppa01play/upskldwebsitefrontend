@@ -12,7 +12,7 @@ import smallbusinessImgOne from "./Smallbusiness_1.jpg";
 import smallbusinessImgTwo from "./Smallbusiness_2.jpg";
 import smallbusinessImgThree from "./Smallbusiness_3.jpg";
 import smallbusinessImgFour from "./Smallbusiness_4.jpg";
-import smallbusinessImgFive from "./Smallbusiness_5.jpg";
+
 
 import WorkingProfessionalsImgOne from "./WorkingProf_1.jpg";
 import WorkingProfessionalsImgTwo from "./WorkingProf_2.jpg";
@@ -58,7 +58,7 @@ const content = [
       smallbusinessImgTwo,
       smallbusinessImgThree,
       smallbusinessImgFour,
-      smallbusinessImgFive,
+
     ],
     // Alt text for each slide image. Refine against the real photo content.
     imageAlts: [
