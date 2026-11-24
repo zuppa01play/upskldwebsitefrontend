@@ -1,0 +1,178 @@
+
+.impac_home_pg_boot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 18px;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(224, 168, 61, 0.6);
+  box-shadow: 0 10px 24px rgba(59, 0, 61, 0.12);
+}
+
+/* ---------- Top line: label + date ---------- */
+
+.impac_home_pg_boot_head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #4e3a50;
+}
+
+.impac_home_pg_boot_pulse {
+  position: relative;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e0a83d;
+}
+
+.impac_home_pg_boot_pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #e0a83d;
+  animation: impac_home_pg_boot_pulse 1.8s ease-out infinite;
+}
+
+@keyframes impac_home_pg_boot_pulse {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
+
+.impac_home_pg_boot_label {
+  font-weight: 600;
+}
+
+.impac_home_pg_boot_date {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #3b003d;
+  color: #faf6ec;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Timer: 11 Days 00 Hours 00 Minutes ---------- */
+
+.impac_home_pg_boot_timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.impac_home_pg_boot_unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 62px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f8e9fd 0%, #f1dffa 100%);
+  border: 1px solid #e6dcfa;
+}
+
+.impac_home_pg_boot_num {
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #3b003d;
+  font-variant-numeric: tabular-nums;
+}
+
+.impac_home_pg_boot_unit_label {
+  margin-top: 2px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #b8861f;
+}
+
+.impac_home_pg_boot_sep {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  color: #e0a83d;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 820px) {
+  .impac_home_pg_boot {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .impac_home_pg_boot {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .impac_home_pg_boot_head {
+    font-size: 13px;
+  }
+
+  .impac_home_pg_boot_date {
+    font-size: 12.5px;
+  }
+
+  .impac_home_pg_boot_timer {
+    gap: 6px;
+  }
+
+  .impac_home_pg_boot_unit {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
+  }
+
+  .impac_home_pg_boot_unit_label {
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+  }
+
+  .impac_home_pg_boot_sep {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .impac_home_pg_boot_num {
+    font-size: 22px;
+  }
+
+  .impac_home_pg_boot_unit_label {
+    font-size: 9.5px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .impac_home_pg_boot_pulse::after {
+    animation: none;
+  }
+}

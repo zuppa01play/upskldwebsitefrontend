@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import "./HomePageSlider.css";
 import "./HomePageSliderFade.css";
-import { openBookingModal, selectBusiness,
-} from "../Openbookingmodal";
+import "./HomePageCountdown.css";
+import { openBookingModal, selectBusiness } from "../Openbookingmodal";
 import { Helmet } from "react-helmet-async";
 
 /* NOTE: file names are case-sensitive on the Linux server.
@@ -12,7 +12,6 @@ import smallbusinessImgOne from "./Smallbusiness_1.jpg";
 import smallbusinessImgTwo from "./Smallbusiness_2.jpg";
 import smallbusinessImgThree from "./Smallbusiness_3.jpg";
 import smallbusinessImgFour from "./Smallbusiness_4.jpg";
-
 
 import WorkingProfessionalsImgOne from "./WorkingProf_1.jpg";
 import WorkingProfessionalsImgTwo from "./WorkingProf_2.jpg";
@@ -25,10 +24,6 @@ import StudentsImgThree from "./S_3.jpg";
 import StudentsImgFour from "./S_4.jpg";
 import StudentsImgFive from "./S_5.jpg";
 import StudentsImgSix from "./S_6.jpg";
-
-
-
-
 
 const SLIDE_INTERVAL = 3000;
 
@@ -53,12 +48,19 @@ const content = [
     ],
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
+    // Only this slide has a bootcamp countdown.
+    // `start` is midnight (IST) at the start of 05-12-2026.
+    // When this moment is reached, the countdown disappears by itself.
+    bootcamp: {
+      label: "AI Bootcamp starts on",
+      date: "05-12-2026",
+      start: "2026-12-05T00:00:00+05:30",
+    },
     images: [
       smallbusinessImgOne,
       smallbusinessImgTwo,
       smallbusinessImgThree,
       smallbusinessImgFour,
-
     ],
     // Alt text for each slide image. Refine against the real photo content.
     imageAlts: [
@@ -236,6 +238,88 @@ const UsersIcon = () => (
   </svg>
 );
 
+/* ---------- Bootcamp countdown ---------- */
+
+const pad = (value) => String(value).padStart(2, "0");
+
+/* Returns { days, hours, minutes }, or null once the start time is reached */
+const getTimeLeft = (targetMs) => {
+  if (Number.isNaN(targetMs)) return null;
+
+  const diff = targetMs - Date.now();
+  if (diff <= 0) return null;
+
+  const totalMinutes = Math.floor(diff / 60000);
+
+  return {
+    days: Math.floor(totalMinutes / 1440),
+    hours: Math.floor((totalMinutes % 1440) / 60),
+    minutes: totalMinutes % 60,
+  };
+};
+
+const isSameTime = (a, b) =>
+  a === b ||
+  (a &&
+    b &&
+    a.days === b.days &&
+    a.hours === b.hours &&
+    a.minutes === b.minutes);
+
+const BootcampCountdown = ({ label, date, start }) => {
+  const targetMs = new Date(start).getTime();
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(targetMs));
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const next = getTimeLeft(targetMs);
+      setTimeLeft((previous) => (isSameTime(previous, next) ? previous : next));
+
+      // Stop ticking once the bootcamp date is reached
+      if (!next) clearInterval(timer);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetMs]);
+
+  // Date reached: the whole countdown block closes
+  if (!timeLeft) return null;
+
+  return (
+    <div
+      className="impac_home_pg_boot impac_home_pg_reveal"
+      style={{ "--d": "40ms" }}
+      role="timer"
+      aria-label={`${label} ${date}. ${timeLeft.days} days ${timeLeft.hours} hours ${timeLeft.minutes} minutes left.`}
+    >
+      <div className="impac_home_pg_boot_head">
+        <span className="impac_home_pg_boot_pulse" aria-hidden="true"></span>
+        <span className="impac_home_pg_boot_label">{label}</span>
+        <strong className="impac_home_pg_boot_date">{date}</strong>
+      </div>
+
+      <div className="impac_home_pg_boot_timer" aria-hidden="true">
+        <div className="impac_home_pg_boot_unit">
+          <span className="impac_home_pg_boot_num">{pad(timeLeft.days)}</span>
+          <span className="impac_home_pg_boot_unit_label">Days</span>
+        </div>
+        <span className="impac_home_pg_boot_sep">:</span>
+        <div className="impac_home_pg_boot_unit">
+          <span className="impac_home_pg_boot_num">{pad(timeLeft.hours)}</span>
+          <span className="impac_home_pg_boot_unit_label">Hours</span>
+        </div>
+        <span className="impac_home_pg_boot_sep">:</span>
+        <div className="impac_home_pg_boot_unit">
+          <span className="impac_home_pg_boot_num">
+            {pad(timeLeft.minutes)}
+          </span>
+          <span className="impac_home_pg_boot_unit_label">Minutes</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ImageSlider = ({
   images = [],
   imageAlts = [],
@@ -290,9 +374,7 @@ const ImageSlider = ({
             key={`${src}-${index}`}
             className={`impac_home_pg_img impac_home_pg_slider_img ${
               index === 0 ? "" : "impac_home_pg_slider_img_abs"
-            } ${
-              isCurrent ? "impac_home_pg_slider_img_active" : ""
-            } ${
+            } ${isCurrent ? "impac_home_pg_slider_img_active" : ""} ${
               isLeaving ? "impac_home_pg_slider_img_leaving" : ""
             }`}
             src={src}
@@ -337,10 +419,7 @@ const HomePage = ({ activeIndex = 0 }) => {
     const header = document.querySelector(".upskld_heade_pg_header");
     const offset = header ? header.offsetHeight : 80;
     const top =
-      element.getBoundingClientRect().top +
-      window.pageYOffset -
-      offset -
-      10;
+      element.getBoundingClientRect().top + window.pageYOffset - offset - 10;
 
     window.scrollTo({ top, behavior: "smooth" });
   };
@@ -367,14 +446,19 @@ const HomePage = ({ activeIndex = 0 }) => {
 
   return (
     <section className="impac_home_pg_section" id="home" lang="en">
-
-
       <Helmet>
-  <title>Upskld AI | Practical AI Training for Small Businesses, Professionals & Students</title>
-  <meta name="description" content="Learn to use AI for sales, marketing, finance and your career, in plain language. Book a free 15-minute session with Upskld AI." />
-  <link rel="canonical" href="https://upskldai.com/" />
-  <meta property="og:url" content="https://upskldai.com/" />
-</Helmet>
+        <title>
+          Upskld AI | Practical AI Training for Small Businesses, Professionals
+          &amp; Students
+        </title>
+        <meta
+          name="description"
+          content="Learn to use AI for sales, marketing, finance and your career, in plain language. Book a free 15-minute session with Upskld AI."
+        />
+        <link rel="canonical" href="https://upskldai.com/" />
+        <meta property="og:url" content="https://upskldai.com/" />
+      </Helmet>
+
       <div className="impac_home_pg_stage">
         {content.map((item, index) => {
           const isActive = index === activeIndex;
@@ -383,7 +467,7 @@ const HomePage = ({ activeIndex = 0 }) => {
             : index < activeIndex
             ? "prev"
             : "next";
-               const tab = isActive ? 0 : -1;
+          const tab = isActive ? 0 : -1;
           const Heading = isActive ? "h1" : "h2";
 
           return (
@@ -407,7 +491,16 @@ const HomePage = ({ activeIndex = 0 }) => {
                   </span>
                 </span>
 
-                                <Heading
+                {/* Bootcamp countdown: only the Small Business slide has this */}
+                {item.bootcamp && (
+                  <BootcampCountdown
+                    label={item.bootcamp.label}
+                    date={item.bootcamp.date}
+                    start={item.bootcamp.start}
+                  />
+                )}
+
+                <Heading
                   className="impac_home_pg_heading impac_home_pg_reveal"
                   style={{ "--d": "80ms" }}
                 >

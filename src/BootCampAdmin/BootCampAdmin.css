@@ -1,0 +1,251 @@
+.bootcamp_admin_pg_wrapper {
+  min-height: 70vh;
+  padding: 32px 16px 56px;
+  background: #f6f1ff;
+  color: #0f0a2a;
+}
+
+.bootcamp_admin_pg_container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.bootcamp_admin_pg_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.bootcamp_admin_pg_title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: #40159f;
+}
+
+.bootcamp_admin_pg_actions {
+  display: flex;
+  gap: 8px;
+}
+
+.bootcamp_admin_pg_btn,
+.bootcamp_admin_pg_btn_ghost {
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px 18px;
+}
+
+.bootcamp_admin_pg_btn {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(100deg, #40159f, #7a1fc4);
+}
+
+.bootcamp_admin_pg_btn_ghost {
+  border: 1px solid #cfc3ee;
+  color: #40159f;
+  background: #fff;
+}
+
+.bootcamp_admin_pg_btn:disabled,
+.bootcamp_admin_pg_btn_ghost:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Login ---------- */
+.bootcamp_admin_pg_login {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 380px;
+  margin: 24px auto;
+  padding: 28px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(64, 21, 159, 0.12);
+}
+
+.bootcamp_admin_pg_login_title {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.bootcamp_admin_pg_label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d3957;
+}
+
+.bootcamp_admin_pg_input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #0f0a2a;
+  background: #fff;
+  border: 1px solid #d9d2ee;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.bootcamp_admin_pg_input:focus {
+  outline: 2px solid #7a1fc4;
+  outline-offset: 1px;
+}
+
+.bootcamp_admin_pg_error {
+  margin: 4px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c62828;
+}
+
+/* ---------- Stats ---------- */
+.bootcamp_admin_pg_stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.bootcamp_admin_pg_stat {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(64, 21, 159, 0.08);
+}
+
+.bootcamp_admin_pg_stat_num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #40159f;
+}
+
+.bootcamp_admin_pg_stat_label {
+  font-size: 13px;
+  color: #6b6685;
+}
+
+.bootcamp_admin_pg_stat_paid .bootcamp_admin_pg_stat_num {
+  color: #1b7f3b;
+}
+
+.bootcamp_admin_pg_stat_unpaid .bootcamp_admin_pg_stat_num {
+  color: #c2410c;
+}
+
+/* ---------- Toolbar ---------- */
+.bootcamp_admin_pg_toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.bootcamp_admin_pg_tabs {
+  display: inline-flex;
+  padding: 4px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e3dcf5;
+}
+
+.bootcamp_admin_pg_tab {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #40159f;
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.bootcamp_admin_pg_tab_active {
+  color: #fff;
+  background: linear-gradient(100deg, #40159f, #7a1fc4);
+}
+
+.bootcamp_admin_pg_search {
+  max-width: 320px;
+}
+
+/* ---------- Table ---------- */
+.bootcamp_admin_pg_table_wrap {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(64, 21, 159, 0.08);
+}
+
+.bootcamp_admin_pg_table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.bootcamp_admin_pg_table th,
+.bootcamp_admin_pg_table td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #efedf7;
+  word-break: break-word;
+}
+
+.bootcamp_admin_pg_table th {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #6b6685;
+  background: #faf7ff;
+  white-space: nowrap;
+}
+
+.bootcamp_admin_pg_empty {
+  padding: 28px 14px;
+  text-align: center;
+  color: #6b6685;
+}
+
+.bootcamp_admin_pg_badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.bootcamp_admin_pg_badge_paid {
+  color: #14632e;
+  background: #dcf5e4;
+}
+
+.bootcamp_admin_pg_badge_unpaid {
+  color: #9a3412;
+  background: #ffe9d6;
+}
+
+@media (max-width: 560px) {
+  .bootcamp_admin_pg_title {
+    font-size: 22px;
+  }
+  .bootcamp_admin_pg_stat_num {
+    font-size: 22px;
+  }
+  .bootcamp_admin_pg_search {
+    max-width: none;
+  }
+}
