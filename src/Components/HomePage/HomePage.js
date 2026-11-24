@@ -9,15 +9,15 @@ import { Helmet } from "react-helmet-async";
 /* NOTE: file names are case-sensitive on the Linux server.
    Make sure each name below matches the real file name exactly. */
 import smallbusinessImgOne from "./Smallbusiness_1.jpg";
-import smallbusinessImgTwo from "./Smallbusiness_2.jpeg";
-import smallbusinessImgThree from "./Smallbusiness_3.jpeg";
-import smallbusinessImgFour from "./Smallbusiness_4.jpeg";
-import smallbusinessImgFive from "./SmallBusiness_5.jpg";
+import smallbusinessImgTwo from "./Smallbusiness_2.jpg";
+import smallbusinessImgThree from "./Smallbusiness_3.jpg";
+import smallbusinessImgFour from "./Smallbusiness_4.jpg";
+import smallbusinessImgFive from "./Smallbusiness_5.jpg";
 
-import WorkingProfessionalsImgOne from "./WP_1.jpeg";
-import WorkingProfessionalsImgTwo from "./WP_2.jpeg";
-import WorkingProfessionalsImgThree from "./WP_3.jpeg";
-import WorkingProfessionalsImgFour from "./WP_4.jpeg";
+import WorkingProfessionalsImgOne from "./WorkingProf_1.jpg";
+import WorkingProfessionalsImgTwo from "./WorkingProf_2.jpg";
+import WorkingProfessionalsImgThree from "./WorkingProf_3.jpg";
+import WorkingProfessionalsImgFour from "./WorkingProf_4.jpg";
 
 import StudentsImgOne from "./S_1.jpg";
 import StudentsImgTwo from "./S_2.jpg";
