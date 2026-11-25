@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./FooterPage.css";
-import { openEnquiryModal } from "../../Components/Openbookingmodal";
 
 /* ---------- Icons ---------- */
 
@@ -77,9 +76,9 @@ const CapIcon = () => (
 /* ---------- Content ---------- */
 
 /* TODO: fill these 3 before deploying */
-const CONTACT_EMAIL = "growth@impactree.ai"; 
+const CONTACT_EMAIL = "growth@impactree.ai";
 const WHATSAPP_NUMBER = "8807431765";
-const ADDRESS = "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu 600032"; 
+const ADDRESS = "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu 600032";
 
 const navLinks = [
   { label: "Small Business", id: "home" },
@@ -130,22 +129,21 @@ const legalLinks = [
 const PROGRAMS = [
   {
     name: "AI for Small Businesses",
-  
   },
   {
     name: "AI for Working Professionals",
-   
   },
   {
     name: "AI for Students",
-  
   },
 ];
 
 const SHOW_BAR_AFTER = 400; // px scrolled before the enroll bar slides up
+const BOOTCAMP_PATH = "/bootcamp"; // Enroll now click pannina inga poganum
 
 const FooterPage = ({ activeIndex = 0 }) => {
   const PROGRAM = PROGRAMS[activeIndex] || PROGRAMS[0];
+  const navigate = useNavigate();
   const footerRef = useRef(null);
   const [inView, setInView] = useState(false);
   const [barVisible, setBarVisible] = useState(false);
@@ -208,6 +206,12 @@ const FooterPage = ({ activeIndex = 0 }) => {
   const handleNavClick = (e, id) => {
     e.preventDefault();
     scrollToId(id);
+  };
+
+  /* Enroll now -> /bootcamp page, page top la irundhu start aaga */
+  const handleEnrollClick = () => {
+    navigate(BOOTCAMP_PATH);
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   const year = new Date().getFullYear();
@@ -320,7 +324,6 @@ const FooterPage = ({ activeIndex = 0 }) => {
 
           <div key={activeIndex} className="upskld_footer_pg_bar_text">
             <p className="upskld_footer_pg_bar_title">{PROGRAM.name}</p>
-        
           </div>
 
           <div className="upskld_footer_pg_bar_actions">
@@ -328,7 +331,7 @@ const FooterPage = ({ activeIndex = 0 }) => {
               type="button"
               className="upskld_footer_pg_bar_enroll"
               tabIndex={barVisible ? 0 : -1}
-              onClick={openEnquiryModal}
+              onClick={handleEnrollClick}
             >
               Enroll now
             </button>

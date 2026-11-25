@@ -209,12 +209,14 @@ const studentCourses = [
   // },
 ];
 
-/* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students) */
+/* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students)
+   hideEnroll: true -> andha audience la "Enrollment Open" badge + Enroll button kaattaadhu */
 const audiences = [
   {
     id: "small",
     title: "Sales. Marketing. Finance. Start small, go end-to-end.",
     courses: smallBusinessCourses,
+    hideEnroll: true,
   },
   {
     id: "professionals",
@@ -399,26 +401,29 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
                   ))}
                 </ul>
 
-                {!course.open && (
+                {/* Small Business la "Enrollment Open" + Enroll button illa */}
+                {!audience.hideEnroll && !course.open && (
                   <span className="home_course_ho_pg_status">
                     <ClockIcon size={13} />
                     Enrollment Open
                   </span>
                 )}
 
-                <div className="home_course_ho_pg_footer">
-                  <span className="home_course_ho_pg_price">
-                    {/* ₹ {course.price} + GST */}
-                  </span>
-                  <button
-                    type="button"
-                    className="home_course_ho_pg_enroll"
-                    disabled={!course.open}
-                    onClick={openBookingModal}
-                  >
-                    Enroll
-                  </button>
-                </div>
+                {!audience.hideEnroll && (
+                  <div className="home_course_ho_pg_footer">
+                    <span className="home_course_ho_pg_price">
+                      {/* ₹ {course.price} + GST */}
+                    </span>
+                    <button
+                      type="button"
+                      className="home_course_ho_pg_enroll"
+                      disabled={!course.open}
+                      onClick={openBookingModal}
+                    >
+                      Enroll
+                    </button>
+                  </div>
+                )}
               </article>
             </div>
           ))}

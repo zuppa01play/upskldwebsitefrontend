@@ -69,14 +69,7 @@ const content = [
       "Small business team learning to streamline everyday work with technology",
       "Business owner building practical skills for sales, marketing and operations",
     ],
-    badgeTop: {
-      value: "+451%",
-      label: "more qualified leads · Annuitas Group",
-    },
-    badgeBottom: {
-      value: "300+",
-      label: "learners in free sessions",
-    },
+  
   },
   {
     title: "Working Professionals",
@@ -101,14 +94,7 @@ const content = [
       "Professionals learning to improve business workflows with AI",
       "Workplace learning session focused on digital and AI skills",
     ],
-    badgeTop: {
-      value: "32.5%",
-      label: "of the week saved · ActiveCampaign",
-    },
-    badgeBottom: {
-      value: "200+",
-      label: "professionals trained",
-    },
+   
   },
   {
     title: "Student",
@@ -144,14 +130,7 @@ const content = [
       "Higher education students preparing for an AI-enabled workplace",
       "Student-focused practical learning for artificial intelligence",
     ],
-    badgeTop: {
-      value: "24+ Lakh",
-      label: "arts & science graduates",
-    },
-    badgeBottom: {
-      value: "100+",
-      label: "students trained",
-    },
+ 
   },
 ];
 
@@ -218,24 +197,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-const UsersIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
+
 
 /* ---------- Bootcamp countdown ---------- */
 
@@ -265,7 +227,7 @@ const isSameTime = (a, b) =>
     a.hours === b.hours &&
     a.minutes === b.minutes);
 
-const BootcampCountdown = ({ label, date, start, onClick }) => {
+const BootcampCountdown = ({  date, start, onClick }) => {
   const targetMs = new Date(start).getTime();
 
   // Start as null so the server-rendered HTML and the first browser render
@@ -297,29 +259,11 @@ const BootcampCountdown = ({ label, date, start, onClick }) => {
       className="impac_home_pg_boot impac_home_pg_reveal"
       style={{ "--d": "40ms" }}
       role="timer"
-      aria-label={`${label} ${date}. ${timeLeft.days} days ${timeLeft.hours} hours ${timeLeft.minutes} minutes left.`}
+      aria-label={` ${date}. ${timeLeft.days} days ${timeLeft.hours} hours ${timeLeft.minutes} minutes left.`}
     >
       <div className="impac_home_pg_boot_head">
         <span className="impac_home_pg_boot_pulse" aria-hidden="true"></span>
-        <button
-          type="button"
-          className="impac_home_pg_boot_label"
-          onClick={onClick}
-          aria-label={`Go to bootcamp page: ${label}`}
-          style={{
-            cursor: "pointer",
-            border: "none",
-            padding: 0,
-            background: "transparent",
-            color: "inherit",
-            font: "inherit",
-            textAlign: "left",
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
-          {label}
-        </button>
+       
         <strong className="impac_home_pg_boot_date">{date}</strong>
       </div>
 
@@ -609,29 +553,6 @@ const HomePage = ({ activeIndex = 0 }) => {
                     active={isActive}
                     eager={index === 0}
                   />
-                </div>
-
-                <div className="impac_home_pg_badge impac_home_pg_badge_top">
-                  <strong className="impac_home_pg_badge_value">
-                    {item.badgeTop.value}
-                  </strong>
-                  <span className="impac_home_pg_badge_label">
-                    {item.badgeTop.label}
-                  </span>
-                </div>
-
-                <div className="impac_home_pg_badge impac_home_pg_badge_bottom">
-                  <span className="impac_home_pg_badge_icon">
-                    <UsersIcon />
-                  </span>
-                  <div className="impac_home_pg_badge_text">
-                    <strong className="impac_home_pg_badge_value">
-                      {item.badgeBottom.value}
-                    </strong>
-                    <span className="impac_home_pg_badge_label">
-                      {item.badgeBottom.label}
-                    </span>
-                  </div>
                 </div>
               </div>
             </article>
