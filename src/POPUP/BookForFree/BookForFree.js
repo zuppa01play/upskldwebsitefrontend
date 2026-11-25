@@ -14,7 +14,7 @@ import "./BookForFree.css";
 
 
 // Relative "/api" -> live la same origin, localhost:4002 la local backend, npm start la proxy (package.json)
-const API_URL = process.env.REACT_APP_API_URL || "/api";
+const API_URL = "https://upskldai.com/api";
 const REQUEST_TIMEOUT = 15000; // 15s
 const CLOSE_MS = 260; // CSS exit animation duration-oda match aaganum
 
