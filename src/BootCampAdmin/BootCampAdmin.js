@@ -24,6 +24,22 @@ const readToken = () => {
   }
 };
 
+// JWT-oda exp (seconds) -> ms. Padikka mudiyala na 0 (= expired maadhiri treat)
+const tokenExpiryMs = (jwt) => {
+  try {
+    const part = jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+    const json = decodeURIComponent(
+      atob(part)
+        .split("")
+        .map((ch) => "%" + ch.charCodeAt(0).toString(16).padStart(2, "0"))
+        .join("")
+    );
+    return Number(JSON.parse(json).exp) * 1000 || 0;
+  } catch (e) {
+    return 0;
+  }
+};
+
 const saveToken = (value) => {
   try {
     if (value) sessionStorage.setItem(TOKEN_KEY, value);
@@ -45,7 +61,15 @@ const formatDate = (value) => {
 };
 
 const BootCampAdmin = () => {
-  const [token, setToken] = useState(readToken);
+  // Page open pannumbodhe token expire aayiduchuna login page-ku
+  const [token, setToken] = useState(() => {
+    const saved = readToken();
+    if (saved && tokenExpiryMs(saved) <= Date.now()) {
+      saveToken("");
+      return "";
+    }
+    return saved;
+  });
   const [login, setLogin] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
@@ -63,6 +87,21 @@ const BootCampAdmin = () => {
     setRows([]);
     setLoginError(message);
   }, []);
+
+  // 1 hour mudinja udane auto logout -> login page
+  useEffect(() => {
+    if (!token) return undefined;
+    const wait = tokenExpiryMs(token) - Date.now();
+    if (wait <= 0) {
+      logout("Session expired. Please login again.");
+      return undefined;
+    }
+    const timer = setTimeout(
+      () => logout("Session expired. Please login again."),
+      Math.min(wait, 2147483647)
+    );
+    return () => clearTimeout(timer);
+  }, [token, logout]);
 
   const loadRows = useCallback(async () => {
     if (!token) return;
