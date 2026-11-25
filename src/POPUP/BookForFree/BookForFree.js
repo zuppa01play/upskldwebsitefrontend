@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import { toast } from "react-toastify";
 import {
   BOOKING_EVENT,
@@ -12,9 +13,11 @@ import {
 } from "../../Components/Openbookingmodal.js";
 import "./BookForFree.css";
 
+// localhost-la irundha local backend (4002), production-la same domain (/api)
+const API_BASE =
+  process.env.REACT_APP_API_URL ||
+  (window.location.hostname === "localhost" ? "http://localhost:4002" : "");
 
-// Relative "/api" -> live la same origin, localhost:4002 la local backend, npm start la proxy (package.json)
-const API_URL = process.env.REACT_APP_API_URL || "/api";
 const REQUEST_TIMEOUT = 15000; // 15s
 const CLOSE_MS = 260; // CSS exit animation duration-oda match aaganum
 
@@ -81,14 +84,10 @@ const BookForFree = ({ activeIndex = 0 }) => {
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
-
       try {
-        const res = await fetch(`${API_URL}/student-form`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const res = await axios.post(
+          `${API_BASE}/api/student-form`,
+          {
             fullName: values.fullName,
             phone: toTenDigits(values.phone),
             email: values.email,
@@ -99,42 +98,39 @@ const BookForFree = ({ activeIndex = 0 }) => {
             detailLabel: detailInfo.label,
             detailKey: detailInfo.key,
             detail: values.detail,
-          }),
-          signal: controller.signal,
-        });
+          },
+          { timeout: REQUEST_TIMEOUT }
+        );
 
-        // server JSON anuppala na (404 html page etc.) crash aagaama handle
-        let data = null;
-        try {
-          data = await res.json();
-        } catch (parseErr) {
-          data = null;
-        }
-
-        if (res.ok && data && data.success) {
+        if (res.data && res.data.success) {
           markPopupDismissed();
           toast.success("Submitted successfully! We'll reach out shortly.");
           setIsSubmitted(true);
           resetForm();
         } else {
-          const message =
-            (data && data.message) ||
-            (res.status === 404
-              ? "Service not found. Please contact support."
-              : "Something went wrong. Please try again.");
-          toast.error(message);
+          toast.error((res.data && res.data.message) || "Something went wrong. Please try again.");
         }
-      } catch (err) {
-        console.error("Submit failed:", err);
-        if (err.name === "AbortError") {
+      } catch (error) {
+        console.error("Submit failed:", error);
+
+        if (error.code === "ECONNABORTED" || error.code === "ETIMEDOUT") {
+          // timeout
           toast.error("Request timed out. Please try again.");
+        } else if (error.response) {
+          // server respond pannuchu, aana 4xx / 5xx
+          toast.error(
+            error.response.data?.message ||
+              (error.response.status === 404
+                ? "Service not found. Please contact support."
+                : "Something went wrong. Please try again.")
+          );
         } else {
+          // server-ae reach aagala (backend down / network / CORS)
           toast.error(
             "Unable to reach the server. Please check your internet connection and try again."
           );
         }
       } finally {
-        clearTimeout(timer);
         setSubmitting(false);
       }
     },
