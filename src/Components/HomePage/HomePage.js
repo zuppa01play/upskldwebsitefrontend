@@ -49,7 +49,7 @@ const content = [
     ],
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
-  
+
     bootcamp: {
       label: "AI Bootcamp starts on",
       date: "05-12-2026",
@@ -267,21 +267,29 @@ const isSameTime = (a, b) =>
 
 const BootcampCountdown = ({ label, date, start, onClick }) => {
   const targetMs = new Date(start).getTime();
-  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(targetMs));
+
+  // Start as null so the server-rendered HTML and the first browser render
+  // match (no Date.now() during render). The real value is set after mount.
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const tick = () => {
       const next = getTimeLeft(targetMs);
-      setTimeLeft((previous) => (isSameTime(previous, next) ? previous : next));
+      setTimeLeft((prev) => (isSameTime(prev, next) ? prev : next));
+      return next;
+    };
 
-      // Stop ticking once the bootcamp date is reached
-      if (!next) clearInterval(timer);
+    // Date already reached: nothing to show, no timer needed
+    if (!tick()) return undefined;
+
+    const timer = setInterval(() => {
+      if (!tick()) clearInterval(timer);
     }, 1000);
 
     return () => clearInterval(timer);
   }, [targetMs]);
 
-  // Date reached: the whole countdown block closes
+  // Date reached (or not mounted yet): nothing to show
   if (!timeLeft) return null;
 
   return (

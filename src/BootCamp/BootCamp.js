@@ -109,7 +109,7 @@ const validationSchema = Yup.object().shape({
   consent: Yup.boolean().oneOf([true], "Please accept to continue"),
 });
 
-/* Small inline icons (no extra package needed) */
+
 const Icon = ({ children }) => (
   <svg
     className="bootcamp_pg_icon"
@@ -151,12 +151,6 @@ const IconCheck = () => (
   </Icon>
 );
 
-const IconAward = () => (
-  <Icon>
-    <circle cx="12" cy="8" r="7" />
-    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
-  </Icon>
-);
 
 const BootCamp = () => {
   const { pay, loading: payLoading } = useRazorpay();
