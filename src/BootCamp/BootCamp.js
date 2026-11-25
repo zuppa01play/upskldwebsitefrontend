@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import useRazorpay from "../hooks/useRazorpay";
 import "./BootCamp.css";
+import RajadhriImage from "./Rajashri.jpg";
 
 // localhost-la irundha local backend, production-la same domain (/api)
 const API_BASE =
@@ -601,31 +602,67 @@ const BootCamp = () => {
             </p>
           </div>
 
-          <article className="bootcamp_pg_mentor_card">
-            <h3 className="bootcamp_pg_mentor_name">{TRAINER}</h3>
-            <br />
-            <span className="bootcamp_pg_mentor_role">Co-Founder, Upskld AI</span>
+     <article className="bootcamp_pg_mentor_card">
+  <div className="row align-items-center g-4 g-lg-5">
+    {/* Photo: mobile la mela, desktop la right side */}
+    <div className="col-12 col-lg-5 order-1 order-lg-2 d-flex justify-content-center">
+      <img
+        src={RajadhriImage}
+        alt="Mrs. Rajashri Sai, Co-Founder of Upskld AI"
+        className="img-fluid rounded-4 shadow bootcamp_pg_mentor_image"
+        loading="lazy"
+        width="400"
+        height="480"
+      />
+    </div>
 
-            <br />
+    {/* Details */}
+    <div className="col-12 col-lg-7 order-2 order-lg-1">
+      <h3 className="bootcamp_pg_mentor_name">{TRAINER}</h3>
+      <br/>
+      <span className="bootcamp_pg_mentor_role">Co-Founder, Upskld AI</span>
 
-            <ul className="bootcamp_pg_mentor_tags" aria-label="Areas of expertise">
-              {mentorTags.map((tag) => (
-                <li key={tag} className="bootcamp_pg_mentor_tag">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-            <br />
-            <div className="bootcamp_pg_mentor_body">
-              <p className="bootcamp_pg_mentor_text">
-            Is a serial entrepreneur and business leader with over a decade of experience building technology-driven ventures. As Founder of UPSKLD, she leads an AI capacity-development platform for the non-technical segment, offering online courses, bootcamps, and institutional partnerships.
-              </p>
-<p className="bootcamp_pg_mentor_text">Her entrepreneurial journey spans drone technology, operational intelligence, and social impact. She also serves as an Independent Director at Autoline Industries Ltd. and leads the Impactree Foundation, supporting over 1,000 rural women entrepreneurs across India.</p>
-            <p className="bootcamp_pg_mentor_text">She has been recognised by the President of India as one of the Top 10 Women Entrepreneurs Transforming India and has spoken at the United Nations, the World Economic Forum, and the G20.</p>
-            <p className="bootcamp_pg_mentor_text">In every UPSKLD course, she brings practical, boardroom-to-ground experience to help non-technical professionals learn and apply AI with confidence.</p>
-          
-            </div>
-          </article>
+      <ul
+        className="bootcamp_pg_mentor_tags mt-3 mb-4"
+        aria-label="Areas of expertise"
+      >
+        {mentorTags.map((tag) => (
+          <li key={tag} className="bootcamp_pg_mentor_tag">
+            {tag}
+          </li>
+        ))}
+      </ul>
+
+      <p className="bootcamp_pg_mentor_text">
+       <b> Is</b> a serial entrepreneur and business leader with over a decade of
+        experience building technology-driven ventures. As Founder of UPSKLD,
+        she leads an AI capacity-development platform for the non-technical
+        segment, offering online courses, bootcamps, and institutional
+        partnerships.
+      </p>
+      <hr/>
+      <p className="bootcamp_pg_mentor_text">
+      <b>  Her</b> entrepreneurial journey spans drone technology, operational
+        intelligence, and social impact. She also serves as an Independent
+        Director at Autoline Industries Ltd. and leads the Impactree
+        Foundation, supporting over 1,000 rural women entrepreneurs across
+        India.
+      </p>
+        <hr/>
+      <p className="bootcamp_pg_mentor_text">
+        <b>She</b> has been recognised by the President of India as one of the Top 10
+        Women Entrepreneurs Transforming India and has spoken at the United
+        Nations, the World Economic Forum, and the G20.
+      </p>
+        <hr/>
+      <p className="bootcamp_pg_mentor_text mb-0">
+        <b>In</b> every UPSKLD course, she brings practical, boardroom-to-ground
+        experience to help non-technical professionals learn and apply AI with
+        confidence.
+      </p>
+    </div>
+  </div>
+</article>
         </section>
       </div>
     </main>
