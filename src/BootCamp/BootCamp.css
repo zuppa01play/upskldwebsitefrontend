@@ -619,6 +619,7 @@
   font-size: 14.5px;
   line-height: 1.8;
   color: #3d3957;
+  text-align: justify;
 }
 
 .bootcamp_pg_mentor_text strong {
@@ -875,5 +876,19 @@
 
   .bootcamp_pg_btn:hover:not(:disabled) {
     transform: none;
+  }
+}
+.bootcamp_pg_mentor_image {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .bootcamp_pg_mentor_image {
+    max-width: 280px;
   }
 }

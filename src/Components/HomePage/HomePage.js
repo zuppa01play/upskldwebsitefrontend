@@ -24,6 +24,7 @@ import StudentsImgThree from "./S_3.jpg";
 import StudentsImgFour from "./S_4.jpg";
 import StudentsImgFive from "./S_5.jpg";
 import StudentsImgSix from "./S_6.jpg";
+import { useNavigate } from "react-router-dom";
 
 const SLIDE_INTERVAL = 3000;
 
@@ -48,9 +49,7 @@ const content = [
     ],
     primaryBtn: "Book a free session",
     secondaryBtn: "See all courses",
-    // Only this slide has a bootcamp countdown.
-    // `start` is midnight (IST) at the start of 05-12-2026.
-    // When this moment is reached, the countdown disappears by itself.
+
     bootcamp: {
       label: "AI Bootcamp starts on",
       date: "05-12-2026",
@@ -266,23 +265,31 @@ const isSameTime = (a, b) =>
     a.hours === b.hours &&
     a.minutes === b.minutes);
 
-const BootcampCountdown = ({ label, date, start }) => {
+const BootcampCountdown = ({ label, date, start, onClick }) => {
   const targetMs = new Date(start).getTime();
-  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(targetMs));
+
+  // Start as null so the server-rendered HTML and the first browser render
+  // match (no Date.now() during render). The real value is set after mount.
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const tick = () => {
       const next = getTimeLeft(targetMs);
-      setTimeLeft((previous) => (isSameTime(previous, next) ? previous : next));
+      setTimeLeft((prev) => (isSameTime(prev, next) ? prev : next));
+      return next;
+    };
 
-      // Stop ticking once the bootcamp date is reached
-      if (!next) clearInterval(timer);
+    // Date already reached: nothing to show, no timer needed
+    if (!tick()) return undefined;
+
+    const timer = setInterval(() => {
+      if (!tick()) clearInterval(timer);
     }, 1000);
 
     return () => clearInterval(timer);
   }, [targetMs]);
 
-  // Date reached: the whole countdown block closes
+  // Date reached (or not mounted yet): nothing to show
   if (!timeLeft) return null;
 
   return (
@@ -294,7 +301,25 @@ const BootcampCountdown = ({ label, date, start }) => {
     >
       <div className="impac_home_pg_boot_head">
         <span className="impac_home_pg_boot_pulse" aria-hidden="true"></span>
-        <span className="impac_home_pg_boot_label">{label}</span>
+        <button
+          type="button"
+          className="impac_home_pg_boot_label"
+          onClick={onClick}
+          aria-label={`Go to bootcamp page: ${label}`}
+          style={{
+            cursor: "pointer",
+            border: "none",
+            padding: 0,
+            background: "transparent",
+            color: "inherit",
+            font: "inherit",
+            textAlign: "left",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          {label}
+        </button>
         <strong className="impac_home_pg_boot_date">{date}</strong>
       </div>
 
@@ -411,6 +436,7 @@ const ImageSlider = ({
 const HomePage = ({ activeIndex = 0 }) => {
   // Selected chip per slide: { 0: "Retail shop", 1: "Sales" }
   const [selectedOption, setSelectedOption] = useState({});
+  const navigate = useNavigate();
 
   const scrollToId = (id) => {
     const element = document.getElementById(id);
@@ -494,6 +520,7 @@ const HomePage = ({ activeIndex = 0 }) => {
                 {/* Bootcamp countdown: only the Small Business slide has this */}
                 {item.bootcamp && (
                   <BootcampCountdown
+                    onClick={() => navigate("/bootcamp")}
                     label={item.bootcamp.label}
                     date={item.bootcamp.date}
                     start={item.bootcamp.start}

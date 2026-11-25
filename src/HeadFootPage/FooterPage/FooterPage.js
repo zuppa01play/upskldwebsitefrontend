@@ -78,7 +78,7 @@ const CapIcon = () => (
 
 /* TODO: fill these 3 before deploying */
 const CONTACT_EMAIL = "growth@impactree.ai"; 
-const WHATSAPP_NUMBER = "919360430032";
+const WHATSAPP_NUMBER = "8807431765";
 const ADDRESS = "8th Floor, Eastern Wing, Polyhose Towers, 86, Anna Salai, Guindy, Chennai, Tamil Nadu 600032"; 
 
 const navLinks = [
