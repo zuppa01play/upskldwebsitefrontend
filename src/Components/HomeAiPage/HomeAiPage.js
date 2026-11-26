@@ -660,13 +660,6 @@ const BusinessTypeView = ({ instant }) => {
               <div className="impac_ai_home_pg_actions impac_ai_home_pg_step" style={{ "--s": 7 }}>
                 <button
                   type="button"
-                  className="impac_ai_home_pg_btn_dark"
-                  onClick={() => scrollToId("courses")}
-                >
-                  Learn this → Enroll
-                </button>
-                <button
-                  type="button"
                   className="impac_ai_home_pg_btn_primary"
                   onClick={openBookingModal}
                 >

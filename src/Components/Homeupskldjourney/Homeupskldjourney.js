@@ -556,15 +556,7 @@ const HomeUpSkldjourney = ({ activeIndex: audienceIndex = 0 }) => {
                 Source: {active.source}
               </p>
 
-              <div className="ai_small_busin_pg_actions ai_small_busin_pg_step" style={{ "--s": 5 }}>
-                <button
-                  type="button"
-                  className="ai_small_busin_pg_btn"
-                  onClick={() => scrollToId("courses")}
-                >
-                  Learn this → Enroll
-                </button>
-              </div>
+             
             </div>
           </div>
         </div>
