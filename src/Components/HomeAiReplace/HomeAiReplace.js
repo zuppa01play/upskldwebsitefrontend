@@ -38,6 +38,22 @@ const CheckIcon = () => (
   </svg>
 );
 
+const ArrowIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
+
 /* ---------- Content ---------- */
 
 const modes = {
@@ -210,13 +226,15 @@ const studentCourses = [
 ];
 
 /* Order MUST match navLinks in HeaderPage (0 small business · 1 professionals · 2 students)
-   hideEnroll: true -> andha audience la "Enrollment Open" badge + Enroll button kaattaadhu */
+   hideEnroll: true  -> andha audience la "Enrollment Open" badge + Enroll button kaattaadhu
+   showBookCta: true -> cards ku keezha oru "Book a free session" button kaattum */
 const audiences = [
   {
     id: "small",
     title: "Sales. Marketing. Finance. Start small, go end-to-end.",
     courses: smallBusinessCourses,
     hideEnroll: true,
+    showBookCta: true,
   },
   {
     id: "professionals",
@@ -428,6 +446,20 @@ const HomeAiReplace = ({ activeIndex = 0 }) => {
             </div>
           ))}
         </div>
+
+        {/* ---------- Book a free session (Small Business mattum) ---------- */}
+        {audience.showBookCta && (
+          <div className="home_course_ho_pg_cta" key={`cta-${audience.id}`}>
+            <button
+              type="button"
+              className="home_course_ho_pg_cta_btn"
+              onClick={openBookingModal}
+            >
+              <span>Book a free session</span>
+              <ArrowIcon />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
