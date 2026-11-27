@@ -221,18 +221,7 @@ const HomeTrackPage = ({ activeIndex = 0 }) => {
         </div>
 
         {/* Enroll CTA */}
-        <div className="impac_trac_ho_pg_cta">
-          <Reveal delay={300}>
-            <button
-              type="button"
-              className="impac_trac_ho_pg_enroll_btn"
-              onClick={handleEnroll}
-              disabled={payLoading}
-            >
-              {payLoading ? "Opening payment..." : `Enroll now — ₹${course.amount}`}
-            </button>
-          </Reveal>
-        </div>
+   
 
       </div>
     </section>
