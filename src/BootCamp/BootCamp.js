@@ -662,7 +662,7 @@ const BootCamp = () => {
                       width="68"
                       height="68"
                     />
-                    <div>
+                    <div className="bootcamp_pg_mentor_identity">
                       <h3 className="bootcamp_pg_mentor_name">{TRAINER}</h3>
                       <span className="bootcamp_pg_mentor_role">
                         Co-Founder, Upskld AI

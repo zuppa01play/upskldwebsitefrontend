@@ -21,11 +21,7 @@
   box-sizing: border-box;
 }
 
-.bootcamp_pg_wrapper h1,
-.bootcamp_pg_wrapper h2,
-.bootcamp_pg_wrapper h3,
-.bootcamp_pg_wrapper p,
-.bootcamp_pg_wrapper ul {
+.bootcamp_pg_wrapper :where(h1, h2, h3, p, ul) {
   margin: 0;
   padding: 0;
 }
@@ -590,12 +586,21 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 20px 0 0;
 }
 
 .bootcamp_pg_mentor_profile {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.bootcamp_pg_mentor_identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
 }
 
 .bootcamp_pg_mentor_avatar {
@@ -615,7 +620,6 @@
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: #0f0a2a;
-  margin-bottom: 8px;
 }
 
 .bootcamp_pg_mentor_role {
@@ -631,16 +635,18 @@
 
 .bootcamp_pg_mentor_tags {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 18px 0;
+  margin: 18px 0;
+  border-top: 1px solid #efedf7;
   border-bottom: 1px solid #efedf7;
 }
 
 .bootcamp_pg_mentor_tag {
+  display: flex;
+  align-items: center;
   background-color: #faf8ff;
   border: 1px solid #e2e0ee;
   border-radius: 10px;
@@ -648,7 +654,8 @@
   font-weight: 600;
   line-height: 1.4;
   color: #3d3957;
-  padding: 8px 12px;
+  padding: 10px 14px;
+  min-width: 0;
 }
 
 .bootcamp_pg_mentor_body {
@@ -864,6 +871,10 @@
     font-size: 30px;
   }
 
+  .bootcamp_pg_mentor_bio {
+    padding: 24px 0 0;
+  }
+
   .bootcamp_pg_mentor_video_panel {
     padding: 24px;
   }
@@ -965,10 +976,19 @@
 }
 
 .bootcamp_pg_mentor_video_panel .bootcamp_pg_mentor_tags {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  margin-bottom: 18px;
-  border-bottom-color: #e4dcfb;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 0;
+  margin: 16px 0 18px;
+  border-top: 1px solid #e4dcfb;
+  border-bottom: 1px solid #e4dcfb;
+}
+
+@media (max-width: 520px) {
+  .bootcamp_pg_mentor_tags {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .bootcamp_pg_mentor_video_panel .bootcamp_pg_mentor_tag {
