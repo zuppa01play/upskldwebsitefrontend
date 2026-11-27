@@ -175,9 +175,7 @@ const HomeTrackPage = ({ activeIndex = 0 }) => {
             ))}
           </Reveal>
 
-          <Reveal className="impac_trac_ho_pg_line_box" delay={150}>
-            <span className="impac_trac_ho_pg_line_bar"></span>
-          </Reveal>
+    
         </header>
 
         {/* Build AI / Use AI cards */}

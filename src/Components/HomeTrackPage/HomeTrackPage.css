@@ -1,6 +1,3 @@
-/* =====================================================
-   Base = MOBILE (360px+): single column, mobile-first
-   ===================================================== */
 .impac_trac_ho_pg_section {
   position: relative;
   width: 100%;
@@ -36,30 +33,16 @@
 
 /* ===== Heading ===== */
 .impac_trac_ho_pg_title {
-  margin: 0;
-  font-size: 1.5rem;
+   margin: 0 auto;
+  text-align: center;
+  font-size: clamp(22px, 4.4vw, 48px);
   font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.5px;
-  color: #1c1c1c;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: #010141;
+  text-wrap: balance;
 }
 
-.impac_trac_ho_pg_title_line {
-  display: block;
-}
-
-.impac_trac_ho_pg_line_box {
-  margin: 14px 0 0;
-}
-
-.impac_trac_ho_pg_line_bar {
-  display: block;
-  width: 0;
-  height: 2px;
-  border-radius: 2px;
-  background-color: #1c1c1c;
-  transition: width 0.9s ease 0.2s;
-}
 
 .impac_trac_ho_pg_fade_show .impac_trac_ho_pg_line_bar {
   width: 56px;

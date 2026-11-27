@@ -49,6 +49,7 @@
 
 .impac_audience_pg_container {
   position: relative;
+  text-align: center;
   z-index: 1;
   width: 100%;
   max-width: 1200px;
@@ -58,9 +59,9 @@
 /* ---------- Title ---------- */
 
 .impac_audience_pg_title {
-  max-width: 820px;
-  margin: 0;
-  font-size: clamp(24px, 4.4vw, 48px);
+  margin: 0 auto;
+  text-align: center;
+  font-size: clamp(22px, 4.4vw, 48px);
   font-weight: 800;
   line-height: 1.22;
   letter-spacing: -0.02em;
@@ -80,10 +81,10 @@
   display: block;
   width: 88px;
   height: 4px;
-  margin: 18px 0 40px;
+  margin: 18px auto 40px;
   border-radius: 4px;
   background: linear-gradient(90deg, #5b2fd0 0%, #e0a83d 100%);
-  transform-origin: left center;
+  transform-origin: center center;
 }
 
 /* ---------- Map (mobile: single column) ---------- */
@@ -215,6 +216,8 @@
 
 .impac_audience_pg_card {
   position: relative;
+  min-width: 0;
+  text-align: left;
   width: 100%;
   max-width: 440px;
   margin-top: 16px;
@@ -283,6 +286,7 @@
 
 .impac_audience_pg_card_outcome {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
@@ -413,6 +417,10 @@
     padding: 40px 12px 50px;
   }
 
+  .impac_audience_pg_underline {
+    margin-bottom: 32px;
+  }
+
   .impac_audience_pg_hub {
     width: 190px;
     height: 190px;
@@ -445,7 +453,7 @@
   }
 
   .impac_audience_pg_underline {
-    margin: 20px 0 52px;
+    margin: 20px auto 52px;
   }
 
   .impac_audience_pg_map {
@@ -524,7 +532,7 @@
   }
 
   .impac_audience_pg_underline {
-    margin: 22px 0 64px;
+    margin: 22px auto 64px;
   }
 
   .impac_audience_pg_map {
@@ -638,6 +646,29 @@
 /* ============================================================
    Large desktop (≥ 1440px)
    ============================================================ */
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .impac_audience_pg_map {
+    grid-template-columns: minmax(0, 1fr) 56px 250px 56px minmax(0, 1fr);
+  }
+
+  .impac_audience_pg_hub {
+    width: 230px;
+    height: 230px;
+  }
+
+  .impac_audience_pg_ring_two {
+    inset: -24px;
+  }
+
+  .impac_audience_pg_card {
+    padding: 22px 20px 24px;
+  }
+
+  .impac_audience_pg_card_title {
+    font-size: 18px;
+  }
+}
 
 @media (min-width: 1440px) {
   .impac_audience_pg_container {
