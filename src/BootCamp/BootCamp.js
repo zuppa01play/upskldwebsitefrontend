@@ -649,7 +649,7 @@ const BootCamp = () => {
           </div>
 
           <article className="bootcamp_pg_mentor_card">
-            <div className="row align-items-stretch g-4 g-lg-5">
+            <div className="row align-items-start g-4 g-lg-5">
               {/* Mentor Bio: left side on desktop */}
               <div className="col-12 col-lg-6 order-2 order-lg-1">
                 <div className="bootcamp_pg_mentor_bio">

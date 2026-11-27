@@ -947,17 +947,12 @@
   }
 }
 .bootcamp_pg_mentor_video_panel {
-  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #faf8ff;
   border: 1px solid #e4dcfb;
   border-radius: 20px;
   padding: 20px;
-}
-
-.bootcamp_pg_mentor_video_panel .bootcamp_pg_mentor_note {
-  margin-top: auto;
 }
 
 .bootcamp_pg_mentor_video_head {
