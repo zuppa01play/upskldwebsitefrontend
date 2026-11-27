@@ -1,6 +1,6 @@
 
 
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import useRazorpay from "../hooks/useRazorpay";
 import "./BootCamp.css";
 import RajadhriImage from "./Rajashri.jpg";
+import bootcampVideo from "../POPUP/PopupVideo/upskld_ai_bootcamp.mp4";
 
 // localhost-la irundha local backend, production-la same domain (/api)
 const API_BASE =
@@ -17,8 +18,9 @@ const API_BASE =
 
 const SITE_URL = "https://upskldai.com";
 const PAGE_URL = `${SITE_URL}/bootcamp`;
-// Backend-la BOOTCAMP_PRICE_INR (default 99)-oda SAME aaganum, illana payment verify fail aagum
-const BOOTCAMP_PRICE = 99;
+// Set to 0 for a free bootcamp; for paid bootcamps set > 0 matching backend BOOTCAMP_PRICE_INR
+const BOOTCAMP_PRICE = 0;
+const IS_PAID_BOOTCAMP = BOOTCAMP_PRICE > 0;
 const BOOTCAMP_DATE = "05 December 2026";
 const TIMING = "10:00 AM - 11:30 AM IST";
 const BOOTCAMP_DATE_ISO = "2026-12-05";
@@ -41,6 +43,7 @@ const EVENT_SCHEMA = {
   startDate: BOOTCAMP_DATE_ISO,
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+  isAccessibleForFree: !IS_PAID_BOOTCAMP,
   location: { "@type": "VirtualLocation", url: PAGE_URL },
   organizer: { "@type": "Organization", name: "Upskld AI", url: SITE_URL },
   url: PAGE_URL,
@@ -70,11 +73,10 @@ const bootcampDetails = [
 ];
 
 const learnPoints = [
-  "Use AI to create reports and professional documents.",
-  "Analyse data and extract useful insights.",
-  "Prepare for interviews and improve career readiness.",
-  "Automate repetitive tasks and workflows.",
-  "Apply AI confidently in your professional and personal work.",
+  "Access free learning resources on our platform to master AI fundamentals, prompting, and accelerate your AI journey.",
+  "Discover how to use AI effectively across sales, marketing, finance, and other business functions.",
+  "Solve real-world problems during the workshop through crowd-sourced challenges and live AI-powered solutions.",
+  "Join a community of AI learners, stay updated on AI trends, and participate in regular problem-solving competitions with recognition and awards.",
 ];
 
 const mentorTags = [
@@ -82,6 +84,12 @@ const mentorTags = [
   "Applied AI Adoption",
   "Workflow Automation",
   "Executive & Student Mentorship",
+];
+
+const videoHighlights = [
+  "90-Min Live Session",
+  "Zero Coding Needed",
+  "Practical AI Workflows",
 ];
 
 const validationSchema = Yup.object().shape({
@@ -160,6 +168,25 @@ const BootCamp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
+  const mentorVideoRef = useRef(null);
+
+  // React does not reliably write `muted` to the DOM, so set it directly for reliable autoplay
+  const setMentorVideoRef = useCallback((node) => {
+    mentorVideoRef.current = node;
+    if (node) {
+      node.muted = true;
+      node.defaultMuted = true;
+      node.setAttribute("muted", "");
+      node.setAttribute("playsinline", "");
+    }
+  }, []);
+
+  const tryPlayMentorVideo = useCallback(() => {
+    const video = mentorVideoRef.current;
+    if (!video) return;
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
+  }, []);
 
   // slot closed aana notice red-ah maaridum
   const isSlotClosed = new Date() >= SLOT_CLOSE_AT;
@@ -209,9 +236,10 @@ const BootCamp = () => {
       phone: formData.phone.trim(),
       category: formData.category,
       college: formData.college.trim(),
+      ...(IS_PAID_BOOTCAMP ? {} : { isFree: true }),
     };
 
-    // Step 2: Razorpay-ku MUNNADI database-la save (payment: false = "Not paid")
+    // Step 2: Save registration details
     setIsSubmitting(true);
     let registrationId;
     try {
@@ -224,6 +252,16 @@ const BootCamp = () => {
       setIsSubmitting(false);
       return;
     }
+
+    // Free bootcamp: complete registration immediately without payment
+    if (!IS_PAID_BOOTCAMP) {
+      setSubmittedEmail(payload.email);
+      setIsSubmitted(true);
+      setFormData(initialForm);
+      setIsSubmitting(false);
+      return;
+    }
+
     setIsSubmitting(false);
 
     // Step 3: Razorpay — payment success aana apram dhaan payment: true
@@ -303,15 +341,14 @@ const BootCamp = () => {
             <span className="bootcamp_pg_badge">Upskld AI Bootcamp</span>
 
             <h1 className="bootcamp_pg_title">
-              Don’t just learn about AI.
+              India’s First
               <span className="bootcamp_pg_title_highlight">
-                Learn how to use AI.
+                Solver Series Bootcamp.
               </span>
             </h1>
 
             <p className="bootcamp_pg_intro">
-              Practical AI skills for your everyday work, career and business.
-              No coding or technical background needed.
+              Knowing AI tools is just the beginning. Build the muscle to think, create, and solve problems with AI—and accelerate your business or career.
             </p>
 
             <div className="bootcamp_pg_date_chip">
@@ -401,21 +438,28 @@ const BootCamp = () => {
               ) : (
                 <>
                   <div className="bootcamp_pg_head">
-                    <span
-                      className={
-                        isSlotClosed
-                          ? "bootcamp_pg_card_deadline bootcamp_pg_card_deadline_closed"
-                          : "bootcamp_pg_card_deadline"
-                      }
-                    >
-                      <IconClock />
-                      {isSlotClosed
-                        ? "Registration slots are closed"
-                        : `Registration closes on ${SLOT_CLOSE_DATE}`}
-                    </span>
+                    <div className="bootcamp_pg_head_badges">
+                      <span
+                        className={
+                          isSlotClosed
+                            ? "bootcamp_pg_card_deadline bootcamp_pg_card_deadline_closed"
+                            : "bootcamp_pg_card_deadline"
+                        }
+                      >
+                        <IconClock />
+                        {isSlotClosed
+                          ? "Registration slots are closed"
+                          : `Registration closes on ${SLOT_CLOSE_DATE}`}
+                      </span>
+                      {!IS_PAID_BOOTCAMP && (
+                        <span className="bootcamp_pg_card_free">Free Entry</span>
+                      )}
+                    </div>
                     <h2 className="bootcamp_pg_card_title">Register now</h2>
                     <p className="bootcamp_pg_subtitle">
-                      Fill in your details to reserve your seat.
+                      {IS_PAID_BOOTCAMP
+                        ? "Fill in your details to reserve your seat."
+                        : "Fill in your details to reserve your free seat."}
                     </p>
                   </div>
 
@@ -568,13 +612,15 @@ const BootCamp = () => {
                     <button
                       type="submit"
                       className="bootcamp_pg_btn"
-                      disabled={isSubmitting || payLoading}
+                      disabled={isSubmitting || (IS_PAID_BOOTCAMP && payLoading)}
                     >
-                      {payLoading
+                      {IS_PAID_BOOTCAMP && payLoading
                         ? "Opening payment..."
                         : isSubmitting
                         ? "Please wait..."
-                        : `Reserve my seat — ₹${BOOTCAMP_PRICE}`}
+                        : IS_PAID_BOOTCAMP
+                        ? `Reserve my seat — ₹${BOOTCAMP_PRICE}`
+                        : "Reserve my free seat"}
                     </button>
                   </form>
                 </>
@@ -602,67 +648,122 @@ const BootCamp = () => {
             </p>
           </div>
 
-     <article className="bootcamp_pg_mentor_card">
-  <div className="row align-items-center g-4 g-lg-5">
-    {/* Photo: mobile la mela, desktop la right side */}
-    <div className="col-12 col-lg-5 order-1 order-lg-2 d-flex justify-content-center">
-      <img
-        src={RajadhriImage}
-        alt="Mrs. Rajashri Sai, Co-Founder of Upskld AI"
-        className="img-fluid rounded-4 shadow bootcamp_pg_mentor_image"
-        loading="lazy"
-        width="400"
-        height="480"
-      />
-    </div>
+          <article className="bootcamp_pg_mentor_card">
+            <div className="row align-items-stretch g-4 g-lg-5">
+              {/* Mentor Bio: left side on desktop */}
+              <div className="col-12 col-lg-6 order-2 order-lg-1">
+                <div className="bootcamp_pg_mentor_bio">
+                  <div className="bootcamp_pg_mentor_profile">
+                    <img
+                      src={RajadhriImage}
+                      alt="Mrs. Rajashri Sai, Co-Founder of Upskld AI"
+                      className="bootcamp_pg_mentor_avatar"
+                      loading="lazy"
+                      width="68"
+                      height="68"
+                    />
+                    <div>
+                      <h3 className="bootcamp_pg_mentor_name">{TRAINER}</h3>
+                      <span className="bootcamp_pg_mentor_role">
+                        Co-Founder, Upskld AI
+                      </span>
+                    </div>
+                  </div>
 
-    {/* Details */}
-    <div className="col-12 col-lg-7 order-2 order-lg-1">
-      <h3 className="bootcamp_pg_mentor_name">{TRAINER}</h3>
-      <br/>
-      <span className="bootcamp_pg_mentor_role">Co-Founder, Upskld AI</span>
+                  <ul
+                    className="bootcamp_pg_mentor_tags"
+                    aria-label="Areas of expertise"
+                  >
+                    {mentorTags.map((tag) => (
+                      <li key={tag} className="bootcamp_pg_mentor_tag">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
 
-      <ul
-        className="bootcamp_pg_mentor_tags mt-3 mb-4"
-        aria-label="Areas of expertise"
-      >
-        {mentorTags.map((tag) => (
-          <li key={tag} className="bootcamp_pg_mentor_tag">
-            {tag}
-          </li>
-        ))}
-      </ul>
+                  <div className="bootcamp_pg_mentor_body">
+                    <p className="bootcamp_pg_mentor_text">
+                      <b>Is</b> a serial entrepreneur and business leader with over a decade of
+                      experience building technology-driven ventures. As Founder of UPSKLD,
+                      she leads an AI capacity-development platform for the non-technical
+                      segment, offering online courses, bootcamps, and institutional
+                      partnerships.
+                    </p>
+                    <p className="bootcamp_pg_mentor_text">
+                      <b>Her</b> entrepreneurial journey spans drone technology, operational
+                      intelligence, and social impact. She also serves as an Independent
+                      Director at Autoline Industries Ltd. and leads the Impactree
+                      Foundation, supporting over 1,000 rural women entrepreneurs across
+                      India.
+                    </p>
+                    <p className="bootcamp_pg_mentor_text">
+                      <b>She</b> has been recognised by the President of India as one of the Top 10
+                      Women Entrepreneurs Transforming India and has spoken at the United
+                      Nations, the World Economic Forum, and the G20.
+                    </p>
+                    <p className="bootcamp_pg_mentor_text mb-0">
+                      <b>In</b> every UPSKLD course, she brings practical, boardroom-to-ground
+                      experience to help non-technical professionals learn and apply AI with
+                      confidence.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-      <p className="bootcamp_pg_mentor_text">
-       <b> Is</b> a serial entrepreneur and business leader with over a decade of
-        experience building technology-driven ventures. As Founder of UPSKLD,
-        she leads an AI capacity-development platform for the non-technical
-        segment, offering online courses, bootcamps, and institutional
-        partnerships.
-      </p>
-      <hr/>
-      <p className="bootcamp_pg_mentor_text">
-      <b>  Her</b> entrepreneurial journey spans drone technology, operational
-        intelligence, and social impact. She also serves as an Independent
-        Director at Autoline Industries Ltd. and leads the Impactree
-        Foundation, supporting over 1,000 rural women entrepreneurs across
-        India.
-      </p>
-        <hr/>
-      <p className="bootcamp_pg_mentor_text">
-        <b>She</b> has been recognised by the President of India as one of the Top 10
-        Women Entrepreneurs Transforming India and has spoken at the United
-        Nations, the World Economic Forum, and the G20.
-      </p>
-        <hr/>
-      <p className="bootcamp_pg_mentor_text mb-0">
-        <b>In</b> every UPSKLD course, she brings practical, boardroom-to-ground
-        experience to help non-technical professionals learn and apply AI with
-        confidence.
-      </p>
-    </div>
-  </div>
-</article>
+              {/* Bootcamp Video: right side on desktop */}
+              <div className="col-12 col-lg-6 order-1 order-lg-2">
+                <div className="bootcamp_pg_mentor_video_panel">
+                  <div className="bootcamp_pg_mentor_video_head">
+                    <span className="bootcamp_pg_mentor_role">
+                      Bootcamp preview
+                    </span>
+                    <h3 className="bootcamp_pg_mentor_video_title">
+                      Inside the Upskld AI Bootcamp
+                    </h3>
+                  </div>
+
+                  <ul
+                    className="bootcamp_pg_mentor_tags"
+                    aria-label="Bootcamp highlights"
+                  >
+                    {videoHighlights.map((item) => (
+                      <li key={item} className="bootcamp_pg_mentor_tag">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="bootcamp_pg_mentor_video_wrap">
+                    <video
+                      ref={setMentorVideoRef}
+                      className="bootcamp_pg_mentor_video"
+                      src={bootcampVideo}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls
+                      preload="metadata"
+                      onCanPlay={tryPlayMentorVideo}
+                      aria-label="Upskld AI Bootcamp video"
+                    />
+                  </div>
+
+                  <div className="bootcamp_pg_mentor_note">
+                    <div className="bootcamp_pg_mentor_note_label">
+                      <IconStar />
+                      <span>What to expect</span>
+                    </div>
+                    <p className="bootcamp_pg_mentor_note_text">
+                      See how <strong>Mrs. Rajashri Sai</strong> breaks down
+                      real-world AI workflows in plain language—designed for{" "}
+                      <strong>students, professionals, and business owners</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
         </section>
       </div>
     </main>
