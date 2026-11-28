@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "./HomePhilosophyPage.css";
 
 const stats = [
-  { end: 300, suffix: "+", label: "learners attended free sessions" },
-  { end: 200, suffix: "+", label: "working professionals trained across functions" },
-  { end: 100, suffix: "+", label: "students trained on job-ready AI skills" },
+  { end: 400, suffix: "+", label: "learners attended free sessions" },
+  { end: 300, suffix: "+", label: "working professionals trained across functions" },
+  { end: 300, suffix: "+", label: "students trained on job-ready AI skills" },
   { end: 8, suffix: "", label: "experts across AI, research, marketing and business" },
 ];
 
